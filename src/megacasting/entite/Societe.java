@@ -9,7 +9,7 @@ package megacasting.entite;
  *
  * @author theodore
  */
-public abstract class Societe {
+public class Societe {
     
     protected long id;
     protected String raisonSociale;
@@ -71,9 +71,5 @@ public abstract class Societe {
         this.telephone = telephone;
         this.adresse = adresse;
     }
-    
-        @Override
-    public String toString() {
-        return "Societe (" + id + ") : " + raisonSociale + ", " + email + ", " + telephone + ", " + adresse;
-    }
+
 }

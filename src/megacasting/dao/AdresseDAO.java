@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import megacasting.entite.Adresse;
+import megacasting.entite.Societe;
 
 /**
  *
@@ -18,7 +19,7 @@ import megacasting.entite.Adresse;
  */
 public class AdresseDAO {
     
-    public static void creer (Connection cnx, Adresse a) throws Exception {
+    public static void creer (Connection cnx, Adresse a) throws Exception  {
         
         Adresse aTemp = trouver(cnx, a.getNumero(), a.getRue(), a.getCodePostal(), a.getVille());
         if (aTemp != null) {
@@ -59,7 +60,7 @@ public class AdresseDAO {
     public static void modifier (Connection cnx, Adresse a) throws Exception {
         
         Adresse aTemp = trouver(cnx, a.getNumero(), a.getRue(), a.getCodePostal(), a.getVille());
-        if (aTemp != null) {
+        if (aTemp != null && aTemp.getId() != a.getId()) {
             throw new Exception("Cette adresse existe déjà !");
         }
         

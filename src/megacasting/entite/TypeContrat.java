@@ -11,4 +11,38 @@ package megacasting.entite;
  */
 public class TypeContrat {
     
+    private long id;
+    private String libelle;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    @Override
+    public String toString() {
+        return "TypeContrat (" + id + ") : " + libelle;
+    }
+
+    public TypeContrat(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public TypeContrat(long id, String libelle) {
+        this.id = id;
+        this.libelle = libelle;
+    }
+    
+    
 }

@@ -37,19 +37,19 @@ CREATE TABLE Societe
 	IdAdresse BIGINT NOT NULL,
 	CONSTRAINT PK_Societe PRIMARY KEY (Id),
 	CONSTRAINT FK_Societe_Adresse FOREIGN KEY (IdAdresse) REFERENCES Adresse (Id),
-	CONSTRAINT UK_Societe UNIQUE (RaisonSociale, Email, Telephone)
+	CONSTRAINT UK_Societe UNIQUE (RaisonSociale)
 )
 GO
 
 CREATE INDEX IFK_Societe_Adresse ON Societe (IdAdresse)
 GO
 
-CREATE INDEX IUK_Societe ON Societe (RaisonSociale, Email, Telephone)
+CREATE INDEX IUK_Societe ON Societe (RaisonSociale)
 GO
 
 CREATE TABLE Diffuseur
 (
-	Id BIGINT NOT NULL IDENTITY,
+	Id BIGINT NOT NULL,
 	CONSTRAINT PK_Diffuseur PRIMARY KEY (Id),
 	CONSTRAINT FK_Diffuseur_Societe FOREIGN KEY (Id) REFERENCES Societe (Id)
 )
@@ -60,7 +60,7 @@ GO
 
 CREATE TABLE Annonceur
 (
-	Id BIGINT NOT NULL IDENTITY,
+	Id BIGINT NOT NULL,
 	CONSTRAINT PK_Annonceur PRIMARY KEY (Id),
 	CONSTRAINT FK_Annonceur_Societe FOREIGN KEY (Id) REFERENCES Societe (Id)
 )

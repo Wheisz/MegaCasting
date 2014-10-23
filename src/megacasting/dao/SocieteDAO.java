@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import megacasting.entite.Adresse;
+import megacasting.entite.Annonceur;
 import megacasting.entite.Societe;
 
 /**
@@ -20,31 +22,29 @@ public class SocieteDAO {
     
     public static void creer (Connection cnx, Societe s) throws Exception {
         
-        Societe pTemp = trouver(cnx, p.getNom(), p.getPrenom());
-        if (pTemp != null) {
-            throw new Exception("Cette societe existe déjà !");
+        Societe sTemp = trouver(cnx, s.getRaisonSociale());
+        if (sTemp != null) {
+            throw new Exception("La societe " + s.getRaisonSociale() + " existe déjà !");
         }
         
-        AdresseDAO.creer(cnx, p.getAdresse());
+        AdresseDAO.creer(cnx, s.getAdresse());
         
         int id = 0;
         Statement stmt = null;
         try {
             stmt = cnx.createStatement();
             
-            // Il manque la vérification que la personne n'existe pas
-            stmt.executeUpdate("INSERT INTO Personne "
-                    + "(Nom, Prenom, Age, IdAdresse) "
-                    + "VALUES ('" + p.getNom() + "', '" + p.getPrenom() + "', "
-                    + p.getAge() + ", '" + p.getAdresse().getId() + "')");
+            stmt.executeUpdate("INSERT INTO Societe "
+                    + "(RaisonSociale, Email, Telephone, IdAdresse) "
+                    + "VALUES ('" + s.getRaisonSociale() + "', '" + s.getEmail() + "', '"
+                    + s.getTelephone() + "', '" + s.getAdresse().getId() + "')");
 
-            ResultSet rs = stmt.executeQuery("SELECT MAX(Id) FROM Personne");
+            ResultSet rs = stmt.executeQuery("SELECT MAX(Id) FROM Societe");
             
             if(rs.next()) {
-                p.setId(rs.getLong(1));
-                System.out.println("Personne ajoutée ! (Id = " + p.getId() + ")");
-            }
-            
+                s.setId(rs.getLong(1));
+                System.out.println("La société " + s.getRaisonSociale() + "(Id = " + s.getId() + ") a été ajoutée !");
+            }    
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -61,26 +61,26 @@ public class SocieteDAO {
     
     public static void modifier (Connection cnx, Societe s) throws Exception {
         
-        Personne pTemp = trouver(cnx, p.getNom(), p.getPrenom());
-        if (pTemp != null) {
-            throw new Exception("Cette personne existe déjà !");
+        Societe sTemp = trouver(cnx, s.getRaisonSociale());
+        if (sTemp != null && sTemp.getId() != s.getId()) {
+            throw new Exception("La societe " + s.getRaisonSociale() + " existe déjà !");
         }
         
-        AdresseDAO.modifier(cnx, p.getAdresse());
+        AdresseDAO.modifier(cnx, s.getAdresse());
         
         Statement stmt = null;
         try {
             stmt = cnx.createStatement();
             
-            stmt.executeUpdate("UPDATE Personne "
-                    + "SET Nom = '" + p.getNom()
-                    + "', Prenom = '" + p.getPrenom()
-                    + "', Age = " + p.getAge()
-                    + ", IdAdresse = '" + p.getAdresse().getId()
-                    + "' WHERE Id = " + p.getId()
+            stmt.executeUpdate("UPDATE Societe "
+                    + "SET RaisonSociale = '" + s.getRaisonSociale()
+                    + "', Email = '" + s.getEmail()
+                    + "', Telephone = '" + s.getTelephone()
+                    + "', IdAdresse = " + s.getAdresse().getId()
+                    + " WHERE Id = " + s.getId()
             );
 
-            System.out.println("Personne modifiée !");
+            System.out.println("La société " + s.getRaisonSociale() + " a été modifiée !");
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -97,8 +97,6 @@ public class SocieteDAO {
     
     public static void supprimer (Connection cnx, Societe s) {
         
-        AdresseDAO.supprimer(cnx, s.getAdresse());
-        
         Statement stmt = null;
         try {
             stmt = cnx.createStatement();
@@ -107,7 +105,7 @@ public class SocieteDAO {
                     + "WHERE Id = " + s.getId()
             );
 
-            System.out.println("Personne supprimée !");            
+            System.out.println("La societe " + s.getRaisonSociale() + " a été supprimée !");            
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -122,19 +120,20 @@ public class SocieteDAO {
         }   
     }
     
-    public static ArrayList<Personne> lister (Connection cnx) {
+    public static ArrayList<Societe> lister (Connection cnx) {
         
-        ArrayList<Personne> personnes = new ArrayList();
+        ArrayList<Societe> societes = new ArrayList();
         Statement stmt = null;
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, Nom, Prenom, Age, IdAdresse FROM Personne");
+            ResultSet rs = stmt.executeQuery("SELECT Id, RaisonSociale, Email, Telephone, IdAdresse "
+                    + "FROM Societe");
             
             while(rs.next()) {
                 Adresse a = AdresseDAO.trouver(cnx, rs.getLong(5));
-                Personne p = new Personne(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getInt(4), a);
-                personnes.add(p);
+                Societe s = new Societe(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), a);
+                societes.add(s);
             }
             
         } catch (SQLException ex) {
@@ -148,31 +147,31 @@ public class SocieteDAO {
                 }
             }
         }         
-        return personnes;
+        return societes;
     }
     
-    public static Personne trouver (Connection cnx, long id) {
-        Personne p = null;
+    public static Societe trouver (Connection cnx, long id) {
+        Societe s = null;
         
         Statement stmt = null;
-        String nom = null;
-        String prenom = null;
-        int age = 0;
+        String raisonSociale = null;
+        String email = null;
+        String telephone = null;
         long idAdresse = 0;
         
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, Nom, Prenom, Age, IdAdresse FROM Personne "
+            ResultSet rs = stmt.executeQuery("SELECT Id, RaisonSociale, Email, Telephone, IdAdresse FROM Societe "
                     + "WHERE Id = " + id);
             
             if(rs.next()) {
-                nom = rs.getString(2);
-                prenom = rs.getString(3);
-                age = rs.getInt(4);
+                raisonSociale = rs.getString(2);
+                email = rs.getString(3);
+                telephone = rs.getString(4);
                 idAdresse = rs.getLong(5);                
                 Adresse a = AdresseDAO.trouver(cnx, idAdresse);
-                p = new Personne(id, nom, prenom, age, a);
+                s = new Societe(id, raisonSociale, email, telephone, a);
             }
             
         } catch (SQLException ex) {
@@ -186,29 +185,31 @@ public class SocieteDAO {
                 }
             }
         }   
-        return p;
+        return s;
     }
     
-    public static Personne trouver (Connection cnx, String nom, String prenom) {
-        Personne p = null;
+    public static Societe trouver (Connection cnx, String raisonSociale) {
+        Societe s = null;
         
         Statement stmt = null;
         long id = 0;
-        int age = 0;
+        String email = null;
+        String telephone = null;
         long idAdresse = 0;
         
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, Nom, Prenom, Age, IdAdresse FROM Personne "
-                    + "WHERE Nom = '" + nom + "' AND Prenom = '" + prenom + "'");
+            ResultSet rs = stmt.executeQuery("SELECT Id, RaisonSociale, Email, Telephone, IdAdresse FROM Societe "
+                    + "WHERE RaisonSociale = '" + raisonSociale + "'");
             
             if(rs.next()) {
                 id = rs.getLong(1);
-                age = rs.getInt(4);
+                email = rs.getString(3);
+                telephone = rs.getString(4);
                 idAdresse = rs.getLong(5);                
                 Adresse a = AdresseDAO.trouver(cnx, idAdresse);
-                p = new Personne(id, nom, prenom, age, a);
+                s = new Societe(id, raisonSociale, email, telephone, a);
             }
             
         } catch (SQLException ex) {
@@ -222,6 +223,6 @@ public class SocieteDAO {
                 }
             }
         }      
-        return p;
+        return s;
     }
 }
