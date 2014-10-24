@@ -7,8 +7,58 @@ package megacasting.entite;
 
 /**
  *
- * @author theodore
+ * @author kevin
  */
 public class Metier {
+    
+    private long id;
+    private String libelle;
+    private Domaine domaine;
+    private long idDomaine;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public Domaine getDomaine() {
+        return domaine;
+    }
+
+    public void setDomaine(Domaine domaine) {
+        this.domaine = domaine;
+    }
+
+    public long getIdDomaine() {
+        return idDomaine;
+    }
+
+    public void setIdDomaine(long idDomaine) {
+        this.idDomaine = idDomaine;
+    }
+
+    public Metier(long id, String libelle, Domaine domaine) {
+        this.id = id;
+        this.libelle = libelle;
+        this.domaine = domaine;
+    }
+
+    public Metier(String libelle, Domaine domaine) {
+        this.libelle = libelle;
+        this.domaine = domaine;
+    }
+    
+    
     
 }

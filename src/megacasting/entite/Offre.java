@@ -5,10 +5,254 @@
  */
 package megacasting.entite;
 
+
+import java.util.Date;
+
 /**
  *
- * @author theodore
+ * @author kevin
  */
 public class Offre {
+    
+    private long id;
+    private String intitule;
+    private String reference;
+    private Date datePublication;
+    private int dureeDiffusion;
+    private Date dateDebutContrat;
+    private int nbPoste;
+    private String localisationLattitude;
+    private String localisationLongitude;
+    private String descriptionPoste;
+    private String descriptionProfil;
+    private String telephone;
+    private String email;
+    private Domaine domaine;
+    private Metier metier;
+    private TypeContrat typeContrat;
+    private Annonceur annonceur;
+    private long idDomaine;
+    private long idMetier;
+    private long idTypeContrat;
+    private long idAnnonceur;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getIntitule() {
+        return intitule;
+    }
+
+    public void setIntitule(String intitule) {
+        this.intitule = intitule;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+    
+    
+
+    public Date getDatePublication() {
+        return datePublication;
+    }
+
+//    public void setDatePublication(DateTime datePublication) {
+//        this.datePublication = datePublication;
+//    }
+    
+    
+
+    public int getDureeDiffusion() {
+        return dureeDiffusion;
+    }
+
+    public void setDureeDiffusion(int dureeDiffusion) {
+        this.dureeDiffusion = dureeDiffusion;
+    }
+
+    public Date getDateDebutContrat() {
+        return dateDebutContrat;
+    }
+
+    public void setDateDebutContrat(Date dateDebutContrat) {
+        this.dateDebutContrat = dateDebutContrat;
+    }
+
+    public int getNbPoste() {
+        return nbPoste;
+    }
+
+    public void setNbPoste(int nbPoste) {
+        this.nbPoste = nbPoste;
+    }
+
+    public String getLocalisationLattitude() {
+        return localisationLattitude;
+    }
+
+    public void setLocalisationLattitude(String localisationLattitude) {
+        this.localisationLattitude = localisationLattitude;
+    }
+
+    public String getLocalisationLongitude() {
+        return localisationLongitude;
+    }
+
+    public void setLocalisationLongitude(String localisationLongitude) {
+        this.localisationLongitude = localisationLongitude;
+    }
+
+    public String getDescriptionPoste() {
+        return descriptionPoste;
+    }
+
+    public void setDescriptionPoste(String descriptionPoste) {
+        this.descriptionPoste = descriptionPoste;
+    }
+
+    public String getDescriptionProfil() {
+        return descriptionProfil;
+    }
+
+    public void setDescriptionProfil(String descriptionProfil) {
+        this.descriptionProfil = descriptionProfil;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Domaine getDomaine() {
+        return domaine;
+    }
+
+    public void setDomaine(Domaine domaine) {
+        this.domaine = domaine;
+    }
+
+    public Metier getMetier() {
+        return metier;
+    }
+
+    public void setMetier(Metier metier) {
+        this.metier = metier;
+    }
+
+    public TypeContrat getTypeContrat() {
+        return typeContrat;
+    }
+
+    public void setTypeContrat(TypeContrat typeContrat) {
+        this.typeContrat = typeContrat;
+    }
+
+    public Annonceur getAnnonceur() {
+        return annonceur;
+    }
+
+    public void setAnnonceur(Annonceur annonceur) {
+        this.annonceur = annonceur;
+    }
+
+    public long getIdDomaine() {
+        return idDomaine;
+    }
+
+    public void setIdDomaine(long idDomaine) {
+        this.idDomaine = idDomaine;
+    }
+
+    public long getIdMetier() {
+        return idMetier;
+    }
+
+    public void setIdMetier(long idMetier) {
+        this.idMetier = idMetier;
+    }
+
+    public long getIdTypeContrat() {
+        return idTypeContrat;
+    }
+
+    public void setIdTypeContrat(long idTypeContrat) {
+        this.idTypeContrat = idTypeContrat;
+    }
+
+    public long getIdAnnonceur() {
+        return idAnnonceur;
+    }
+
+    public void setIdAnnonceur(long idAnnonceur) {
+        this.idAnnonceur = idAnnonceur;
+    }
+    
+    public Offre(long id, String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
+        this.id = id;
+        this.intitule = intitule;
+        this.reference = reference;
+        long now = System.currentTimeMillis();
+        this.datePublication = new Date(now);
+        this.dureeDiffusion = dureeDiffusion;
+        this.dateDebutContrat = dateDebutContrat;
+        this.nbPoste = nbPoste;
+        this.localisationLattitude = localisationLattitude;
+        this.localisationLongitude = localisationLongitude;
+        this.descriptionPoste = descriptionPoste;
+        this.descriptionProfil = descriptionProfil;
+        this.telephone = telephone;
+        this.email = email;
+        this.domaine = domaine;
+        this.metier = metier;
+        this.typeContrat = typeContrat;
+        this.annonceur = annonceur;
+    }
+
+    public Offre(String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
+        this.intitule = intitule;
+        this.reference = reference;
+        long now = System.currentTimeMillis();
+        this.datePublication = new Date(now);
+        this.dureeDiffusion = dureeDiffusion;
+        this.dateDebutContrat = dateDebutContrat;
+        this.nbPoste = nbPoste;
+        this.localisationLattitude = localisationLattitude;
+        this.localisationLongitude = localisationLongitude;
+        this.descriptionPoste = descriptionPoste;
+        this.descriptionProfil = descriptionProfil;
+        this.telephone = telephone;
+        this.email = email;
+        this.domaine = domaine;
+        this.metier = metier;
+        this.typeContrat = typeContrat;
+        this.annonceur = annonceur;
+    }
+    
+    
+    
+    
+    
+    
     
 }
