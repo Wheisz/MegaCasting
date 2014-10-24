@@ -146,6 +146,40 @@ public class MetierDAO {
         }         
         return metiers;
     }
+     
+     public static Metier trouver (Connection cnx, long id) {
+        Metier m = null;
+        
+        Statement stmt = null;
+        String libelle = null;
+        long idDomaine = 0;
+        
+        try {
+            stmt = cnx.createStatement();
+            
+            ResultSet rs = stmt.executeQuery("SELECT Id, Libelle, IdDomaine FROM Metier "
+                    + "WHERE Id = '" + id + "'");
+            
+            if(rs.next()) {
+                libelle = rs.getString(2);
+                idDomaine = rs.getLong(3);                
+                Domaine d = DomaineDAO.trouver(cnx, idDomaine);
+                m = new Metier(id, libelle,d);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex){
+                    
+                }
+            }
+        }      
+        return m;
+     }
         
      public static Metier trouver (Connection cnx, String libelle) {
         Metier m = null;
@@ -180,5 +214,7 @@ public class MetierDAO {
         }      
         return m;
      }
+     
+
     
 }

@@ -146,7 +146,7 @@ public class DomaineDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, Libelle FROM Adresse "
+            ResultSet rs = stmt.executeQuery("SELECT Id, Libelle FROM Domaine "
                     + "WHERE Id = " + id);
             
             if(rs.next()) {
@@ -178,7 +178,7 @@ public class DomaineDAO {
             stmt = cnx.createStatement();
             
             ResultSet rs = stmt.executeQuery("SELECT Id, Libelle "
-                    + "FROM Adresse "
+                    + "FROM Domaine "
                     + "WHERE Libelle = '" + libelle + "'");
             
             if(rs.next()) {
