@@ -8,13 +8,16 @@ package megacasting;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import megacasting.dao.AdresseDAO;
 import megacasting.dao.AnnonceurDAO;
 import megacasting.dao.DomaineDAO;
 import megacasting.dao.MetierDAO;
+import megacasting.dao.OffreDAO;
 import megacasting.dao.SocieteDAO;
 import megacasting.dao.TypeContratDAO;
 import megacasting.entite.Adresse;
@@ -57,9 +60,15 @@ public class MegaCasting {
             
             cnx = DriverManager.getConnection(url, "sa", "not24get");
             
-//            Adresse a = new Adresse(37, "rue bidule", 53000, "Laval");
-//            Annonceur ann = new Annonceur("McDonald", "mcdonald@gmail.com", "02.41.54.84.15", a);
-//            AnnonceurDAO.creer(cnx, ann);
+//            long now = System.currentTimeMillis();
+//            Date datePublication = new Date(System.currentTimeMillis());
+//            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//            String datePublicationStr = sdf.format(datePublication);
+//            System.out.println(datePublicationStr);
+            
+            Adresse a = new Adresse(37, "rue bidule", 53000, "Laval");
+            Annonceur ann = new Annonceur("McDonald", "mcdonald@gmail.com", "02.41.54.84.15", a);
+            AnnonceurDAO.creer(cnx, ann);
 //            
 //            Adresse a1 = new Adresse(27, "rue brouette", 53000, "Laval");
 //            Annonceur ann1 = new Annonceur("Decathlon", "decathlon@gmail.com", "02.54.87.02.33", a1);
@@ -81,8 +90,8 @@ public class MegaCasting {
 //            AnnonceurDAO.modifier(cnx, ann);
 //            System.out.println(AnnonceurDAO.trouver(cnx, "GOULOUGOULOU"));
 //            
-//            TypeContrat cdi = new TypeContrat("CDI");
-//            TypeContratDAO.creer(cnx, cdi);
+            TypeContrat cdi = new TypeContrat("CDI");
+            TypeContratDAO.creer(cnx, cdi);
 //            TypeContrat cdd = new TypeContrat("CDD");
 //            TypeContratDAO.creer(cnx, cdd);
 //            
@@ -96,7 +105,7 @@ public class MegaCasting {
 //            TypeContratDAO.modifier(cnx, cdi);
 //            System.out.println(TypeContratDAO.trouver(cnx, "HAHA"));
 //            
-//            Domaine musique = new Domaine("Musique");
+            Domaine musique = new Domaine("Musique");
 //            DomaineDAO.creer(cnx, musique);
 //            Domaine sport = new Domaine("Sport");
 //            DomaineDAO.creer(cnx, sport);
@@ -110,14 +119,22 @@ public class MegaCasting {
 //            musique.setLibelle("CAROTTE");
 //            DomaineDAO.modifier(cnx, musique);
 //            System.out.println(DomaineDAO.trouver(cnx, "CAROTTE"));
+            
+            Metier developper = new Metier("Developper",musique);
+            MetierDAO.creer(cnx, developper);
 
+            Date dateDebutContrat = Offre.changeStringInDate("22/10/2010");
             
-            Offre offre1 = new Offre("recherche chanteur","REF205",5,"22/10/2010",1,"-30","50","recherche chanteur de jazz","expérimenté","0243562869","jazz.com");
-            System.out.println(offre1);
+            Offre offre1 = new Offre("recherche chanteur","Test",5,dateDebutContrat,1,"-30","50","recherche chanteur de jazz","expérimenté","0243562869","jazz.com",musique,developper,cdi,ann);
             
+            OffreDAO.creer(cnx, offre1);
             
-            Domaine d = DomaineDAO.trouver(cnx, "libelle");
-            System.out.println(d);
+            ArrayList<Offre> offres = OffreDAO.lister(cnx);
+            for(Offre o : offres)
+            {
+                System.out.println(o);
+            }
+            
             
         } catch (SQLException ex) {
             ex.printStackTrace();

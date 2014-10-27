@@ -33,9 +33,11 @@ public class AnnonceurDAO {
         try {
             stmt = cnx.createStatement();
 
-            stmt.executeUpdate("INSERT INTO Annonceur "
+            stmt.executeUpdate("SET IDENTITY_INSERT Annonceur ON "
+                    + "INSERT INTO Annonceur "
                     + "(Id) "
-                    + "VALUES (" + annonceur.getId() + ")");
+                    + "VALUES (" + annonceur.getId()
+                    + ") SET IDENTITY_INSERT Annonceur OFF");
 
             System.out.println("La société " + annonceur.getRaisonSociale() + "(Id = " + annonceur.getId() + ") a été ajoutée !");   
             

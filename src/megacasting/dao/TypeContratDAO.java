@@ -31,7 +31,7 @@ public class TypeContratDAO {
             stmt = cnx.createStatement();
             
             stmt.executeUpdate("INSERT INTO TypeContrat (Libelle) "
-                    + "VALUES (" + tc.getLibelle() + ")");
+                    + "VALUES ('" + tc.getLibelle() + "')");
 
             ResultSet rs = stmt.executeQuery("SELECT MAX(Id) FROM TypeContrat");
             

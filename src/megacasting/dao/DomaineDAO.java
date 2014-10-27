@@ -31,7 +31,7 @@ public class DomaineDAO {
             stmt = cnx.createStatement();
             
             stmt.executeUpdate("INSERT INTO Domaine (Libelle) "
-                    + "VALUES (" + d.getLibelle() + ")");
+                    + "VALUES ('" + d.getLibelle() + "')");
 
             ResultSet rs = stmt.executeQuery("SELECT MAX(Id) FROM Domaine");
             

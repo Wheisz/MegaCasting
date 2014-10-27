@@ -225,16 +225,15 @@ public class Offre {
         
         return date;
     }
-    
-    
 
-    public Offre(long id, String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email) {
+
+    public Offre(long id, String intitule, String reference,Date datePublication, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
         this.id = id;
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
+        this.datePublication =  datePublication;
         this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
+        this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
         this.localisationLattitude = localisationLattitude;
         this.localisationLongitude = localisationLongitude;
@@ -242,31 +241,19 @@ public class Offre {
         this.descriptionProfil = descriptionProfil;
         this.telephone = telephone;
         this.email = email;
+        this.domaine = domaine;
+        this.metier = metier;
+        this.typeContrat = typeContrat;
+        this.annonceur = annonceur;
     }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email) {
-        this.intitule = intitule;
-        this.reference = reference;
-        long now = System.currentTimeMillis();
-        this.datePublication = new Date(System.currentTimeMillis());
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-    }
-    
-    public Offre(long id, String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
+     
+    public Offre(long id, String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
         this.id = id;
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
+        this.datePublication =  new Date(System.currentTimeMillis());
         this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
+        this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
         this.localisationLattitude = localisationLattitude;
         this.localisationLongitude = localisationLongitude;
@@ -280,12 +267,12 @@ public class Offre {
         this.annonceur = annonceur;
     }
 
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
+    public Offre(String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
+        this.datePublication =  new Date(System.currentTimeMillis());
         this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
+        this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
         this.localisationLattitude = localisationLattitude;
         this.localisationLongitude = localisationLongitude;
@@ -298,94 +285,14 @@ public class Offre {
         this.typeContrat = typeContrat;
         this.annonceur = annonceur;
     }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine) {
+    
+    public Offre(long id, String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, TypeContrat typeContrat, Annonceur annonceur) {
+        this.id = id;
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
+        this.datePublication =  new Date(System.currentTimeMillis());
         this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.domaine = domaine;
-    }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Metier metier) {
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.metier = metier;
-    }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, TypeContrat typeContrat) {
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.typeContrat = typeContrat;
-    }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Annonceur annonceur) {
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.annonceur = annonceur;
-    }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier) {
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.domaine = domaine;
-        this.metier = metier;
-    }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, TypeContrat typeContrat) {
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
+        this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
         this.localisationLattitude = localisationLattitude;
         this.localisationLongitude = localisationLongitude;
@@ -395,14 +302,15 @@ public class Offre {
         this.email = email;
         this.domaine = domaine;
         this.typeContrat = typeContrat;
+        this.annonceur = annonceur;
     }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Annonceur annonceur) {
+    
+    public Offre(String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, TypeContrat typeContrat, Annonceur annonceur) {
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
+        this.datePublication =  new Date(System.currentTimeMillis());
         this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
+        this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
         this.localisationLattitude = localisationLattitude;
         this.localisationLongitude = localisationLongitude;
@@ -411,102 +319,17 @@ public class Offre {
         this.telephone = telephone;
         this.email = email;
         this.domaine = domaine;
-        this.annonceur = annonceur;
-    }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Metier metier, TypeContrat typeContrat) {
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.metier = metier;
-        this.typeContrat = typeContrat;
-    }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Metier metier, Annonceur annonceur) {
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.metier = metier;
-        this.annonceur = annonceur;
-    }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, TypeContrat typeContrat, Annonceur annonceur) {
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
         this.typeContrat = typeContrat;
         this.annonceur = annonceur;
     }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat) {
+    
+    public Offre(long id, String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
+        this.id = id;
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
+        this.datePublication =  new Date(System.currentTimeMillis());
         this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.domaine = domaine;
-        this.metier = metier;
-        this.typeContrat = typeContrat;
-    }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, Annonceur annonceur) {
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.domaine = domaine;
-        this.metier = metier;
-        this.annonceur = annonceur;
-    }
-
-    public Offre(String intitule, String reference, int dureeDiffusion, String dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication = new Date(System.currentTimeMillis());
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = changeStringInDate(dateDebutContrat);
+        this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
         this.localisationLattitude = localisationLattitude;
         this.localisationLongitude = localisationLongitude;
@@ -519,11 +342,21 @@ public class Offre {
         this.annonceur = annonceur;
     }
     
-    
-    
-    
-    
-    
-    
-    
+    public Offre(String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
+        this.intitule = intitule;
+        this.reference = reference;
+        this.datePublication =  new Date(System.currentTimeMillis());
+        this.dureeDiffusion = dureeDiffusion;
+        this.dateDebutContrat = dateDebutContrat;
+        this.nbPoste = nbPoste;
+        this.localisationLattitude = localisationLattitude;
+        this.localisationLongitude = localisationLongitude;
+        this.descriptionPoste = descriptionPoste;
+        this.descriptionProfil = descriptionProfil;
+        this.telephone = telephone;
+        this.email = email;
+        this.metier = metier;
+        this.typeContrat = typeContrat;
+        this.annonceur = annonceur;
+    }
 }
