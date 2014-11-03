@@ -117,7 +117,7 @@ CREATE TABLE Offre
 	Reference NVARCHAR(100) NOT NULL,
 	DatePublication DATETIME2 NOT NULL,
 	DureeDiffusion INT NOT NULL,
-	DateDebutCOntrat DATE NOT NULL,
+	DateDebutContrat DATE NOT NULL,
 	NbPoste INT NOT NULL,
 	LocalisationLattitude NVARCHAR(50) NOT NULL,
 	LocalisationLongitude NVARCHAR(50) NOT NULL,
