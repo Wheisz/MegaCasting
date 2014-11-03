@@ -27,7 +27,12 @@ public class MetierDAO {
             throw new Exception("Le métier " + m.getLibelle() + " existe déjà !");
         }
         
-        DomaineDAO.creer(cnx, m.getDomaine());
+        Domaine dTemp = DomaineDAO.trouver(cnx, m.getDomaine().getLibelle());
+        if(dTemp == null)
+        {
+           DomaineDAO.creer(cnx, m.getDomaine());  
+        }
+
         
         int id = 0;
         Statement stmt = null;

@@ -48,6 +48,13 @@ public class Metier {
         this.idDomaine = idDomaine;
     }
 
+    @Override
+    public String toString() {
+        return "Metier{" + "id=" + id + ", libelle=" + libelle + ", domaine=" + domaine + ", idDomaine=" + idDomaine + '}';
+    }
+
+    
+    
     public Metier(long id, String libelle, Domaine domaine) {
         this.id = id;
         this.libelle = libelle;

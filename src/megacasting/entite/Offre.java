@@ -208,9 +208,10 @@ public class Offre {
 
     @Override
     public String toString() {
-        return "Offre{" + "id=" + id + ", intitule=" + intitule + ", reference=" + reference + ", datePublication=" + datePublication + ", dureeDiffusion=" + dureeDiffusion + ", dateDebutContrat=" + dateDebutContrat + ", nbPoste=" + nbPoste + ", localisationLattitude=" + localisationLattitude + ", localisationLongitude=" + localisationLongitude + ", descriptionPoste=" + descriptionPoste + ", descriptionProfil=" + descriptionProfil + ", telephone=" + telephone + ", email=" + email + ", domaine=" + domaine + ", metier=" + metier + ", typeContrat=" + typeContrat + ", annonceur=" + annonceur + ", idDomaine=" + idDomaine + ", idMetier=" + idMetier + ", idTypeContrat=" + idTypeContrat + ", idAnnonceur=" + idAnnonceur + '}';
+        return "Offre{" + "id=" + id + ", intitule=" + intitule + ", reference=" + reference + ", datePublication=" + datePublication + ", dureeDiffusion=" + dureeDiffusion + ", dateDebutContrat=" + dateDebutContrat + ", nbPoste=" + nbPoste + ", localisationLattitude=" + localisationLattitude + ", localisationLongitude=" + localisationLongitude + ", descriptionPoste=" + descriptionPoste + ", descriptionProfil=" + descriptionProfil + ", telephone=" + telephone + ", email=" + email + ", domaine=" + domaine + ", metier=" + metier + ", typeContrat=" + typeContrat + ", annonceur=" + annonceur + '}';
     }
-    
+
+
     public static Date changeStringInDate(String str)
     {
         Date date = null;

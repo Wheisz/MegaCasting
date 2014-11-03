@@ -62,11 +62,14 @@ public class TypeContratDAO {
         }
         
         Statement stmt = null;
+        
+        System.out.println(tc.getLibelle());
         try {
             stmt = cnx.createStatement();
             
             stmt.executeUpdate("UPDATE TypeContrat "
-                    + "SET Libelle = " + tc.getLibelle()
+                    + "SET Libelle = '" +tc.getLibelle()+"'"
+                    + "WHERE Id ="+tc.getId()
             );
 
             System.out.println("TypeContrat modifié !");
@@ -116,7 +119,7 @@ public class TypeContratDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, Libelle FROM TypeContrat");
+            ResultSet rs = stmt.executeQuery("SELECT Id,Libelle FROM TypeContrat");
             
             while(rs.next()) {
                 TypeContrat tc = new TypeContrat(rs.getLong(1), rs.getString(2));

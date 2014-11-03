@@ -31,16 +31,22 @@ public class OffreDAO {
             throw new Exception("L'offre " + o.getIntitule()+ " existe déjà !");
         }
         
-//        if(o.getDomaine() != null)
-//        {
-//          DomaineDAO.creer(cnx, o.getDomaine()); 
-//        }
-//        if(o.getMetier() != null)
-//        {
-//          MetierDAO.creer(cnx, o.getMetier());  
-//        }
-//        TypeContratDAO.creer(cnx, o.getTypeContrat());
-//        AnnonceurDAO.creer(cnx, o.getAnnonceur());
+        Metier mTemp = MetierDAO.trouver(cnx, o.getMetier().getLibelle());
+        if (mTemp == null) {
+        MetierDAO.creer(cnx, o.getMetier()); 
+
+        }
+        TypeContrat tcTemp = TypeContratDAO.trouver(cnx, o.getTypeContrat().getLibelle());
+        if(tcTemp == null)
+        {
+            TypeContratDAO.creer(cnx, o.getTypeContrat());
+        }
+        Annonceur aTemp = AnnonceurDAO.trouver(cnx, o.getAnnonceur().getRaisonSociale());
+        if(aTemp == null)
+        {
+            AnnonceurDAO.creer(cnx, o.getAnnonceur());
+        }
+    
         
         long id = 0;
         Statement stmt = null;
@@ -69,10 +75,16 @@ public class OffreDAO {
                     + o.getEmail()+"', "+ o.getDomaine().getId() +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
                     + o.getAnnonceur().getId() +")");
 
-            ResultSet rs = stmt.executeQuery("SELECT MAX(Id) FROM Offre");
+            ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(IdDomaine) as IdDomaine,"
+                    + "                              MAX(IdMetier) as IdMetier, MAX(IdTypeContrat) as IdTypeContrat,"
+                    + "                              MAX(IdAnnonceur) as Annonceur FROM Offre");
             
             if(rs.next()) {
                 o.setId(rs.getLong(1));
+                o.setIdDomaine(rs.getLong(2));
+                o.setIdMetier(rs.getLong(3));
+                o.setIdTypeContrat(rs.getLong(4));
+                o.setIdAnnonceur(rs.getLong(5));
                 System.out.println("L'offre " + o.getIntitule() + "(Id = " + o.getId() + ") a été ajoutée !");
             }    
             

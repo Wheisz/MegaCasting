@@ -66,7 +66,8 @@ public class DomaineDAO {
             stmt = cnx.createStatement();
             
             stmt.executeUpdate("UPDATE Domaine "
-                    + "SET Libelle = " + d.getLibelle()
+                    + "SET Libelle = '" +d.getLibelle()+"'"
+                    +"WHERE Id="+d.getId()
             );
 
             System.out.println("Domaine modifié !");
