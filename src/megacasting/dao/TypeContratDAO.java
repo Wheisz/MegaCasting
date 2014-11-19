@@ -18,7 +18,7 @@ import megacasting.entite.TypeContrat;
  */
 public class TypeContratDAO {
     
-    public static void creer (Connection cnx, TypeContrat tc) throws Exception  {
+    public static TypeContrat creer (Connection cnx, TypeContrat tc) throws Exception  {
         
         TypeContrat tcTemp = trouver(cnx, tc.getLibelle());
         if (tcTemp != null) {
@@ -51,7 +51,8 @@ public class TypeContratDAO {
                     
                 }
             }
-        }   
+        }
+        return tc;
     }
     
     public static void modifier (Connection cnx, TypeContrat tc) throws Exception {

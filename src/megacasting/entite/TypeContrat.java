@@ -32,7 +32,7 @@ public class TypeContrat {
 
     @Override
     public String toString() {
-        return "TypeContrat (" + id + ") : " + libelle;
+        return libelle;
     }
 
     public TypeContrat(String libelle) {
