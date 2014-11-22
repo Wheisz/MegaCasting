@@ -5,6 +5,26 @@
  */
 package megacasting.view;
 
+import java.awt.CardLayout;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import megacasting.MegaCasting;
+import megacasting.dao.AnnonceurDAO;
+import megacasting.dao.DiffuseurDAO;
+import megacasting.dao.SocieteDAO;
+import megacasting.entite.Adresse;
+import megacasting.entite.Annonceur;
+import megacasting.entite.Diffuseur;
+import megacasting.entite.Societe;
+
 /**
  *
  * @author theodore
@@ -12,11 +32,28 @@ package megacasting.view;
 public class SocieteForm extends javax.swing.JPanel {
 
     private MainJFrame mainJFrame;
+    protected Connection cnx;
 
     public SocieteForm(MainJFrame mainJFrame) {
         this.mainJFrame = mainJFrame;
+        initComponents();
+        MegaCasting.loadDriver();
+        String url = "jdbc:jtds:sqlserver://localhost:1433/MegaCastingCL";
+
+        try {
+
+            cnx = DriverManager.getConnection(url, "sa", "not24get");
+
+            refreshList();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
-    
+
     /**
      * Creates new form societeForm
      */
@@ -33,19 +70,721 @@ public class SocieteForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        societeTable = new javax.swing.JTable();
+        raisonSocialLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        telephoneLabel = new javax.swing.JLabel();
+        numeroLabel = new javax.swing.JLabel();
+        rueLabel = new javax.swing.JLabel();
+        codePostal = new javax.swing.JLabel();
+        villeLabel = new javax.swing.JLabel();
+        raisonSocialeTextField = new javax.swing.JTextField();
+        emailTextField = new javax.swing.JTextField();
+        telephoneTextField = new javax.swing.JTextField();
+        rueTextField = new javax.swing.JTextField();
+        villeTextField = new javax.swing.JTextField();
+        annonceurRadioButton = new javax.swing.JRadioButton();
+        diffuseurRadioButton = new javax.swing.JRadioButton();
+        numeroSpinner = new javax.swing.JSpinner();
+        codePostalSpinner = new javax.swing.JSpinner();
+        societeSupprimerButton = new javax.swing.JButton();
+        validerSocieteButton = new javax.swing.JButton();
+        effacerSocieteButton = new javax.swing.JButton();
+        supprimerLabel = new javax.swing.JLabel();
+        validationLabel = new javax.swing.JLabel();
+        annonceurValiderRadioButton = new javax.swing.JRadioButton();
+        diffuseurValiderRadioButton = new javax.swing.JRadioButton();
+        raisonSocialeErreurLabel = new javax.swing.JLabel();
+        emailErreurLabel = new javax.swing.JLabel();
+        numeroErreurLabel = new javax.swing.JLabel();
+        rueErreurLabel = new javax.swing.JLabel();
+        codePostalErreur = new javax.swing.JLabel();
+        villeErreurLabel = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        telephoneErreurLabel = new javax.swing.JLabel();
+        annonceurDiffuseurErreurLabel = new javax.swing.JLabel();
+
+        societeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id", "Raison Sociale"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        societeTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selection(evt);
+            }
+        });
+        jScrollPane2.setViewportView(societeTable);
+
+        raisonSocialLabel.setText("Raison Sociale");
+
+        emailLabel.setText("Email");
+
+        telephoneLabel.setText("Telephone");
+
+        numeroLabel.setText("Numéro");
+
+        rueLabel.setText("Rue");
+
+        codePostal.setText("Code Postal");
+
+        villeLabel.setText("Ville");
+
+        buttonGroup2.add(annonceurRadioButton);
+        annonceurRadioButton.setText("Annonceur");
+        annonceurRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                annonceurRadioButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(diffuseurRadioButton);
+        diffuseurRadioButton.setText("Diffuseur");
+        diffuseurRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diffuseurRadioButtonActionPerformed(evt);
+            }
+        });
+
+        societeSupprimerButton.setText("Supprimer");
+        societeSupprimerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                societeSupprimerButtonActionPerformed(evt);
+            }
+        });
+
+        validerSocieteButton.setText("Valider");
+        validerSocieteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validerSocieteButtonActionPerformed(evt);
+            }
+        });
+
+        effacerSocieteButton.setText("Effacer");
+        effacerSocieteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                effacerSocieteButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(annonceurValiderRadioButton);
+        annonceurValiderRadioButton.setText("Annonceur");
+
+        buttonGroup1.add(diffuseurValiderRadioButton);
+        diffuseurValiderRadioButton.setText("Diffuseur");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(supprimerLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(annonceurRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(diffuseurRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(societeSupprimerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 14, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(validationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(validerSocieteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(effacerSocieteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(raisonSocialLabel)
+                                    .addComponent(emailLabel)
+                                    .addComponent(telephoneLabel)
+                                    .addComponent(numeroLabel)
+                                    .addComponent(rueLabel)
+                                    .addComponent(codePostal)
+                                    .addComponent(villeLabel))
+                                .addGap(84, 84, 84)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(diffuseurValiderRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(raisonSocialeTextField)
+                                    .addComponent(emailTextField)
+                                    .addComponent(telephoneTextField)
+                                    .addComponent(rueTextField)
+                                    .addComponent(villeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(numeroSpinner)
+                                    .addComponent(codePostalSpinner)))
+                            .addComponent(annonceurValiderRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(raisonSocialeErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(numeroErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                .addComponent(rueErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                .addComponent(codePostalErreur, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(telephoneErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(emailErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(annonceurDiffuseurErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(villeErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(validationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(raisonSocialLabel)
+                            .addComponent(raisonSocialeTextField)
+                            .addComponent(raisonSocialeErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(emailLabel)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(emailErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(telephoneLabel)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(telephoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7))
+                            .addComponent(telephoneErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(numeroLabel)
+                            .addComponent(numeroSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(numeroErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rueLabel)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(rueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rueErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(codePostal)
+                            .addComponent(codePostalSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(codePostalErreur, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(villeLabel)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(villeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(villeErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(annonceurValiderRadioButton)
+                            .addComponent(diffuseurValiderRadioButton)
+                            .addComponent(annonceurDiffuseurErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(validerSocieteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(effacerSocieteButton)
+                            .addComponent(supprimerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(annonceurRadioButton)
+                            .addComponent(diffuseurRadioButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(societeSupprimerButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void selection(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selection
+        // TODO add your handling code here:
+        int row = societeTable.rowAtPoint(evt.getPoint());
+        DefaultTableModel model = (DefaultTableModel) societeTable.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (i == row) {
+                long id = (long) model.getValueAt(row, 0);
+                Societe s = SocieteDAO.trouver(cnx, id);
+
+                this.raisonSocialeTextField.setText(s.getRaisonSociale());
+                this.emailTextField.setText(s.getEmail());
+                this.telephoneTextField.setText(s.getTelephone());
+                this.numeroSpinner.setValue(s.getAdresse().getNumero());
+                this.rueTextField.setText(s.getAdresse().getRue());
+                this.codePostalSpinner.setValue(s.getAdresse().getCodePostal());
+                this.villeTextField.setText(s.getAdresse().getVille());
+
+                Annonceur a = AnnonceurDAO.trouver(cnx, id);
+                if (a != null) {
+                    this.annonceurValiderRadioButton.setSelected(true);
+                } else {
+                    this.diffuseurValiderRadioButton.setSelected(true);
+                }
+
+            }
+        }
+    }//GEN-LAST:event_selection
+
+    private void annonceurRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annonceurRadioButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) societeTable.getModel();
+
+        ArrayList<Societe> societes = SocieteDAO.lister(cnx);
+        model.setRowCount(0);
+        for (Societe s : societes) {
+            Annonceur a = AnnonceurDAO.trouver(cnx, s.getId());
+            if (a != null) {
+                model.addRow(new Object[]{
+                    s.getId(),
+                    s.getRaisonSociale()
+                });
+            }
+        }
+
+        societeTable.setModel(model);
+    }//GEN-LAST:event_annonceurRadioButtonActionPerformed
+
+    private void diffuseurRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diffuseurRadioButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) societeTable.getModel();
+
+        ArrayList<Societe> societes = SocieteDAO.lister(cnx);
+        model.setRowCount(0);
+        for (Societe s : societes) {
+            Diffuseur d = DiffuseurDAO.trouver(cnx, s.getId());
+            if (d != null) {
+                model.addRow(new Object[]{
+                    s.getId(),
+                    s.getRaisonSociale()
+                });
+            }
+        }
+
+        societeTable.setModel(model);
+    }//GEN-LAST:event_diffuseurRadioButtonActionPerformed
+
+    private void societeSupprimerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_societeSupprimerButtonActionPerformed
+        // TODO add your handling code here:
+        String raisonSocial = this.raisonSocialeTextField.getText();
+
+        Societe s = SocieteDAO.trouver(cnx, raisonSocial);
+
+        if (s != null) {
+            try {
+                SocieteDAO.supprimer(cnx, s);
+                raz();
+                supprimerLabel.setText("Suppresion réussie !");
+                refreshList();
+            } catch (Exception e) {
+                supprimerLabel.setText("Une erreur s'est produite lors de la suppresion");
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_societeSupprimerButtonActionPerformed
+
+    private void effacerSocieteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_effacerSocieteButtonActionPerformed
+        // TODO add your handling code here:
+        raz();
+    }//GEN-LAST:event_effacerSocieteButtonActionPerformed
+
+    private void validerSocieteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerSocieteButtonActionPerformed
+        // TODO add your handling code here:
+
+        // Recuperation des données de la société
+        String raisonSociale = this.raisonSocialeTextField.getText();
+        String email = this.emailTextField.getText();
+        String telephone = this.telephoneTextField.getText();
+
+        // Recuperation des données de l'adresse de la société
+        int numero = (int) numeroSpinner.getValue();
+        String rue = this.rueTextField.getText();
+        int codePostal = (int) this.codePostalSpinner.getValue();
+        String ville = this.villeTextField.getText();
+
+        ArrayList<String> erreurs = verifFormulaire();
+        if (erreurs == null) {
+            if (this.annonceurValiderRadioButton.isSelected()) {
+
+                Annonceur a = AnnonceurDAO.trouver(cnx, raisonSociale);
+
+                if (a == null) {
+                    Adresse adresse = new Adresse(numero, rue, codePostal, ville);
+                    a = new Annonceur(raisonSociale, email, telephone, adresse);
+
+                    try {
+                        AnnonceurDAO.creer(cnx, a);
+                        raz();
+                        refreshList();
+                        validationLabel.setText("L'annonceur a été crée !");
+                    } catch (Exception e) {
+                        validationLabel.setText("Une erreur s'est produite lors de la création");
+                        e.printStackTrace();
+                    }
+                } else {
+                    a.setRaisonSociale(raisonSociale);
+                    a.setEmail(email);
+                    a.setTelephone(telephone);
+
+                    Adresse adresse = a.getAdresse();
+                    adresse.setNumero(numero);
+                    adresse.setRue(rue);
+                    adresse.setCodePostal(codePostal);
+                    adresse.setVille(ville);
+                    try {
+                        AnnonceurDAO.modifier(cnx, a);
+                        raz();
+                        refreshList();
+                        validationLabel.setText("L'annonceur a été modifiée !");
+                    } catch (Exception ex) {
+                        validationLabel.setText("Une erreur s'est produite lors de la modification");
+                        ex.printStackTrace();
+                    }
+                }
+            } else {
+                if (this.diffuseurValiderRadioButton.isSelected()) {
+                    Diffuseur d = DiffuseurDAO.trouver(cnx, raisonSociale);
+
+                    if (d == null) {
+                        Adresse adresse = new Adresse(numero, rue, codePostal, ville);
+                        d = new Diffuseur(raisonSociale, email, telephone, adresse);
+
+                        try {
+                            DiffuseurDAO.creer(cnx, d);
+                            raz();
+                            refreshList();
+                            validationLabel.setText("Le diffuseur a été crée !");
+                        } catch (Exception e) {
+                            validationLabel.setText("Une erreur s'est produite lors de la création");
+                            e.printStackTrace();
+                        }
+                    } else {
+                        d.setRaisonSociale(raisonSociale);
+                        d.setEmail(email);
+                        d.setTelephone(telephone);
+
+                        Adresse adresse = d.getAdresse();
+                        adresse.setNumero(numero);
+                        adresse.setRue(rue);
+                        adresse.setCodePostal(codePostal);
+                        adresse.setVille(ville);
+                        try {
+                            DiffuseurDAO.modifier(cnx, d);
+                            raz();
+                            refreshList();
+                            validationLabel.setText("Le  a été modifiée !");
+                        } catch (Exception ex) {
+                            validationLabel.setText("Une erreur s'est produite lors de la modification");
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+            }
+        } else {
+            affichageErreurs(erreurs);
+        }
+
+
+    }//GEN-LAST:event_validerSocieteButtonActionPerformed
+
+    private void refreshList() {
+        DefaultTableModel model = (DefaultTableModel) societeTable.getModel();
+
+        ArrayList<Societe> societes = SocieteDAO.lister(cnx);
+        model.setRowCount(0);
+        for (Societe s : societes) {
+
+            model.addRow(new Object[]{
+                s.getId(),
+                s.getRaisonSociale()
+            });
+
+        }
+
+        columnsHide(societeTable);
+
+        societeTable.setModel(model);
+
+    }
+
+    private void raz() {
+        this.raisonSocialeTextField.setText(null);
+        this.emailTextField.setText(null);
+        this.telephoneTextField.setText(null);
+        this.numeroSpinner.setValue(0);
+        this.rueTextField.setText(null);
+        this.codePostalSpinner.setValue(0);
+        this.villeTextField.setText(null);
+        this.validationLabel.setText(null);
+        this.supprimerLabel.setText(null);
+        
+        this.raisonSocialeErreurLabel.setText(null);
+        this.emailErreurLabel.setText(null);
+        this.telephoneErreurLabel.setText(null);
+        this.numeroErreurLabel.setText(null);
+        this.rueErreurLabel.setText(null);
+        this.codePostalErreur.setText(null);
+        this.villeErreurLabel.setText(null);
+        this.annonceurDiffuseurErreurLabel.setText(null);
+        
+        this.buttonGroup1.clearSelection();
+    }
+
+    private ArrayList verifFormulaire() {
+        ArrayList<String> erreurs = new ArrayList();
+
+        if (!this.raisonSocialeTextField.getText().equals("")) {
+            erreurs.add(0, null);
+        } else {
+            erreurs.add(0, "Veuillez inserer une raison sociale !");
+        }
+        if (!this.emailTextField.getText().equals("")) {
+            erreurs.add(1, null);
+            String email = this.emailTextField.getText();
+            Boolean verifEmail = regexEmail(email);
+            if (verifEmail) {
+                erreurs.add(1, null);
+            } else {
+                erreurs.add(1, "Veuillez saisir un email valide !");
+            }
+        } else {
+            erreurs.add(1, "Veuillez inserer un email !");
+        }
+        if (!this.telephoneTextField.getText().equals("")) {
+            erreurs.add(2, null);
+            String telephone = this.telephoneTextField.getText();
+            Boolean verifTelephone = regexTelephone(telephone);
+            if (verifTelephone) {
+                erreurs.add(2, null);
+            } else {
+                erreurs.add(2, "Veuillez saisir un numéro de téléphone correct !");
+            }
+        } else {
+            erreurs.add(2, "Veuillez inserer un telephone !");
+        }
+        if ((int)this.numeroSpinner.getValue() != 0)
+        {
+            erreurs.add(3,null);
+        } else {
+            erreurs.add(3,"Veuillez saisir un numéro de rue supérieur à 0 !");
+        }
+        if(!this.rueTextField.getText().equals(""))
+        {
+            erreurs.add(4,null);
+            String rue = this.rueTextField.getText();
+            Boolean verifRue = regexRue(rue);
+            if (verifRue) {
+                erreurs.add(4, null);
+            } else {
+                erreurs.add(4, "Veuillez saisir un nom de rue correcte !");
+            }
+        } else {
+            erreurs.add(4,"Veuillez saisir un nom de rue !");
+        }
+        if((int)this.codePostalSpinner.getValue() != 0 )
+        {
+            erreurs.add(5,null);
+            int codePostalTemp = (int)this.codePostalSpinner.getValue();
+            String codePostal = Integer.toString(codePostalTemp);
+            Boolean verifCodePostal = regexCodePostal(codePostal);
+            if (verifCodePostal) {
+                erreurs.add(5, null);
+            } else {
+                erreurs.add(5, "Veuillez saisir un code postal correct !");
+            }
+        } else {
+            erreurs.add(5,"Veuillez saisir un code postal !");
+        }
+        if(!this.villeTextField.getText().equals(""))
+        {
+            erreurs.add(6,null);
+            String ville = this.villeTextField.getText();
+            Boolean verifVille = regexVille(ville);
+            if (verifVille) {
+                erreurs.add(6, null);
+            } else {
+                erreurs.add(6, "Veuillez saisir un nom de ville correcte !");
+            }
+        } else {
+            erreurs.add(6,"Veuillez saisir un nom de ville !");
+        }
+
+        if((!this.annonceurValiderRadioButton.isSelected())&&(!this.diffuseurValiderRadioButton.isSelected()))
+        {
+            erreurs.add(7,"Veuillez choisir Annonceur ou Diffuseur !");
+        } else {
+            erreurs.add(7,null);
+        }
+
+        return erreurs;
+
+    }
+
+    private Boolean regexTelephone(String telephone) {
+        Pattern p = Pattern.compile("^0[1-68]([.- ]?[0-9]{2}){4}$");
+        Matcher m = p.matcher(telephone);
+        Boolean b = m.matches();
+
+        return b;
+    }
+    
+    private Boolean regexEmail(String email) {
+        Pattern p = Pattern.compile("^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$");
+        Matcher m = p.matcher(email);
+        Boolean b = m.matches();
+        
+        return b;
+    }
+    
+    private Boolean regexRue(String rue) {
+        Pattern p = Pattern.compile("^[a-zA-Z ]+$");
+        Matcher m = p.matcher(rue);
+        Boolean b = m.matches();
+        
+        return b;
+    }
+    
+    private Boolean regexCodePostal(String codePostal) {
+        Pattern p = Pattern.compile("^[0-9]{5}$");
+        Matcher m = p.matcher(codePostal);
+        Boolean b = m.matches();
+        
+        return b;
+    }
+    
+    private Boolean regexVille(String ville){
+        Pattern p = Pattern.compile("^[a-zA-Z- ]+$");
+        Matcher m = p.matcher(ville);
+        Boolean b = m.matches();
+        
+        return b;
+    }
+
+    private void affichageErreurs(ArrayList<String> erreurs) {
+        if (erreurs.get(0) != null) {
+            this.raisonSocialeErreurLabel.setText(erreurs.get(0));
+        } else {
+            this.raisonSocialeErreurLabel.setText(null);
+        }
+        if (erreurs.get(1) != null) {
+            this.emailErreurLabel.setText(erreurs.get(1));
+        } else {
+            this.emailErreurLabel.setText(null);
+        }
+        if ((erreurs.get(2)) != null) {
+            this.telephoneErreurLabel.setText(erreurs.get(2));
+        } else {
+            this.telephoneErreurLabel.setText(null);
+        }
+        if ((erreurs.get(3)) != null) {
+            this.numeroErreurLabel.setText(erreurs.get(3));
+        } else {
+            this.numeroErreurLabel.setText(null);
+        }
+        if ((erreurs.get(4)) != null) {
+            this.rueErreurLabel.setText(erreurs.get(4));
+        } else {
+            this.rueErreurLabel.setText(null);
+        }
+        if ((erreurs.get(5)) != null) {
+            this.codePostalErreur.setText(erreurs.get(5));
+        } else {
+            this.codePostalErreur.setText(null);
+        }
+        if ((erreurs.get(6)) != null) {
+            this.villeErreurLabel.setText(erreurs.get(6));
+        } else {
+            this.villeErreurLabel.setText(null);
+        }
+        if((erreurs.get(7)) != null)
+        {
+            this.annonceurDiffuseurErreurLabel.setText(erreurs.get(7));
+        } else {
+            this.annonceurDiffuseurErreurLabel.setText(null);
+        }
+
+    }
+
+    private void columnsHide(JTable societeTable) {
+        JTableHeader header = societeTable.getTableHeader();
+        TableColumn column = societeTable.getColumnModel().getColumn(0);
+        header.setResizingColumn(column);                  
+        column.setMinWidth(0);                       
+        column.setWidth(0);                 
+    }
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {
+        // TODO add your handling code here:
+        if (cnx != null) {
+            try {
+                cnx.close();
+            } catch (SQLException ex) {
+
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel annonceurDiffuseurErreurLabel;
+    private javax.swing.JRadioButton annonceurRadioButton;
+    private javax.swing.JRadioButton annonceurValiderRadioButton;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JLabel codePostal;
+    private javax.swing.JLabel codePostalErreur;
+    private javax.swing.JSpinner codePostalSpinner;
+    private javax.swing.JRadioButton diffuseurRadioButton;
+    private javax.swing.JRadioButton diffuseurValiderRadioButton;
+    private javax.swing.JButton effacerSocieteButton;
+    private javax.swing.JLabel emailErreurLabel;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField emailTextField;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel numeroErreurLabel;
+    private javax.swing.JLabel numeroLabel;
+    private javax.swing.JSpinner numeroSpinner;
+    private javax.swing.JLabel raisonSocialLabel;
+    private javax.swing.JLabel raisonSocialeErreurLabel;
+    private javax.swing.JTextField raisonSocialeTextField;
+    private javax.swing.JLabel rueErreurLabel;
+    private javax.swing.JLabel rueLabel;
+    private javax.swing.JTextField rueTextField;
+    private javax.swing.JButton societeSupprimerButton;
+    private javax.swing.JTable societeTable;
+    private javax.swing.JLabel supprimerLabel;
+    private javax.swing.JLabel telephoneErreurLabel;
+    private javax.swing.JLabel telephoneLabel;
+    private javax.swing.JTextField telephoneTextField;
+    private javax.swing.JLabel validationLabel;
+    private javax.swing.JButton validerSocieteButton;
+    private javax.swing.JLabel villeErreurLabel;
+    private javax.swing.JLabel villeLabel;
+    private javax.swing.JTextField villeTextField;
     // End of variables declaration//GEN-END:variables
 }

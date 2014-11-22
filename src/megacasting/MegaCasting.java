@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import megacasting.dao.AdresseDAO;
 import megacasting.dao.AnnonceurDAO;
+import megacasting.dao.DiffuseurDAO;
 import megacasting.dao.DomaineDAO;
 import megacasting.dao.MetierDAO;
 import megacasting.dao.OffreDAO;
@@ -22,6 +23,7 @@ import megacasting.dao.SocieteDAO;
 import megacasting.dao.TypeContratDAO;
 import megacasting.entite.Adresse;
 import megacasting.entite.Annonceur;
+import megacasting.entite.Diffuseur;
 import megacasting.entite.Domaine;
 import megacasting.entite.Metier;
 import megacasting.entite.Offre;
@@ -64,6 +66,10 @@ public class MegaCasting {
             Adresse a = new Adresse(37, "rue bidule", 53000, "Laval");
             Annonceur ann = new Annonceur("McDonald", "mcdonald@gmail.com", "02.41.54.84.15", a);
             AnnonceurDAO.creer(cnx, ann);
+            
+            Adresse a2 = new Adresse(35, "rue test", 53000, "Laval");
+            Diffuseur dif = new Diffuseur("iia", "iiagmail.com", "02.48.56.81.15", a2);
+            DiffuseurDAO.creer(cnx, dif);
           
             Adresse a1 = new Adresse(27, "rue brouette", 53000, "Laval");
             Annonceur ann1 = new Annonceur("Decathlon", "decathlon@gmail.com", "02.54.87.02.33", a1);
