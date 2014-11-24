@@ -36,11 +36,9 @@ public class MainJFrame extends javax.swing.JFrame {
     private AdresseForm adresseForm;
     private AnnonceurForm annonceurForm;
     private DiffuseurForm diffuseurForm;
-    private DomaineForm domaineForm;
-    private MetierForm metierForm;
     private OffreForm offreForm;
     private SocieteForm societeForm;
-    private TypeContratForm typeContratForm;
+    private ParamsForm paramsForm;
     
     protected Connection cnx;
 
@@ -82,21 +80,15 @@ public class MainJFrame extends javax.swing.JFrame {
         // Diffuseur
         diffuseurForm = new DiffuseurForm(this);
         mainPanel.add(diffuseurForm, "diffuseurCard");
-        // Domaine
-        domaineForm = new DomaineForm(this);
-        mainPanel.add(domaineForm, "domaineCard");
-        // Metier
-        metierForm = new MetierForm(this);
-        mainPanel.add(metierForm, "metierCard");
         // Offre
         offreForm = new OffreForm(this);
         mainPanel.add(offreForm, "offreCard");
+        // Paramètres
+        paramsForm = new ParamsForm(this);
+        mainPanel.add(paramsForm, "paramsCard");
         // Societe
         societeForm = new SocieteForm(this);
         mainPanel.add(societeForm, "societeCard");
-        // Type Contrat
-        typeContratForm = new TypeContratForm(this);
-        mainPanel.add(typeContratForm, "typeContratCard");
     }
     /**
      * This method is called from within the constructor to initialize the form.

@@ -20,11 +20,6 @@ public class TypeContratDAO {
     
     public static TypeContrat creer (Connection cnx, TypeContrat tc) throws Exception  {
         
-        TypeContrat tcTemp = trouver(cnx, tc.getLibelle());
-        if (tcTemp != null) {
-            throw new Exception("Ce type de contrat existe déjà !");
-        }
-        
         int id = 0;
         Statement stmt = null;
         try {

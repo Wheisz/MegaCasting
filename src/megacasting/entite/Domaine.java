@@ -32,7 +32,7 @@ public class Domaine {
 
     @Override
     public String toString() {
-        return "Domaine (" + id + ") : " + libelle;
+        return libelle;
     }
 
     public Domaine(String libelle) {

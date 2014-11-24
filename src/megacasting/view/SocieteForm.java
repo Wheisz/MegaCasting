@@ -32,7 +32,6 @@ import megacasting.entite.Societe;
 public class SocieteForm extends javax.swing.JPanel {
 
     private MainJFrame mainJFrame;
-    protected Connection cnx;
 
     public SocieteForm(MainJFrame mainJFrame) {
         this.mainJFrame = mainJFrame;
@@ -42,7 +41,7 @@ public class SocieteForm extends javax.swing.JPanel {
 
         try {
 
-            cnx = DriverManager.getConnection(url, "sa", "not24get");
+            mainJFrame.cnx = DriverManager.getConnection(url, "sa", "not24get");
 
             refreshList();
 
@@ -106,6 +105,7 @@ public class SocieteForm extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         telephoneErreurLabel = new javax.swing.JLabel();
         annonceurDiffuseurErreurLabel = new javax.swing.JLabel();
+        retourButton = new javax.swing.JButton();
 
         societeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -187,6 +187,13 @@ public class SocieteForm extends javax.swing.JPanel {
         buttonGroup1.add(diffuseurValiderRadioButton);
         diffuseurValiderRadioButton.setText("Diffuseur");
 
+        retourButton.setText("Retour");
+        retourButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                retourButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,9 +254,11 @@ public class SocieteForm extends javax.swing.JPanel {
                                         .addComponent(emailErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(annonceurDiffuseurErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(villeErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(retourButton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(annonceurDiffuseurErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(villeErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -318,7 +327,9 @@ public class SocieteForm extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(societeSupprimerButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(societeSupprimerButton)
+                            .addComponent(retourButton))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -330,7 +341,7 @@ public class SocieteForm extends javax.swing.JPanel {
         for (int i = 0; i < model.getRowCount(); i++) {
             if (i == row) {
                 long id = (long) model.getValueAt(row, 0);
-                Societe s = SocieteDAO.trouver(cnx, id);
+                Societe s = SocieteDAO.trouver(mainJFrame.cnx, id);
 
                 this.raisonSocialeTextField.setText(s.getRaisonSociale());
                 this.emailTextField.setText(s.getEmail());
@@ -511,6 +522,12 @@ public class SocieteForm extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_validerSocieteButtonActionPerformed
+
+    private void retourButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retourButtonActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
+        cl.show(mainJFrame.mainPanel, "accueilCard");
+    }//GEN-LAST:event_retourButtonActionPerformed
 
     private void refreshList() {
         DefaultTableModel model = (DefaultTableModel) societeTable.getModel();
@@ -772,6 +789,7 @@ public class SocieteForm extends javax.swing.JPanel {
     private javax.swing.JLabel raisonSocialLabel;
     private javax.swing.JLabel raisonSocialeErreurLabel;
     private javax.swing.JTextField raisonSocialeTextField;
+    private javax.swing.JButton retourButton;
     private javax.swing.JLabel rueErreurLabel;
     private javax.swing.JLabel rueLabel;
     private javax.swing.JTextField rueTextField;

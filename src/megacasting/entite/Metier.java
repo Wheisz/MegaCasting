@@ -50,7 +50,7 @@ public class Metier {
 
     @Override
     public String toString() {
-        return "Metier{" + "id=" + id + ", libelle=" + libelle + ", domaine=" + domaine + ", idDomaine=" + idDomaine + '}';
+        return libelle;
     }
 
     

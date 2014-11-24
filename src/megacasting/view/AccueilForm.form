@@ -28,6 +28,7 @@
                           <Component id="typeContratButton" max="32767" attributes="0"/>
                           <Component id="offreButton" min="-2" max="-2" attributes="0"/>
                           <Component id="societeButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="buttonParams" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -40,7 +41,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+              <Component id="buttonParams" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="offreButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="typeContratButton" min="-2" max="-2" attributes="0"/>
@@ -79,6 +82,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="societeButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonParams">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Param&#xe8;tres"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonParamsActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
