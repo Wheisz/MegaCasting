@@ -17,6 +17,7 @@ public class AccueilForm extends javax.swing.JPanel {
 
     public AccueilForm(MainJFrame mainJFrame) {
         this.mainJFrame = mainJFrame;
+        this.mainJFrame.setExtendedState(this.mainJFrame.MAXIMIZED_BOTH);
         initComponents();
         
         
@@ -40,6 +41,7 @@ public class AccueilForm extends javax.swing.JPanel {
 
         buttonParams = new javax.swing.JButton();
         buttonSociete = new javax.swing.JButton();
+        buttonOffre = new javax.swing.JButton();
 
         buttonParams.setText("Paramètres");
         buttonParams.addActionListener(new java.awt.event.ActionListener() {
@@ -55,6 +57,13 @@ public class AccueilForm extends javax.swing.JPanel {
             }
         });
 
+        buttonOffre.setText("Offre");
+        buttonOffre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOffreActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -63,7 +72,8 @@ public class AccueilForm extends javax.swing.JPanel {
                 .addGap(134, 134, 134)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonParams, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonSociete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonSociete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonOffre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(179, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -73,7 +83,9 @@ public class AccueilForm extends javax.swing.JPanel {
                 .addComponent(buttonParams)
                 .addGap(18, 18, 18)
                 .addComponent(buttonSociete)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(buttonOffre)
+                .addContainerGap(124, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -89,8 +101,15 @@ public class AccueilForm extends javax.swing.JPanel {
         cl.show(mainJFrame.mainPanel, "societeCard");
     }//GEN-LAST:event_buttonSocieteActionPerformed
 
+    private void buttonOffreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOffreActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
+        cl.show(mainJFrame.mainPanel, "offreCard");
+    }//GEN-LAST:event_buttonOffreActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonOffre;
     private javax.swing.JButton buttonParams;
     private javax.swing.JButton buttonSociete;
     // End of variables declaration//GEN-END:variables

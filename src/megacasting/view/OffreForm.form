@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -17,28 +17,232 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="domaineLabel" min="-2" pref="226" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
-                      <Component id="accueilButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="annonceurLabel" alignment="0" pref="172" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
+                              <Component id="metierLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane3" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
+                          <Component id="typeContratLabel" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                          <Component id="jScrollPane4" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jScrollPane5" min="-2" pref="185" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="intituleLabel" max="32767" attributes="0"/>
+                          <Component id="referenceLabel" max="32767" attributes="0"/>
+                          <Component id="datePublicationLabel" max="32767" attributes="0"/>
+                          <Component id="dureeDiffusionLabel" max="32767" attributes="0"/>
+                          <Component id="dateDebutContratLabel" max="32767" attributes="0"/>
+                          <Component id="nbPosteLabel" max="32767" attributes="0"/>
+                          <Component id="lattitudeLabel" max="32767" attributes="0"/>
+                          <Component id="LongitudeLabel" max="32767" attributes="0"/>
+                          <Component id="domaineOffreLabel" max="32767" attributes="0"/>
+                          <Component id="metierOffreLabel" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="intituleTextField" max="32767" attributes="0"/>
+                                                  <Component id="referenceTextField" max="32767" attributes="0"/>
+                                                  <Component id="dureeDiffusionSpinner" pref="166" max="32767" attributes="0"/>
+                                                  <Component id="nbPosteSpinner" max="32767" attributes="0"/>
+                                                  <Component id="longitudeTextField" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="lattitudeTextField" alignment="0" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Component id="datePublicationDateChooser" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="dateDebutContratDateChooser" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="domaineOffreComboBox" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="metierOffreComboBox" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="descriptionPosteLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="descriptionProfilLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="telephoneLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="telephoneTextField" min="-2" pref="166" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="emailLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="emailTextField" min="-2" pref="166" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="typeContratOffreLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="typeContratOffreComboBox" min="-2" pref="166" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="annonceurOffreLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="annonceurOffreComboBox" min="-2" pref="166" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="validerOffreButton" min="-2" pref="323" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="201" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Component id="accueilButton" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
-              <Component id="accueilButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="120" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="accueilButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="domaineLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jScrollPane1" min="-2" pref="70" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="metierLabel" min="-2" pref="29" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="77" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="annonceurLabel" min="-2" pref="22" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="typeContratLabel" min="-2" pref="31" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane4" min="-2" pref="158" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="intituleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="intituleTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="referenceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="referenceTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                              <Component id="descriptionPosteLabel" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="datePublicationLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="datePublicationDateChooser" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="dureeDiffusionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="dureeDiffusionSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="dateDebutContratLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="dateDebutContratDateChooser" min="-2" max="-2" attributes="0"/>
+                                          <Component id="descriptionProfilLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="nbPosteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="nbPosteSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="lattitudeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lattitudeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="jScrollPane7" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="LongitudeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="longitudeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="telephoneLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="telephoneTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="emailLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="emailTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="domaineOffreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="domaineOffreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="typeContratOffreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="typeContratOffreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="metierOffreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="metierOffreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="annonceurOffreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="annonceurOffreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="validerOffreButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace pref="583" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -53,14 +257,275 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Accueil"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
-      </AccessibilityProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accueilButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="domaineLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Domaine"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="domaineList">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="selection"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="metierLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="M&#xe9;tier"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="metierList">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="annonceurLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Annonceurs"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="annonceurList">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="typeContratLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Type de Contrat"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="typeContratList">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane5">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="offreList">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="intituleLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Intitule"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="intituleTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="referenceLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="R&#xe9;f&#xe9;rence"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="referenceTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="datePublicationLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Date de la publication"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dureeDiffusionLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dur&#xe9;e de la diffusion"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="dureeDiffusionSpinner">
+    </Component>
+    <Component class="javax.swing.JLabel" name="dateDebutContratLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Date de d&#xe9;but du contrat"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nbPosteLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nombre de poste(s)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="nbPosteSpinner">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lattitudeLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Lattitude"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="lattitudeTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="LongitudeLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Longitude"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="longitudeTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="descriptionPosteLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Description du poste"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane6">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="descriptionPosteTextArea">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="descriptionProfilLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Description du profil"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane7">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="descriptionProfilTextArea">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="telephoneLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="T&#xe9;l&#xe9;phone"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="telephoneTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="emailLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Email"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="emailTextField">
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="datePublicationDateChooser">
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="dateDebutContratDateChooser">
+    </Component>
+    <Component class="javax.swing.JLabel" name="domaineOffreLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Domaine"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="metierOffreLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="M&#xe9;tier"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="domaineOffreComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="metierOffreComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="typeContratOffreLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Type de Contrat"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="annonceurOffreLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Annonceur"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="typeContratOffreComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="annonceurOffreComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="validerOffreButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Valider"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -21,7 +21,7 @@ public class Annonceur extends Societe {
 
     @Override
     public String toString() {
-        return "Annonceur (" + id + ") : " + raisonSociale + ", " + email + ", " + telephone + ", " + adresse;
+        return  raisonSociale ;
     }
     
     

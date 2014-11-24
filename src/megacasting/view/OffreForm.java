@@ -6,6 +6,18 @@
 package megacasting.view;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import megacasting.dao.AnnonceurDAO;
+import megacasting.dao.DomaineDAO;
+import megacasting.dao.MetierDAO;
+import megacasting.dao.OffreDAO;
+import megacasting.dao.TypeContratDAO;
+import megacasting.entite.Annonceur;
+import megacasting.entite.Domaine;
+import megacasting.entite.Metier;
+import megacasting.entite.Offre;
+import megacasting.entite.TypeContrat;
 
 /**
  *
@@ -18,9 +30,22 @@ public class OffreForm extends javax.swing.JPanel {
     public OffreForm(MainJFrame mainJFrame) {
         this.mainJFrame = mainJFrame;
         initComponents();
+        DefaultListModel<Annonceur>annonceurListModel = new DefaultListModel<>();
+        annonceurList.setModel(annonceurListModel);
+        DefaultListModel<Domaine>domaineListModel = new DefaultListModel<>();
+        domaineList.setModel(domaineListModel);
+        DefaultListModel<Metier>metierListModel = new DefaultListModel<>();
+        metierList.setModel(metierListModel);
+        DefaultListModel<TypeContrat>typeContratListModel = new DefaultListModel<>();
+        typeContratList.setModel(typeContratListModel);
+        DefaultListModel<Offre>offreListModel = new DefaultListModel<>();
+        offreList.setModel(offreListModel);
+        refreshList();
+
+
     }
     
-    
+
     /**
      * Creates new form offreForm
      */
@@ -39,6 +64,55 @@ public class OffreForm extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         accueilButton = new javax.swing.JButton();
+        domaineLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        domaineList = new javax.swing.JList();
+        metierLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        metierList = new javax.swing.JList();
+        annonceurLabel = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        annonceurList = new javax.swing.JList();
+        typeContratLabel = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        typeContratList = new javax.swing.JList();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        offreList = new javax.swing.JList();
+        intituleLabel = new javax.swing.JLabel();
+        intituleTextField = new javax.swing.JTextField();
+        referenceLabel = new javax.swing.JLabel();
+        referenceTextField = new javax.swing.JTextField();
+        datePublicationLabel = new javax.swing.JLabel();
+        dureeDiffusionLabel = new javax.swing.JLabel();
+        dureeDiffusionSpinner = new javax.swing.JSpinner();
+        dateDebutContratLabel = new javax.swing.JLabel();
+        nbPosteLabel = new javax.swing.JLabel();
+        nbPosteSpinner = new javax.swing.JSpinner();
+        lattitudeLabel = new javax.swing.JLabel();
+        lattitudeTextField = new javax.swing.JTextField();
+        LongitudeLabel = new javax.swing.JLabel();
+        longitudeTextField = new javax.swing.JTextField();
+        descriptionPosteLabel = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        descriptionPosteTextArea = new javax.swing.JTextArea();
+        descriptionProfilLabel = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        descriptionProfilTextArea = new javax.swing.JTextArea();
+        telephoneLabel = new javax.swing.JLabel();
+        telephoneTextField = new javax.swing.JTextField();
+        emailLabel = new javax.swing.JLabel();
+        emailTextField = new javax.swing.JTextField();
+        datePublicationDateChooser = new com.toedter.calendar.JDateChooser();
+        dateDebutContratDateChooser = new com.toedter.calendar.JDateChooser();
+        domaineOffreLabel = new javax.swing.JLabel();
+        metierOffreLabel = new javax.swing.JLabel();
+        domaineOffreComboBox = new javax.swing.JComboBox();
+        metierOffreComboBox = new javax.swing.JComboBox();
+        typeContratOffreLabel = new javax.swing.JLabel();
+        annonceurOffreLabel = new javax.swing.JLabel();
+        typeContratOffreComboBox = new javax.swing.JComboBox();
+        annonceurOffreComboBox = new javax.swing.JComboBox();
+        validerOffreButton = new javax.swing.JButton();
 
         jLabel1.setText("Offre");
 
@@ -49,31 +123,253 @@ public class OffreForm extends javax.swing.JPanel {
             }
         });
 
+        domaineLabel.setText("Domaine");
+
+        domaineList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                selection(evt);
+            }
+        });
+        jScrollPane1.setViewportView(domaineList);
+
+        metierLabel.setText("Métier");
+
+        jScrollPane2.setViewportView(metierList);
+
+        annonceurLabel.setText("Annonceurs");
+
+        jScrollPane3.setViewportView(annonceurList);
+
+        typeContratLabel.setText("Type de Contrat");
+
+        jScrollPane4.setViewportView(typeContratList);
+
+        jScrollPane5.setViewportView(offreList);
+
+        intituleLabel.setText("Intitule");
+
+        referenceLabel.setText("Référence");
+
+        datePublicationLabel.setText("Date de la publication");
+
+        dureeDiffusionLabel.setText("Durée de la diffusion");
+
+        dateDebutContratLabel.setText("Date de début du contrat");
+
+        nbPosteLabel.setText("Nombre de poste(s)");
+
+        lattitudeLabel.setText("Lattitude");
+
+        LongitudeLabel.setText("Longitude");
+
+        descriptionPosteLabel.setText("Description du poste");
+
+        descriptionPosteTextArea.setColumns(20);
+        descriptionPosteTextArea.setRows(5);
+        jScrollPane6.setViewportView(descriptionPosteTextArea);
+
+        descriptionProfilLabel.setText("Description du profil");
+
+        descriptionProfilTextArea.setColumns(20);
+        descriptionProfilTextArea.setRows(5);
+        jScrollPane7.setViewportView(descriptionProfilTextArea);
+
+        telephoneLabel.setText("Téléphone");
+
+        emailLabel.setText("Email");
+
+        domaineOffreLabel.setText("Domaine");
+
+        metierOffreLabel.setText("Métier");
+
+        typeContratOffreLabel.setText("Type de Contrat");
+
+        annonceurOffreLabel.setText("Annonceur");
+
+        validerOffreButton.setText("Valider");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
+                        .addComponent(domaineLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(accueilButton)))
-                .addContainerGap(201, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(annonceurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(metierLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(typeContratLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(intituleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(referenceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(datePublicationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dureeDiffusionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateDebutContratLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nbPosteLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lattitudeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(LongitudeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(domaineOffreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(metierOffreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(intituleTextField)
+                                                    .addComponent(referenceTextField)
+                                                    .addComponent(dureeDiffusionSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                                    .addComponent(nbPosteSpinner)
+                                                    .addComponent(longitudeTextField)
+                                                    .addComponent(lattitudeTextField))
+                                                .addComponent(datePublicationDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(dateDebutContratDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(domaineOffreComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(metierOffreComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(descriptionPosteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(descriptionProfilLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(telephoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(telephoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(typeContratOffreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(typeContratOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(annonceurOffreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(annonceurOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(validerOffreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(17, 17, 17)
+                .addComponent(accueilButton))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addGap(116, 116, 116)
-                .addComponent(accueilButton)
-                .addContainerGap(120, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(accueilButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(domaineLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(metierLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(annonceurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(typeContratLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(intituleLabel)
+                                            .addComponent(intituleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(referenceLabel)
+                                                    .addComponent(referenceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(9, 9, 9)
+                                                .addComponent(descriptionPosteLabel)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(datePublicationLabel)
+                                            .addComponent(datePublicationDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(dureeDiffusionLabel)
+                                            .addComponent(dureeDiffusionSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(dateDebutContratLabel)
+                                            .addComponent(dateDebutContratDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(descriptionProfilLabel))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(nbPosteLabel)
+                                            .addComponent(nbPosteSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lattitudeLabel)
+                                            .addComponent(lattitudeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(LongitudeLabel)
+                                    .addComponent(longitudeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(telephoneLabel)
+                                    .addComponent(telephoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(emailLabel)
+                                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(domaineOffreLabel)
+                                    .addComponent(domaineOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(typeContratOffreLabel)
+                                    .addComponent(typeContratOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(metierOffreLabel)
+                                    .addComponent(metierOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(annonceurOffreLabel)
+                                    .addComponent(annonceurOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(47, 47, 47)
+                                .addComponent(validerOffreButton))
+                            .addComponent(jScrollPane5))))
+                .addContainerGap(583, Short.MAX_VALUE))
         );
-
-        accueilButton.getAccessibleContext().setAccessibleParent(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void accueilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accueilButtonActionPerformed
@@ -82,9 +378,142 @@ public class OffreForm extends javax.swing.JPanel {
         cl.show(mainJFrame.mainPanel, "accueilCard");
     }//GEN-LAST:event_accueilButtonActionPerformed
 
+    private void selection(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selection
+        // TODO add your handling code here:
+        Domaine d = (Domaine)domaineList.getSelectedValue();
+        
+        DefaultListModel model = (DefaultListModel)metierList.getModel();
+        model.clear();
+        ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, d);
+        for(Metier m : metiers)
+        {
+            if(m != null)
+            {
+                model.addElement(m);
+            }
+        }
+        
+        metierList.setModel(model);
+    }//GEN-LAST:event_selection
+
+    private void refreshListOffres(){
+        DefaultListModel model = (DefaultListModel)offreList.getModel();
+        model.clear();
+        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx);
+        for(Offre o : offres)
+        {
+            model.addElement(o);
+        }
+        offreList.setModel(model);
+        
+    }
+    
+    private void refreshListAnnonceurs(){
+        DefaultListModel model = (DefaultListModel)annonceurList.getModel();
+        model.clear();
+        ArrayList<Annonceur> annonceurs = AnnonceurDAO.lister(mainJFrame.cnx);
+        for(Annonceur a : annonceurs)
+        {
+            model.addElement(a);
+        }
+        annonceurList.setModel(model);
+        
+    }
+    
+    private void refreshListDomaines(){
+        DefaultListModel model = (DefaultListModel)domaineList.getModel();
+        model.clear();
+        ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
+        for(Domaine d : domaines)
+        {
+            model.addElement(d);
+        }
+        domaineList.setModel(model);
+        
+    }
+    
+    private void refreshListMetiers(){
+    DefaultListModel model = (DefaultListModel)metierList.getModel();
+    model.clear();
+    ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
+    for(Metier m : metiers)
+    {
+        model.addElement(m);
+    }
+    metierList.setModel(model);
+        
+    }
+    
+    private void refreshListTypeContrat(){
+    DefaultListModel model = (DefaultListModel)typeContratList.getModel();
+    model.clear();
+    ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
+    for(TypeContrat tc : typeContrats)
+    {
+        model.addElement(tc);
+    }
+    typeContratList.setModel(model);
+        
+    }
+    
+    private void refreshList(){
+        refreshListAnnonceurs();
+        refreshListDomaines();
+        refreshListMetiers();
+        refreshListTypeContrat();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LongitudeLabel;
     private javax.swing.JButton accueilButton;
+    private javax.swing.JLabel annonceurLabel;
+    private javax.swing.JList annonceurList;
+    private javax.swing.JComboBox annonceurOffreComboBox;
+    private javax.swing.JLabel annonceurOffreLabel;
+    private com.toedter.calendar.JDateChooser dateDebutContratDateChooser;
+    private javax.swing.JLabel dateDebutContratLabel;
+    private com.toedter.calendar.JDateChooser datePublicationDateChooser;
+    private javax.swing.JLabel datePublicationLabel;
+    private javax.swing.JLabel descriptionPosteLabel;
+    private javax.swing.JTextArea descriptionPosteTextArea;
+    private javax.swing.JLabel descriptionProfilLabel;
+    private javax.swing.JTextArea descriptionProfilTextArea;
+    private javax.swing.JLabel domaineLabel;
+    private javax.swing.JList domaineList;
+    private javax.swing.JComboBox domaineOffreComboBox;
+    private javax.swing.JLabel domaineOffreLabel;
+    private javax.swing.JLabel dureeDiffusionLabel;
+    private javax.swing.JSpinner dureeDiffusionSpinner;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField emailTextField;
+    private javax.swing.JLabel intituleLabel;
+    private javax.swing.JTextField intituleTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JLabel lattitudeLabel;
+    private javax.swing.JTextField lattitudeTextField;
+    private javax.swing.JTextField longitudeTextField;
+    private javax.swing.JLabel metierLabel;
+    private javax.swing.JList metierList;
+    private javax.swing.JComboBox metierOffreComboBox;
+    private javax.swing.JLabel metierOffreLabel;
+    private javax.swing.JLabel nbPosteLabel;
+    private javax.swing.JSpinner nbPosteSpinner;
+    private javax.swing.JList offreList;
+    private javax.swing.JLabel referenceLabel;
+    private javax.swing.JTextField referenceTextField;
+    private javax.swing.JLabel telephoneLabel;
+    private javax.swing.JTextField telephoneTextField;
+    private javax.swing.JLabel typeContratLabel;
+    private javax.swing.JList typeContratList;
+    private javax.swing.JComboBox typeContratOffreComboBox;
+    private javax.swing.JLabel typeContratOffreLabel;
+    private javax.swing.JButton validerOffreButton;
     // End of variables declaration//GEN-END:variables
 }

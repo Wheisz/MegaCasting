@@ -33,11 +33,10 @@ public class DiffuseurDAO {
         try {
             stmt = cnx.createStatement();
 
-            stmt.executeUpdate("SET IDENTITY_INSERT Diffuseur ON "
-                    + "INSERT INTO Diffuseur "
+            stmt.executeUpdate("INSERT INTO Diffuseur "
                     + "(Id) "
                     + "VALUES (" + diffuseur.getId() 
-                    + ") SET IDENTITY_INSERT Diffuseur OFF ");
+                    + ")");
 
             System.out.println("La société " + diffuseur.getRaisonSociale() + "(Id = " + diffuseur.getId() + ") a été ajoutée !");   
             
