@@ -22,30 +22,23 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="supprimerLabel" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="annonceurRadioButton" min="-2" pref="147" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="diffuseurRadioButton" pref="180" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
-                          <Component id="societeSupprimerButton" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="supprimerLabel" pref="329" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="annonceurRadioButton" min="-2" pref="147" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="diffuseurRadioButton" pref="180" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
+                      <Component id="societeSupprimerButton" alignment="1" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                      <Component id="validationLabel" min="-2" pref="302" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                               <Component id="validerSocieteButton" max="32767" attributes="0"/>
@@ -58,7 +51,7 @@
                                   <Component id="telephoneLabel" min="-2" max="-2" attributes="0"/>
                                   <Component id="numeroLabel" min="-2" max="-2" attributes="0"/>
                                   <Component id="rueLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="codePostal" min="-2" max="-2" attributes="0"/>
+                                  <Component id="codePostalLabel" min="-2" max="-2" attributes="0"/>
                                   <Component id="villeLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
@@ -75,27 +68,31 @@
                           </Group>
                           <Component id="annonceurValiderRadioButton" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="raisonSocialeErreurLabel" alignment="0" max="32767" attributes="0"/>
-                              <Component id="numeroErreurLabel" alignment="0" pref="184" max="32767" attributes="0"/>
-                              <Component id="rueErreurLabel" alignment="0" pref="184" max="32767" attributes="0"/>
-                              <Component id="codePostalErreur" alignment="0" pref="184" max="32767" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="telephoneErreurLabel" max="32767" attributes="0"/>
-                                      <Component id="emailErreurLabel" alignment="0" pref="178" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel7" max="32767" attributes="0"/>
-                              </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="validationLabel" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="raisonSocialeErreurLabel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="numeroErreurLabel" alignment="0" pref="184" max="32767" attributes="0"/>
+                      <Component id="rueErreurLabel" alignment="0" pref="184" max="32767" attributes="0"/>
+                      <Component id="codePostalErreur" alignment="0" pref="184" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="telephoneErreurLabel" max="32767" attributes="0"/>
+                              <Component id="emailErreurLabel" alignment="0" pref="178" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="annonceurDiffuseurErreurLabel" alignment="0" max="32767" attributes="0"/>
-                              <Component id="villeErreurLabel" alignment="0" pref="178" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel7" max="32767" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="annonceurDiffuseurErreurLabel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="villeErreurLabel" alignment="0" pref="178" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -106,7 +103,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="validationLabel" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -148,7 +145,7 @@
                       </Group>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="codePostal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="codePostalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="codePostalSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="codePostalErreur" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                       </Group>
@@ -169,51 +166,28 @@
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="validerSocieteButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="effacerSocieteButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="supprimerLabel" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="effacerSocieteButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="annonceurRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="diffuseurRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="410" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="societeSupprimerButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="410" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="societeSupprimerButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="8" max="32767" attributes="0"/>
+              <Component id="supprimerLabel" min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTable" name="societeTable">
-          <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="2" rowCount="0">
-                <Column editable="true" title="id" type="java.lang.Integer"/>
-                <Column editable="true" title="Raison Sociale" type="java.lang.String"/>
-              </Table>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="selection"/>
-          </Events>
-        </Component>
-      </SubComponents>
-    </Container>
     <Component class="javax.swing.JLabel" name="raisonSocialLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Raison Sociale"/>
@@ -239,7 +213,7 @@
         <Property name="text" type="java.lang.String" value="Rue"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="codePostal">
+    <Component class="javax.swing.JLabel" name="codePostalLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Code Postal"/>
       </Properties>
@@ -347,5 +321,25 @@
     </Component>
     <Component class="javax.swing.JLabel" name="annonceurDiffuseurErreurLabel">
     </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="societeList">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+            <Property name="selectionMode" type="int" value="0"/>
+          </Properties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="selection"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

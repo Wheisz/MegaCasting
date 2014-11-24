@@ -57,6 +57,11 @@ public class Societe {
         this.adresse = adresse;
     }
 
+    @Override
+    public String toString() {
+        return raisonSociale;
+    }
+
     public Societe(String raisonSociale, String email, String telephone, Adresse adresse) {
         this.raisonSociale = raisonSociale;
         this.email = email;
