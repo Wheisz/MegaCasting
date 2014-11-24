@@ -75,7 +75,9 @@ public class AnnonceurDAO {
             stmt.executeUpdate("DELETE FROM Annonceur "
                     + "WHERE Id = " + annonceur.getId()
             );
-
+            
+            SocieteDAO.supprimer(cnx, annonceur);
+            
             System.out.println("L'annonceur " + annonceur.getRaisonSociale() + " a été supprimé !");            
             
         } catch (SQLException ex) {

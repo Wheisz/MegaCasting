@@ -20,28 +20,23 @@ import megacasting.entite.Metier;
  */
 public class MetierDAO {
     
-     public static void creer (Connection cnx, Metier m) throws Exception {
-        
-        Metier mTemp = trouver(cnx, m.getLibelle());
-        if (mTemp != null) {
-            throw new Exception("Le métier " + m.getLibelle() + " existe déjà !");
-        }
-        
-        Domaine dTemp = DomaineDAO.trouver(cnx, m.getDomaine().getLibelle());
-        if(dTemp == null)
-        {
-           DomaineDAO.creer(cnx, m.getDomaine());  
-        }
-
+     public static void creer (Connection cnx, Metier m) {
         
         int id = 0;
         Statement stmt = null;
         try {
             stmt = cnx.createStatement();
             
-            stmt.executeUpdate("INSERT INTO Metier "
+            if (m.getDomaine() != null) {
+                stmt.executeUpdate("INSERT INTO Metier "
                     + "(Libelle,IdDomaine) "
-                    + "VALUES ('" + m.getLibelle()+ "', '" + m.getDomaine().getId()+ "')");
+                    + "VALUES ('" + m.getLibelle()+ "', " + m.getDomaine().getId()+ ")");
+            }
+            else {
+                stmt.executeUpdate("INSERT INTO Metier "
+                    + "(Libelle,IdDomaine) "
+                    + "VALUES ('" + m.getLibelle()+ "', " + null + ")");
+            }
 
             ResultSet rs = stmt.executeQuery("SELECT MAX(Id) FROM Metier");
             
@@ -131,6 +126,46 @@ public class MetierDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT Id, Libelle, IdDomaine "
                     + "FROM Metier");
+            
+            while(rs.next()) {
+                Domaine d = DomaineDAO.trouver(cnx, rs.getLong(3));
+                Metier m = new Metier(rs.getLong(1), rs.getString(2), d);
+                metiers.add(m);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex){
+                    
+                }
+            }
+        }         
+        return metiers;
+    }
+     
+    public static ArrayList<Metier> lister (Connection cnx, Domaine domaine) {
+        
+        ArrayList<Metier> metiers = new ArrayList();
+        Statement stmt = null;
+        try {
+            stmt = cnx.createStatement();
+            
+            ResultSet rs = null;
+            if (domaine != null) {
+                rs = stmt.executeQuery("SELECT Id, Libelle, IdDomaine "
+                    + "FROM Metier "
+                    + "WHERE IdDomaine = " + domaine.getId());
+            }
+            else {
+                rs = stmt.executeQuery("SELECT Id, Libelle, IdDomaine "
+                    + "FROM Metier "
+                    + "WHERE IdDomaine IS NULL");
+            }
+            
             
             while(rs.next()) {
                 Domaine d = DomaineDAO.trouver(cnx, rs.getLong(3));

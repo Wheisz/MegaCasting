@@ -75,6 +75,8 @@ public class DiffuseurDAO {
             stmt.executeUpdate("DELETE FROM Diffuseur "
                     + "WHERE Id = " + diffuseur.getId()
             );
+            
+            SocieteDAO.supprimer(cnx, diffuseur);
 
             System.out.println("Le diffuseur " + diffuseur.getRaisonSociale() + " a été supprimé !");            
             

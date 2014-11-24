@@ -104,7 +104,9 @@ public class SocieteDAO {
             stmt.executeUpdate("DELETE FROM Societe "
                     + "WHERE Id = " + s.getId()
             );
-
+            
+            AdresseDAO.supprimer(cnx, s.getAdresse());
+            
             System.out.println("La societe " + s.getRaisonSociale() + " a été supprimée !");            
             
         } catch (SQLException ex) {
