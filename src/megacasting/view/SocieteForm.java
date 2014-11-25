@@ -161,6 +161,22 @@ public class SocieteForm extends javax.swing.JPanel {
         buttonGroup1.add(diffuseurValiderRadioButton);
         diffuseurValiderRadioButton.setText("Diffuseur");
 
+        raisonSocialeErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        emailErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        numeroErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        rueErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        codePostalErreur.setForeground(new java.awt.Color(255, 0, 0));
+
+        villeErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        telephoneErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        annonceurDiffuseurErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
         societeList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         societeList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -177,16 +193,16 @@ public class SocieteForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(supprimerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(annonceurRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(diffuseurRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
-                        .addComponent(societeSupprimerButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(annonceurRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(diffuseurRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                    .addComponent(societeSupprimerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addGap(0, 10, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(validerSocieteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -211,9 +227,7 @@ public class SocieteForm extends javax.swing.JPanel {
                                     .addComponent(numeroSpinner)
                                     .addComponent(codePostalSpinner)))
                             .addComponent(annonceurValiderRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(validationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(validationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -387,7 +401,11 @@ public class SocieteForm extends javax.swing.JPanel {
         ArrayList<Erreur> erreurs = verifFormulaire();
         if (erreurs.isEmpty()) {
             if (this.annonceurValiderRadioButton.isSelected()) {
-
+                Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, raisonSociale);
+                if(d != null)
+                {
+                    DiffuseurDAO.supprimer(mainJFrame.cnx, d);
+                }
                 Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, raisonSociale);
 
                 if (a == null) {
@@ -425,6 +443,11 @@ public class SocieteForm extends javax.swing.JPanel {
                 }
             } else {
                 if (this.diffuseurValiderRadioButton.isSelected()) {
+                    Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, raisonSociale);
+                    if(a != null)
+                    {
+                        AnnonceurDAO.supprimer(mainJFrame.cnx, a);
+                    }
                     Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, raisonSociale);
 
                     if (d == null) {

@@ -60,7 +60,7 @@ public class AnnonceurDAO {
         if (aTemp != null && aTemp.getId() != annonceur.getId()) {
             throw new Exception("L'annonceur " + annonceur.getRaisonSociale() + " existe déjà !");
         }
-        
+        System.out.println(aTemp.getId());
         SocieteDAO.modifier(cnx, annonceur);
         
         System.out.println("L'annonceur " + annonceur.getRaisonSociale() + " a été modifié !");

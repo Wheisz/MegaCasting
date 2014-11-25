@@ -65,7 +65,7 @@ public class SocieteDAO {
         if (sTemp != null && sTemp.getId() != s.getId()) {
             throw new Exception("La societe " + s.getRaisonSociale() + " existe déjà !");
         }
-        
+        System.out.println(sTemp.getId());
         AdresseDAO.modifier(cnx, s.getAdresse());
         
         Statement stmt = null;

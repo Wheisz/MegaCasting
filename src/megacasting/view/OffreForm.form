@@ -38,214 +38,223 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane5" min="-2" pref="185" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="intituleLabel" max="32767" attributes="0"/>
-                          <Component id="referenceLabel" max="32767" attributes="0"/>
-                          <Component id="datePublicationLabel" max="32767" attributes="0"/>
-                          <Component id="dureeDiffusionLabel" max="32767" attributes="0"/>
-                          <Component id="dateDebutContratLabel" max="32767" attributes="0"/>
-                          <Component id="nbPosteLabel" max="32767" attributes="0"/>
-                          <Component id="lattitudeLabel" max="32767" attributes="0"/>
-                          <Component id="LongitudeLabel" max="32767" attributes="0"/>
-                          <Component id="domaineOffreLabel" max="32767" attributes="0"/>
-                          <Component id="metierOffreLabel" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="intituleTextField" max="32767" attributes="0"/>
-                                                  <Component id="referenceTextField" max="32767" attributes="0"/>
-                                                  <Component id="dureeDiffusionSpinner" pref="166" max="32767" attributes="0"/>
-                                                  <Component id="nbPosteSpinner" max="32767" attributes="0"/>
-                                                  <Component id="longitudeTextField" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="lattitudeTextField" alignment="0" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Component id="datePublicationDateChooser" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="dateDebutContratDateChooser" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="domaineOffreComboBox" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="metierOffreComboBox" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="descriptionPosteLabel" min="-2" pref="122" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="descriptionProfilLabel" min="-2" pref="122" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="telephoneLabel" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="telephoneTextField" min="-2" pref="166" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="emailLabel" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="emailTextField" min="-2" pref="166" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="typeContratOffreLabel" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="typeContratOffreComboBox" min="-2" pref="166" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="annonceurOffreLabel" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="annonceurOffreComboBox" min="-2" pref="166" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="accueilButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="validationLabel" max="32767" attributes="0"/>
-                                  <Component id="validerOffreButton" pref="323" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="effacerOffreButton" min="-2" pref="291" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="intituleLabel" max="32767" attributes="0"/>
+                                          <Component id="referenceLabel" max="32767" attributes="0"/>
+                                          <Component id="datePublicationLabel" max="32767" attributes="0"/>
+                                          <Component id="dureeDiffusionLabel" max="32767" attributes="0"/>
+                                          <Component id="dateDebutContratLabel" max="32767" attributes="0"/>
+                                          <Component id="nbPosteLabel" max="32767" attributes="0"/>
+                                          <Component id="lattitudeLabel" max="32767" attributes="0"/>
+                                          <Component id="LongitudeLabel" max="32767" attributes="0"/>
+                                          <Component id="domaineOffreLabel" max="32767" attributes="0"/>
+                                          <Component id="metierOffreLabel" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Group type="103" groupAlignment="0" attributes="0">
+                                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                                  <Component id="intituleTextField" max="32767" attributes="0"/>
+                                                                  <Component id="referenceTextField" max="32767" attributes="0"/>
+                                                                  <Component id="dureeDiffusionSpinner" pref="166" max="32767" attributes="0"/>
+                                                                  <Component id="nbPosteSpinner" max="32767" attributes="0"/>
+                                                                  <Component id="longitudeTextField" alignment="0" max="32767" attributes="0"/>
+                                                                  <Component id="lattitudeTextField" alignment="0" max="32767" attributes="0"/>
+                                                              </Group>
+                                                              <Component id="datePublicationDateChooser" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Component id="dateDebutContratDateChooser" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="domaineOffreComboBox" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="metierOffreComboBox" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="descriptionPosteLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" pref="45" max="32767" attributes="0"/>
+                                                      <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="descriptionProfilLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="annonceurOffreLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="annonceurOffreComboBox" min="-2" pref="166" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="telephoneLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="telephoneTextField" min="-2" pref="166" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="emailLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="emailTextField" min="-2" pref="166" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="typeContratOffreLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="typeContratOffreComboBox" min="-2" pref="166" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                                                      <Component id="validationLabel" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="validerOffreButton" pref="323" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              <Component id="accueilButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="domaineLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="metierLabel" min="-2" pref="29" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="77" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="annonceurLabel" min="-2" pref="22" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="typeContratLabel" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane4" min="-2" pref="158" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="intituleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="intituleTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="referenceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="referenceTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                      <Component id="descriptionPosteLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="datePublicationLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="datePublicationDateChooser" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="dureeDiffusionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="dureeDiffusionSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="dateDebutContratLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="dateDebutContratDateChooser" min="-2" max="-2" attributes="0"/>
+                                  <Component id="descriptionProfilLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="nbPosteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nbPosteSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lattitudeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lattitudeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jScrollPane7" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="LongitudeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="longitudeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="telephoneLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="telephoneTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="emailLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="emailTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="domaineOffreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="domaineOffreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="typeContratOffreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="typeContratOffreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="metierOffreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="metierOffreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="annonceurOffreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="annonceurOffreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="validerOffreButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="effacerOffreButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="validationLabel" min="-2" pref="0" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                       <Component id="accueilButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="domaineLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jScrollPane1" min="-2" pref="70" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="metierLabel" min="-2" pref="29" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" min="-2" pref="77" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="annonceurLabel" min="-2" pref="22" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="typeContratLabel" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" min="-2" pref="158" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="intituleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="intituleTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="referenceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="referenceTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                                              <Component id="descriptionPosteLabel" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="datePublicationLabel" min="-2" max="-2" attributes="0"/>
-                                          <Component id="datePublicationDateChooser" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="dureeDiffusionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="dureeDiffusionSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="dateDebutContratLabel" min="-2" max="-2" attributes="0"/>
-                                          <Component id="dateDebutContratDateChooser" min="-2" max="-2" attributes="0"/>
-                                          <Component id="descriptionProfilLabel" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="nbPosteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="nbPosteSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lattitudeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lattitudeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="jScrollPane7" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="LongitudeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="longitudeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="telephoneLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="telephoneTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="emailLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="emailTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="domaineOffreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="domaineOffreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="typeContratOffreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="typeContratOffreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="metierOffreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="metierOffreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="annonceurOffreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="annonceurOffreComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="validerOffreButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="validationLabel" min="-2" pref="0" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="583" max="32767" attributes="0"/>
           </Group>
@@ -539,6 +548,14 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="validationLabel">
+    </Component>
+    <Component class="javax.swing.JButton" name="effacerOffreButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Effacer"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="effacerOffreButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
