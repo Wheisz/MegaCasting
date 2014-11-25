@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sourceforge.jtds.jdbc.DateTime;
 
 
 /**
@@ -208,7 +209,7 @@ public class Offre {
 
     @Override
     public String toString() {
-        return "Offre{" + "id=" + id + ", intitule=" + intitule + ", reference=" + reference + ", datePublication=" + datePublication + ", dureeDiffusion=" + dureeDiffusion + ", dateDebutContrat=" + dateDebutContrat + ", nbPoste=" + nbPoste + ", localisationLattitude=" + localisationLattitude + ", localisationLongitude=" + localisationLongitude + ", descriptionPoste=" + descriptionPoste + ", descriptionProfil=" + descriptionProfil + ", telephone=" + telephone + ", email=" + email + ", domaine=" + domaine + ", metier=" + metier + ", typeContrat=" + typeContrat + ", annonceur=" + annonceur + '}';
+        return intitule;
     }
 
 
@@ -252,7 +253,7 @@ public class Offre {
         this.id = id;
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication =  new Date(System.currentTimeMillis());
+        this.datePublication = new Date();
         this.dureeDiffusion = dureeDiffusion;
         this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
@@ -271,7 +272,7 @@ public class Offre {
     public Offre(String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication =  new Date(System.currentTimeMillis());
+        this.datePublication =  new Date();
         this.dureeDiffusion = dureeDiffusion;
         this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
@@ -291,7 +292,7 @@ public class Offre {
         this.id = id;
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication =  new Date(System.currentTimeMillis());
+        this.datePublication =  new Date();
         this.dureeDiffusion = dureeDiffusion;
         this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
@@ -309,7 +310,7 @@ public class Offre {
     public Offre(String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, TypeContrat typeContrat, Annonceur annonceur) {
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication =  new Date(System.currentTimeMillis());
+        this.datePublication =  new Date();
         this.dureeDiffusion = dureeDiffusion;
         this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
@@ -328,7 +329,7 @@ public class Offre {
         this.id = id;
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication =  new Date(System.currentTimeMillis());
+        this.datePublication =  new Date();
         this.dureeDiffusion = dureeDiffusion;
         this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
@@ -346,7 +347,7 @@ public class Offre {
     public Offre(String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication =  new Date(System.currentTimeMillis());
+        this.datePublication =  new Date();
         this.dureeDiffusion = dureeDiffusion;
         this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;

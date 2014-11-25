@@ -57,7 +57,7 @@ public class DomaineDAO {
     public static void modifier (Connection cnx, Domaine d) throws Exception {
         
         Domaine dTemp = trouver(cnx, d.getLibelle());
-        if (dTemp != null) {
+        if (dTemp != null && dTemp.getId() != d.getId()) {
             throw new Exception("Ce domaine existe déjà !");
         }
         
@@ -67,7 +67,7 @@ public class DomaineDAO {
             
             stmt.executeUpdate("UPDATE Domaine "
                     + "SET Libelle = '" +d.getLibelle()+"'"
-                    +"WHERE Id="+d.getId()
+                    +" WHERE Id="+d.getId()
             );
 
             System.out.println("Domaine modifié !");

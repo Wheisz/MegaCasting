@@ -372,8 +372,6 @@ public class SocieteForm extends javax.swing.JPanel {
 
     private void validerSocieteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerSocieteButtonActionPerformed
         // TODO add your handling code here:
-
-        Societe s = (Societe)societeList.getSelectedValue();
         
         // Recuperation des données de la société
         String raisonSociale = this.raisonSocialeTextField.getText();

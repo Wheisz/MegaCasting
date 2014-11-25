@@ -113,6 +113,7 @@ public class OffreDAO {
         TypeContratDAO.modifier(cnx, o.getTypeContrat());
         AnnonceurDAO.modifier(cnx, o.getAnnonceur());
         
+        
         Statement stmt = null;
         try {
             stmt = cnx.createStatement();
@@ -120,19 +121,19 @@ public class OffreDAO {
             stmt.executeUpdate("UPDATE Offre "
                     + "SET Intitule = '" + o.getIntitule()
                     + "', Reference = '" + o.getReference()
-                    + "', DureeDiffusion = '" + o.getDureeDiffusion()
-                    + "', DateDebutContrat = '" + o.getDateDebutContrat()
-                    + "', NbPoste = '" + o.getNbPoste()
-                    + "', LocalisationLattitude = '" + o.getLocalisationLattitude()
+                    + "', DureeDiffusion = " + o.getDureeDiffusion()
+                    + ", DateDebutContrat = " + o.getDateDebutContrat()
+                    + ", NbPoste = " + o.getNbPoste()
+                    + ", LocalisationLattitude = '" + o.getLocalisationLattitude()
                     + "', LocalisationLongitude = '" + o.getLocalisationLongitude()
                     + "', DescriptionPoste = '" + o.getDescriptionPoste()
                     + "', DescriptionProfil = '" + o.getDescriptionProfil()
                     + "', Telephone = '" + o.getTelephone()
                     + "', Email = '" + o.getEmail()
                     + "', IdDomaine = " + o.getDomaine().getId()
-                    + "', IdMetier = " + o.getMetier().getId()
-                    + "', IdTypeContrat = " + o.getTypeContrat().getId()
-                    + "', IdAnnonceur = " + o.getAnnonceur().getId()
+                    + ", IdMetier = " + o.getMetier().getId()
+                    + ", IdTypeContrat = " + o.getTypeContrat().getId()
+                    + ", IdAnnonceur = " + o.getAnnonceur().getId()
                     + " WHERE Id = " + o.getId()
             );
 
@@ -253,9 +254,9 @@ public class OffreDAO {
             if(rs.next()) {
                 intitule = rs.getString(2);
                 reference = rs.getString(3);
-                datePublication = rs.getDate(4);
+                datePublication = rs.getTimestamp(4);
                 dureeDiffusion = rs.getInt(5);
-                dateDebutContrat = Offre.changeStringInDate(rs.getString(6));
+                dateDebutContrat = rs.getDate(6);
                 nbPoste = rs.getInt(7);
                 localisationLattitude = rs.getString(8);
                 localisationLongitude = rs.getString(9);
@@ -329,9 +330,9 @@ public class OffreDAO {
             if(rs.next()) {
                 id = rs.getLong(1);
                 intitule = rs.getString(2);
-                datePublication = rs.getDate(4);
+                datePublication = rs.getTimestamp(4);
                 dureeDiffusion = rs.getInt(5);
-                dateDebutContrat = Offre.changeStringInDate(rs.getString(6));
+                dateDebutContrat = rs.getDate(6);
                 nbPoste = rs.getInt(7);
                 localisationLattitude = rs.getString(8);
                 localisationLongitude = rs.getString(9);

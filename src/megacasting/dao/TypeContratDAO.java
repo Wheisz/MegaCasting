@@ -53,7 +53,7 @@ public class TypeContratDAO {
     public static void modifier (Connection cnx, TypeContrat tc) throws Exception {
         
         TypeContrat tcTemp = trouver(cnx, tc.getLibelle());
-        if (tcTemp != null) {
+        if (tcTemp != null && tcTemp.getId() != tc.getId()) {
             throw new Exception("Ce type de contrat existe déjà !");
         }
         

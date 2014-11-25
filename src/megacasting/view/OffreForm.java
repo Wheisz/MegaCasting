@@ -6,7 +6,9 @@
 package megacasting.view;
 
 import java.awt.CardLayout;
+import java.util.Date;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import megacasting.dao.AnnonceurDAO;
 import megacasting.dao.DomaineDAO;
@@ -40,7 +42,22 @@ public class OffreForm extends javax.swing.JPanel {
         typeContratList.setModel(typeContratListModel);
         DefaultListModel<Offre>offreListModel = new DefaultListModel<>();
         offreList.setModel(offreListModel);
+        
+        DefaultComboBoxModel<Annonceur>annonceurComboBoxModel = new DefaultComboBoxModel<>();
+        annonceurOffreComboBox.setModel(annonceurComboBoxModel);
+        DefaultComboBoxModel<Domaine>domaineComboBoxModel = new DefaultComboBoxModel<>();
+        domaineOffreComboBox.setModel(domaineComboBoxModel);
+        DefaultComboBoxModel<Metier>metierComboBoxModel = new DefaultComboBoxModel<>();
+        metierOffreComboBox.setModel(metierComboBoxModel);
+        DefaultComboBoxModel<TypeContrat>typeContratComboBoxModel = new DefaultComboBoxModel<>();
+        typeContratOffreComboBox.setModel(typeContratComboBoxModel);
+        
+        
+
+        
+        
         refreshList();
+        refreshComboBox();
 
 
     }
@@ -113,6 +130,7 @@ public class OffreForm extends javax.swing.JPanel {
         typeContratOffreComboBox = new javax.swing.JComboBox();
         annonceurOffreComboBox = new javax.swing.JComboBox();
         validerOffreButton = new javax.swing.JButton();
+        validationLabel = new javax.swing.JLabel();
 
         jLabel1.setText("Offre");
 
@@ -144,6 +162,11 @@ public class OffreForm extends javax.swing.JPanel {
 
         jScrollPane4.setViewportView(typeContratList);
 
+        offreList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                selectionOffre(evt);
+            }
+        });
         jScrollPane5.setViewportView(offreList);
 
         intituleLabel.setText("Intitule");
@@ -187,6 +210,11 @@ public class OffreForm extends javax.swing.JPanel {
         annonceurOffreLabel.setText("Annonceur");
 
         validerOffreButton.setText("Valider");
+        validerOffreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validerOffreButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -271,7 +299,9 @@ public class OffreForm extends javax.swing.JPanel {
                                                 .addComponent(annonceurOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(validerOffreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(validationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(validerOffreButton, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(17, 17, 17)
                 .addComponent(accueilButton))
@@ -366,7 +396,9 @@ public class OffreForm extends javax.swing.JPanel {
                                     .addComponent(annonceurOffreLabel)
                                     .addComponent(annonceurOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(47, 47, 47)
-                                .addComponent(validerOffreButton))
+                                .addComponent(validerOffreButton)
+                                .addGap(29, 29, 29)
+                                .addComponent(validationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane5))))
                 .addContainerGap(583, Short.MAX_VALUE))
         );
@@ -396,6 +428,115 @@ public class OffreForm extends javax.swing.JPanel {
         metierList.setModel(model);
     }//GEN-LAST:event_selection
 
+    private void selectionOffre(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionOffre
+        // TODO add your handling code here:
+        Offre o = (Offre)offreList.getSelectedValue();
+        if(o != null)
+        {
+            this.intituleTextField.setText(o.getIntitule());
+            this.referenceTextField.setText(o.getReference());
+            this.datePublicationDateChooser.setDate(o.getDatePublication());
+            this.dureeDiffusionSpinner.setValue(o.getDureeDiffusion());
+            this.dateDebutContratDateChooser.setDate(o.getDateDebutContrat());
+            this.nbPosteSpinner.setValue(o.getNbPoste());
+            this.lattitudeTextField.setText(o.getLocalisationLattitude());
+            this.longitudeTextField.setText(o.getLocalisationLongitude());
+            this.descriptionPosteTextArea.setText(o.getDescriptionPoste());
+            this.descriptionProfilTextArea.setText(o.getDescriptionProfil());
+            this.telephoneTextField.setText(o.getTelephone());
+            this.emailTextField.setText(o.getEmail());
+            
+            
+        }
+                   
+    }//GEN-LAST:event_selectionOffre
+
+    private void validerOffreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerOffreButtonActionPerformed
+        // TODO add your handling code here:
+        
+        String intitule = this.intituleTextField.getText();
+        String reference = this.referenceTextField.getText();
+        int dureeDiffusion = (int)this.dureeDiffusionSpinner.getValue();
+        Date dateDebutContrat = this.dateDebutContratDateChooser.getDate();
+        int nbPoste = (int)this.nbPosteSpinner.getValue();
+        String lattitude = this.lattitudeTextField.getText();
+        String longitude = this.longitudeTextField.getText();
+        String descriptionPoste = this.descriptionPosteTextArea.getText();
+        String descriptionProfil = this.descriptionProfilTextArea.getText();
+        String telephone = this.telephoneTextField.getText();
+        String email = this.emailTextField.getText();
+        Domaine domaine = (Domaine)this.domaineOffreComboBox.getSelectedItem();
+        Metier metier = (Metier)this.metierOffreComboBox.getSelectedItem();
+        TypeContrat typeContrat = (TypeContrat)this.typeContratOffreComboBox.getSelectedItem();
+        Annonceur annonceur = (Annonceur)this.annonceurOffreComboBox.getSelectedItem();
+        
+        Offre o = OffreDAO.trouver(mainJFrame.cnx, reference);
+        if(o == null)
+        {
+            try {
+                 o = new Offre(intitule,reference,dureeDiffusion,
+                        dateDebutContrat,nbPoste,lattitude,longitude,descriptionPoste,descriptionProfil,
+                        telephone,email,domaine,metier,typeContrat,annonceur);
+
+                OffreDAO.creer(mainJFrame.cnx,o);
+                raz();
+                refreshList();
+                validationLabel.setText("L'offre a été crée !");
+            } catch (Exception e) {
+                validationLabel.setText("Une erreur s'est produite lors de la création");
+                e.printStackTrace();
+            } 
+        } else {
+            o.setIntitule(intitule);
+            o.setReference(reference);
+            o.setDureeDiffusion(dureeDiffusion);
+            o.setDateDebutContrat(dateDebutContrat);
+            o.setNbPoste(nbPoste);
+            o.setLocalisationLattitude(lattitude);
+            o.setLocalisationLongitude(longitude);
+            o.setDescriptionPoste(descriptionPoste);
+            o.setDescriptionProfil(descriptionProfil);
+            o.setTelephone(telephone);
+            o.setEmail(email);
+            o.setDomaine(domaine);
+            o.setMetier(metier);
+            o.setTypeContrat(typeContrat);
+            o.setAnnonceur(annonceur);
+            try {
+                OffreDAO.modifier(mainJFrame.cnx, o);
+                raz();
+                refreshList();
+                validationLabel.setText("L'offre a été modifiée !");
+            } catch (Exception ex) {
+                validationLabel.setText("Une erreur s'est produite lors de la modification");
+            ex.printStackTrace();
+            }
+        }
+
+    }//GEN-LAST:event_validerOffreButtonActionPerformed
+
+    private void raz(){
+        this.intituleTextField.setText(null);
+        this.referenceTextField.setText(null);
+        this.dureeDiffusionSpinner.setValue(0);
+        this.dateDebutContratDateChooser.setDate(null);
+        this.nbPosteSpinner.setValue(0);
+        this.lattitudeTextField.setText(null);
+        this.longitudeTextField.setText(null);
+        this.descriptionPosteTextArea.setText(null);
+        this.descriptionProfilTextArea.setText(null);
+        this.telephoneTextField.setText(null);
+        this.emailTextField.setText(null);
+    }
+    
+    private void refreshList(){
+        refreshListAnnonceurs();
+        refreshListDomaines();
+        refreshListMetiers();
+        refreshListTypeContrat();
+        refreshListOffres();
+    }
+    
     private void refreshListOffres(){
         DefaultListModel model = (DefaultListModel)offreList.getModel();
         model.clear();
@@ -456,12 +597,57 @@ public class OffreForm extends javax.swing.JPanel {
         
     }
     
-    private void refreshList(){
-        refreshListAnnonceurs();
-        refreshListDomaines();
-        refreshListMetiers();
-        refreshListTypeContrat();
+    private void refreshComboBox () {
+        refreshComboBoxAnnonceurs();
+        refreshComboBoxDomaines();
+        refreshComboBoxMetiers();
+        refreshComboBoxTypeContrats();
     }
+    
+    private void refreshComboBoxAnnonceurs () {
+        DefaultComboBoxModel<Annonceur> model = (DefaultComboBoxModel)annonceurOffreComboBox.getModel();
+        model.removeAllElements();
+        ArrayList<Annonceur> annonceurs = AnnonceurDAO.lister(mainJFrame.cnx);
+        for(Annonceur a : annonceurs)
+        {
+            model.addElement(a);
+        }
+        annonceurOffreComboBox.setModel(model);
+    }
+    
+    private void refreshComboBoxDomaines() {
+        DefaultComboBoxModel<Domaine> model = (DefaultComboBoxModel)domaineOffreComboBox.getModel();
+        model.removeAllElements();
+        ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
+        for(Domaine d : domaines)
+        {
+            model.addElement(d);
+        }
+        domaineOffreComboBox.setModel(model);
+    }
+    
+    private void refreshComboBoxMetiers() {
+        DefaultComboBoxModel<Metier> model = (DefaultComboBoxModel)metierOffreComboBox.getModel();
+        model.removeAllElements();
+        ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
+        for(Metier m : metiers)
+        {
+            model.addElement(m);
+        }
+        metierOffreComboBox.setModel(model);
+    }
+    
+    private void refreshComboBoxTypeContrats() {
+        DefaultComboBoxModel<TypeContrat> model = (DefaultComboBoxModel)typeContratOffreComboBox.getModel();
+        model.removeAllElements();
+        ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
+        for(TypeContrat tc : typeContrats)
+        {
+            model.addElement(tc);
+        }
+        typeContratOffreComboBox.setModel(model);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LongitudeLabel;
@@ -514,6 +700,7 @@ public class OffreForm extends javax.swing.JPanel {
     private javax.swing.JList typeContratList;
     private javax.swing.JComboBox typeContratOffreComboBox;
     private javax.swing.JLabel typeContratOffreLabel;
+    private javax.swing.JLabel validationLabel;
     private javax.swing.JButton validerOffreButton;
     // End of variables declaration//GEN-END:variables
 }
