@@ -8,6 +8,8 @@ package megacasting.view;
 import java.awt.CardLayout;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import megacasting.dao.AnnonceurDAO;
@@ -28,6 +30,13 @@ import megacasting.entite.TypeContrat;
 public class OffreForm extends javax.swing.JPanel {
 
     private MainJFrame mainJFrame;
+    public enum Erreur {
+        ERREUR_INTITULE_VIDE, ERREUR_REFERENCE_VIDE, ERREUR_REFERENCE_INVALIDE, ERREUR_DUREEDIFFUSION_VIDE,
+        ERREUR_DATEDEBUTCONTRAT_VIDE, ERREUR_DATEDEBUTCONTRAT_INVALIDE, ERREUR_NBPOSTE_VIDE, ERREUR_LATTITUDE_VIDE,
+        ERREUR_LATTITUDE_INVALIDE, ERREUR_LONGITUDE_VIDE, ERREUR_LONGITUDE_INVALIDE, ERREUR_DESCRIPTIONPOSTE_VIDE,
+        ERREUR_DESCRIPTIONPROFIL_VIDE, ERREUR_TELEPHONE_VIDE, ERREUR_TELEPHONE_INVALIDE, ERREUR_EMAIL_VIDE, 
+        ERREUR_EMAIL_INVALIDE, ERREUR_IDANNONCEUR_VIDE;
+    }
 
     public OffreForm(MainJFrame mainJFrame) {
         this.mainJFrame = mainJFrame;
@@ -133,6 +142,18 @@ public class OffreForm extends javax.swing.JPanel {
         validerOffreButton = new javax.swing.JButton();
         validationLabel = new javax.swing.JLabel();
         effacerOffreButton = new javax.swing.JButton();
+        intituleErreurLabel = new javax.swing.JLabel();
+        referenceErreurLabel = new javax.swing.JLabel();
+        dureeDiffusionErreurLabel = new javax.swing.JLabel();
+        dateDebutContratErreurLabel = new javax.swing.JLabel();
+        nbPosteErreurLabel = new javax.swing.JLabel();
+        lattitudeErreurLabel = new javax.swing.JLabel();
+        longitudeErreurLabel = new javax.swing.JLabel();
+        descriptionPosteErreurLabel = new javax.swing.JLabel();
+        descriptionProfilErreurLabel = new javax.swing.JLabel();
+        emailErreurLabel = new javax.swing.JLabel();
+        telephoneErreurLabel = new javax.swing.JLabel();
+        annonceurErreurLabel = new javax.swing.JLabel();
 
         jLabel1.setText("Offre");
 
@@ -225,6 +246,30 @@ public class OffreForm extends javax.swing.JPanel {
             }
         });
 
+        intituleErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        referenceErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        dureeDiffusionErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        dateDebutContratErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        nbPosteErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        lattitudeErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        longitudeErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        descriptionPosteErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        descriptionProfilErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        emailErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        telephoneErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        annonceurErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -250,87 +295,109 @@ public class OffreForm extends javax.swing.JPanel {
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(accueilButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(intituleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(referenceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(datePublicationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                                    .addComponent(metierOffreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(domaineOffreLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(dureeDiffusionLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(dateDebutContratLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(nbPosteLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(LongitudeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lattitudeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(effacerOffreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(intituleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(referenceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(datePublicationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(dureeDiffusionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(dateDebutContratLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(nbPosteLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lattitudeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(LongitudeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(domaineOffreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(metierOffreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(35, 35, 35)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
+                                                .addGap(77, 77, 77)
+                                                .addComponent(validationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(metierOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(annonceurOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(longitudeErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(datePublicationDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(dureeDiffusionSpinner)
+                                            .addComponent(dateDebutContratDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(nbPosteSpinner)
+                                            .addComponent(lattitudeTextField)
+                                            .addComponent(longitudeTextField)
+                                            .addComponent(lattitudeErreurLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(nbPosteErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(dateDebutContratErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(dureeDiffusionErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(referenceErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(intituleErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(domaineOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 123, Short.MAX_VALUE))
+                                            .addComponent(intituleTextField)
+                                            .addComponent(referenceTextField))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(40, 40, 40)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                    .addComponent(intituleTextField)
-                                                                    .addComponent(referenceTextField)
-                                                                    .addComponent(dureeDiffusionSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                                                                    .addComponent(nbPosteSpinner)
-                                                                    .addComponent(longitudeTextField)
-                                                                    .addComponent(lattitudeTextField))
-                                                                .addComponent(datePublicationDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                            .addComponent(dateDebutContratDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(domaineOffreComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(metierOffreComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(descriptionPosteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 45, Short.MAX_VALUE)
-                                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(descriptionProfilLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGap(0, 0, Short.MAX_VALUE))
                                                     .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(annonceurOffreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(descriptionPosteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(annonceurOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(telephoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(telephoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(typeContratOffreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(typeContratOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(77, 77, 77)
-                                                        .addComponent(validationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                    .addComponent(validerOffreButton, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))
-                                                .addGap(0, 0, Short.MAX_VALUE)))))))))
-                .addGap(82, 82, 82))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(typeContratOffreComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(descriptionProfilErreurLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(descriptionPosteErreurLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                    .addComponent(emailErreurLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(typeContratOffreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(telephoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                    .addGap(35, 35, 35)
+                                                                    .addComponent(telephoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addComponent(annonceurOffreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(annonceurErreurLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                    .addComponent(telephoneErreurLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(effacerOffreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(validerOffreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(accueilButton)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(domaineLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(accueilButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -351,72 +418,99 @@ public class OffreForm extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(intituleLabel)
                                     .addComponent(intituleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(referenceLabel)
-                                            .addComponent(referenceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addComponent(descriptionPosteLabel)))
-                                .addGap(18, 18, 18)
+                                .addGap(1, 1, 1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(descriptionPosteLabel)
+                                    .addComponent(intituleErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(referenceLabel)
+                                    .addComponent(referenceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(referenceErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(datePublicationLabel)
                                     .addComponent(datePublicationDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(descriptionPosteErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(3, 3, 3)
+                                .addComponent(descriptionProfilErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(dureeDiffusionLabel)
-                                    .addComponent(dureeDiffusionSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(dureeDiffusionSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dureeDiffusionLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dureeDiffusionErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(descriptionProfilLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dateDebutContratLabel)
-                                    .addComponent(dateDebutContratDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(descriptionProfilLabel))
+                                    .addComponent(dateDebutContratDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(nbPosteLabel)
-                                    .addComponent(nbPosteSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dateDebutContratErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lattitudeLabel)
-                                    .addComponent(lattitudeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LongitudeLabel)
-                            .addComponent(longitudeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(telephoneLabel)
-                            .addComponent(telephoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nbPosteSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nbPosteLabel))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nbPosteErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(telephoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(telephoneLabel)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(telephoneErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lattitudeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lattitudeLabel)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(emailLabel)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lattitudeErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(longitudeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(LongitudeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(emailErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addComponent(longitudeErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(emailLabel)
-                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(domaineOffreLabel)
                             .addComponent(domaineOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(typeContratOffreLabel)
-                            .addComponent(typeContratOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(domaineOffreLabel)
+                            .addComponent(typeContratOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(typeContratOffreLabel))
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(metierOffreLabel)
                             .addComponent(metierOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(annonceurOffreLabel)
-                            .addComponent(annonceurOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
-                        .addComponent(validerOffreButton)
-                        .addGap(29, 29, 29)
-                        .addComponent(effacerOffreButton)
+                            .addComponent(metierOffreLabel)
+                            .addComponent(annonceurOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(annonceurOffreLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(validationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addComponent(accueilButton))
-                    .addComponent(jScrollPane5))
-                .addContainerGap(583, Short.MAX_VALUE))
+                        .addComponent(annonceurErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(effacerOffreButton)
+                            .addComponent(validerOffreButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(validationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(421, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -471,7 +565,9 @@ public class OffreForm extends javax.swing.JPanel {
 
     private void validerOffreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerOffreButtonActionPerformed
         // TODO add your handling code here:
-        
+        ArrayList<Erreur> erreurs = verifFormulaire();
+        if(erreurs.isEmpty()) {
+            
         String intitule = this.intituleTextField.getText();
         String reference = this.referenceTextField.getText();
         int dureeDiffusion = (int)this.dureeDiffusionSpinner.getValue();
@@ -488,6 +584,7 @@ public class OffreForm extends javax.swing.JPanel {
         TypeContrat typeContrat = (TypeContrat)this.typeContratOffreComboBox.getSelectedItem();
         Annonceur annonceur = (Annonceur)this.annonceurOffreComboBox.getSelectedItem();
         
+
         Offre o = OffreDAO.trouver(mainJFrame.cnx, reference);
         if(o == null)
         {
@@ -530,6 +627,9 @@ public class OffreForm extends javax.swing.JPanel {
             ex.printStackTrace();
             }
         }
+        } else {
+            affichageErreurs(erreurs);
+        }
 
     }//GEN-LAST:event_validerOffreButtonActionPerformed
 
@@ -552,6 +652,19 @@ public class OffreForm extends javax.swing.JPanel {
         this.descriptionProfilTextArea.setText(null);
         this.telephoneTextField.setText(null);
         this.emailTextField.setText(null);
+        
+        this.intituleErreurLabel.setText(null);
+        this.referenceErreurLabel.setText(null);
+        this.dureeDiffusionErreurLabel.setText(null);
+        this.dateDebutContratErreurLabel.setText(null);
+        this.nbPosteErreurLabel.setText(null);
+        this.lattitudeErreurLabel.setText(null);
+        this.longitudeErreurLabel.setText(null);
+        this.descriptionPosteErreurLabel.setText(null);
+        this.descriptionProfilErreurLabel.setText(null);
+        this.telephoneErreurLabel.setText(null);
+        this.emailErreurLabel.setText(null);
+        this.annonceurErreurLabel.setText(null);
         
     }
     
@@ -674,31 +787,240 @@ public class OffreForm extends javax.swing.JPanel {
         typeContratOffreComboBox.setModel(model);
     }
     
+    private ArrayList verifFormulaire() {
+
+    ArrayList<Erreur> erreurs = new ArrayList();
+    
+    // Creation d'une erreur si le champ intitule est vide
+    if(this.intituleTextField.getText().equals("")) {
+        erreurs.add(Erreur.ERREUR_INTITULE_VIDE);
+    } else {
+        this.intituleErreurLabel.setText(null);
+    }
+    // Creation d'une erreur si le champ reference est vide
+    if(this.referenceTextField.getText().equals("")) {
+        erreurs.add(Erreur.ERREUR_REFERENCE_VIDE);
+    } else {
+        // Creation d'une erreur si le champ reference a été mal saisi
+        Boolean verifReference = regexReference(this.referenceTextField.getText());
+        if(verifReference != true) {
+            erreurs.add(Erreur.ERREUR_REFERENCE_INVALIDE);
+        } else {
+            this.referenceErreurLabel.setText(null);
+        }
+    }
+    // Creation d'une erreur si la durée de diffusion est égale à 0
+    if((int)this.dureeDiffusionSpinner.getValue() == 0) {
+        erreurs.add(Erreur.ERREUR_DUREEDIFFUSION_VIDE);        
+    } else {
+        this.dureeDiffusionErreurLabel.setText(null);
+    }
+    // Creation d'une erreur si la date de début de contrat est vide 
+    if(this.dateDebutContratDateChooser.getDate() ==  null) {
+        erreurs.add(Erreur.ERREUR_DATEDEBUTCONTRAT_VIDE);
+    } else {
+        Date now = new Date();
+        // Creation d'une erreur si la date de debut de oontrat est inférieure à celle de publication
+        if(this.dateDebutContratDateChooser.getDate().before(now)){
+            erreurs.add(Erreur.ERREUR_DATEDEBUTCONTRAT_INVALIDE);
+        } else {
+            this.dateDebutContratErreurLabel.setText(null);
+        }
+    }
+    // Creation d'une erreur si le nombre de postes est égale à 0
+    if((int)this.nbPosteSpinner.getValue() == 0) {
+        erreurs.add(Erreur.ERREUR_NBPOSTE_VIDE);
+    } else {
+        this.nbPosteErreurLabel.setText(null);
+    }
+    // Creation d'une erreur si la lattitude est vide 
+    if(this.lattitudeTextField.getText().equals("")) {
+        erreurs.add(Erreur.ERREUR_LATTITUDE_VIDE);
+    } else {
+        // Creation d'une erreur si la lattitude saisie est incorrect
+        Boolean verifLattitude = regexCoordonnées(this.lattitudeTextField.getText());
+        if(verifLattitude != true) {
+            erreurs.add(Erreur.ERREUR_LATTITUDE_INVALIDE);
+        } else {
+            this.lattitudeErreurLabel.setText(null);
+        }
+    }
+    // Creation d'une erreur si la longitude est vide 
+    if(this.longitudeTextField.getText().equals("")) {
+        erreurs.add(Erreur.ERREUR_LONGITUDE_VIDE);
+    } else {
+        // Creation d'une erreur si la longitude saisie est incorrect
+        Boolean verifLongitude = regexCoordonnées(this.longitudeTextField.getText());
+        if(verifLongitude != true ) {
+            erreurs.add(Erreur.ERREUR_LONGITUDE_INVALIDE);
+        } else {
+            this.longitudeErreurLabel.setText(null);
+        }
+    }
+    // Creation d'une erreur si la description de poste est vide 
+    if(this.descriptionPosteTextArea.getText().equals("")) {
+        erreurs.add(Erreur.ERREUR_DESCRIPTIONPOSTE_VIDE);
+    } else {
+        this.descriptionPosteErreurLabel.setText(null);
+    }
+    // Creation d'une erreur si la description du profil est vide
+    if(this.descriptionProfilTextArea.getText().equals("")) {
+        erreurs.add(Erreur.ERREUR_DESCRIPTIONPROFIL_VIDE);
+    } else {
+        this.descriptionProfilErreurLabel.setText(null);
+    }
+    // Creation d'une erreur si le numéro de téléphone est vide
+    if(this.telephoneTextField.getText().equals("")) {
+        erreurs.add(Erreur.ERREUR_TELEPHONE_VIDE);
+    } else {
+        // Creation d'une erreur si le numéro de téléphone saisi est incorrect
+        Boolean verifTelephone = regexTelephone(this.telephoneTextField.getText());
+        if(verifTelephone != true) {
+            erreurs.add(Erreur.ERREUR_TELEPHONE_INVALIDE);
+        } else {
+            this.telephoneErreurLabel.setText(null);
+        }
+    }
+    // Creation d'une erreur si l'email est vide
+    if(this.emailTextField.getText().equals("")) {
+        erreurs.add(Erreur.ERREUR_EMAIL_VIDE);
+    } else {
+        // Creation d'une erreur si l'email saisie est incorrect 
+        Boolean verifEmail = regexEmail(this.emailTextField.getText());
+        if(verifEmail != true) {
+            erreurs.add(Erreur.ERREUR_EMAIL_INVALIDE);
+        } else {
+            this.emailErreurLabel.setText(null);
+        }
+    }
+    // Creation d'une erreur si aucun annonceur à été choisi
+    if(this.annonceurOffreComboBox.getSelectedItem() == null) {
+        erreurs.add(Erreur.ERREUR_IDANNONCEUR_VIDE);
+    } else {
+        this.annonceurErreurLabel.setText(null);
+    }
+    
+    return erreurs;
+    
+    }
+    
+    private void affichageErreurs (ArrayList<Erreur> erreurs){
+        
+        for(Erreur erreur : erreurs) {
+            switch (erreur) {
+                
+                case ERREUR_INTITULE_VIDE :             this.intituleErreurLabel.setText("Veuillez saisir un intitulé !");
+                                                        break;
+                case ERREUR_REFERENCE_VIDE :            this.referenceErreurLabel.setText("Veuillez saisir une référence !");
+                                                        break;
+                case ERREUR_REFERENCE_INVALIDE :        this.referenceErreurLabel.setText("Veuillez saisir une référence correcte !");
+                                                        break;
+                case ERREUR_DUREEDIFFUSION_VIDE :       this.dureeDiffusionErreurLabel.setText("Veuillez saisir une durée de diffusion supérieure à 0 !");
+                                                        break;
+                case ERREUR_DATEDEBUTCONTRAT_VIDE :     this.dateDebutContratErreurLabel.setText("Veuillez saisir une date de début de contrat !");
+                                                        break;
+                case ERREUR_DATEDEBUTCONTRAT_INVALIDE : this.dateDebutContratErreurLabel.setText("La date saisie est inférieure à celle d\'aujourdh'hui !");
+                                                        break;
+                case ERREUR_NBPOSTE_VIDE :              this.nbPosteErreurLabel.setText("Veuillez saisir le nombre de postes pour l'offre !");
+                                                        break;
+                case ERREUR_LATTITUDE_VIDE :            this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude !");
+                                                        break;
+                case ERREUR_LATTITUDE_INVALIDE :        this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude correcte : 00° 00' NORD !");
+                                                        break;
+                case ERREUR_LONGITUDE_VIDE :            this.longitudeErreurLabel.setText("Veuillez saisir une longitude !");
+                                                        break;
+                case ERREUR_LONGITUDE_INVALIDE :        this.longitudeErreurLabel.setText("Veuillez saisir une longitude correcte : 00° 00' NORD !");
+                                                        break;
+                case ERREUR_DESCRIPTIONPOSTE_VIDE :     this.descriptionPosteErreurLabel.setText("Veuillez saisir une description de poste !");
+                                                        break;
+                case ERREUR_DESCRIPTIONPROFIL_VIDE :    this.descriptionProfilErreurLabel.setText("Veuillez saisir une description de profil !");
+                                                        break;
+                case ERREUR_TELEPHONE_VIDE :            this.telephoneErreurLabel.setText("Veuillez saisir un numéro de téléphone !");
+                                                        break;
+                case ERREUR_TELEPHONE_INVALIDE :        this.telephoneErreurLabel.setText("Veuillez saisir une numéro de téléphone de 10 chiffres !");
+                                                        break;
+                case ERREUR_EMAIL_VIDE :                this.emailErreurLabel.setText("Veuillez saisir un email !");
+                                                        break;
+                case ERREUR_EMAIL_INVALIDE :            this.emailErreurLabel.setText("Veuillez saisir un email correct !");
+                                                        break;
+                case ERREUR_IDANNONCEUR_VIDE :          this.annonceurErreurLabel.setText("Veuillez choisir un annonceur pour votre offre !");
+                                                        break;
+                default : break;
+            
+            
+            }
+            
+            
+            
+
+            
+        }
+    }
+    
+    private Boolean regexCoordonnées(String coordonnée) {
+        Pattern p = Pattern.compile("^[0-9]{2}° [0-9]{2}' [a-zA-Z]{3,5}$");
+        Matcher m = p.matcher(coordonnée);
+        Boolean b = m.matches();
+        
+        return b;
+    }
+    
+    private Boolean regexReference(String reference) {
+        Pattern p = Pattern.compile("^[a-zA-Z0-9_-]+$");
+        Matcher m = p.matcher(reference);
+        Boolean b = m.matches();
+        
+        return b;
+    }
+    
+    private Boolean regexTelephone(String telephone) {
+        Pattern p = Pattern.compile("^0[1-68]([.-]?[0-9]{2}){4}$");
+        Matcher m = p.matcher(telephone);
+        Boolean b = m.matches();
+
+        return b;
+    }
+    
+    private Boolean regexEmail(String email) {
+        Pattern p = Pattern.compile("^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$");
+        Matcher m = p.matcher(email);
+        Boolean b = m.matches();
+        
+        return b;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LongitudeLabel;
     private javax.swing.JButton accueilButton;
+    private javax.swing.JLabel annonceurErreurLabel;
     private javax.swing.JLabel annonceurLabel;
     private javax.swing.JList annonceurList;
     private javax.swing.JComboBox annonceurOffreComboBox;
     private javax.swing.JLabel annonceurOffreLabel;
     private com.toedter.calendar.JDateChooser dateDebutContratDateChooser;
+    private javax.swing.JLabel dateDebutContratErreurLabel;
     private javax.swing.JLabel dateDebutContratLabel;
     private com.toedter.calendar.JDateChooser datePublicationDateChooser;
     private javax.swing.JLabel datePublicationLabel;
+    private javax.swing.JLabel descriptionPosteErreurLabel;
     private javax.swing.JLabel descriptionPosteLabel;
     private javax.swing.JTextArea descriptionPosteTextArea;
+    private javax.swing.JLabel descriptionProfilErreurLabel;
     private javax.swing.JLabel descriptionProfilLabel;
     private javax.swing.JTextArea descriptionProfilTextArea;
     private javax.swing.JLabel domaineLabel;
     private javax.swing.JList domaineList;
     private javax.swing.JComboBox domaineOffreComboBox;
     private javax.swing.JLabel domaineOffreLabel;
+    private javax.swing.JLabel dureeDiffusionErreurLabel;
     private javax.swing.JLabel dureeDiffusionLabel;
     private javax.swing.JSpinner dureeDiffusionSpinner;
     private javax.swing.JButton effacerOffreButton;
+    private javax.swing.JLabel emailErreurLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
+    private javax.swing.JLabel intituleErreurLabel;
     private javax.swing.JLabel intituleLabel;
     private javax.swing.JTextField intituleTextField;
     private javax.swing.JLabel jLabel1;
@@ -709,18 +1031,23 @@ public class OffreForm extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JLabel lattitudeErreurLabel;
     private javax.swing.JLabel lattitudeLabel;
     private javax.swing.JTextField lattitudeTextField;
+    private javax.swing.JLabel longitudeErreurLabel;
     private javax.swing.JTextField longitudeTextField;
     private javax.swing.JLabel metierLabel;
     private javax.swing.JList metierList;
     private javax.swing.JComboBox metierOffreComboBox;
     private javax.swing.JLabel metierOffreLabel;
+    private javax.swing.JLabel nbPosteErreurLabel;
     private javax.swing.JLabel nbPosteLabel;
     private javax.swing.JSpinner nbPosteSpinner;
     private javax.swing.JList offreList;
+    private javax.swing.JLabel referenceErreurLabel;
     private javax.swing.JLabel referenceLabel;
     private javax.swing.JTextField referenceTextField;
+    private javax.swing.JLabel telephoneErreurLabel;
     private javax.swing.JLabel telephoneLabel;
     private javax.swing.JTextField telephoneTextField;
     private javax.swing.JLabel typeContratLabel;

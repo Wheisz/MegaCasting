@@ -387,6 +387,8 @@ public class SocieteForm extends javax.swing.JPanel {
     private void validerSocieteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerSocieteButtonActionPerformed
         // TODO add your handling code here:
         
+        ArrayList<Erreur> erreurs = verifFormulaire();
+        if (erreurs.isEmpty()) {
         // Recuperation des données de la société
         String raisonSociale = this.raisonSocialeTextField.getText();
         String email = this.emailTextField.getText();
@@ -398,8 +400,7 @@ public class SocieteForm extends javax.swing.JPanel {
         int codePostal = (int)this.codePostalSpinner.getValue();
         String ville = this.villeTextField.getText();
 
-        ArrayList<Erreur> erreurs = verifFormulaire();
-        if (erreurs.isEmpty()) {
+
             if (this.annonceurValiderRadioButton.isSelected()) {
                 Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, raisonSociale);
                 if(d != null)
@@ -710,8 +711,7 @@ public class SocieteForm extends javax.swing.JPanel {
                                                       break;
                 case ERREUR_ANNONCEURDIFFUSEUR_VIDE : this.annonceurDiffuseurErreurLabel.setText("Veuillez choisir soit un annonceur ou un diffuseur !");
                                                       break;
-                default : this.emailErreurLabel.setText(null);
-                          break;
+                default : break;
             }
         }
 
