@@ -5,14 +5,21 @@
  */
 package megacasting.view;
 
+import java.awt.CardLayout;
+import static java.time.Instant.now;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
+import megacasting.dao.AnnonceurDAO;
 import megacasting.dao.DomaineDAO;
 import megacasting.dao.MetierDAO;
 import megacasting.dao.OffreDAO;
+import megacasting.dao.TypeContratDAO;
+import megacasting.entite.Annonceur;
 import megacasting.entite.Domaine;
 import megacasting.entite.Metier;
 import megacasting.entite.Offre;
+import megacasting.entite.TypeContrat;
 
 /**
  *
@@ -21,30 +28,28 @@ import megacasting.entite.Offre;
 public class StatistiqueForm extends javax.swing.JPanel {
 
     private MainJFrame mainJFrame;
-
+    
     private void refreshTableDomaine() {
         DefaultTableModel model = (DefaultTableModel) tableDomaine.getModel();
-
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
-        ArrayList<Metier> metiers = new ArrayList<>();
-        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx);
-        
+        ArrayList<Metier> metiers = new ArrayList<>();      
+    
+        model.setRowCount(0);
         
         for (Domaine d : domaines) {
             metiers = MetierDAO.lister(mainJFrame.cnx, d);
-            ArrayList<Offre> offresFinal = new ArrayList<>();
+            ArrayList<Offre> offresFinal = OffreDAO.lister(mainJFrame.cnx, d);
             int nbPostes = 0;
             
             for (Metier m : metiers) {
-                for (Offre o : offres) {
-                    if (o.getMetier() != null && o.getDomaine() != null && o.getMetier().getDomaine() != null) {
-                        if (o.getMetier().getDomaine().equals(d) || o.getDomaine().equals(d)) {
-                            offresFinal.add(o);
-                            nbPostes += o.getNbPoste();
-                        }
-                    }
-                    
+                ArrayList<Offre> offresTemp = OffreDAO.lister(mainJFrame.cnx, m);
+                
+                for (Offre o : offresTemp) {
+                    offresFinal.add(o);
                 }
+            }
+            for (Offre of : offresFinal) {
+                nbPostes += of.getNbPoste();
             }
             
             model.addRow(new Object[] {
@@ -56,11 +61,75 @@ public class StatistiqueForm extends javax.swing.JPanel {
         }
     }
     
+    private void refreshTableMetier() {
+        DefaultTableModel model = (DefaultTableModel) tableMetier.getModel();
+        ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
+    
+        model.setRowCount(0);
+        
+        for (Metier m : metiers) {
+            ArrayList<Offre> offresFinal = OffreDAO.lister(mainJFrame.cnx, m);
+            int nbPostes = 0;
+            
+            for (Offre of : offresFinal) {
+                nbPostes += of.getNbPoste();
+            }
+            
+            model.addRow(new Object[] {
+                m.getLibelle(),
+                offresFinal.size(),
+                nbPostes
+            });
+        }
+    }
+    
+    private void refreshTableAnnonceur() {
+        DefaultTableModel model = (DefaultTableModel) tableSociete.getModel();
+        ArrayList<Annonceur> annonceurs = AnnonceurDAO.lister(mainJFrame.cnx);
+    
+        model.setRowCount(0);
+        
+        for (Annonceur a : annonceurs) {
+            ArrayList<Offre> offresFinal = OffreDAO.lister(mainJFrame.cnx, a);
+            int nbPostes = 0;
+            
+            for (Offre of : offresFinal) {
+                nbPostes += of.getNbPoste();
+            }
+            
+            model.addRow(new Object[] {
+                a.getRaisonSociale(),
+                offresFinal.size(),
+                nbPostes
+            });
+        }
+    }
+    
+    private void refreshTableTypeContrat() {
+        DefaultTableModel model = (DefaultTableModel) tableTypeContrat.getModel();
+        ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
+    
+        model.setRowCount(0);
+        
+        for (TypeContrat tc : typeContrats) {
+            ArrayList<Offre> offresFinal = OffreDAO.lister(mainJFrame.cnx, tc);
+            int nbPostes = 0;
+            
+            for (Offre of : offresFinal) {
+                nbPostes += of.getNbPoste();
+            }
+            
+            model.addRow(new Object[] {
+                tc.getLibelle(),
+                offresFinal.size(),
+                nbPostes
+            });
+        }
+    }
+    
     public StatistiqueForm(MainJFrame mainJFrame) {
         this.mainJFrame = mainJFrame;
         initComponents();
-        
-        refreshTableDomaine();
     }
     
     /**
@@ -92,9 +161,13 @@ public class StatistiqueForm extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tableTypeContrat = new javax.swing.JTable();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tableMois = new javax.swing.JTable();
+        buttonAccueil = new javax.swing.JButton();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         tableSociete.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,17 +194,17 @@ public class StatistiqueForm extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Societe", jPanel1);
+        jTabbedPane1.addTab("Annonceur", jPanel1);
 
         tableDomaine.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,14 +231,14 @@ public class StatistiqueForm extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Domaine", jPanel2);
@@ -195,14 +268,14 @@ public class StatistiqueForm extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Métier", jPanel3);
@@ -232,83 +305,73 @@ public class StatistiqueForm extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Type de contrat", jPanel4);
 
-        tableMois.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mois", "Nombre d'offres", "Nombre de postes"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        buttonAccueil.setText("Accueil");
+        buttonAccueil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAccueilActionPerformed(evt);
             }
         });
-        jScrollPane5.setViewportView(tableMois);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Mois", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buttonAccueil)
+                .addGap(0, 34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(buttonAccueil)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonAccueilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccueilActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
+        cl.show(mainJFrame.mainPanel, "accueilCard");
+    }//GEN-LAST:event_buttonAccueilActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        refreshTableDomaine();
+        refreshTableMetier();
+        refreshTableAnnonceur();
+        refreshTableTypeContrat();
+    }//GEN-LAST:event_formComponentShown
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAccueil;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tableDomaine;
     private javax.swing.JTable tableMetier;
-    private javax.swing.JTable tableMois;
     private javax.swing.JTable tableSociete;
     private javax.swing.JTable tableTypeContrat;
     // End of variables declaration//GEN-END:variables

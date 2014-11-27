@@ -16,6 +16,7 @@ import megacasting.entite.Annonceur;
 import megacasting.entite.Domaine;
 import megacasting.entite.Metier;
 import megacasting.entite.Offre;
+import megacasting.entite.Societe;
 import megacasting.entite.TypeContrat;
 
 /**
@@ -24,7 +25,7 @@ import megacasting.entite.TypeContrat;
  */
 public class OffreDAO {
     
-        public static void creer (Connection cnx, Offre o) throws Exception {
+    public static void creer (Connection cnx, Offre o) throws Exception {
         
         Offre oTemp = trouver(cnx, o.getReference());
         if (oTemp != null) {
@@ -104,7 +105,7 @@ public class OffreDAO {
         }   
     }
         
-        public static void modifier (Connection cnx, Offre o) throws Exception {
+    public static void modifier (Connection cnx, Offre o) throws Exception {
         
         Offre oTemp = trouver(cnx, o.getReference());
         if (oTemp != null && oTemp.getId() != o.getId()) {
@@ -161,7 +162,7 @@ public class OffreDAO {
         }   
     }
         
-        public static void supprimer (Connection cnx, Offre o) {
+    public static void supprimer (Connection cnx, Offre o) {
         
         Statement stmt = null;
         try {
@@ -186,7 +187,7 @@ public class OffreDAO {
         }   
     }
         
-        public static ArrayList<Offre> lister (Connection cnx) {
+    public static ArrayList<Offre> lister (Connection cnx) {
         
         ArrayList<Offre> offres = new ArrayList();
         Statement stmt = null;
@@ -222,8 +223,159 @@ public class OffreDAO {
         }         
         return offres;
     }
+    
+    public static ArrayList<Offre> lister (Connection cnx, Domaine d) {
         
-        public static Offre trouver (Connection cnx, long id) {
+        ArrayList<Offre> offres = new ArrayList();
+        Statement stmt = null;
+        try {
+            stmt = cnx.createStatement();
+            
+            ResultSet rs = stmt.executeQuery("SELECT o.Id, o.Intitule, o.Reference, o.DatePublication, DureeDiffusion,DateDebutContrat"
+                    + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
+                    + "                              , DescriptionProfil, Telephone, Email, o.IdDomaine, o.IdMetier, o.IdTypeContrat"
+                    + "                              , o.IdAnnonceur "
+                    + "FROM Offre o "
+                    + "WHERE o.IdDomaine = " + d.getId());
+            
+            while(rs.next()) {
+                Metier m = MetierDAO.trouver(cnx, rs.getLong(15));
+                TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(16));
+                Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(17));
+                Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
+                rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),
+                rs.getString(12), rs.getString(13),d,m,tc,a);
+                offres.add(o);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex){
+                    
+                }
+            }
+        }         
+        return offres;
+    }
+    
+    public static ArrayList<Offre> lister (Connection cnx, Metier m) {
+        
+        ArrayList<Offre> offres = new ArrayList();
+        Statement stmt = null;
+        try {
+            stmt = cnx.createStatement();
+            
+            ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
+                    + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
+                    + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
+                    + "                              , IdAnnonceur "   
+                    + "FROM Offre o "
+                    + "WHERE o.IdMetier = " + m.getId());
+            
+            while(rs.next()) {
+                Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
+                TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(16));
+                Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(17));
+                Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
+                rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),
+                rs.getString(12), rs.getString(13),d,m,tc,a);
+                offres.add(o);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex){
+                    
+                }
+            }
+        }         
+        return offres;
+    }
+    
+    public static ArrayList<Offre> lister (Connection cnx, Annonceur a) {
+        
+        ArrayList<Offre> offres = new ArrayList();
+        Statement stmt = null;
+        try {
+            stmt = cnx.createStatement();
+            
+            ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
+                    + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
+                    + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
+                    + "                              , IdAnnonceur "   
+                    + "FROM Offre o "
+                    + "WHERE o.IdAnnonceur = " + a.getId());
+            
+            while(rs.next()) {
+                Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
+                Metier m = MetierDAO.trouver(cnx, rs.getLong(15));
+                TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(16));
+                Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
+                rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),
+                rs.getString(12), rs.getString(13),d,m,tc,a);
+                offres.add(o);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex){
+                    
+                }
+            }
+        }         
+        return offres;
+    }
+    
+    public static ArrayList<Offre> lister (Connection cnx, TypeContrat tc) {
+        
+        ArrayList<Offre> offres = new ArrayList();
+        Statement stmt = null;
+        try {
+            stmt = cnx.createStatement();
+            
+            ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
+                    + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
+                    + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
+                    + "                              , IdAnnonceur   FROM Offre "
+                    + "WHERE IdTypeContrat = " + tc.getId());
+            
+            while(rs.next()) {
+                Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
+                Metier m = MetierDAO.trouver(cnx, rs.getLong(15));
+                Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(17));
+                Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
+                rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),
+                rs.getString(12), rs.getString(13),d,m,tc,a);
+                offres.add(o);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex){
+                    
+                }
+            }
+        }         
+        return offres;
+    }
+        
+    public static Offre trouver (Connection cnx, long id) {
             
         Offre o = null;
         
@@ -300,7 +452,7 @@ public class OffreDAO {
         return o;
     }
         
-        public static Offre trouver (Connection cnx, String reference) {
+    public static Offre trouver (Connection cnx, String reference) {
         Offre o = null;
         
         Statement stmt = null;
@@ -339,6 +491,86 @@ public class OffreDAO {
             if(rs.next()) {
                 id = rs.getLong(1);
                 intitule = rs.getString(2);
+                datePublication = rs.getTimestamp(4);
+                dureeDiffusion = rs.getInt(5);
+                dateDebutContrat = rs.getDate(6);
+                nbPoste = rs.getInt(7);
+                localisationLattitude = rs.getString(8);
+                localisationLongitude = rs.getString(9);
+                descriptionPoste = rs.getString(10);
+                descriptionProfil = rs.getString(11);
+                telephone = rs.getString(12);
+                email = rs.getString(13);
+                idDomaine = rs.getLong(14);
+                idMetier = rs.getLong(15);
+                idTypeContrat = rs.getLong(16);
+                idAnnonceur = rs.getLong(17);
+                
+                d = DomaineDAO.trouver(cnx, idDomaine);
+                m = MetierDAO.trouver(cnx, idMetier);
+                TypeContrat tc = TypeContratDAO.trouver(cnx, idTypeContrat);
+                Annonceur a = AnnonceurDAO.trouver(cnx, idAnnonceur);
+
+                o = new Offre(id,intitule,reference,datePublication,dureeDiffusion,dateDebutContrat,nbPoste,localisationLattitude,localisationLongitude,descriptionPoste,descriptionProfil,telephone,email,d,m,tc,a);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex){
+                    
+                }
+            }
+        }   
+        return o;
+    }
+    
+    public static Offre trouverOld (Connection cnx) {
+            
+        Offre o = null;
+        
+        Statement stmt = null;
+        
+        long id = 0;
+        String intitule = null;
+        String reference = null;
+        Date datePublication = null;
+        int dureeDiffusion = 0;
+        Date dateDebutContrat = null;
+        int nbPoste = 0;
+        String localisationLattitude = null;
+        String localisationLongitude = null;
+        String descriptionPoste = null;
+        String descriptionProfil = null;
+        String telephone = null;
+        String email = null;
+        long idDomaine = 0;
+        long idMetier = 0;
+        long idTypeContrat = 0;
+        long idAnnonceur = 0;
+        Domaine d = null;
+        Metier m = null;
+        
+        
+        
+        try {
+            stmt = cnx.createStatement();
+            
+            ResultSet rs = stmt.executeQuery("SELECT TOP 1 "
+                    + "Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
+                                                + ", NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
+                                                + ", DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
+                                                + ", IdAnnonceur"
+                                                + " FROM Offre"
+                                                + " ORDER BY DatePublication ASC");
+            
+            if(rs.next()) {
+                id = rs.getLong(1);
+                intitule = rs.getString(2);
+                reference = rs.getString(3);
                 datePublication = rs.getTimestamp(4);
                 dureeDiffusion = rs.getInt(5);
                 dateDebutContrat = rs.getDate(6);
