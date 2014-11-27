@@ -39,6 +39,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private OffreForm offreForm;
     private SocieteForm societeForm;
     private ParamsForm paramsForm;
+    private StatistiqueForm statistiqueForm;
     
     protected Connection cnx;
 
@@ -89,6 +90,9 @@ public class MainJFrame extends javax.swing.JFrame {
         // Societe
         societeForm = new SocieteForm(this);
         mainPanel.add(societeForm, "societeCard");
+        // Statistique
+        statistiqueForm = new StatistiqueForm(this);
+        mainPanel.add(statistiqueForm, "statistiqueCard");
     }
     /**
      * This method is called from within the constructor to initialize the form.
