@@ -227,6 +227,12 @@ public class Offre {
         
         return date;
     }
+    
+    public static String modifCoordonnee(String coordonnee) 
+    {
+        coordonnee = coordonnee.replace("'", "''");
+        return coordonnee;
+    }
 
 
     public Offre(long id, String intitule, String reference,Date datePublication, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {

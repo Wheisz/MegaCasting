@@ -838,24 +838,24 @@ public class OffreForm extends javax.swing.JPanel {
         erreurs.add(Erreur.ERREUR_LATTITUDE_VIDE);
     } else {
         // Creation d'une erreur si la lattitude saisie est incorrect
-        Boolean verifLattitude = regexCoordonnées(this.lattitudeTextField.getText());
-        if(verifLattitude != true) {
-            erreurs.add(Erreur.ERREUR_LATTITUDE_INVALIDE);
-        } else {
+//        Boolean verifLattitude = regexCoordonnées(this.lattitudeTextField.getText());
+//        if(verifLattitude != true) {
+//            erreurs.add(Erreur.ERREUR_LATTITUDE_INVALIDE);
+//        } else {
             this.lattitudeErreurLabel.setText(null);
-        }
+//        }
     }
     // Creation d'une erreur si la longitude est vide 
     if(this.longitudeTextField.getText().equals("")) {
         erreurs.add(Erreur.ERREUR_LONGITUDE_VIDE);
     } else {
         // Creation d'une erreur si la longitude saisie est incorrect
-        Boolean verifLongitude = regexCoordonnées(this.longitudeTextField.getText());
-        if(verifLongitude != true ) {
-            erreurs.add(Erreur.ERREUR_LONGITUDE_INVALIDE);
-        } else {
+//        Boolean verifLongitude = regexCoordonnées(this.longitudeTextField.getText());
+//        if(verifLongitude != true ) {
+//            erreurs.add(Erreur.ERREUR_LONGITUDE_INVALIDE);
+//        } else {
             this.longitudeErreurLabel.setText(null);
-        }
+//        }
     }
     // Creation d'une erreur si la description de poste est vide 
     if(this.descriptionPosteTextArea.getText().equals("")) {
@@ -925,11 +925,11 @@ public class OffreForm extends javax.swing.JPanel {
                                                         break;
                 case ERREUR_LATTITUDE_VIDE :            this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude !");
                                                         break;
-                case ERREUR_LATTITUDE_INVALIDE :        this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude correcte : 00° 00' NORD !");
+                case ERREUR_LATTITUDE_INVALIDE :        this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude correcte : 00° 00' N !");
                                                         break;
                 case ERREUR_LONGITUDE_VIDE :            this.longitudeErreurLabel.setText("Veuillez saisir une longitude !");
                                                         break;
-                case ERREUR_LONGITUDE_INVALIDE :        this.longitudeErreurLabel.setText("Veuillez saisir une longitude correcte : 00° 00' NORD !");
+                case ERREUR_LONGITUDE_INVALIDE :        this.longitudeErreurLabel.setText("Veuillez saisir une longitude correcte : 00° 00' N !");
                                                         break;
                 case ERREUR_DESCRIPTIONPOSTE_VIDE :     this.descriptionPosteErreurLabel.setText("Veuillez saisir une description de poste !");
                                                         break;
@@ -958,7 +958,7 @@ public class OffreForm extends javax.swing.JPanel {
     }
     
     private Boolean regexCoordonnées(String coordonnée) {
-        Pattern p = Pattern.compile("^[0-9]{2}° [0-9]{2}' [a-zA-Z]{3,5}$");
+        Pattern p = Pattern.compile("^[0-9]{2}° [0-9]{2}' [N-S-E-O]{1}$");
         Matcher m = p.matcher(coordonnée);
         Boolean b = m.matches();
         

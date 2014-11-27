@@ -61,16 +61,19 @@ public class OffreDAO {
             Date dateDebutContrat = o.getDateDebutContrat();
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
             String dateDebutContratStr = sdf1.format(dateDebutContrat);
+              
+            String lattitude = Offre.modifCoordonnee(o.getLocalisationLattitude());
+            String longitude = Offre.modifCoordonnee(o.getLocalisationLongitude());
             
             
-            
+                    
             stmt.executeUpdate("INSERT INTO Offre "
                     + "(Intitule, Reference, DatePublication, DureeDiffusion, DateDebutContrat, NbPoste, LocalisationLattitude"
                     + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, IdDomaine, IdMetier"
                     + ", IdTypeContrat, IdAnnonceur ) "
                     + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', convert(datetime,'"
-                    +datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
-                    + o.getNbPoste()+", '"+ o.getLocalisationLattitude()+"', '"+o.getLocalisationLongitude()+"', '"
+                    + datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
+                    + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
                     + o.getDescriptionPoste()+"', '"+o.getDescriptionProfil()+"', '"+o.getTelephone()+"', '"
                     + o.getEmail()+"', "+ o.getDomaine().getId() +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
                     + o.getAnnonceur().getId() +")");
@@ -113,6 +116,12 @@ public class OffreDAO {
         TypeContratDAO.modifier(cnx, o.getTypeContrat());
         AnnonceurDAO.modifier(cnx, o.getAnnonceur());
         
+        Date dateDebutContrat = o.getDateDebutContrat();
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        String dateDebutContratStr = sdf1.format(dateDebutContrat);
+        
+        String lattitude = Offre.modifCoordonnee(o.getLocalisationLattitude());
+        String longitude = Offre.modifCoordonnee(o.getLocalisationLongitude());
         
         Statement stmt = null;
         try {
@@ -122,10 +131,10 @@ public class OffreDAO {
                     + "SET Intitule = '" + o.getIntitule()
                     + "', Reference = '" + o.getReference()
                     + "', DureeDiffusion = " + o.getDureeDiffusion()
-                    + ", DateDebutContrat = " + o.getDateDebutContrat()
-                    + ", NbPoste = " + o.getNbPoste()
-                    + ", LocalisationLattitude = '" + o.getLocalisationLattitude()
-                    + "', LocalisationLongitude = '" + o.getLocalisationLongitude()
+                    + ", DateDebutContrat = '" + dateDebutContratStr
+                    + "', NbPoste = " + o.getNbPoste()
+                    + ", LocalisationLattitude = '" + lattitude
+                    + "', LocalisationLongitude = '" + longitude
                     + "', DescriptionPoste = '" + o.getDescriptionPoste()
                     + "', DescriptionProfil = '" + o.getDescriptionProfil()
                     + "', Telephone = '" + o.getTelephone()
