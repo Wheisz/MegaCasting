@@ -103,6 +103,8 @@ public class SocieteForm extends javax.swing.JPanel {
         annonceurDiffuseurErreurLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         societeList = new javax.swing.JList();
+        societeRadioButton = new javax.swing.JRadioButton();
+        buttonAccueil = new javax.swing.JButton();
 
         raisonSocialLabel.setText("Raison Sociale");
 
@@ -185,24 +187,44 @@ public class SocieteForm extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(societeList);
 
+        buttonGroup2.add(societeRadioButton);
+        societeRadioButton.setText("Société");
+        societeRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                societeRadioButtonActionPerformed(evt);
+            }
+        });
+
+        buttonAccueil.setText("Accueil");
+        buttonAccueil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAccueilActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(supprimerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(annonceurRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(diffuseurRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
-                    .addComponent(societeSupprimerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(supprimerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                        .addComponent(societeSupprimerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(annonceurRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(diffuseurRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(societeRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(buttonAccueil)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 10, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(validerSocieteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -303,15 +325,22 @@ public class SocieteForm extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(effacerSocieteButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(annonceurRadioButton)
-                            .addComponent(diffuseurRadioButton))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(annonceurRadioButton)
+                                    .addComponent(diffuseurRadioButton)
+                                    .addComponent(societeRadioButton)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buttonAccueil)
+                                .addGap(18, 18, 18)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(societeSupprimerButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(supprimerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -518,6 +547,23 @@ public class SocieteForm extends javax.swing.JPanel {
         
     }//GEN-LAST:event_selection
 
+    private void societeRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_societeRadioButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultListModel model = (DefaultListModel) societeList.getModel();
+        model.clear();
+        ArrayList<Societe> societes = SocieteDAO.lister(mainJFrame.cnx);
+        for (Societe s : societes) {
+            model.addElement(s);
+        }
+        societeList.setModel(model);
+    }//GEN-LAST:event_societeRadioButtonActionPerformed
+
+    private void buttonAccueilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccueilActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
+        cl.show(mainJFrame.mainPanel, "accueilCard");
+    }//GEN-LAST:event_buttonAccueilActionPerformed
+
     private void refreshList() {
         DefaultListModel<Societe> model = (DefaultListModel<Societe>) societeList.getModel();
         model.clear();
@@ -722,6 +768,7 @@ public class SocieteForm extends javax.swing.JPanel {
     private javax.swing.JLabel annonceurDiffuseurErreurLabel;
     private javax.swing.JRadioButton annonceurRadioButton;
     private javax.swing.JRadioButton annonceurValiderRadioButton;
+    private javax.swing.JButton buttonAccueil;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel codePostalErreur;
@@ -745,6 +792,7 @@ public class SocieteForm extends javax.swing.JPanel {
     private javax.swing.JLabel rueLabel;
     private javax.swing.JTextField rueTextField;
     private javax.swing.JList societeList;
+    private javax.swing.JRadioButton societeRadioButton;
     private javax.swing.JButton societeSupprimerButton;
     private javax.swing.JLabel supprimerLabel;
     private javax.swing.JLabel telephoneErreurLabel;
