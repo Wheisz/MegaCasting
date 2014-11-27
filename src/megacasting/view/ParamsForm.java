@@ -161,7 +161,7 @@ public class ParamsForm extends javax.swing.JPanel {
         labelErrorLibelleTypeContrat = new javax.swing.JLabel();
         labelErrorValiderTypeContrat = new javax.swing.JLabel();
 
-        buttonRetour.setText("Retour");
+        buttonRetour.setText("Accueil");
         buttonRetour.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonRetourActionPerformed(evt);
@@ -495,21 +495,21 @@ public class ParamsForm extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(buttonRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tabbedPanel))
-                .addGap(205, 205, 205))
+                .addComponent(tabbedPanel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(110, 110, 110))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabbedPanel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(40, 40, 40))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addComponent(buttonRetour)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -522,13 +522,17 @@ public class ParamsForm extends javax.swing.JPanel {
     private void listTypeContratFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_listTypeContratFocusGained
         // TODO add your handling code here:
         TypeContrat tc = (TypeContrat) listTypeContrat.getSelectedValue();
-        textFieldLibelleTypeContrat.setText(tc.getLibelle());
+        if (tc != null) {
+            textFieldLibelleTypeContrat.setText(tc.getLibelle());
+        }
     }//GEN-LAST:event_listTypeContratFocusGained
 
     private void listTypeContratValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listTypeContratValueChanged
         // TODO add your handling code here:
         TypeContrat tc = (TypeContrat) listTypeContrat.getSelectedValue();
-        textFieldLibelleTypeContrat.setText(tc.getLibelle());
+        if (tc != null) {
+            textFieldLibelleTypeContrat.setText(tc.getLibelle());
+        }  
     }//GEN-LAST:event_listTypeContratValueChanged
 
     private void buttonSupprimerTypeContratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupprimerTypeContratActionPerformed
