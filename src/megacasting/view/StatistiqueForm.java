@@ -8,6 +8,8 @@ package megacasting.view;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import megacasting.dao.DomaineDAO;
+import megacasting.dao.MetierDAO;
+import megacasting.dao.OffreDAO;
 import megacasting.entite.Domaine;
 import megacasting.entite.Metier;
 import megacasting.entite.Offre;
@@ -25,22 +27,31 @@ public class StatistiqueForm extends javax.swing.JPanel {
 
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
         ArrayList<Metier> metiers = new ArrayList<>();
-        ArrayList<Offre> offres = new ArrayList<>();
+        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx);
+        
         
         for (Domaine d : domaines) {
-            metiers
-        }
-        
-
-        for (Personne p : personnes) {
-            model.addRow(new Object[]{
-                p.getNom(),
-                p.getPrenom(),
-                p.getAge(),
-                p.getAdresse().getNumero(),
-                p.getAdresse().getRue(),
-                p.getAdresse().getCodePostal(),
-                p.getAdresse().getVille()
+            metiers = MetierDAO.lister(mainJFrame.cnx, d);
+            ArrayList<Offre> offresFinal = new ArrayList<>();
+            int nbPostes = 0;
+            
+            for (Metier m : metiers) {
+                for (Offre o : offres) {
+                    if (o.getMetier() != null && o.getDomaine() != null && o.getMetier().getDomaine() != null) {
+                        if (o.getMetier().getDomaine().equals(d) || o.getDomaine().equals(d)) {
+                            offresFinal.add(o);
+                            nbPostes += o.getNbPoste();
+                        }
+                    }
+                    
+                }
+            }
+            
+            model.addRow(new Object[] {
+                d.getLibelle(),
+                metiers.size(),
+                offresFinal.size(),
+                nbPostes
             });
         }
     }
@@ -49,7 +60,7 @@ public class StatistiqueForm extends javax.swing.JPanel {
         this.mainJFrame = mainJFrame;
         initComponents();
         
-        
+        refreshTableDomaine();
     }
     
     /**
