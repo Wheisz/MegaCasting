@@ -6,6 +6,7 @@
 package megacasting.view;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -154,6 +155,7 @@ public class OffreForm extends javax.swing.JPanel {
         emailErreurLabel = new javax.swing.JLabel();
         telephoneErreurLabel = new javax.swing.JLabel();
         annonceurErreurLabel = new javax.swing.JLabel();
+        reinitialiserButton = new javax.swing.JButton();
 
         jLabel1.setText("Offre");
 
@@ -168,21 +170,36 @@ public class OffreForm extends javax.swing.JPanel {
 
         domaineList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                selection(evt);
+                selectionDomaine(evt);
             }
         });
         jScrollPane1.setViewportView(domaineList);
 
         metierLabel.setText("Métier");
 
+        metierList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                selectionMetier(evt);
+            }
+        });
         jScrollPane2.setViewportView(metierList);
 
         annonceurLabel.setText("Annonceurs");
 
+        annonceurList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                selectionAnnonceur(evt);
+            }
+        });
         jScrollPane3.setViewportView(annonceurList);
 
         typeContratLabel.setText("Type de Contrat");
 
+        typeContratList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                selectionTypeContrat(evt);
+            }
+        });
         jScrollPane4.setViewportView(typeContratList);
 
         offreList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -228,6 +245,12 @@ public class OffreForm extends javax.swing.JPanel {
 
         metierOffreLabel.setText("Métier");
 
+        domaineOffreComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                domaineOffreComboBoxActionPerformed(evt);
+            }
+        });
+
         typeContratOffreLabel.setText("Type de Contrat");
 
         annonceurOffreLabel.setText("Annonceur");
@@ -270,6 +293,13 @@ public class OffreForm extends javax.swing.JPanel {
 
         annonceurErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
 
+        reinitialiserButton.setText("Réinitialiser");
+        reinitialiserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reinitialiserButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -290,12 +320,13 @@ public class OffreForm extends javax.swing.JPanel {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(typeContratLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(reinitialiserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,20 +430,6 @@ public class OffreForm extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(metierLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(annonceurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(typeContratLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -509,8 +526,25 @@ public class OffreForm extends javax.swing.JPanel {
                             .addComponent(validerOffreButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(validationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(421, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(metierLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(annonceurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(typeContratLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(reinitialiserButton))))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -520,8 +554,9 @@ public class OffreForm extends javax.swing.JPanel {
         cl.show(mainJFrame.mainPanel, "accueilCard");
     }//GEN-LAST:event_accueilButtonActionPerformed
 
-    private void selection(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selection
+    private void selectionDomaine(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionDomaine
         // TODO add your handling code here:
+        
         Domaine d = (Domaine)domaineList.getSelectedValue();
         
         DefaultListModel model = (DefaultListModel)metierList.getModel();
@@ -536,7 +571,18 @@ public class OffreForm extends javax.swing.JPanel {
         }
         
         metierList.setModel(model);
-    }//GEN-LAST:event_selection
+        
+        
+        DefaultListModel modelOffre = (DefaultListModel)offreList.getModel();
+        modelOffre.clear();
+        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, d);
+
+        for(Offre o : offres){
+            modelOffre.addElement(o);
+        }
+
+        offreList.setModel(modelOffre);
+    }//GEN-LAST:event_selectionDomaine
 
     private void selectionOffre(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionOffre
         // TODO add your handling code here:
@@ -567,7 +613,7 @@ public class OffreForm extends javax.swing.JPanel {
         }
                    
     }//GEN-LAST:event_selectionOffre
-
+    
     private void validerOffreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerOffreButtonActionPerformed
         // TODO add your handling code here:
         ArrayList<Erreur> erreurs = verifFormulaire();
@@ -642,6 +688,80 @@ public class OffreForm extends javax.swing.JPanel {
         // TODO add your handling code here:
         raz();
     }//GEN-LAST:event_effacerOffreButtonActionPerformed
+
+    private void domaineOffreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_domaineOffreComboBoxActionPerformed
+        // TODO add your handling code here:
+        DefaultComboBoxModel model = (DefaultComboBoxModel)domaineOffreComboBox.getModel();
+        Domaine d = (Domaine)model.getSelectedItem();
+        
+        ArrayList<Metier>metiers = MetierDAO.lister(mainJFrame.cnx, d);
+        DefaultComboBoxModel modelMetier = (DefaultComboBoxModel)metierOffreComboBox.getModel();
+        
+        modelMetier.removeAllElements();
+        
+        for( Metier m : metiers) {
+            modelMetier.addElement(m);
+        }
+        
+        metierOffreComboBox.setModel(modelMetier);
+        
+    }//GEN-LAST:event_domaineOffreComboBoxActionPerformed
+
+    private void selectionAnnonceur(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionAnnonceur
+        // TODO add your handling code here:
+        
+        Annonceur a = (Annonceur)annonceurList.getSelectedValue();
+        
+        DefaultListModel modelOffre = (DefaultListModel)offreList.getModel();
+        modelOffre.clear();
+        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, a);
+
+        for(Offre o : offres){
+            modelOffre.addElement(o);
+        }
+
+        offreList.setModel(modelOffre);
+    }//GEN-LAST:event_selectionAnnonceur
+
+    private void selectionTypeContrat(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionTypeContrat
+        // TODO add your handling code here:
+        
+        TypeContrat tc = (TypeContrat)typeContratList.getSelectedValue();
+        
+        DefaultListModel modelOffre = (DefaultListModel)offreList.getModel();
+        modelOffre.clear();
+        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx,tc);
+        
+        for(Offre o : offres){
+            modelOffre.addElement(o);
+        }
+
+        offreList.setModel(modelOffre);
+    }//GEN-LAST:event_selectionTypeContrat
+
+    private void reinitialiserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reinitialiserButtonActionPerformed
+        // TODO add your handling code here: 
+        
+        refreshListOffres();
+
+    }//GEN-LAST:event_reinitialiserButtonActionPerformed
+
+    private void selectionMetier(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionMetier
+        // TODO add your handling code here:
+        
+        Metier m = (Metier)metierList.getSelectedValue();
+        
+        DefaultListModel modelOffre = (DefaultListModel)offreList.getModel();
+        modelOffre.clear();
+        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx,m);
+
+        for(Offre o : offres){
+            modelOffre.addElement(o);
+        }
+
+        offreList.setModel(modelOffre);
+        
+    }//GEN-LAST:event_selectionMetier
 
     private void raz(){
         this.intituleTextField.setText(null);
@@ -744,7 +864,6 @@ public class OffreForm extends javax.swing.JPanel {
     private void refreshComboBox () {
         refreshComboBoxAnnonceurs();
         refreshComboBoxDomaines();
-        refreshComboBoxMetiers();
         refreshComboBoxTypeContrats();
     }
     
@@ -768,17 +887,6 @@ public class OffreForm extends javax.swing.JPanel {
             model.addElement(d);
         }
         domaineOffreComboBox.setModel(model);
-    }
-    
-    private void refreshComboBoxMetiers() {
-        DefaultComboBoxModel<Metier> model = (DefaultComboBoxModel)metierOffreComboBox.getModel();
-        model.removeAllElements();
-        ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
-        for(Metier m : metiers)
-        {
-            model.addElement(m);
-        }
-        metierOffreComboBox.setModel(model);
     }
     
     private void refreshComboBoxTypeContrats() {
@@ -962,7 +1070,7 @@ public class OffreForm extends javax.swing.JPanel {
         }
     }
     
-    private Boolean regexCoordonnées(String coordonnée) {
+    private Boolean regexCoordonnees(String coordonnée) {
         Pattern p = Pattern.compile("^[0-9]{2}° [0-9]{2}' [N-S-E-O]{1}$");
         Matcher m = p.matcher(coordonnée);
         Boolean b = m.matches();
@@ -1052,6 +1160,7 @@ public class OffreForm extends javax.swing.JPanel {
     private javax.swing.JLabel referenceErreurLabel;
     private javax.swing.JLabel referenceLabel;
     private javax.swing.JTextField referenceTextField;
+    private javax.swing.JButton reinitialiserButton;
     private javax.swing.JLabel telephoneErreurLabel;
     private javax.swing.JLabel telephoneLabel;
     private javax.swing.JTextField telephoneTextField;
