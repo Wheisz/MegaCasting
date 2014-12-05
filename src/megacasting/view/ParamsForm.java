@@ -43,28 +43,60 @@ public class ParamsForm extends javax.swing.JPanel {
     
     private void refreshListTypeContrat() {
         DefaultListModel<TypeContrat> modelListTypeContrat = new DefaultListModel<>();
+        
+        // Liste de tous les types de contrat
         ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
 
+        // Pour chaque type de contrat
         for (TypeContrat tc : typeContrats) {
+            // On l'ajoute à la liste
             modelListTypeContrat.addElement(tc);
         }
         listTypeContrat.setModel(modelListTypeContrat);
     }
     
+    // Liste des métiers d'un domaine d
     private void refreshListMetier(Domaine d) {
         DefaultListModel<Metier> modelListMetier = new DefaultListModel<>();
+        
+        // Liste des métiers du domaine d
         ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, d);
+        
+        // Pour chaque métier du domaine d
         for (Metier m : metiers) {
+            // On l'ajoute à la liste
             modelListMetier.addElement(m);
         }
         listMetier.setModel(modelListMetier);
     }
     
+    // Liste de tous les métiers
+    private void refreshListMetier(){
+        
+        // Si la checkbox domaine est cochée
+        if (checkBoxDomaine.isSelected()) {
+            // On récupère le domaine sélectionné
+            Domaine d = (Domaine) comboBoxDomaine.getSelectedItem();
+            
+            // On refresh la liste des métiers du domaine sélectionné
+            refreshListMetier(d);
+        }
+        else {
+            // On vide la liste des métiers d'un domaine
+            refreshListMetier(null);
+        }
+    }
+    
+    // Liste de tous les domaines
     private void refreshListDomaine() {
         DefaultListModel<Domaine> modelListDomaine = new DefaultListModel<>();
+        
+        // Liste de tous les domaines
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
 
+        // Pour chaque domaine
         for (Domaine d : domaines) {
+            // On m'ajoute à la liste
             modelListDomaine.addElement(d);
         }
         listDomaine.setModel(modelListDomaine);
@@ -72,25 +104,24 @@ public class ParamsForm extends javax.swing.JPanel {
     
     private void refreshComboBoxDomaine() {
         DefaultComboBoxModel<Domaine> modelComboBoxDomaine = new DefaultComboBoxModel<>();
+        
+        // Liste de tous les domaines
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
+        
+        // Pour chaque domaine
         for (Domaine d : domaines) {
+            // On l'ajoute à la comboBox
             modelComboBoxDomaine.addElement(d);
         }
         comboBoxDomaine.setModel(modelComboBoxDomaine);
+        
+        // Selectionne vide
         comboBoxDomaine.setSelectedIndex(-1);
     }
     
-    private void refreshListMetier(){
-        
-        if (checkBoxDomaine.isSelected()) {
-            Domaine d = (Domaine) comboBoxDomaine.getSelectedItem();
-            refreshListMetier(d);
-        }
-        else {
-            refreshListMetier(null);
-        }
-    }
-    
+    /**
+     * Vide les labels et textField du panneau type de contrat
+     */
     private void resetTypeContrat() {
         textFieldLibelleTypeContrat.setText("");
         labelErrorLibelleTypeContrat.setText("");
@@ -98,12 +129,18 @@ public class ParamsForm extends javax.swing.JPanel {
         labelErrorSupprimerTypeContrat.setText("");
     }
     
+    /**
+     * Vide les labels et textField du panneau domaine
+     */
     private void resetDomaine() {
         textFieldLibelleDomaine.setText("");
         labelErrorLibelleDomaine.setText("");
         labelErrorValiderDomaine.setText("");
     }
     
+    /**
+     * Vide les labels et textField du panneau métier
+     */
     private void resetMetier() {
         textFieldLibelleMetier.setText("");
         labelErrorLibelleMetier.setText("");
@@ -542,53 +579,85 @@ public class ParamsForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    // Click boutton Retour
     private void buttonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRetourActionPerformed
 
+        // On affiche l'accueil
         CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
         cl.show(mainJFrame.mainPanel, "accueilCard");
     }//GEN-LAST:event_buttonRetourActionPerformed
 
     private void listTypeContratFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_listTypeContratFocusGained
         // TODO add your handling code here:
+        // On récupère le type de contrat sélectionné
         TypeContrat tc = (TypeContrat) listTypeContrat.getSelectedValue();
+        
+        // Si la sélection n'est pas nulle
         if (tc != null) {
+            // On rempli le textField libelle
             textFieldLibelleTypeContrat.setText(tc.getLibelle());
         }
     }//GEN-LAST:event_listTypeContratFocusGained
 
+    /**
+     * Changement de valeur dans la liste type de contrat
+     * @param evt 
+     */
     private void listTypeContratValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listTypeContratValueChanged
         // TODO add your handling code here:
+        // On récupère le type de contrat sélectionné
         TypeContrat tc = (TypeContrat) listTypeContrat.getSelectedValue();
+        
+        // Si la sélection n'est pas nulle
         if (tc != null) {
+            // On rempli le textField type contrat
             textFieldLibelleTypeContrat.setText(tc.getLibelle());
         }  
     }//GEN-LAST:event_listTypeContratValueChanged
 
+    // Click boutton Supprimer de type contrat
     private void buttonSupprimerTypeContratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupprimerTypeContratActionPerformed
         // TODO add your handling code here:
+        // On récupère le type de contrat sélectionné
         TypeContrat tc = (TypeContrat) listTypeContrat.getSelectedValue();
+        
+        // Liste des offres ayant ce type de contrat
         ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, tc);
         
+        // Si la liste est vide (pas d'offres pour ce type de contrat)
         if (offres.isEmpty()) {
+            // On supprime le type de contrat de la bdd
             TypeContratDAO.supprimer(mainJFrame.cnx, tc);
+            
+            // Actualise la liste
             refreshListTypeContrat();
         }
+        // Si liste pas vide = reste des offres pour ce type de contrats
         else {
+            // Affiche l'erreur
             labelErrorSupprimerTypeContrat.setText("Suppression impossible, des offres correspondent au type de contrat");
         } 
     }//GEN-LAST:event_buttonSupprimerTypeContratActionPerformed
 
+    // Click boutton effacer panneau type de contrat
     private void buttonEffacerTypeContratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEffacerTypeContratActionPerformed
         // TODO add your handling code here:
+        // On vide les champs
         resetTypeContrat();
     }//GEN-LAST:event_buttonEffacerTypeContratActionPerformed
 
+    // Click boutton valider du panneau type de contrat
     private void buttonValiderTypeContratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonValiderTypeContratActionPerformed
         // TODO add your handling code here:
+        // Liste de tous les types de contrat
         ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
+        
+        // On récupère le libelle du type de contrat
         String libelle = textFieldLibelleTypeContrat.getText();
         
+        // Si le libelle est vide
         if (libelle.equals("")) {
+            // Affiche l'erreur
             labelErrorLibelleTypeContrat.setText("Veuillez saisir un libelle !");
             labelErrorValiderTypeContrat.setText("");
         }
@@ -596,6 +665,7 @@ public class ParamsForm extends javax.swing.JPanel {
             labelErrorLibelleTypeContrat.setText("");
             boolean exist = false;
 
+            // Pour chaque type de contrat
             for(TypeContrat tc : typeContrats) {
                 // Si ce libelle existe déjà
                 if (tc.getLibelle().equalsIgnoreCase(libelle)) {
@@ -608,6 +678,7 @@ public class ParamsForm extends javax.swing.JPanel {
                 // Afficher erreur
                 labelErrorValiderTypeContrat.setText("Ce type de contrat existe déjà !");
             }
+            // Pas d'erreur -> ajout à la bdd
             else {
                 TypeContrat typeC = new TypeContrat(libelle);
                 try {
@@ -615,25 +686,34 @@ public class ParamsForm extends javax.swing.JPanel {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+                // Actualise la liste
                 refreshListTypeContrat();
+                // On vide les champs
                 resetTypeContrat();
             }
         }
     }//GEN-LAST:event_buttonValiderTypeContratActionPerformed
 
+    // Click boutton valider du panneau domaine
     private void buttonValiderDomaineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonValiderDomaineActionPerformed
         // TODO add your handling code here:
+        // Lisye de tous les domaines
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
+        
+        // On récupère le libelle du domaine
         String libelle = textFieldLibelleDomaine.getText();
         
+        // Si le libelle est vide -> on affiche l'erreur
         if (libelle.equals("")) {
             labelErrorLibelleDomaine.setText("Veuillez saisir un libelle !");
             labelErrorValiderDomaine.setText("");
         }
+        // Si pas vide
         else {
             labelErrorLibelleDomaine.setText("");
             boolean exist = false;
 
+            // pour chaque domaine on regarde si il existe déjà
             for (Domaine d : domaines) {
                 if (d.getLibelle().equalsIgnoreCase(libelle)) {
                     // Domaine existant
@@ -642,6 +722,8 @@ public class ParamsForm extends javax.swing.JPanel {
             }
 
             Domaine domaine = null;
+            
+            // Si il existe pas -> on le crée
             if (!exist) {
                 domaine = new Domaine(libelle);
                 try {
@@ -649,10 +731,13 @@ public class ParamsForm extends javax.swing.JPanel {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+                // Actualise la liste et la comboBox
                 refreshListDomaine();
                 refreshComboBoxDomaine();
+                // Vide les champs
                 resetDomaine();
             }
+            // Si il existe on affiche l'erreur
             else {
                 labelErrorValiderDomaine.setText("Ce domaine existe déjà !");
             }
@@ -660,16 +745,23 @@ public class ParamsForm extends javax.swing.JPanel {
         
     }//GEN-LAST:event_buttonValiderDomaineActionPerformed
 
+    // Click boutton supprimer du panneau domaine
     private void buttonSupprimerDomaineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupprimerDomaineActionPerformed
         // TODO add your handling code here:
+        // On récupère le domaine sélectionné
         Domaine d = (Domaine) listDomaine.getSelectedValue();
         
+        // Liste des offres du domaine
         ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, d);
+        
+        // Liste des métiers du domaine
         ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, d);
         
         // Pas d'offres ni de metiers pour ce domaine
         if (offres.isEmpty() && metiers.isEmpty()) {
+            // On le supprime de la bdd
             DomaineDAO.supprimer(mainJFrame.cnx, d);
+            // Actualise l liste et la comboBox
             refreshListDomaine();
             refreshComboBoxDomaine();
         }
@@ -687,93 +779,135 @@ public class ParamsForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buttonSupprimerDomaineActionPerformed
 
+    // Click boutton effacer du panneua domaine
     private void buttonEffacerDomaineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEffacerDomaineActionPerformed
         // TODO add your handling code here:
+        // Vide les champs
         resetDomaine();
     }//GEN-LAST:event_buttonEffacerDomaineActionPerformed
 
+    // Changement de valeure liste domaine
     private void listDomaineValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listDomaineValueChanged
         // TODO add your handling code here:
+        // Actualise la liste métier
         refreshListMetier();
+        
+        // Domaine sélectionné
         Domaine d = (Domaine) listDomaine.getSelectedValue();
         if (d != null) {
+            // On rempli le textField libelle du domaine
             textFieldLibelleDomaine.setText(d.getLibelle());
         }
         
     }//GEN-LAST:event_listDomaineValueChanged
 
+    // Click boutton effacer du panneau métier
     private void buttonEffacerMetierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEffacerMetierActionPerformed
         // TODO add your handling code here:
+        // Actualise la liste
         resetMetier();
+        
+        // Sélectionne rien
         comboBoxDomaine.setSelectedIndex(-1);
     }//GEN-LAST:event_buttonEffacerMetierActionPerformed
 
+    // Changement de valeure de la liste métier
     private void listMetierValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listMetierValueChanged
         // TODO add your handling code here:
+        // Métier selectionné
         Metier m = (Metier) listMetier.getSelectedValue();
+        
+        // Si selection non nulle
         if (m != null) {
+            // Rempli le textField libelle du métier
             textFieldLibelleMetier.setText(m.getLibelle());
         } 
     }//GEN-LAST:event_listMetierValueChanged
 
+    // Check box domaine changement d'état
     private void checkBoxDomaineStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkBoxDomaineStateChanged
         // TODO add your handling code here:
+        // Si checkbox selectionné
         if (checkBoxDomaine.isSelected()) {
+            // on affiche la comboBox
             comboBoxDomaine.setVisible(true);
         }
+        // Pas selectionné
         else {
+            // On cache la comboBox
             comboBoxDomaine.setVisible(false);
         }
         refreshListMetier();
     }//GEN-LAST:event_checkBoxDomaineStateChanged
 
+    // CLick boutton supprimer du panneua métier
     private void buttonSupprimerMetierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupprimerMetierActionPerformed
         // TODO add your handling code here:
+        // Métier selectionné
         Metier m = (Metier) listMetier.getSelectedValue();
         
+        // Liste des offres du métier selctionné
         ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, m);
         
-        // Pas d'offres associées au métier
+        // Pas d'offres associées au métier selectionné
         if (offres.isEmpty()) {
+            // On supprime le métier selectionné
             MetierDAO.supprimer(mainJFrame.cnx, m);
+            
+            // Actualise la liste
             refreshListMetier();
         }
-        // Offres associées au métier
+        // Offres associées au métier -> Erreur
         else {
             labelErrorSupprimerMetier.setText("Suppression impossible, des offres correspondent au métier");
         }  
     }//GEN-LAST:event_buttonSupprimerMetierActionPerformed
 
+    // CLick bouton valider du panneau métier
     private void buttonValiderMetierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonValiderMetierActionPerformed
         // TODO add your handling code here:
+        // Liste de tous les métiers
         ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
+        
+        // On récupère le libelle du métier
         String libelle = textFieldLibelleMetier.getText();
         Domaine d = null;
         boolean exist = false;
 
+        // Si libelle vide -> erreur
         if (libelle.equals("")) {
             labelErrorLibelleMetier.setText("Veuillez saisir un libelle !");
             labelErrorValiderMetier.setText("");
         }
+        // Non vide
         else {
             labelErrorLibelleMetier.setText("");
             
+            // On regarde si le métier existe déjà
             for (Metier m : metiers) {
                 if (m.getLibelle().equalsIgnoreCase(libelle)) {
                     exist = true;
                 }
             }
+            
+            // Si checkBox domaine sélectionné
             if (checkBoxDomaine.isSelected()) {
+                // On récupère le domaine sélectionné dans la comboBox
                 d = (Domaine) comboBoxDomaine.getSelectedItem();
             }
 
+            // Métier existe déjà
             if (exist) {
                 labelErrorValiderMetier.setText("Ce métier existe déjà !");
             }
+            // Existe pas -> on l'ajoute à la bdd
             else {
                 Metier metier = new Metier(libelle, d);
                 MetierDAO.creer(mainJFrame.cnx, metier);
+                
+                // Actualise la liste
                 refreshListMetier();
+                // Vide les champs
                 resetMetier();
             } 
         }

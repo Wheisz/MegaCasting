@@ -29,99 +29,180 @@ public class StatistiqueForm extends javax.swing.JPanel {
 
     private MainJFrame mainJFrame;
     
+    /**
+     * Charge les lignes du tableau domaine
+     * Nom du domaine X, Nb de métiers du domaine X, Nb d'offres du domaine X, Nb de postes du domaine X
+     */
     private void refreshTableDomaine() {
+        // On récupère le model
         DefaultTableModel model = (DefaultTableModel) tableDomaine.getModel();
+        
+        // Liste de tous les domaines
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
+        
         ArrayList<Metier> metiers = new ArrayList<>();      
     
+        // Vide les lignes
         model.setRowCount(0);
         
+        // Pour chaque domaine
         for (Domaine d : domaines) {
+            // Liste des métiers du domaine
             metiers = MetierDAO.lister(mainJFrame.cnx, d);
+            
+            // Liste des offres du domaine (celles qui n'ont pas de métier)
             ArrayList<Offre> offresFinal = OffreDAO.lister(mainJFrame.cnx, d);
+            
+            // On initialise le nb de postes à 0
             int nbPostes = 0;
             
+            // Pour chaque métier
             for (Metier m : metiers) {
+                // Liste des offres du métier (et donc du domaine)
                 ArrayList<Offre> offresTemp = OffreDAO.lister(mainJFrame.cnx, m);
                 
+                // Pour chaque offre du métier
                 for (Offre o : offresTemp) {
+                    // On l'ajoute à la liste des offres du domaine
                     offresFinal.add(o);
                 }
             }
+            // Pour chaque offre du domaine
             for (Offre of : offresFinal) {
+                // On compte le nombre de postes
                 nbPostes += of.getNbPoste();
             }
             
+            // On ajoute la ligne dans le model
             model.addRow(new Object[] {
+                // Libelle du domaine
                 d.getLibelle(),
+                // Nombre de métiers dans ce domaine
                 metiers.size(),
+                // Nombre d'offres pour ce domaine
                 offresFinal.size(),
+                // Nombre de postes pour ce domaine
                 nbPostes
             });
         }
     }
     
+    /**
+     * Charge les lignes du tableau métier
+     * Nom du métier X, Nb d'offres du métier X, Nb de postes du métier X
+     */
     private void refreshTableMetier() {
+        // On récupère le model
         DefaultTableModel model = (DefaultTableModel) tableMetier.getModel();
+        
+        // Liste de tous les métiers
         ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
     
+        // Vide les lignes du tableau
         model.setRowCount(0);
         
+        // Pour chaque métier
         for (Metier m : metiers) {
+            // On récupère les offres du métier
             ArrayList<Offre> offresFinal = OffreDAO.lister(mainJFrame.cnx, m);
+            
+            // Initialisation du nb de postes à 0
             int nbPostes = 0;
             
+            // Pour chaque offre du métier
             for (Offre of : offresFinal) {
+                // On compte le nb de postes
                 nbPostes += of.getNbPoste();
             }
             
+            // On ajoute la ligne au tableau
             model.addRow(new Object[] {
+                // Libelle du métier
                 m.getLibelle(),
+                // Nombre d'offres pour ce métier
                 offresFinal.size(),
+                // Nombre de postes offert pour ce métier
                 nbPostes
             });
         }
     }
     
+    /**
+     * Chargement des lignes du tableau annonceur
+     * Nom de l'annonceur X, Nb d'offres de l'annonceur X, Nb de postes de l'annonceur X
+     */
     private void refreshTableAnnonceur() {
+        // On récupère le modèle du tableau
         DefaultTableModel model = (DefaultTableModel) tableSociete.getModel();
+        
+        // Liste de tous les annonceurs
         ArrayList<Annonceur> annonceurs = AnnonceurDAO.lister(mainJFrame.cnx);
     
+        // On vide les lignes du tableau
         model.setRowCount(0);
         
+        // Pour chaque annonceur
         for (Annonceur a : annonceurs) {
+            // On récupère les offres de l'annonceur
             ArrayList<Offre> offresFinal = OffreDAO.lister(mainJFrame.cnx, a);
+            
+            // Nb de postes à 0
             int nbPostes = 0;
             
+            // Pour chaque offre de l'annonceur
             for (Offre of : offresFinal) {
+                // On compte le nb de postes
                 nbPostes += of.getNbPoste();
             }
             
+            // On ajoute la ligne au tableau
             model.addRow(new Object[] {
+                // Raison sociale de l'annonceur
                 a.getRaisonSociale(),
+                // Nombre d'offres proposées par l'annonceur
                 offresFinal.size(),
+                // Nombre de postes offert grâce à l'annonceur
                 nbPostes
             });
         }
     }
     
+    
+    /**
+     * Charge les lignes du tableau type contrat
+     * Nom du type de contrat X, Nb d'offres du type de contrat X, Nb de postes du type de contrat X
+     */
     private void refreshTableTypeContrat() {
+        // On recupère le model
         DefaultTableModel model = (DefaultTableModel) tableTypeContrat.getModel();
+        
+        // Liste de tous les type de contrats
         ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
     
+        // On vide les lignes 
         model.setRowCount(0);
         
+        // Pour chaque type de contrat
         for (TypeContrat tc : typeContrats) {
+            // Liste des offres du type de contrat
             ArrayList<Offre> offresFinal = OffreDAO.lister(mainJFrame.cnx, tc);
+            
+            // Initialisation du nb de postes à 0
             int nbPostes = 0;
             
+            // Pour chaque offre du type de contrat
             for (Offre of : offresFinal) {
+                // On compte le nb de potes
                 nbPostes += of.getNbPoste();
             }
             
+            // On ajoute la ligne au model
             model.addRow(new Object[] {
+                // Libelle du type de contrat
                 tc.getLibelle(),
+                // Nombre d'offres ayant ce type de contrat
                 offresFinal.size(),
+                // Nombre de postes ayant ce type de contrat
                 nbPostes
             });
         }
@@ -355,14 +436,17 @@ public class StatistiqueForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    // Clic boutton accueil
     private void buttonAccueilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccueilActionPerformed
         // TODO add your handling code here:
+        // On renvoi sur l'accueil
         CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
         cl.show(mainJFrame.mainPanel, "accueilCard");
     }//GEN-LAST:event_buttonAccueilActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
+        // On charge les lignes des tableaux
         refreshTableDomaine();
         refreshTableMetier();
         refreshTableAnnonceur();
