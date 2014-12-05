@@ -5,6 +5,8 @@
  */
 package megacasting.entite;
 
+import java.util.Objects;
+
 /**
  *
  * @author kevin
@@ -53,6 +55,27 @@ public class Metier {
         return libelle;
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Metier other = (Metier) obj;
+        if (!Objects.equals(this.libelle, other.libelle)) {
+            return false;
+        }
+        if (!Objects.equals(this.domaine, other.domaine)) {
+            return false;
+        }
+        if (this.idDomaine != other.idDomaine) {
+            return false;
+        }
+        return true;
+    }
     
     
     public Metier(long id, String libelle, Domaine domaine) {

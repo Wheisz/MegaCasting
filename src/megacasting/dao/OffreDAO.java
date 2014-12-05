@@ -348,8 +348,9 @@ public class OffreDAO {
             ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                     + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
                     + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
-                    + "                              , IdAnnonceur   FROM Offre "
-                    + "WHERE IdTypeContrat = " + tc.getId());
+                    + "                              , IdAnnonceur "
+                    + "FROM Offre o "
+                    + "WHERE o.IdTypeContrat = " + tc.getId());
             
             while(rs.next()) {
                 Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));

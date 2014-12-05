@@ -5,6 +5,8 @@
  */
 package megacasting.entite;
 
+import java.util.Objects;
+
 /**
  *
  * @author theodore
@@ -61,6 +63,41 @@ public class Societe {
     public String toString() {
         return raisonSociale;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Societe other = (Societe) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.raisonSociale, other.raisonSociale)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.telephone, other.telephone)) {
+            return false;
+        }
+        if (!Objects.equals(this.adresse, other.adresse)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
     public Societe(String raisonSociale, String email, String telephone, Adresse adresse) {
         this.raisonSociale = raisonSociale;

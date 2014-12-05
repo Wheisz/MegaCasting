@@ -10,6 +10,7 @@ package megacasting.entite;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sourceforge.jtds.jdbc.DateTime;
@@ -210,6 +211,87 @@ public class Offre {
     @Override
     public String toString() {
         return intitule;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Offre other = (Offre) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.intitule, other.intitule)) {
+            return false;
+        }
+        if (!Objects.equals(this.reference, other.reference)) {
+            return false;
+        }
+        if (!Objects.equals(this.datePublication, other.datePublication)) {
+            return false;
+        }
+        if (this.dureeDiffusion != other.dureeDiffusion) {
+            return false;
+        }
+        if (!Objects.equals(this.dateDebutContrat, other.dateDebutContrat)) {
+            return false;
+        }
+        if (this.nbPoste != other.nbPoste) {
+            return false;
+        }
+        if (!Objects.equals(this.localisationLattitude, other.localisationLattitude)) {
+            return false;
+        }
+        if (!Objects.equals(this.localisationLongitude, other.localisationLongitude)) {
+            return false;
+        }
+        if (!Objects.equals(this.descriptionPoste, other.descriptionPoste)) {
+            return false;
+        }
+        if (!Objects.equals(this.descriptionProfil, other.descriptionProfil)) {
+            return false;
+        }
+        if (!Objects.equals(this.telephone, other.telephone)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.domaine, other.domaine)) {
+            return false;
+        }
+        if (!Objects.equals(this.metier, other.metier)) {
+            return false;
+        }
+        if (!Objects.equals(this.typeContrat, other.typeContrat)) {
+            return false;
+        }
+        if (!Objects.equals(this.annonceur, other.annonceur)) {
+            return false;
+        }
+        if (this.idDomaine != other.idDomaine) {
+            return false;
+        }
+        if (this.idMetier != other.idMetier) {
+            return false;
+        }
+        if (this.idTypeContrat != other.idTypeContrat) {
+            return false;
+        }
+        if (this.idAnnonceur != other.idAnnonceur) {
+            return false;
+        }
+        return true;
     }
 
 

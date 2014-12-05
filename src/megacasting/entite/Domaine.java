@@ -5,6 +5,8 @@
  */
 package megacasting.entite;
 
+import java.util.Objects;
+
 /**
  *
  * @author theodore
@@ -35,6 +37,22 @@ public class Domaine {
         return libelle;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Domaine other = (Domaine) obj;
+        if (!Objects.equals(this.libelle, other.libelle)) {
+            return false;
+        }
+        return true;
+    }
+
+    
     public Domaine(String libelle) {
         this.libelle = libelle;
     }
