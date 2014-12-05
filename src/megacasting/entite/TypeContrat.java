@@ -5,6 +5,8 @@
  */
 package megacasting.entite;
 
+import java.util.Objects;
+
 /**
  *
  * @author theodore
@@ -34,6 +36,23 @@ public class TypeContrat {
     public String toString() {
         return libelle;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TypeContrat other = (TypeContrat) obj;
+        if (!Objects.equals(this.libelle, other.libelle)) {
+            return false;
+        }
+        return true;
+    }
+    
 
     public TypeContrat(String libelle) {
         this.libelle = libelle;

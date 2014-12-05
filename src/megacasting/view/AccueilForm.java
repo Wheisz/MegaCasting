@@ -77,18 +77,18 @@ public class AccueilForm extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buttonParams, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonSociete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonOffre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonStatistique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addGap(249, 249, 249)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonParams)
+                    .addComponent(buttonSociete, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonOffre, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonStatistique, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(89, 89, 89)
                 .addComponent(buttonParams)
                 .addGap(18, 18, 18)
                 .addComponent(buttonSociete)
@@ -96,21 +96,15 @@ public class AccueilForm extends javax.swing.JPanel {
                 .addComponent(buttonOffre)
                 .addGap(18, 18, 18)
                 .addComponent(buttonStatistique)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonParamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonParamsActionPerformed
+    private void buttonStatistiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStatistiqueActionPerformed
         // TODO add your handling code here:
         CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
-        cl.show(mainJFrame.mainPanel, "paramsCard");      
-    }//GEN-LAST:event_buttonParamsActionPerformed
-
-    private void buttonSocieteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSocieteActionPerformed
-        // TODO add your handling code here:
-        CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
-        cl.show(mainJFrame.mainPanel, "societeCard");
-    }//GEN-LAST:event_buttonSocieteActionPerformed
+        cl.show(mainJFrame.mainPanel, "statistiqueCard");
+    }//GEN-LAST:event_buttonStatistiqueActionPerformed
 
     private void buttonOffreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOffreActionPerformed
         // TODO add your handling code here:
@@ -118,11 +112,17 @@ public class AccueilForm extends javax.swing.JPanel {
         cl.show(mainJFrame.mainPanel, "offreCard");
     }//GEN-LAST:event_buttonOffreActionPerformed
 
-    private void buttonStatistiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStatistiqueActionPerformed
+    private void buttonSocieteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSocieteActionPerformed
         // TODO add your handling code here:
         CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
-        cl.show(mainJFrame.mainPanel, "statistiqueCard");
-    }//GEN-LAST:event_buttonStatistiqueActionPerformed
+        cl.show(mainJFrame.mainPanel, "societeCard");
+    }//GEN-LAST:event_buttonSocieteActionPerformed
+
+    private void buttonParamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonParamsActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
+        cl.show(mainJFrame.mainPanel, "paramsCard");
+    }//GEN-LAST:event_buttonParamsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

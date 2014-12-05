@@ -278,8 +278,8 @@ public class OffreForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(domaineLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(domaineLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -559,6 +559,11 @@ public class OffreForm extends javax.swing.JPanel {
             this.emailTextField.setText(o.getEmail());
             
             
+            this.typeContratOffreComboBox.setSelectedItem(o.getTypeContrat());
+            this.domaineOffreComboBox.setSelectedItem(o.getDomaine());
+            this.annonceurOffreComboBox.setSelectedItem(o.getAnnonceur());
+            this.metierOffreComboBox.setSelectedItem(o.getMetier());
+
         }
                    
     }//GEN-LAST:event_selectionOffre

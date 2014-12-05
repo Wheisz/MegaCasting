@@ -47,7 +47,7 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     public MainJFrame() {
-        initComponents();        
+            initComponents();      
         MegaCasting.loadDriver();
         String url = "jdbc:jtds:sqlserver://localhost:1433/MegaCastingCL";
         

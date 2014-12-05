@@ -22,7 +22,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -36,65 +36,71 @@
                       <Component id="diffuseurRadioButton" min="-2" pref="82" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="societeRadioButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="42" max="32767" attributes="0"/>
-                      <Component id="buttonAccueil" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <Component id="buttonAccueil" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="validerSocieteButton" max="32767" attributes="0"/>
-                              <Component id="effacerSocieteButton" pref="305" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="raisonSocialLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="emailLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="telephoneLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="numeroLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rueLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="codePostalLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="villeLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="validerSocieteButton" max="32767" attributes="0"/>
+                                      <Component id="effacerSocieteButton" pref="305" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="raisonSocialLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="emailLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="telephoneLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="numeroLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rueLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="codePostalLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="villeLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="diffuseurValiderRadioButton" max="32767" attributes="0"/>
+                                          <Component id="raisonSocialeTextField" max="32767" attributes="0"/>
+                                          <Component id="emailTextField" max="32767" attributes="0"/>
+                                          <Component id="telephoneTextField" max="32767" attributes="0"/>
+                                          <Component id="rueTextField" max="32767" attributes="0"/>
+                                          <Component id="villeTextField" pref="150" max="32767" attributes="0"/>
+                                          <Component id="numeroSpinner" max="32767" attributes="0"/>
+                                          <Component id="codePostalSpinner" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="annonceurValiderRadioButton" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="diffuseurValiderRadioButton" max="32767" attributes="0"/>
-                                  <Component id="raisonSocialeTextField" max="32767" attributes="0"/>
-                                  <Component id="emailTextField" max="32767" attributes="0"/>
-                                  <Component id="telephoneTextField" max="32767" attributes="0"/>
-                                  <Component id="rueTextField" max="32767" attributes="0"/>
-                                  <Component id="villeTextField" pref="150" max="32767" attributes="0"/>
-                                  <Component id="numeroSpinner" max="32767" attributes="0"/>
-                                  <Component id="codePostalSpinner" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="validationLabel" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="raisonSocialeErreurLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="numeroErreurLabel" alignment="0" pref="184" max="32767" attributes="0"/>
+                              <Component id="rueErreurLabel" alignment="0" pref="184" max="32767" attributes="0"/>
+                              <Component id="codePostalErreur" alignment="0" pref="184" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="telephoneErreurLabel" max="32767" attributes="0"/>
+                                      <Component id="emailErreurLabel" alignment="0" pref="178" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel7" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="annonceurValiderRadioButton" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="validationLabel" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="raisonSocialeErreurLabel" alignment="0" max="32767" attributes="0"/>
-                      <Component id="numeroErreurLabel" alignment="0" pref="184" max="32767" attributes="0"/>
-                      <Component id="rueErreurLabel" alignment="0" pref="184" max="32767" attributes="0"/>
-                      <Component id="codePostalErreur" alignment="0" pref="184" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="telephoneErreurLabel" max="32767" attributes="0"/>
-                              <Component id="emailErreurLabel" alignment="0" pref="178" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="annonceurDiffuseurErreurLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="villeErreurLabel" alignment="0" pref="178" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel7" max="32767" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="annonceurDiffuseurErreurLabel" alignment="0" max="32767" attributes="0"/>
-                      <Component id="villeErreurLabel" alignment="0" pref="178" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -106,6 +112,7 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <Component id="buttonAccueil" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="validationLabel" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -171,28 +178,19 @@
                       <Component id="effacerSocieteButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="annonceurRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="diffuseurRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="societeRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="buttonAccueil" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="annonceurRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="diffuseurRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="societeRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="410" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="societeSupprimerButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="7" max="32767" attributes="0"/>
+              <EmptySpace pref="9" max="32767" attributes="0"/>
               <Component id="supprimerLabel" min="-2" pref="23" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -202,36 +200,57 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="raisonSocialLabel">
       <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="raisonSocialeTextField"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Raison Sociale"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="emailLabel">
       <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="emailTextField"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Email"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="telephoneLabel">
       <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="telephoneTextField"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Telephone"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="numeroLabel">
       <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="numeroSpinner"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Num&#xe9;ro"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="rueLabel">
       <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="rueTextField"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Rue"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="codePostalLabel">
       <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="codePostalSpinner"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Code Postal"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="villeLabel">
       <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="villeTextField"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Ville"/>
       </Properties>
     </Component>
