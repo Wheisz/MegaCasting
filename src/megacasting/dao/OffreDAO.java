@@ -411,7 +411,7 @@ public class OffreDAO {
                                                 + ", DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
                                                 + ", IdAnnonceur"
                                                 + " FROM Offre"
-                                                + " WHERE Reference = '" + reference+"'");
+                                                + " WHERE Id = " + id);
             
             if(rs.next()) {
                 intitule = rs.getString(2);

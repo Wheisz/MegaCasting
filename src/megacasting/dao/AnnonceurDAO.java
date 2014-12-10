@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import megacasting.entite.Adresse;
 import megacasting.entite.Annonceur;
+import megacasting.entite.Offre;
 
 /**
  *
@@ -70,12 +71,17 @@ public class AnnonceurDAO {
         
         Statement stmt = null;
         try {
+            ArrayList<Offre> offres = OffreDAO.lister(cnx, annonceur);
+            for(Offre o : offres){
+                OffreDAO.supprimer(cnx, o);
+            }
+            
             stmt = cnx.createStatement();
 
             stmt.executeUpdate("DELETE FROM Annonceur "
                     + "WHERE Id = " + annonceur.getId()
             );
-            
+
             SocieteDAO.supprimer(cnx, annonceur);
             
             System.out.println("L'annonceur " + annonceur.getRaisonSociale() + " a été supprimé !");            

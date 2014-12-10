@@ -382,11 +382,8 @@ public class SocieteForm extends javax.swing.JPanel {
 
     private void societeSupprimerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_societeSupprimerButtonActionPerformed
         // TODO add your handling code here:
-        JOptionPane option = new JOptionPane();
-        int retour = JOptionPane.showConfirmDialog(this,
-                     "La suppression de la société , supprimera les offres rattachées", 
-                     "Demande de confirmation",
-                     JOptionPane.OK_CANCEL_OPTION);
+
+        int retour = mainJFrame.affichagePopUpValidation("La suppresion de la société entraîne la suppresion des offres rattachées", "Attention");
         
         if(retour == 0) {
         Societe s = (Societe)societeList.getSelectedValue();
@@ -401,9 +398,9 @@ public class SocieteForm extends javax.swing.JPanel {
                 try {
                     AnnonceurDAO.supprimer(mainJFrame.cnx, a);
                     raz();
-                    supprimerLabel.setText("Suppresion réussie !");
+                    mainJFrame.affichagePopUpInfo("Suppression de l'annonceur réussie","Information");
                 } catch (Exception e) {
-                    supprimerLabel.setText("Une erreur s'est produite lors de la suppresion");
+                    mainJFrame.affichagePopUpInfo( "Une erreur s'est produite lors de la suppression de l'annonceur","Information");
                     e.printStackTrace();
                 }
             } else {
@@ -411,9 +408,9 @@ public class SocieteForm extends javax.swing.JPanel {
                 try {
                     DiffuseurDAO.supprimer(mainJFrame.cnx, d);
                     raz();
-                    supprimerLabel.setText("Suppresion réussie !");
+                    mainJFrame.affichagePopUpInfo("Suppression du diffuseur réussie","Information");
                 } catch (Exception e) {
-                    supprimerLabel.setText("Une erreur s'est produite lors de la suppresion");
+                    mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la suppression du diffuseur","Information");
                     e.printStackTrace();
                 }
             }
@@ -461,9 +458,9 @@ public class SocieteForm extends javax.swing.JPanel {
                         AnnonceurDAO.creer(mainJFrame.cnx, a);
                         raz();
                         refreshList();
-                        validationLabel.setText("L'annonceur a été crée !");
+                        mainJFrame.affichagePopUpInfo("L'annonceur a été crée", "Information");
                     } catch (Exception e) {
-                        validationLabel.setText("Une erreur s'est produite lors de la création");
+                        mainJFrame.affichagePopUpInfo("Erreur lors de la création d'un annonceur", "Information");
                         e.printStackTrace();
                     }
                 } else {
@@ -480,9 +477,9 @@ public class SocieteForm extends javax.swing.JPanel {
                         AnnonceurDAO.modifier(mainJFrame.cnx, a);
                         raz();
                         refreshList();
-                        validationLabel.setText("L'annonceur a été modifiée !");
+                        mainJFrame.affichagePopUpInfo("L'annonceur a été modifié", "Information");
                     } catch (Exception ex) {
-                        validationLabel.setText("Une erreur s'est produite lors de la modification");
+                        mainJFrame.affichagePopUpInfo("Erreur lors de la modification de l'offre", "Information");
                         ex.printStackTrace();
                     }
                 }
@@ -503,9 +500,9 @@ public class SocieteForm extends javax.swing.JPanel {
                             DiffuseurDAO.creer(mainJFrame.cnx, d);
                             raz();
                             refreshList();
-                            validationLabel.setText("Le diffuseur a été crée !");
+                            mainJFrame.affichagePopUpInfo("Le diffuseur a été crée", "Information");
                         } catch (Exception e) {
-                            validationLabel.setText("Une erreur s'est produite lors de la création");
+                            mainJFrame.affichagePopUpInfo("Erreur lors de la création du diffuseur", "Information");
                             e.printStackTrace();
                         }
                     } else {
@@ -522,9 +519,9 @@ public class SocieteForm extends javax.swing.JPanel {
                             DiffuseurDAO.modifier(mainJFrame.cnx, d);
                             raz();
                             refreshList();
-                            validationLabel.setText("Le  a été modifiée !");
+                            mainJFrame.affichagePopUpInfo("Le diffuseur a été modifié", "Information");
                         } catch (Exception ex) {
-                            validationLabel.setText("Une erreur s'est produite lors de la modification");
+                            mainJFrame.affichagePopUpInfo("Erreur lors de la modification du diffuseur", "Information");
                             ex.printStackTrace();
                         }
                     }

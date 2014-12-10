@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import megacasting.MegaCasting;
 import megacasting.dao.AdresseDAO;
@@ -147,6 +148,22 @@ public class MainJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    protected int affichagePopUpValidation (String contenu, String titre){
+        JOptionPane option = new JOptionPane();
+        int retour = JOptionPane.showConfirmDialog(this,
+                     contenu, 
+                     titre,
+                     JOptionPane.OK_CANCEL_OPTION);
+        return retour;
+    }
+    
+    protected void affichagePopUpInfo (String contenu,String titre){
+        JOptionPane option = new JOptionPane();
+        JOptionPane.showMessageDialog(this,
+                     contenu,
+                     titre,
+                     JOptionPane.INFORMATION_MESSAGE);
+    }
     /**
      * @param args the command line arguments
      */
