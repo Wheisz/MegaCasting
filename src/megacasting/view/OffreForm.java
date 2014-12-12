@@ -6,7 +6,6 @@
 package megacasting.view;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -31,48 +30,46 @@ import megacasting.entite.TypeContrat;
 public class OffreForm extends javax.swing.JPanel {
 
     private MainJFrame mainJFrame;
+
     public enum Erreur {
+
         ERREUR_INTITULE_VIDE, ERREUR_REFERENCE_VIDE, ERREUR_REFERENCE_INVALIDE, ERREUR_DUREEDIFFUSION_VIDE,
         ERREUR_DATEDEBUTCONTRAT_VIDE, ERREUR_DATEDEBUTCONTRAT_INVALIDE, ERREUR_NBPOSTE_VIDE, ERREUR_LATTITUDE_VIDE,
         ERREUR_LATTITUDE_INVALIDE, ERREUR_LONGITUDE_VIDE, ERREUR_LONGITUDE_INVALIDE, ERREUR_DESCRIPTIONPOSTE_VIDE,
-        ERREUR_DESCRIPTIONPROFIL_VIDE, ERREUR_TELEPHONE_VIDE, ERREUR_TELEPHONE_INVALIDE, ERREUR_EMAIL_VIDE, 
-        ERREUR_EMAIL_INVALIDE, ERREUR_IDANNONCEUR_VIDE;
+        ERREUR_DESCRIPTIONPROFIL_VIDE, ERREUR_TELEPHONE_VIDE, ERREUR_TELEPHONE_INVALIDE, ERREUR_EMAIL_VIDE,
+        ERREUR_EMAIL_INVALIDE, ERREUR_IDANNONCEUR_VIDE, ERREUR_DOMAINE_METIER_VIDE;
     }
 
     public OffreForm(MainJFrame mainJFrame) {
         this.mainJFrame = mainJFrame;
         initComponents();
-        DefaultListModel<Annonceur>annonceurListModel = new DefaultListModel<>();
+        DefaultListModel<Annonceur> annonceurListModel = new DefaultListModel<>();
         annonceurList.setModel(annonceurListModel);
-        DefaultListModel<Domaine>domaineListModel = new DefaultListModel<>();
+        DefaultListModel<Domaine> domaineListModel = new DefaultListModel<>();
         domaineList.setModel(domaineListModel);
-        DefaultListModel<Metier>metierListModel = new DefaultListModel<>();
+        DefaultListModel<Metier> metierListModel = new DefaultListModel<>();
         metierList.setModel(metierListModel);
-        DefaultListModel<TypeContrat>typeContratListModel = new DefaultListModel<>();
+        DefaultListModel<TypeContrat> typeContratListModel = new DefaultListModel<>();
         typeContratList.setModel(typeContratListModel);
-        DefaultListModel<Offre>offreListModel = new DefaultListModel<>();
+        DefaultListModel<Offre> offreListModel = new DefaultListModel<>();
         offreList.setModel(offreListModel);
-        
-        DefaultComboBoxModel<Annonceur>annonceurComboBoxModel = new DefaultComboBoxModel<>();
+
+        DefaultComboBoxModel<Annonceur> annonceurComboBoxModel = new DefaultComboBoxModel<>();
         annonceurOffreComboBox.setModel(annonceurComboBoxModel);
-        DefaultComboBoxModel<Domaine>domaineComboBoxModel = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<Domaine> domaineComboBoxModel = new DefaultComboBoxModel<>();
         domaineOffreComboBox.setModel(domaineComboBoxModel);
-        DefaultComboBoxModel<Metier>metierComboBoxModel = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<Metier> metierComboBoxModel = new DefaultComboBoxModel<>();
         metierOffreComboBox.setModel(metierComboBoxModel);
-        DefaultComboBoxModel<TypeContrat>typeContratComboBoxModel = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<TypeContrat> typeContratComboBoxModel = new DefaultComboBoxModel<>();
         typeContratOffreComboBox.setModel(typeContratComboBoxModel);
-        
+
         this.datePublicationLabel.setVisible(false);
         this.datePublicationDateChooser.setVisible(false);
 
-        
-        
         refreshList();
         refreshComboBox();
 
-
     }
-    
 
     /**
      * Creates new form offreForm
@@ -157,6 +154,7 @@ public class OffreForm extends javax.swing.JPanel {
         annonceurErreurLabel = new javax.swing.JLabel();
         reinitialiserButton = new javax.swing.JButton();
         supprimerOffreButton = new javax.swing.JButton();
+        domaineMetierErreurLabel = new javax.swing.JLabel();
 
         jLabel1.setText("Offre");
 
@@ -383,7 +381,10 @@ public class OffreForm extends javax.swing.JPanel {
                                                 .addComponent(domaineOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 127, Short.MAX_VALUE))
                                             .addComponent(intituleTextField)
-                                            .addComponent(referenceTextField))
+                                            .addComponent(referenceTextField)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(domaineMetierErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(43, 43, 43)))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(40, 40, 40)
@@ -529,7 +530,9 @@ public class OffreForm extends javax.swing.JPanel {
                             .addComponent(annonceurOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(annonceurOffreLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(annonceurErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(annonceurErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(domaineMetierErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(effacerOffreButton)
@@ -567,39 +570,26 @@ public class OffreForm extends javax.swing.JPanel {
 
     private void selectionDomaine(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionDomaine
         // TODO add your handling code here:
-        
-        Domaine d = (Domaine)domaineList.getSelectedValue();
-        
-        DefaultListModel model = (DefaultListModel)metierList.getModel();
+
+        Domaine d = (Domaine) domaineList.getSelectedValue();
+
+        DefaultListModel model = (DefaultListModel) metierList.getModel();
         model.clear();
         ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, d);
-        for(Metier m : metiers)
-        {
-            if(m != null)
-            {
+        for (Metier m : metiers) {
+            if (m != null) {
                 model.addElement(m);
             }
         }
-        
+
         metierList.setModel(model);
-        
-        
-        DefaultListModel modelOffre = (DefaultListModel)offreList.getModel();
-        modelOffre.clear();
-        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, d);
 
-        for(Offre o : offres){
-            modelOffre.addElement(o);
-        }
-
-        offreList.setModel(modelOffre);
     }//GEN-LAST:event_selectionDomaine
 
     private void selectionOffre(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionOffre
         // TODO add your handling code here:
-        Offre o = (Offre)offreList.getSelectedValue();
-        if(o != null)
-        {
+        Offre o = (Offre) offreList.getSelectedValue();
+        if (o != null) {
             this.intituleTextField.setText(o.getIntitule());
             this.referenceTextField.setText(o.getReference());
             this.datePublicationLabel.setVisible(true);
@@ -614,81 +604,79 @@ public class OffreForm extends javax.swing.JPanel {
             this.descriptionProfilTextArea.setText(o.getDescriptionProfil());
             this.telephoneTextField.setText(o.getTelephone());
             this.emailTextField.setText(o.getEmail());
-            
-            
+
             this.typeContratOffreComboBox.setSelectedItem(o.getTypeContrat());
             this.domaineOffreComboBox.setSelectedItem(o.getDomaine());
             this.annonceurOffreComboBox.setSelectedItem(o.getAnnonceur());
             this.metierOffreComboBox.setSelectedItem(o.getMetier());
 
         }
-                   
+
     }//GEN-LAST:event_selectionOffre
-    
+
     private void validerOffreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerOffreButtonActionPerformed
         // TODO add your handling code here:
         ArrayList<Erreur> erreurs = verifFormulaire();
-        if(erreurs.isEmpty()) {
-            
-        String intitule = this.intituleTextField.getText();
-        String reference = this.referenceTextField.getText();
-        int dureeDiffusion = (int)this.dureeDiffusionSpinner.getValue();
-        Date dateDebutContrat = this.dateDebutContratDateChooser.getDate();
-        int nbPoste = (int)this.nbPosteSpinner.getValue();
-        String lattitude = this.lattitudeTextField.getText();
-        String longitude = this.longitudeTextField.getText();
-        String descriptionPoste = this.descriptionPosteTextArea.getText();
-        String descriptionProfil = this.descriptionProfilTextArea.getText();
-        String telephone = this.telephoneTextField.getText();
-        String email = this.emailTextField.getText();
-        Domaine domaine = (Domaine)this.domaineOffreComboBox.getSelectedItem();
-        Metier metier = (Metier)this.metierOffreComboBox.getSelectedItem();
-        TypeContrat typeContrat = (TypeContrat)this.typeContratOffreComboBox.getSelectedItem();
-        Annonceur annonceur = (Annonceur)this.annonceurOffreComboBox.getSelectedItem();
-        
 
-        Offre o = OffreDAO.trouver(mainJFrame.cnx, reference);
-        if(o == null)
-        {
-            try {
-                 o = new Offre(intitule,reference,dureeDiffusion,
-                        dateDebutContrat,nbPoste,lattitude,longitude,descriptionPoste,descriptionProfil,
-                        telephone,email,domaine,metier,typeContrat,annonceur);
+        if (erreurs.isEmpty()) {
 
-                OffreDAO.creer(mainJFrame.cnx,o);
-                raz();
-                refreshList();
-                mainJFrame.affichagePopUpInfo("Offre crée","Information");
-            } catch (Exception e) {
-                mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la création","Information");
-                e.printStackTrace();
-            } 
-        } else {
-            o.setIntitule(intitule);
-            o.setReference(reference);
-            o.setDureeDiffusion(dureeDiffusion);
-            o.setDateDebutContrat(dateDebutContrat);
-            o.setNbPoste(nbPoste);
-            o.setLocalisationLattitude(lattitude);
-            o.setLocalisationLongitude(longitude);
-            o.setDescriptionPoste(descriptionPoste);
-            o.setDescriptionProfil(descriptionProfil);
-            o.setTelephone(telephone);
-            o.setEmail(email);
-            o.setDomaine(domaine);
-            o.setMetier(metier);
-            o.setTypeContrat(typeContrat);
-            o.setAnnonceur(annonceur);
-            try {
-                OffreDAO.modifier(mainJFrame.cnx, o);
-                raz();
-                refreshList();
-                mainJFrame.affichagePopUpInfo("Offre modifiée","Information");
-            } catch (Exception ex) {
-                mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la modification","Information");
-            ex.printStackTrace();
+            String intitule = this.intituleTextField.getText();
+            String reference = this.referenceTextField.getText();
+            int dureeDiffusion = (int) this.dureeDiffusionSpinner.getValue();
+            Date dateDebutContrat = this.dateDebutContratDateChooser.getDate();
+            int nbPoste = (int) this.nbPosteSpinner.getValue();
+            String lattitude = this.lattitudeTextField.getText();
+            String longitude = this.longitudeTextField.getText();
+            String descriptionPoste = this.descriptionPosteTextArea.getText();
+            String descriptionProfil = this.descriptionProfilTextArea.getText();
+            String telephone = this.telephoneTextField.getText();
+            String email = this.emailTextField.getText();
+            Domaine domaine = (Domaine) this.domaineOffreComboBox.getSelectedItem();
+            Metier metier = (Metier) this.metierOffreComboBox.getSelectedItem();
+            TypeContrat typeContrat = (TypeContrat) this.typeContratOffreComboBox.getSelectedItem();
+            Annonceur annonceur = (Annonceur) this.annonceurOffreComboBox.getSelectedItem();
+
+            Offre o = OffreDAO.trouver(mainJFrame.cnx, reference);
+            if (o == null) {
+                try {
+                    o = new Offre(intitule, reference, dureeDiffusion,
+                            dateDebutContrat, nbPoste, lattitude, longitude, descriptionPoste, descriptionProfil,
+                            telephone, email, domaine, metier, typeContrat, annonceur);
+
+                    OffreDAO.creer(mainJFrame.cnx, o);
+                    raz();
+                    refreshList();
+                    mainJFrame.affichagePopUpInfo("Offre crée", "Information");
+                } catch (Exception e) {
+                    mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la création", "Information");
+                    e.printStackTrace();
+                }
+            } else {
+                o.setIntitule(intitule);
+                o.setReference(reference);
+                o.setDureeDiffusion(dureeDiffusion);
+                o.setDateDebutContrat(dateDebutContrat);
+                o.setNbPoste(nbPoste);
+                o.setLocalisationLattitude(lattitude);
+                o.setLocalisationLongitude(longitude);
+                o.setDescriptionPoste(descriptionPoste);
+                o.setDescriptionProfil(descriptionProfil);
+                o.setTelephone(telephone);
+                o.setEmail(email);
+                o.setDomaine(domaine);
+                o.setMetier(metier);
+                o.setTypeContrat(typeContrat);
+                o.setAnnonceur(annonceur);
+                try {
+                    OffreDAO.modifier(mainJFrame.cnx, o);
+                    raz();
+                    refreshList();
+                    mainJFrame.affichagePopUpInfo("Offre modifiée", "Information");
+                } catch (Exception ex) {
+                    mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la modification", "Information");
+                    ex.printStackTrace();
+                }
             }
-        }
         } else {
             affichageErreurs(erreurs);
         }
@@ -702,32 +690,47 @@ public class OffreForm extends javax.swing.JPanel {
 
     private void domaineOffreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_domaineOffreComboBoxActionPerformed
         // TODO add your handling code here:
-        DefaultComboBoxModel model = (DefaultComboBoxModel)domaineOffreComboBox.getModel();
-        Domaine d = (Domaine)model.getSelectedItem();
-        
-        ArrayList<Metier>metiers = MetierDAO.lister(mainJFrame.cnx, d);
-        DefaultComboBoxModel modelMetier = (DefaultComboBoxModel)metierOffreComboBox.getModel();
-        
-        modelMetier.removeAllElements();
-        
-        for( Metier m : metiers) {
-            modelMetier.addElement(m);
+        DefaultComboBoxModel model = (DefaultComboBoxModel) domaineOffreComboBox.getModel();
+        if ((Domaine) model.getSelectedItem() != null) {
+            Domaine d = (Domaine) model.getSelectedItem();
+
+            ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, d);
+            DefaultComboBoxModel modelMetier = (DefaultComboBoxModel) metierOffreComboBox.getModel();
+
+            modelMetier.removeAllElements();
+
+            for (Metier m : metiers) {
+                modelMetier.addElement(m);
+            }
+            modelMetier.addElement(null);
+            metierOffreComboBox.setModel(modelMetier);
+        } else {
+            ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
+            DefaultComboBoxModel modelMetier = (DefaultComboBoxModel) metierOffreComboBox.getModel();
+
+            modelMetier.removeAllElements();
+
+            for (Metier m : metiers) {
+                modelMetier.addElement(m);
+            }
+            modelMetier.addElement(null);
+            metierOffreComboBox.setModel(modelMetier);
         }
-        
-        metierOffreComboBox.setModel(modelMetier);
-        
+
+
+
     }//GEN-LAST:event_domaineOffreComboBoxActionPerformed
 
     private void selectionAnnonceur(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionAnnonceur
         // TODO add your handling code here:
-        
-        Annonceur a = (Annonceur)annonceurList.getSelectedValue();
-        
-        DefaultListModel modelOffre = (DefaultListModel)offreList.getModel();
+
+        Annonceur a = (Annonceur) annonceurList.getSelectedValue();
+
+        DefaultListModel modelOffre = (DefaultListModel) offreList.getModel();
         modelOffre.clear();
         ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, a);
 
-        for(Offre o : offres){
+        for (Offre o : offres) {
             modelOffre.addElement(o);
         }
 
@@ -736,14 +739,14 @@ public class OffreForm extends javax.swing.JPanel {
 
     private void selectionTypeContrat(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionTypeContrat
         // TODO add your handling code here:
-        
-        TypeContrat tc = (TypeContrat)typeContratList.getSelectedValue();
-        
-        DefaultListModel modelOffre = (DefaultListModel)offreList.getModel();
+
+        TypeContrat tc = (TypeContrat) typeContratList.getSelectedValue();
+
+        DefaultListModel modelOffre = (DefaultListModel) offreList.getModel();
         modelOffre.clear();
-        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx,tc);
-        
-        for(Offre o : offres){
+        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, tc);
+
+        for (Offre o : offres) {
             modelOffre.addElement(o);
         }
 
@@ -752,51 +755,51 @@ public class OffreForm extends javax.swing.JPanel {
 
     private void reinitialiserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reinitialiserButtonActionPerformed
         // TODO add your handling code here: 
-        
+
         refreshListOffres();
 
     }//GEN-LAST:event_reinitialiserButtonActionPerformed
 
     private void selectionMetier(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionMetier
         // TODO add your handling code here:
-        
-        Metier m = (Metier)metierList.getSelectedValue();
-        
-        DefaultListModel modelOffre = (DefaultListModel)offreList.getModel();
-        modelOffre.clear();
-        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx,m);
 
-        for(Offre o : offres){
+        Metier m = (Metier) metierList.getSelectedValue();
+
+        DefaultListModel modelOffre = (DefaultListModel) offreList.getModel();
+        modelOffre.clear();
+        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, m);
+
+        for (Offre o : offres) {
             modelOffre.addElement(o);
         }
 
         offreList.setModel(modelOffre);
-        
+
     }//GEN-LAST:event_selectionMetier
 
     private void supprimerOffreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerOffreButtonActionPerformed
         // TODO add your handling code here:
-        Offre o = (Offre)offreList.getSelectedValue();
+        Offre o = (Offre) offreList.getSelectedValue();
 
-        Offre offre = OffreDAO.trouver(mainJFrame.cnx,o.getId());
+        Offre offre = OffreDAO.trouver(mainJFrame.cnx, o.getId());
 
         if (offre != null) {
 
-                try {
-                    OffreDAO.supprimer(mainJFrame.cnx, offre);
-                    raz();
-                    mainJFrame.affichagePopUpInfo("Suppression de l'offre réussie","Information");
-                } catch (Exception e) {
-                    mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la suppression de l'offre","Information");
-                    e.printStackTrace();
-                }
-               refreshList();
+            try {
+                OffreDAO.supprimer(mainJFrame.cnx, offre);
+                raz();
+                mainJFrame.affichagePopUpInfo("Suppression de l'offre réussie", "Information");
+            } catch (Exception e) {
+                mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la suppression de l'offre", "Information");
+                e.printStackTrace();
+            }
+            refreshList();
         }
 
-        
+
     }//GEN-LAST:event_supprimerOffreButtonActionPerformed
 
-    private void raz(){
+    private void raz() {
         this.intituleTextField.setText(null);
         this.referenceTextField.setText(null);
         this.datePublicationLabel.setVisible(false);
@@ -810,7 +813,7 @@ public class OffreForm extends javax.swing.JPanel {
         this.descriptionProfilTextArea.setText(null);
         this.telephoneTextField.setText(null);
         this.emailTextField.setText(null);
-        
+
         this.intituleErreurLabel.setText(null);
         this.referenceErreurLabel.setText(null);
         this.dureeDiffusionErreurLabel.setText(null);
@@ -823,302 +826,314 @@ public class OffreForm extends javax.swing.JPanel {
         this.telephoneErreurLabel.setText(null);
         this.emailErreurLabel.setText(null);
         this.annonceurErreurLabel.setText(null);
-        
+
     }
-    
-    private void refreshList(){
+
+    private void refreshList() {
         refreshListAnnonceurs();
         refreshListDomaines();
         refreshListMetiers();
         refreshListTypeContrat();
         refreshListOffres();
     }
-    
-    private void refreshListOffres(){
-        DefaultListModel model = (DefaultListModel)offreList.getModel();
+
+    private void refreshListOffres() {
+        DefaultListModel model = (DefaultListModel) offreList.getModel();
         model.clear();
         ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx);
-        for(Offre o : offres)
-        {
+        for (Offre o : offres) {
             model.addElement(o);
         }
         offreList.setModel(model);
-        
+
     }
-    
-    private void refreshListAnnonceurs(){
-        DefaultListModel model = (DefaultListModel)annonceurList.getModel();
+
+    private void refreshListAnnonceurs() {
+        DefaultListModel model = (DefaultListModel) annonceurList.getModel();
         model.clear();
         ArrayList<Annonceur> annonceurs = AnnonceurDAO.lister(mainJFrame.cnx);
-        for(Annonceur a : annonceurs)
-        {
+        for (Annonceur a : annonceurs) {
             model.addElement(a);
         }
         annonceurList.setModel(model);
-        
+
     }
-    
-    private void refreshListDomaines(){
-        DefaultListModel model = (DefaultListModel)domaineList.getModel();
+
+    private void refreshListDomaines() {
+        DefaultListModel model = (DefaultListModel) domaineList.getModel();
         model.clear();
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
-        for(Domaine d : domaines)
-        {
+        for (Domaine d : domaines) {
             model.addElement(d);
         }
         domaineList.setModel(model);
-        
+
     }
-    
-    private void refreshListMetiers(){
-    DefaultListModel model = (DefaultListModel)metierList.getModel();
-    model.clear();
-    ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
-    for(Metier m : metiers)
-    {
-        model.addElement(m);
+
+    private void refreshListMetiers() {
+        DefaultListModel model = (DefaultListModel) metierList.getModel();
+        model.clear();
+        ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
+        for (Metier m : metiers) {
+            model.addElement(m);
+        }
+        metierList.setModel(model);
+
     }
-    metierList.setModel(model);
-        
+
+    private void refreshListTypeContrat() {
+        DefaultListModel model = (DefaultListModel) typeContratList.getModel();
+        model.clear();
+        ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
+        for (TypeContrat tc : typeContrats) {
+            model.addElement(tc);
+        }
+        typeContratList.setModel(model);
+
     }
-    
-    private void refreshListTypeContrat(){
-    DefaultListModel model = (DefaultListModel)typeContratList.getModel();
-    model.clear();
-    ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
-    for(TypeContrat tc : typeContrats)
-    {
-        model.addElement(tc);
-    }
-    typeContratList.setModel(model);
-        
-    }
-    
-    private void refreshComboBox () {
+
+    private void refreshComboBox() {
         refreshComboBoxAnnonceurs();
         refreshComboBoxDomaines();
         refreshComboBoxTypeContrats();
     }
-    
-    private void refreshComboBoxAnnonceurs () {
-        DefaultComboBoxModel<Annonceur> model = (DefaultComboBoxModel)annonceurOffreComboBox.getModel();
+
+    private void refreshComboBoxAnnonceurs() {
+        DefaultComboBoxModel<Annonceur> model = (DefaultComboBoxModel) annonceurOffreComboBox.getModel();
         model.removeAllElements();
         ArrayList<Annonceur> annonceurs = AnnonceurDAO.lister(mainJFrame.cnx);
-        for(Annonceur a : annonceurs)
-        {
+        for (Annonceur a : annonceurs) {
             model.addElement(a);
         }
         annonceurOffreComboBox.setModel(model);
     }
-    
+
     private void refreshComboBoxDomaines() {
-        DefaultComboBoxModel<Domaine> model = (DefaultComboBoxModel)domaineOffreComboBox.getModel();
+        DefaultComboBoxModel<Domaine> model = (DefaultComboBoxModel) domaineOffreComboBox.getModel();
         model.removeAllElements();
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
-        for(Domaine d : domaines)
-        {
+        for (Domaine d : domaines) {
             model.addElement(d);
         }
+        model.addElement(null);
         domaineOffreComboBox.setModel(model);
     }
-    
+
     private void refreshComboBoxTypeContrats() {
-        DefaultComboBoxModel<TypeContrat> model = (DefaultComboBoxModel)typeContratOffreComboBox.getModel();
+        DefaultComboBoxModel<TypeContrat> model = (DefaultComboBoxModel) typeContratOffreComboBox.getModel();
         model.removeAllElements();
         ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
-        for(TypeContrat tc : typeContrats)
-        {
+        for (TypeContrat tc : typeContrats) {
             model.addElement(tc);
         }
         typeContratOffreComboBox.setModel(model);
     }
-    
+
     private ArrayList verifFormulaire() {
 
-    ArrayList<Erreur> erreurs = new ArrayList();
-    
-    // Creation d'une erreur si le champ intitule est vide
-    if(this.intituleTextField.getText().equals("")) {
-        erreurs.add(Erreur.ERREUR_INTITULE_VIDE);
-    } else {
-        this.intituleErreurLabel.setText(null);
-    }
-    // Creation d'une erreur si le champ reference est vide
-    if(this.referenceTextField.getText().equals("")) {
-        erreurs.add(Erreur.ERREUR_REFERENCE_VIDE);
-    } else {
-        // Creation d'une erreur si le champ reference a été mal saisi
-        Boolean verifReference = regexReference(this.referenceTextField.getText());
-        if(verifReference != true) {
-            erreurs.add(Erreur.ERREUR_REFERENCE_INVALIDE);
-        } else {
-            this.referenceErreurLabel.setText(null);
-        }
-    }
-    // Creation d'une erreur si la durée de diffusion est égale à 0
-    if((int)this.dureeDiffusionSpinner.getValue() == 0) {
-        erreurs.add(Erreur.ERREUR_DUREEDIFFUSION_VIDE);        
-    } else {
-        this.dureeDiffusionErreurLabel.setText(null);
-    }
-    // Creation d'une erreur si la date de début de contrat est vide 
-    if(this.dateDebutContratDateChooser.getDate() ==  null) {
-        erreurs.add(Erreur.ERREUR_DATEDEBUTCONTRAT_VIDE);
-    } else {
-        Date now = new Date();
-        // Creation d'une erreur si la date de debut de oontrat est inférieure à celle de publication
-        if(this.dateDebutContratDateChooser.getDate().before(now)){
-            erreurs.add(Erreur.ERREUR_DATEDEBUTCONTRAT_INVALIDE);
-        } else {
-            this.dateDebutContratErreurLabel.setText(null);
-        }
-    }
-    // Creation d'une erreur si le nombre de postes est égale à 0
-    if((int)this.nbPosteSpinner.getValue() == 0) {
-        erreurs.add(Erreur.ERREUR_NBPOSTE_VIDE);
-    } else {
-        this.nbPosteErreurLabel.setText(null);
-    }
-    // Creation d'une erreur si la lattitude est vide 
-    if(this.lattitudeTextField.getText().equals("")) {
-        erreurs.add(Erreur.ERREUR_LATTITUDE_VIDE);
-    } else {
-        // Creation d'une erreur si la lattitude saisie est incorrect
-//        Boolean verifLattitude = regexCoordonnées(this.lattitudeTextField.getText());
-//        if(verifLattitude != true) {
-//            erreurs.add(Erreur.ERREUR_LATTITUDE_INVALIDE);
-//        } else {
-            this.lattitudeErreurLabel.setText(null);
-//        }
-    }
-    // Creation d'une erreur si la longitude est vide 
-    if(this.longitudeTextField.getText().equals("")) {
-        erreurs.add(Erreur.ERREUR_LONGITUDE_VIDE);
-    } else {
-        // Creation d'une erreur si la longitude saisie est incorrect
-//        Boolean verifLongitude = regexCoordonnées(this.longitudeTextField.getText());
-//        if(verifLongitude != true ) {
-//            erreurs.add(Erreur.ERREUR_LONGITUDE_INVALIDE);
-//        } else {
-            this.longitudeErreurLabel.setText(null);
-//        }
-    }
-    // Creation d'une erreur si la description de poste est vide 
-    if(this.descriptionPosteTextArea.getText().equals("")) {
-        erreurs.add(Erreur.ERREUR_DESCRIPTIONPOSTE_VIDE);
-    } else {
-        this.descriptionPosteErreurLabel.setText(null);
-    }
-    // Creation d'une erreur si la description du profil est vide
-    if(this.descriptionProfilTextArea.getText().equals("")) {
-        erreurs.add(Erreur.ERREUR_DESCRIPTIONPROFIL_VIDE);
-    } else {
-        this.descriptionProfilErreurLabel.setText(null);
-    }
-    // Creation d'une erreur si le numéro de téléphone est vide
-    if(this.telephoneTextField.getText().equals("")) {
-        erreurs.add(Erreur.ERREUR_TELEPHONE_VIDE);
-    } else {
-        // Creation d'une erreur si le numéro de téléphone saisi est incorrect
-        Boolean verifTelephone = regexTelephone(this.telephoneTextField.getText());
-        if(verifTelephone != true) {
-            erreurs.add(Erreur.ERREUR_TELEPHONE_INVALIDE);
-        } else {
-            this.telephoneErreurLabel.setText(null);
-        }
-    }
-    // Creation d'une erreur si l'email est vide
-    if(this.emailTextField.getText().equals("")) {
-        erreurs.add(Erreur.ERREUR_EMAIL_VIDE);
-    } else {
-        // Creation d'une erreur si l'email saisie est incorrect 
-        Boolean verifEmail = regexEmail(this.emailTextField.getText());
-        if(verifEmail != true) {
-            erreurs.add(Erreur.ERREUR_EMAIL_INVALIDE);
-        } else {
-            this.emailErreurLabel.setText(null);
-        }
-    }
-    // Creation d'une erreur si aucun annonceur à été choisi
-    if(this.annonceurOffreComboBox.getSelectedItem() == null) {
-        erreurs.add(Erreur.ERREUR_IDANNONCEUR_VIDE);
-    } else {
-        this.annonceurErreurLabel.setText(null);
-    }
-    
-    return erreurs;
-    
-    }
-    
-    private void affichageErreurs (ArrayList<Erreur> erreurs){
-        
-        for(Erreur erreur : erreurs) {
-            switch (erreur) {
-                
-                case ERREUR_INTITULE_VIDE :             this.intituleErreurLabel.setText("Veuillez saisir un intitulé !");
-                                                        break;
-                case ERREUR_REFERENCE_VIDE :            this.referenceErreurLabel.setText("Veuillez saisir une référence !");
-                                                        break;
-                case ERREUR_REFERENCE_INVALIDE :        this.referenceErreurLabel.setText("Veuillez saisir une référence correcte !");
-                                                        break;
-                case ERREUR_DUREEDIFFUSION_VIDE :       this.dureeDiffusionErreurLabel.setText("Veuillez saisir une durée de diffusion supérieure à 0 !");
-                                                        break;
-                case ERREUR_DATEDEBUTCONTRAT_VIDE :     this.dateDebutContratErreurLabel.setText("Veuillez saisir une date de début de contrat !");
-                                                        break;
-                case ERREUR_DATEDEBUTCONTRAT_INVALIDE : this.dateDebutContratErreurLabel.setText("La date saisie est inférieure à celle d\'aujourdh'hui !");
-                                                        break;
-                case ERREUR_NBPOSTE_VIDE :              this.nbPosteErreurLabel.setText("Veuillez saisir le nombre de postes pour l'offre !");
-                                                        break;
-                case ERREUR_LATTITUDE_VIDE :            this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude !");
-                                                        break;
-                case ERREUR_LATTITUDE_INVALIDE :        this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude correcte : 00° 00' N !");
-                                                        break;
-                case ERREUR_LONGITUDE_VIDE :            this.longitudeErreurLabel.setText("Veuillez saisir une longitude !");
-                                                        break;
-                case ERREUR_LONGITUDE_INVALIDE :        this.longitudeErreurLabel.setText("Veuillez saisir une longitude correcte : 00° 00' N !");
-                                                        break;
-                case ERREUR_DESCRIPTIONPOSTE_VIDE :     this.descriptionPosteErreurLabel.setText("Veuillez saisir une description de poste !");
-                                                        break;
-                case ERREUR_DESCRIPTIONPROFIL_VIDE :    this.descriptionProfilErreurLabel.setText("Veuillez saisir une description de profil !");
-                                                        break;
-                case ERREUR_TELEPHONE_VIDE :            this.telephoneErreurLabel.setText("Veuillez saisir un numéro de téléphone !");
-                                                        break;
-                case ERREUR_TELEPHONE_INVALIDE :        this.telephoneErreurLabel.setText("Veuillez saisir une numéro de téléphone de 10 chiffres !");
-                                                        break;
-                case ERREUR_EMAIL_VIDE :                this.emailErreurLabel.setText("Veuillez saisir un email !");
-                                                        break;
-                case ERREUR_EMAIL_INVALIDE :            this.emailErreurLabel.setText("Veuillez saisir un email correct !");
-                                                        break;
-                case ERREUR_IDANNONCEUR_VIDE :          this.annonceurErreurLabel.setText("Veuillez choisir un annonceur pour votre offre !");
-                                                        break;
-                default : break;
-            
-            
-            }
-            
-            
-            
+        ArrayList<Erreur> erreurs = new ArrayList();
 
-            
+        // Creation d'une erreur si le champ intitule est vide
+        if (this.intituleTextField.getText().equals("")) {
+            erreurs.add(Erreur.ERREUR_INTITULE_VIDE);
+        } else {
+            this.intituleErreurLabel.setText(null);
+        }
+        // Creation d'une erreur si le champ reference est vide
+        if (this.referenceTextField.getText().equals("")) {
+            erreurs.add(Erreur.ERREUR_REFERENCE_VIDE);
+        } else {
+            // Creation d'une erreur si le champ reference a été mal saisi
+            Boolean verifReference = regexReference(this.referenceTextField.getText());
+            if (verifReference != true) {
+                erreurs.add(Erreur.ERREUR_REFERENCE_INVALIDE);
+            } else {
+                this.referenceErreurLabel.setText(null);
+            }
+        }
+        // Creation d'une erreur si la durée de diffusion est égale à 0
+        if ((int) this.dureeDiffusionSpinner.getValue() == 0) {
+            erreurs.add(Erreur.ERREUR_DUREEDIFFUSION_VIDE);
+        } else {
+            this.dureeDiffusionErreurLabel.setText(null);
+        }
+        // Creation d'une erreur si la date de début de contrat est vide 
+        if (this.dateDebutContratDateChooser.getDate() == null) {
+            erreurs.add(Erreur.ERREUR_DATEDEBUTCONTRAT_VIDE);
+        } else {
+            Date now = new Date();
+            // Creation d'une erreur si la date de debut de oontrat est inférieure à celle de publication
+            if (this.dateDebutContratDateChooser.getDate().before(now)) {
+                erreurs.add(Erreur.ERREUR_DATEDEBUTCONTRAT_INVALIDE);
+            } else {
+                this.dateDebutContratErreurLabel.setText(null);
+            }
+        }
+        // Creation d'une erreur si le nombre de postes est égale à 0
+        if ((int) this.nbPosteSpinner.getValue() == 0) {
+            erreurs.add(Erreur.ERREUR_NBPOSTE_VIDE);
+        } else {
+            this.nbPosteErreurLabel.setText(null);
+        }
+        // Creation d'une erreur si la lattitude est vide 
+        if (this.lattitudeTextField.getText().equals("")) {
+            erreurs.add(Erreur.ERREUR_LATTITUDE_VIDE);
+        } else {
+            // Creation d'une erreur si la lattitude saisie est incorrect
+            Boolean verifLattitude = regexCoordonnees(this.lattitudeTextField.getText());
+            if (verifLattitude != true) {
+                erreurs.add(Erreur.ERREUR_LATTITUDE_INVALIDE);
+            } else {
+                this.lattitudeErreurLabel.setText(null);
+            }
+        }
+        // Creation d'une erreur si la longitude est vide 
+        if (this.longitudeTextField.getText().equals("")) {
+            erreurs.add(Erreur.ERREUR_LONGITUDE_VIDE);
+        } else {
+            // Creation d'une erreur si la longitude saisie est incorrect
+            Boolean verifLongitude = regexCoordonnees(this.longitudeTextField.getText());
+            if (verifLongitude != true) {
+                erreurs.add(Erreur.ERREUR_LONGITUDE_INVALIDE);
+            } else {
+                this.longitudeErreurLabel.setText(null);
+            }
+        }
+        // Creation d'une erreur si la description de poste est vide 
+        if (this.descriptionPosteTextArea.getText().equals("")) {
+            erreurs.add(Erreur.ERREUR_DESCRIPTIONPOSTE_VIDE);
+        } else {
+            this.descriptionPosteErreurLabel.setText(null);
+        }
+        // Creation d'une erreur si la description du profil est vide
+        if (this.descriptionProfilTextArea.getText().equals("")) {
+            erreurs.add(Erreur.ERREUR_DESCRIPTIONPROFIL_VIDE);
+        } else {
+            this.descriptionProfilErreurLabel.setText(null);
+        }
+        // Creation d'une erreur si le numéro de téléphone est vide
+        if (this.telephoneTextField.getText().equals("")) {
+            erreurs.add(Erreur.ERREUR_TELEPHONE_VIDE);
+        } else {
+            // Creation d'une erreur si le numéro de téléphone saisi est incorrect
+            Boolean verifTelephone = regexTelephone(this.telephoneTextField.getText());
+            if (verifTelephone != true) {
+                erreurs.add(Erreur.ERREUR_TELEPHONE_INVALIDE);
+            } else {
+                this.telephoneErreurLabel.setText(null);
+            }
+        }
+        // Creation d'une erreur si l'email est vide
+        if (this.emailTextField.getText().equals("")) {
+            erreurs.add(Erreur.ERREUR_EMAIL_VIDE);
+        } else {
+            // Creation d'une erreur si l'email saisie est incorrect 
+            Boolean verifEmail = regexEmail(this.emailTextField.getText());
+            if (verifEmail != true) {
+                erreurs.add(Erreur.ERREUR_EMAIL_INVALIDE);
+            } else {
+                this.emailErreurLabel.setText(null);
+            }
+        }
+        // Creation d'une erreur si aucun annonceur à été choisi
+        if (this.annonceurOffreComboBox.getSelectedItem() == null) {
+            erreurs.add(Erreur.ERREUR_IDANNONCEUR_VIDE);
+        } else {
+            this.annonceurErreurLabel.setText(null);
+        }
+        if ((this.domaineOffreComboBox.getSelectedItem() == null) & (this.metierOffreComboBox.getSelectedItem() == null)) {
+            erreurs.add(Erreur.ERREUR_DOMAINE_METIER_VIDE);
+        }
+        return erreurs;
+
+    }
+
+    private void affichageErreurs(ArrayList<Erreur> erreurs) {
+
+        for (Erreur erreur : erreurs) {
+            switch (erreur) {
+
+                case ERREUR_INTITULE_VIDE:
+                    this.intituleErreurLabel.setText("Veuillez saisir un intitulé !");
+                    break;
+                case ERREUR_REFERENCE_VIDE:
+                    this.referenceErreurLabel.setText("Veuillez saisir une référence !");
+                    break;
+                case ERREUR_REFERENCE_INVALIDE:
+                    this.referenceErreurLabel.setText("Veuillez saisir une référence correcte !");
+                    break;
+                case ERREUR_DUREEDIFFUSION_VIDE:
+                    this.dureeDiffusionErreurLabel.setText("Veuillez saisir une durée de diffusion supérieure à 0 !");
+                    break;
+                case ERREUR_DATEDEBUTCONTRAT_VIDE:
+                    this.dateDebutContratErreurLabel.setText("Veuillez saisir une date de début de contrat !");
+                    break;
+                case ERREUR_DATEDEBUTCONTRAT_INVALIDE:
+                    this.dateDebutContratErreurLabel.setText("La date saisie est inférieure à celle d\'aujourdh'hui !");
+                    break;
+                case ERREUR_NBPOSTE_VIDE:
+                    this.nbPosteErreurLabel.setText("Veuillez saisir le nombre de postes pour l'offre !");
+                    break;
+                case ERREUR_LATTITUDE_VIDE:
+                    this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude !");
+                    break;
+                case ERREUR_LATTITUDE_INVALIDE:
+                    this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude correcte : 00° 00' N !");
+                    break;
+                case ERREUR_LONGITUDE_VIDE:
+                    this.longitudeErreurLabel.setText("Veuillez saisir une longitude !");
+                    break;
+                case ERREUR_LONGITUDE_INVALIDE:
+                    this.longitudeErreurLabel.setText("Veuillez saisir une longitude correcte : 00° 00' N !");
+                    break;
+                case ERREUR_DESCRIPTIONPOSTE_VIDE:
+                    this.descriptionPosteErreurLabel.setText("Veuillez saisir une description de poste !");
+                    break;
+                case ERREUR_DESCRIPTIONPROFIL_VIDE:
+                    this.descriptionProfilErreurLabel.setText("Veuillez saisir une description de profil !");
+                    break;
+                case ERREUR_TELEPHONE_VIDE:
+                    this.telephoneErreurLabel.setText("Veuillez saisir un numéro de téléphone !");
+                    break;
+                case ERREUR_TELEPHONE_INVALIDE:
+                    this.telephoneErreurLabel.setText("Veuillez saisir une numéro de téléphone de 10 chiffres !");
+                    break;
+                case ERREUR_EMAIL_VIDE:
+                    this.emailErreurLabel.setText("Veuillez saisir un email !");
+                    break;
+                case ERREUR_EMAIL_INVALIDE:
+                    this.emailErreurLabel.setText("Veuillez saisir un email correct !");
+                    break;
+                case ERREUR_IDANNONCEUR_VIDE:
+                    this.annonceurErreurLabel.setText("Veuillez choisir un annonceur pour votre offre !");
+                    break;
+                case ERREUR_DOMAINE_METIER_VIDE:
+                    this.domaineMetierErreurLabel.setText("Veuillez choisir soit un domaine de métier ou un métier !");
+                    break;
+                default:
+                    break;
+
+            }
+
         }
     }
-    
+
     private Boolean regexCoordonnees(String coordonnée) {
         Pattern p = Pattern.compile("^[0-9]{2}° [0-9]{2}' [N-S-E-O]{1}$");
         Matcher m = p.matcher(coordonnée);
         Boolean b = m.matches();
-        
+
         return b;
     }
-    
+
     private Boolean regexReference(String reference) {
         Pattern p = Pattern.compile("^[a-zA-Z0-9_-]+$");
         Matcher m = p.matcher(reference);
         Boolean b = m.matches();
-        
+
         return b;
     }
-    
+
     private Boolean regexTelephone(String telephone) {
         Pattern p = Pattern.compile("^0[1-68]([.-]?[0-9]{2}){4}$");
         Matcher m = p.matcher(telephone);
@@ -1126,15 +1141,15 @@ public class OffreForm extends javax.swing.JPanel {
 
         return b;
     }
-    
+
     private Boolean regexEmail(String email) {
         Pattern p = Pattern.compile("^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$");
         Matcher m = p.matcher(email);
         Boolean b = m.matches();
-        
+
         return b;
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LongitudeLabel;
@@ -1157,6 +1172,7 @@ public class OffreForm extends javax.swing.JPanel {
     private javax.swing.JTextArea descriptionProfilTextArea;
     private javax.swing.JLabel domaineLabel;
     private javax.swing.JList domaineList;
+    private javax.swing.JLabel domaineMetierErreurLabel;
     private javax.swing.JComboBox domaineOffreComboBox;
     private javax.swing.JLabel domaineOffreLabel;
     private javax.swing.JLabel dureeDiffusionErreurLabel;

@@ -635,7 +635,7 @@ public class ParamsForm extends javax.swing.JPanel {
         // Si liste pas vide = reste des offres pour ce type de contrats
         else {
             // Affiche l'erreur
-            labelErrorSupprimerTypeContrat.setText("Suppression impossible, des offres correspondent au type de contrat");
+            mainJFrame.affichagePopUpInfo("Suppression impossible, des offres correspondent au type de contrat","Information");
         } 
     }//GEN-LAST:event_buttonSupprimerTypeContratActionPerformed
 
@@ -676,7 +676,7 @@ public class ParamsForm extends javax.swing.JPanel {
 
             if (exist) {
                 // Afficher erreur
-                labelErrorValiderTypeContrat.setText("Ce type de contrat existe déjà !");
+                mainJFrame.affichagePopUpInfo("Ce type de contrat existe déjà !","Information");
             }
             // Pas d'erreur -> ajout à la bdd
             else {
@@ -739,7 +739,7 @@ public class ParamsForm extends javax.swing.JPanel {
             }
             // Si il existe on affiche l'erreur
             else {
-                labelErrorValiderDomaine.setText("Ce domaine existe déjà !");
+                mainJFrame.affichagePopUpInfo("Ce domaine existe déjà !", "information");
             }
         }
         
@@ -859,7 +859,7 @@ public class ParamsForm extends javax.swing.JPanel {
         }
         // Offres associées au métier -> Erreur
         else {
-            labelErrorSupprimerMetier.setText("Suppression impossible, des offres correspondent au métier");
+            mainJFrame.affichagePopUpInfo("Suppression impossible, des offres correspondent au métier","Information");
         }  
     }//GEN-LAST:event_buttonSupprimerMetierActionPerformed
 
@@ -898,7 +898,7 @@ public class ParamsForm extends javax.swing.JPanel {
 
             // Métier existe déjà
             if (exist) {
-                labelErrorValiderMetier.setText("Ce métier existe déjà !");
+                mainJFrame.affichagePopUpInfo("Ce métier existe déjà !","Information");
             }
             // Existe pas -> on l'ajoute à la bdd
             else {

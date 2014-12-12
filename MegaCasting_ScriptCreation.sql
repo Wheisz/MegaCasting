@@ -127,7 +127,7 @@ CREATE TABLE Offre
 	Email NVARCHAR(50) NOT NULL,
 	IdDomaine BIGINT,
 	IdMetier BIGINT,
-	IdTypeContrat BIGINT,
+	IdTypeContrat BIGINT NOT NULL,
 	IdAnnonceur BIGINT NOT NULL,
 	CONSTRAINT PK_Offre PRIMARY KEY (Id),
 	CONSTRAINT FK_Offre_Domaine FOREIGN KEY (IdDomaine) REFERENCES Domaine (Id),

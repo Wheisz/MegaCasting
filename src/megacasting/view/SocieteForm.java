@@ -35,21 +35,22 @@ import megacasting.entite.Societe;
 public class SocieteForm extends javax.swing.JPanel {
 
     private MainJFrame mainJFrame;
+
     public enum Erreur {
+
         ERREUR_RAISONSOCIALE_VIDE, ERREUR_EMAIL_VIDE, ERREUR_EMAIL_INVALIDE,
         ERREUR_TELEPHONE_VIDE, ERREUR_TELEPHONE_INVALIDE, ERREUR_NUMERO_VIDE, ERREUR_NUMERO_INVALIDE,
         ERREUR_RUE_VIDE, ERREUR_RUE_INVALIDE, ERREUR_CODEPOSTAL_VIDE, ERREUR_CODEPOSTAL_INVALIDE,
         ERREUR_VILLE_VIDE, ERREUR_VILLE_INVALIDE, ERREUR_ANNONCEURDIFFUSEUR_VIDE;
     }
-    
 
     public SocieteForm(MainJFrame mainJFrame) {
         this.mainJFrame = mainJFrame;
         initComponents();
-        DefaultListModel<Societe>societeListModel = new DefaultListModel<>();
+        DefaultListModel<Societe> societeListModel = new DefaultListModel<>();
         societeList.setModel(societeListModel);
         refreshList();
-        
+
     }
 
     /**
@@ -383,41 +384,41 @@ public class SocieteForm extends javax.swing.JPanel {
     private void societeSupprimerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_societeSupprimerButtonActionPerformed
         // TODO add your handling code here:
 
-        int retour = mainJFrame.affichagePopUpValidation("La suppresion de la société entraîne la suppresion des offres rattachées", "Attention");
-        
-        if(retour == 0) {
-        Societe s = (Societe)societeList.getSelectedValue();
+        Societe s = (Societe) societeList.getSelectedValue();
 
-        Societe societe = SocieteDAO.trouver(mainJFrame.cnx,s.getId());
+        Societe societe = SocieteDAO.trouver(mainJFrame.cnx, s.getId());
 
         if (societe != null) {
             Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, societe.getId());
-            
-            if (a != null)
-            {
-                try {
-                    AnnonceurDAO.supprimer(mainJFrame.cnx, a);
-                    raz();
-                    mainJFrame.affichagePopUpInfo("Suppression de l'annonceur réussie","Information");
-                } catch (Exception e) {
-                    mainJFrame.affichagePopUpInfo( "Une erreur s'est produite lors de la suppression de l'annonceur","Information");
-                    e.printStackTrace();
+
+            if (a != null) {
+                int retour = mainJFrame.affichagePopUpValidation("La suppresion de la société entraîne la suppresion des offres rattachées", "Attention");
+
+                if (retour == 0) {
+                    try {
+                        AnnonceurDAO.supprimer(mainJFrame.cnx, a);
+                        raz();
+                        mainJFrame.affichagePopUpInfo("Suppression de l'annonceur réussie", "Information");
+                    } catch (Exception e) {
+                        mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la suppression de l'annonceur", "Information");
+                        e.printStackTrace();
+                    }
                 }
             } else {
                 Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, societe.getId());
                 try {
                     DiffuseurDAO.supprimer(mainJFrame.cnx, d);
                     raz();
-                    mainJFrame.affichagePopUpInfo("Suppression du diffuseur réussie","Information");
+                    mainJFrame.affichagePopUpInfo("Suppression du diffuseur réussie", "Information");
                 } catch (Exception e) {
-                    mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la suppression du diffuseur","Information");
+                    mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la suppression du diffuseur", "Information");
                     e.printStackTrace();
                 }
             }
 
         }
         refreshList();
-        }
+
     }//GEN-LAST:event_societeSupprimerButtonActionPerformed
 
     private void effacerSocieteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_effacerSocieteButtonActionPerformed
@@ -427,25 +428,23 @@ public class SocieteForm extends javax.swing.JPanel {
 
     private void validerSocieteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerSocieteButtonActionPerformed
         // TODO add your handling code here:
-        
+
         ArrayList<Erreur> erreurs = verifFormulaire();
         if (erreurs.isEmpty()) {
-        // Recuperation des données de la société
-        String raisonSociale = this.raisonSocialeTextField.getText();
-        String email = this.emailTextField.getText();
-        String telephone = this.telephoneTextField.getText();
+            // Recuperation des données de la société
+            String raisonSociale = this.raisonSocialeTextField.getText();
+            String email = this.emailTextField.getText();
+            String telephone = this.telephoneTextField.getText();
 
-        // Recuperation des données de l'adresse de la société
-        int numero = (int)this.numeroSpinner.getValue();
-        String rue = this.rueTextField.getText();
-        int codePostal = (int)this.codePostalSpinner.getValue();
-        String ville = this.villeTextField.getText();
-
+            // Recuperation des données de l'adresse de la société
+            int numero = (int) this.numeroSpinner.getValue();
+            String rue = this.rueTextField.getText();
+            int codePostal = (int) this.codePostalSpinner.getValue();
+            String ville = this.villeTextField.getText();
 
             if (this.annonceurValiderRadioButton.isSelected()) {
                 Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, raisonSociale);
-                if(d != null)
-                {
+                if (d != null) {
                     DiffuseurDAO.supprimer(mainJFrame.cnx, d);
                 }
                 Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, raisonSociale);
@@ -486,8 +485,7 @@ public class SocieteForm extends javax.swing.JPanel {
             } else {
                 if (this.diffuseurValiderRadioButton.isSelected()) {
                     Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, raisonSociale);
-                    if(a != null)
-                    {
+                    if (a != null) {
                         AnnonceurDAO.supprimer(mainJFrame.cnx, a);
                     }
                     Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, raisonSociale);
@@ -536,9 +534,8 @@ public class SocieteForm extends javax.swing.JPanel {
 
     private void selection(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selection
         // TODO add your handling code here:
-        Societe s = (Societe)societeList.getSelectedValue();
-        if(s != null)
-        {
+        Societe s = (Societe) societeList.getSelectedValue();
+        if (s != null) {
             this.raisonSocialeTextField.setText(s.getRaisonSociale());
             this.emailTextField.setText(s.getEmail());
             this.telephoneTextField.setText(s.getTelephone());
@@ -546,17 +543,16 @@ public class SocieteForm extends javax.swing.JPanel {
             this.rueTextField.setText(s.getAdresse().getRue());
             this.codePostalSpinner.setValue(s.getAdresse().getCodePostal());
             this.villeTextField.setText(s.getAdresse().getVille());
-            
+
             Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, s.getId());
-            if(a != null)
-            {
+            if (a != null) {
                 this.annonceurValiderRadioButton.setSelected(true);
             } else {
                 this.diffuseurValiderRadioButton.setSelected(true);
             }
         }
 
-        
+
     }//GEN-LAST:event_selection
 
     private void societeRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_societeRadioButtonActionPerformed
@@ -599,7 +595,7 @@ public class SocieteForm extends javax.swing.JPanel {
         this.villeTextField.setText(null);
         this.validationLabel.setText(null);
         this.supprimerLabel.setText(null);
-        
+
         this.raisonSocialeErreurLabel.setText(null);
         this.emailErreurLabel.setText(null);
         this.telephoneErreurLabel.setText(null);
@@ -608,14 +604,14 @@ public class SocieteForm extends javax.swing.JPanel {
         this.codePostalErreur.setText(null);
         this.villeErreurLabel.setText(null);
         this.annonceurDiffuseurErreurLabel.setText(null);
-        
+
         this.buttonGroup1.clearSelection();
     }
 
     private ArrayList verifFormulaire() {
 
-      ArrayList<Erreur> erreurs = new ArrayList();
-        
+        ArrayList<Erreur> erreurs = new ArrayList();
+
         if (this.raisonSocialeTextField.getText().equals("")) {
             erreurs.add(Erreur.ERREUR_RAISONSOCIALE_VIDE);
         } else {
@@ -643,14 +639,12 @@ public class SocieteForm extends javax.swing.JPanel {
         } else {
             erreurs.add(Erreur.ERREUR_TELEPHONE_VIDE);
         }
-        if ((int)this.numeroSpinner.getValue() != 0)
-        {
+        if ((int) this.numeroSpinner.getValue() != 0) {
             this.numeroErreurLabel.setText(null);
         } else {
             erreurs.add(Erreur.ERREUR_NUMERO_VIDE);
         }
-        if(!this.rueTextField.getText().equals(""))
-        {
+        if (!this.rueTextField.getText().equals("")) {
             String rue = this.rueTextField.getText();
             Boolean verifRue = regexRue(rue);
             if (verifRue) {
@@ -661,9 +655,8 @@ public class SocieteForm extends javax.swing.JPanel {
         } else {
             erreurs.add(Erreur.ERREUR_RUE_VIDE);
         }
-        if((int)this.codePostalSpinner.getValue() != 0 )
-        {
-            int codePostalTemp = (int)this.codePostalSpinner.getValue();
+        if ((int) this.codePostalSpinner.getValue() != 0) {
+            int codePostalTemp = (int) this.codePostalSpinner.getValue();
             String codePostal = Integer.toString(codePostalTemp);
             Boolean verifCodePostal = regexCodePostal(codePostal);
             if (verifCodePostal) {
@@ -674,8 +667,7 @@ public class SocieteForm extends javax.swing.JPanel {
         } else {
             erreurs.add(Erreur.ERREUR_CODEPOSTAL_VIDE);
         }
-        if(!this.villeTextField.getText().equals(""))
-        {
+        if (!this.villeTextField.getText().equals("")) {
 
             String ville = this.villeTextField.getText();
             Boolean verifVille = regexVille(ville);
@@ -688,8 +680,7 @@ public class SocieteForm extends javax.swing.JPanel {
             erreurs.add(Erreur.ERREUR_VILLE_VIDE);
         }
 
-        if((!this.annonceurValiderRadioButton.isSelected())&&(!this.diffuseurValiderRadioButton.isSelected()))
-        {
+        if ((!this.annonceurValiderRadioButton.isSelected()) && (!this.diffuseurValiderRadioButton.isSelected())) {
             erreurs.add(Erreur.ERREUR_ANNONCEURDIFFUSEUR_VIDE);
         } else {
             this.annonceurDiffuseurErreurLabel.setText(null);
@@ -706,70 +697,81 @@ public class SocieteForm extends javax.swing.JPanel {
 
         return b;
     }
-    
+
     private Boolean regexEmail(String email) {
         Pattern p = Pattern.compile("^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$");
         Matcher m = p.matcher(email);
         Boolean b = m.matches();
-        
+
         return b;
     }
-    
+
     private Boolean regexRue(String rue) {
         Pattern p = Pattern.compile("^[a-zA-Z ]+$");
         Matcher m = p.matcher(rue);
         Boolean b = m.matches();
-        
+
         return b;
     }
-    
+
     private Boolean regexCodePostal(String codePostal) {
         Pattern p = Pattern.compile("^[0-9]{5}$");
         Matcher m = p.matcher(codePostal);
         Boolean b = m.matches();
-        
+
         return b;
     }
-    
-    private Boolean regexVille(String ville){
+
+    private Boolean regexVille(String ville) {
         Pattern p = Pattern.compile("^[a-zA-Z- ]+$");
         Matcher m = p.matcher(ville);
         Boolean b = m.matches();
-        
+
         return b;
     }
 
     private void affichageErreurs(ArrayList<Erreur> erreurs) {
-        
-        for(Erreur erreur : erreurs)
-        {
-            switch(erreur)
-            {
-                case ERREUR_RAISONSOCIALE_VIDE :      this.raisonSocialeErreurLabel.setText("Veuillez saisir une raison sociale !");
-                                                      break;
-                case ERREUR_EMAIL_VIDE :              this.emailErreurLabel.setText("Veuillez saisir un email !");
-                                                      break;
-                case ERREUR_EMAIL_INVALIDE :          this.emailErreurLabel.setText("Veuillez saisir un email valide !");
-                                                      break;
-                case ERREUR_TELEPHONE_VIDE :          this.telephoneErreurLabel.setText("Veuillez saisir un numéro de téléphone !");
-                                                      break;
-                case ERREUR_TELEPHONE_INVALIDE :      this.telephoneErreurLabel.setText("Veuillez saisir un numéro de téléphone à 10 chiffres !");
-                                                      break;
-                case ERREUR_NUMERO_VIDE :             this.numeroErreurLabel.setText("Veuillez saisir un numéro supérieur à 0 !");
-                                                      break;
-                case ERREUR_RUE_VIDE :                this.rueErreurLabel.setText("Veuillez saisir un nom de rue !");
-                                                      break;
-                case ERREUR_RUE_INVALIDE :            this.rueErreurLabel.setText("Veuillez saisir un nom de rue valide !");
-                                                      break;
-                case ERREUR_CODEPOSTAL_VIDE :         this.codePostalErreur.setText("Veuillez saisir un code postal !");
-                                                      break;
-                case ERREUR_CODEPOSTAL_INVALIDE :     this.codePostalErreur.setText("Veuillez saisir un code postal à 5 chiffres !");
-                                                      break;
-                case ERREUR_VILLE_VIDE :              this.villeErreurLabel.setText("Veuillez saisir un nom de ville !");
-                                                      break;
-                case ERREUR_ANNONCEURDIFFUSEUR_VIDE : this.annonceurDiffuseurErreurLabel.setText("Veuillez choisir soit un annonceur ou un diffuseur !");
-                                                      break;
-                default : break;
+
+        for (Erreur erreur : erreurs) {
+            switch (erreur) {
+                case ERREUR_RAISONSOCIALE_VIDE:
+                    this.raisonSocialeErreurLabel.setText("Veuillez saisir une raison sociale !");
+                    break;
+                case ERREUR_EMAIL_VIDE:
+                    this.emailErreurLabel.setText("Veuillez saisir un email !");
+                    break;
+                case ERREUR_EMAIL_INVALIDE:
+                    this.emailErreurLabel.setText("Veuillez saisir un email valide !");
+                    break;
+                case ERREUR_TELEPHONE_VIDE:
+                    this.telephoneErreurLabel.setText("Veuillez saisir un numéro de téléphone !");
+                    break;
+                case ERREUR_TELEPHONE_INVALIDE:
+                    this.telephoneErreurLabel.setText("Veuillez saisir un numéro de téléphone à 10 chiffres !");
+                    break;
+                case ERREUR_NUMERO_VIDE:
+                    this.numeroErreurLabel.setText("Veuillez saisir un numéro supérieur à 0 !");
+                    break;
+                case ERREUR_RUE_VIDE:
+                    this.rueErreurLabel.setText("Veuillez saisir un nom de rue !");
+                    break;
+                case ERREUR_RUE_INVALIDE:
+                    this.rueErreurLabel.setText("Veuillez saisir un nom de rue valide !");
+                    break;
+                case ERREUR_CODEPOSTAL_VIDE:
+                    this.codePostalErreur.setText("Veuillez saisir un code postal !");
+                    break;
+                case ERREUR_CODEPOSTAL_INVALIDE:
+                    this.codePostalErreur.setText("Veuillez saisir un code postal à 5 chiffres !");
+                    break;
+                case ERREUR_VILLE_VIDE:
+                    this.villeErreurLabel.setText("Veuillez saisir un nom de ville !");
+                    break;
+                case ERREUR_ANNONCEURDIFFUSEUR_VIDE:
+                    this.annonceurDiffuseurErreurLabel.setText("Veuillez choisir soit un annonceur ou un diffuseur !");
+                    break;
+                default:
+                    break;
             }
         }
 
