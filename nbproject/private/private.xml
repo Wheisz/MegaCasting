@@ -4,12 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/MegaCasting/src/megacasting/view/MainJFrame.java</file>
-            <file>file:/C:/MegaCasting/src/megacasting/dao/OffreDAO.java</file>
+            <file>file:/C:/MegaCasting/src/megacasting/dao/SocieteDAO.java</file>
             <file>file:/C:/MegaCasting/src/megacasting/view/SocieteForm.java</file>
-            <file>file:/C:/MegaCasting/src/megacasting/entite/TypeContrat.java</file>
+            <file>file:/C:/MegaCasting/src/megacasting/entite/Annonceur.java</file>
             <file>file:/C:/MegaCasting/src/megacasting/dao/AnnonceurDAO.java</file>
-            <file>file:/C:/MegaCasting/src/megacasting/view/OffreForm.java</file>
+            <file>file:/C:/MegaCasting/src/megacasting/dao/DiffuseurDAO.java</file>
             <file>file:/C:/MegaCasting/src/megacasting/view/ParamsForm.java</file>
+            <file>file:/C:/MegaCasting/src/megacasting/view/AccueilForm.java</file>
         </group>
     </open-files>
 </project-private>

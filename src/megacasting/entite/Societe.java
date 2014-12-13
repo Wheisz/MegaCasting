@@ -14,6 +14,7 @@ import java.util.Objects;
 public class Societe {
     
     protected long id;
+    protected long numeroSiret;
     protected String raisonSociale;
     protected String email;
     protected String telephone;
@@ -27,6 +28,14 @@ public class Societe {
         this.id = id;
     }
 
+    public long getNumeroSiret() {
+        return numeroSiret;
+    }
+
+    public void setNumeroSiret(long numeroSiret) {
+        this.numeroSiret = numeroSiret;
+    }
+    
     public String getRaisonSociale() {
         return raisonSociale;
     }
@@ -66,7 +75,7 @@ public class Societe {
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 7;
         return hash;
     }
 
@@ -80,6 +89,9 @@ public class Societe {
         }
         final Societe other = (Societe) obj;
         if (this.id != other.id) {
+            return false;
+        }
+        if (this.numeroSiret != other.numeroSiret) {
             return false;
         }
         if (!Objects.equals(this.raisonSociale, other.raisonSociale)) {
@@ -96,18 +108,18 @@ public class Societe {
         }
         return true;
     }
-    
-    
 
-    public Societe(String raisonSociale, String email, String telephone, Adresse adresse) {
+    public Societe(long id, long numeroSiret, String raisonSociale, String email, String telephone, Adresse adresse) {
+        this.id = id;
+        this.numeroSiret = numeroSiret;
         this.raisonSociale = raisonSociale;
         this.email = email;
         this.telephone = telephone;
         this.adresse = adresse;
     }
 
-    public Societe(long id, String raisonSociale, String email, String telephone, Adresse adresse) {
-        this.id = id;
+    public Societe(long numeroSiret, String raisonSociale, String email, String telephone, Adresse adresse) {
+        this.numeroSiret = numeroSiret;
         this.raisonSociale = raisonSociale;
         this.email = email;
         this.telephone = telephone;

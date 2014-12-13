@@ -575,7 +575,7 @@ public class ParamsForm extends javax.swing.JPanel {
                 .addComponent(buttonRetour)
                 .addContainerGap(357, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING))
         );
     }// </editor-fold>//GEN-END:initComponents
 
