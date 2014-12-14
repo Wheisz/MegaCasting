@@ -36,6 +36,7 @@ public class SocieteForm extends javax.swing.JPanel {
 
     private MainJFrame mainJFrame;
 
+    // Creation d'une enumeration d'erreurs
     public enum Erreur {
 
         ERREUR_NUMEROSIRET_VIDE, ERREUR_NUMEROSIRET_INVALIDE, ERREUR_RAISONSOCIALE_VIDE,
@@ -386,83 +387,108 @@ public class SocieteForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    // Evenement lié à la selection du radio button annonceur
+    // Selection des annonceurs dans la liste de societes
     private void annonceurRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annonceurRadioButtonActionPerformed
         // TODO add your handling code here:
+        // On recupere le model de la liste de societes
         DefaultListModel model = (DefaultListModel) societeList.getModel();
         model.clear();
+        // Liste des societes
         ArrayList<Societe> societes = SocieteDAO.lister(mainJFrame.cnx);
+        // On parcours la liste de societes
         for (Societe s : societes) {
+            // On test si la societe est un annonceur
             Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, s.getId());
+            // Si oui
             if (a != null) {
+                // On ajoute la societe au model
                 model.addElement(s);
             }
         }
         societeList.setModel(model);
     }//GEN-LAST:event_annonceurRadioButtonActionPerformed
 
+    // Evenement lié à la selection du radio button diffuseur
+    // Selection des diffuseurs dans la liste de societes
     private void diffuseurRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diffuseurRadioButtonActionPerformed
         // TODO add your handling code here:
+        // On recupere le model de la liste de societe
         DefaultListModel model = (DefaultListModel) societeList.getModel();
         model.clear();
+        // Liste des societes
         ArrayList<Societe> societes = SocieteDAO.lister(mainJFrame.cnx);
+        // On parcours la liste de societes
         for (Societe s : societes) {
+            // On test si la societe est un diffuseur
             Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, s.getId());
+            // Si oui 
             if (d != null) {
+                // On ajoute la societe au model
                 model.addElement(s);
             }
         }
         societeList.setModel(model);
     }//GEN-LAST:event_diffuseurRadioButtonActionPerformed
 
+    // Suppression d'une societe
     private void societeSupprimerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_societeSupprimerButtonActionPerformed
         // TODO add your handling code here:
-
+        // On recupere la scoiete selectionnée
         Societe s = (Societe) societeList.getSelectedValue();
-
+        // On test si la societe selectionnée existe en base de données
         Societe societe = SocieteDAO.trouver(mainJFrame.cnx, s.getId());
-
+        // Si oui 
         if (societe != null) {
+            // On test si la societe est une annonceur
             Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, societe.getId());
-
+            // Si oui
             if (a != null) {
+                // Demande de validation de suppression
                 int retour = mainJFrame.affichagePopUpValidation("La suppresion de la société entraîne la suppresion des offres rattachées", "Attention");
-
+                // Si oui
                 if (retour == 0) {
                     try {
+                        // Suppression de l'annonceur en base de données
                         AnnonceurDAO.supprimer(mainJFrame.cnx, a);
-                        raz();
+                        // On affiche un message confirmant la suppression de l'annonceur
                         mainJFrame.affichagePopUpInfo("Suppression de l'annonceur réussie", "Information");
                     } catch (Exception e) {
-                        mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la suppression de l'annonceur", "Information");
-                        e.printStackTrace();
+                        // On affiche un message si une erreur s'est produite lors de la suppression de l'annonceur
+                        mainJFrame.affichagePopUpInfo(e.toString(), "Information");
                     }
                 }
+            // Si non alors c'est un diffuseur
             } else {
+                // On recupere le diffuseur
                 Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, societe.getId());
                 try {
+                    // On supprime le diffuseur en base de données
                     DiffuseurDAO.supprimer(mainJFrame.cnx, d);
-                    raz();
+                    // On affiche un message confirmant la suppression du diffuseur
                     mainJFrame.affichagePopUpInfo("Suppression du diffuseur réussie", "Information");
                 } catch (Exception e) {
-                    mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la suppression du diffuseur", "Information");
-                    e.printStackTrace();
+                    // On affiche un message si une erreur s'est produite lors de la suppression du diffuseur
+                    mainJFrame.affichagePopUpInfo(e.toString(),"Information");
                 }
             }
-
         }
+        raz();
         refreshList();
 
     }//GEN-LAST:event_societeSupprimerButtonActionPerformed
 
+    // On vide les TextFieds et les labels d'erreurs et on enleve le focus sur la derniere societe selectionnée
     private void effacerSocieteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_effacerSocieteButtonActionPerformed
         // TODO add your handling code here:
         raz();
         societeList.clearSelection();
     }//GEN-LAST:event_effacerSocieteButtonActionPerformed
 
+    // Boutton qui permet la validation du formulaire d'une societe
     private void validerSocieteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerSocieteButtonActionPerformed
         // TODO add your handling code here:
-
+        // Creation d'un ArrayList qui va contenir les erreurs potentiels lors de la validation du formulaire
         ArrayList<Erreur> erreurs = verifFormulaire();
         if (erreurs.isEmpty()) {
             // Recuperation des données de la société
@@ -588,6 +614,7 @@ public class SocieteForm extends javax.swing.JPanel {
 
     }//GEN-LAST:event_validerSocieteButtonActionPerformed
 
+    // Evenement lors de la selection d'une societe
     private void selection(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selection
         // TODO add your handling code here:
         Societe s = (Societe) societeList.getSelectedValue();
@@ -612,36 +639,46 @@ public class SocieteForm extends javax.swing.JPanel {
 
     }//GEN-LAST:event_selection
 
+    // Evenement lié à la selection du radio button societe
+    // Permet d'afficher l'ensemble des societes
     private void societeRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_societeRadioButtonActionPerformed
         // TODO add your handling code here:
+        // On recupere le model de la liste de societes
         DefaultListModel model = (DefaultListModel) societeList.getModel();
         model.clear();
+        // On recupere la liste de toutes les societes
         ArrayList<Societe> societes = SocieteDAO.lister(mainJFrame.cnx);
+        // On parcours la liste des societes
         for (Societe s : societes) {
+            // On ajoute la societe au model
             model.addElement(s);
         }
         societeList.setModel(model);
     }//GEN-LAST:event_societeRadioButtonActionPerformed
 
+    // Boutton qui permet de revenir à l'accueil
     private void buttonAccueilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccueilActionPerformed
         // TODO add your handling code here:
         CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
         cl.show(mainJFrame.mainPanel, "accueilCard");
     }//GEN-LAST:event_buttonAccueilActionPerformed
-
+    
+    // Permet de rafraichir la List de la page
     private void refreshList() {
         DefaultListModel<Societe> model = (DefaultListModel<Societe>) societeList.getModel();
         model.clear();
+        // Liste des societes
         ArrayList<Societe> societes = SocieteDAO.lister(mainJFrame.cnx);
-
+        // On parcours la liste des societes
         for (Societe s : societes) {
+            // On ajoute la societe au model
             model.addElement(s);
         }
-
         societeList.setModel(model);
 
     }
 
+    // Vide les TextFiels et les labels d'erreurs du formulaire d'une societe
     private void raz() {
         this.numeroSiretTextField.setText(null);
         this.raisonSocialeTextField.setText(null);
@@ -666,13 +703,16 @@ public class SocieteForm extends javax.swing.JPanel {
         this.buttonGroup1.clearSelection();
     }
 
+    // Verification du formulaire d'une societe et renvoie un ArrayList null si aucune erreur
     private ArrayList verifFormulaire() {
 
         ArrayList<Erreur> erreurs = new ArrayList();
 
+        // Creation d'une erreur si le numero de siret est vide
         if (this.numeroSiretTextField.getText().equals("")){
             erreurs.add(Erreur.ERREUR_NUMEROSIRET_VIDE);
         } else {
+            // Creation d'une erreur si le numero de siret saisi est incorrect
             String numeroSiret = this.numeroSiretTextField.getText();
             Boolean verifNumeroSiret = regexNumeroSiret(numeroSiret);
             if(verifNumeroSiret){
@@ -681,16 +721,17 @@ public class SocieteForm extends javax.swing.JPanel {
                 erreurs.add(Erreur.ERREUR_NUMEROSIRET_INVALIDE);
             }
         }
-        
+        // Creation d'une erreur si la raison sociale est vide
         if (this.raisonSocialeTextField.getText().equals("")) {
             erreurs.add(Erreur.ERREUR_RAISONSOCIALE_VIDE);
         } else {
             this.raisonSocialeErreurLabel.setText(null);
         }
-        
+        // Creation d'une erreur si l'email est vide
         if (this.emailTextField.getText().equals("")) {
             erreurs.add(Erreur.ERREUR_EMAIL_VIDE);
         } else {
+            // Creation d'une erreur si l'email saisi est incorrect
             String email = this.emailTextField.getText();
             Boolean verifEmail = regexEmail(email);
             if (verifEmail) {
@@ -699,10 +740,11 @@ public class SocieteForm extends javax.swing.JPanel {
                 erreurs.add(Erreur.ERREUR_EMAIL_INVALIDE);
             }
         }
-
+        // Creation d'une erreur si le numero de téléphone est vide
         if (this.telephoneTextField.getText().equals("")) {
             erreurs.add(Erreur.ERREUR_TELEPHONE_VIDE);
         } else {
+            // Creation d'une erreur si le numero de téléphone saisi est incorrect
             String telephone = this.telephoneTextField.getText();
             Boolean verifTelephone = regexTelephone(telephone);
             if (verifTelephone) {
@@ -711,16 +753,17 @@ public class SocieteForm extends javax.swing.JPanel {
                 erreurs.add(Erreur.ERREUR_TELEPHONE_INVALIDE);
             }
         }
-        
+        // Creation d'une erreur si le numéro de rue est égale à 0
         if ((int) this.numeroSpinner.getValue() == 0) {
             erreurs.add(Erreur.ERREUR_NUMERO_VIDE);
         } else {
             this.numeroErreurLabel.setText(null);
         }
-        
+        // Creation d'une erreur si le nom de rue est vide
         if (this.rueTextField.getText().equals("")) {
             erreurs.add(Erreur.ERREUR_RUE_VIDE);
         } else {
+            // Creation d'une erreur si le nom de rue est incorrect
             String rue = this.rueTextField.getText();
             Boolean verifRue = regexRue(rue);
             if (verifRue) {
@@ -729,10 +772,11 @@ public class SocieteForm extends javax.swing.JPanel {
                 erreurs.add(Erreur.ERREUR_RUE_INVALIDE);
             }
         }
-        
+        // Creation d'une erreur si le code postal est égale à 0
         if ((int) this.codePostalSpinner.getValue() == 0) {
             erreurs.add(Erreur.ERREUR_CODEPOSTAL_VIDE);
         } else {
+            // Creation d'une erreur si le code postal saisi est incorrect
             int codePostalTemp = (int) this.codePostalSpinner.getValue();
             String codePostal = Integer.toString(codePostalTemp);
             Boolean verifCodePostal = regexCodePostal(codePostal);
@@ -742,10 +786,11 @@ public class SocieteForm extends javax.swing.JPanel {
                 erreurs.add(Erreur.ERREUR_CODEPOSTAL_INVALIDE);
             }
         }
-        
+        // Creation d'une erreur si le nom de la ville est vide
         if (this.villeTextField.getText().equals("")) {
             erreurs.add(Erreur.ERREUR_VILLE_VIDE);
         } else {
+            // Creation d'une erreur si le nom de la ville est incorrect
             String ville = this.villeTextField.getText();
             Boolean verifVille = regexVille(ville);
             if (verifVille) {
@@ -754,7 +799,7 @@ public class SocieteForm extends javax.swing.JPanel {
                 erreurs.add(Erreur.ERREUR_VILLE_INVALIDE);
             }
         }
-
+        // Creation d'une erreur si la societe est ni annonceur et ni diffuseur
         if ((!this.annonceurValiderRadioButton.isSelected()) && (!this.diffuseurValiderRadioButton.isSelected())) {
             erreurs.add(Erreur.ERREUR_ANNONCEURDIFFUSEUR_VIDE);
         } else {
@@ -764,55 +809,8 @@ public class SocieteForm extends javax.swing.JPanel {
         return erreurs;
 
     }
-    
-    private Boolean regexNumeroSiret(String numeroSiret){
-        Pattern p = Pattern.compile("^[0-9]{14}$");
-        Matcher m = p.matcher(numeroSiret);
-        Boolean b = m.matches();
 
-        return b;  
-    }
-
-    private Boolean regexTelephone(String telephone) {
-        Pattern p = Pattern.compile("^0[1-68]([.-]?[0-9]{2}){4}$");
-        Matcher m = p.matcher(telephone);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
-    private Boolean regexEmail(String email) {
-        Pattern p = Pattern.compile("^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$");
-        Matcher m = p.matcher(email);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
-    private Boolean regexRue(String rue) {
-        Pattern p = Pattern.compile("^[a-zA-Z ]+$");
-        Matcher m = p.matcher(rue);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
-    private Boolean regexCodePostal(String codePostal) {
-        Pattern p = Pattern.compile("^[0-9]{5}$");
-        Matcher m = p.matcher(codePostal);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
-    private Boolean regexVille(String ville) {
-        Pattern p = Pattern.compile("^[a-zA-Z- ]+$");
-        Matcher m = p.matcher(ville);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
+    // Affiche dans les labels d'erreurs les erreurs rencontrés
     private void affichageErreurs(ArrayList<Erreur> erreurs) {
 
         for (Erreur erreur : erreurs) {
@@ -865,6 +863,56 @@ public class SocieteForm extends javax.swing.JPanel {
         }
 
     }
+    
+    private Boolean regexNumeroSiret(String numeroSiret){
+        Pattern p = Pattern.compile("^[0-9]{14}$");
+        Matcher m = p.matcher(numeroSiret);
+        Boolean b = m.matches();
+
+        return b;  
+    }
+
+    private Boolean regexTelephone(String telephone) {
+        Pattern p = Pattern.compile("^0[1-68]([.-]?[0-9]{2}){4}$");
+        Matcher m = p.matcher(telephone);
+        Boolean b = m.matches();
+
+        return b;
+    }
+
+    private Boolean regexEmail(String email) {
+        Pattern p = Pattern.compile("^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$");
+        Matcher m = p.matcher(email);
+        Boolean b = m.matches();
+
+        return b;
+    }
+
+    private Boolean regexRue(String rue) {
+        Pattern p = Pattern.compile("^[a-zA-Z ]+$");
+        Matcher m = p.matcher(rue);
+        Boolean b = m.matches();
+
+        return b;
+    }
+
+    private Boolean regexCodePostal(String codePostal) {
+        Pattern p = Pattern.compile("^[0-9]{5}$");
+        Matcher m = p.matcher(codePostal);
+        Boolean b = m.matches();
+
+        return b;
+    }
+
+    private Boolean regexVille(String ville) {
+        Pattern p = Pattern.compile("^[a-zA-Z- ]+$");
+        Matcher m = p.matcher(ville);
+        Boolean b = m.matches();
+
+        return b;
+    }
+
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -31,6 +31,7 @@ public class OffreForm extends javax.swing.JPanel {
 
     private MainJFrame mainJFrame;
 
+    // Creation d'une enumeration d'erreurs
     public enum Erreur {
 
         ERREUR_INTITULE_VIDE, ERREUR_REFERENCE_VIDE, ERREUR_REFERENCE_INVALIDE, ERREUR_DUREEDIFFUSION_VIDE,
@@ -596,33 +597,42 @@ public class OffreForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    // Boutton pour retourner au menu accueil
     private void accueilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accueilButtonActionPerformed
         // TODO add your handling code here:
         CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
         cl.show(mainJFrame.mainPanel, "accueilCard");
     }//GEN-LAST:event_accueilButtonActionPerformed
 
+    // Evenement lié à la selection d'un domaine dans la liste des domaines
     private void selectionDomaine(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionDomaine
         // TODO add your handling code here:
-
+        
+        // On recupere le domaine qu'on a selectionné
         Domaine d = (Domaine) domaineList.getSelectedValue();
-
+        // On recupere le model de la liste des metiers
         DefaultListModel model = (DefaultListModel) metierList.getModel();
         model.clear();
+        // Liste des metiers
         ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, d);
+        // Parcours la liste des metiers
         for (Metier m : metiers) {
+            // Ajout au model si le metier est different de null
             if (m != null) {
                 model.addElement(m);
             }
         }
-
         metierList.setModel(model);
 
     }//GEN-LAST:event_selectionDomaine
 
+    // Evenement lié à la selection d'une offre dans la liste des offres
     private void selectionOffre(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionOffre
         // TODO add your handling code here:
+        
+        // On recupere l'offre qu'on a selectionné 
         Offre o = (Offre) offreList.getSelectedValue();
+        // On rempli le formulaire avec les informations de l'offre selectionné, si elle est different de null
         if (o != null) {
             this.intituleTextField.setText(o.getIntitule());
             this.referenceTextField.setText(o.getReference());
@@ -648,12 +658,15 @@ public class OffreForm extends javax.swing.JPanel {
 
     }//GEN-LAST:event_selectionOffre
 
+    // Boutton de validation du formulaire d'une offre
     private void validerOffreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerOffreButtonActionPerformed
         // TODO add your handling code here:
+        
+        //Creation d'un ArrayList qui va contenir les erreurs potentiels lié au formulaire
         ArrayList<Erreur> erreurs = verifFormulaire();
-
+        // Si aucune erreur est trouvée
         if (erreurs.isEmpty()) {
-
+            // On stocke les differentes informations de l'offre
             String intitule = this.intituleTextField.getText();
             String reference = this.referenceTextField.getText();
             int dureeDiffusion = (int) this.dureeDiffusionSpinner.getValue();
@@ -669,23 +682,26 @@ public class OffreForm extends javax.swing.JPanel {
             Metier metier = (Metier) this.metierOffreComboBox.getSelectedItem();
             TypeContrat typeContrat = (TypeContrat) this.typeContratOffreComboBox.getSelectedItem();
             Annonceur annonceur = (Annonceur) this.annonceurOffreComboBox.getSelectedItem();
-
+            // On teste si l'offre est deja en base de données
             Offre o = OffreDAO.trouver(mainJFrame.cnx, reference);
+            // Si oui 
             if (o == null) {
                 try {
+                    // On instancie une nouvelle offre
                     o = new Offre(intitule, reference, dureeDiffusion,
                             dateDebutContrat, nbPoste, lattitude, longitude, descriptionPoste, descriptionProfil,
                             telephone, email, domaine, metier, typeContrat, annonceur);
-
+                    // On crée l'offre en base de données
                     OffreDAO.creer(mainJFrame.cnx, o);
-                    raz();
-                    refreshList();
+                    // On affiche un message confirmant la création de l'offre
                     mainJFrame.affichagePopUpInfo("Offre crée", "Information");
                 } catch (Exception e) {
-                    mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la création", "Information");
-                    e.printStackTrace();
+                    // On affiche un message si une erreur est intervenue lors de la creation de l'offre
+                    mainJFrame.affichagePopUpInfo(e.toString(), "Erreur");
                 }
+            // Si non    
             } else {
+                // On modfie les informations de l'offre
                 o.setIntitule(intitule);
                 o.setReference(reference);
                 o.setDureeDiffusion(dureeDiffusion);
@@ -702,89 +718,107 @@ public class OffreForm extends javax.swing.JPanel {
                 o.setTypeContrat(typeContrat);
                 o.setAnnonceur(annonceur);
                 try {
+                    // On enregistre les modifications de l'offre en base de données
                     OffreDAO.modifier(mainJFrame.cnx, o);
-                    raz();
-                    refreshList();
+                    // On affiche un message confirmant la modification de l'offre
                     mainJFrame.affichagePopUpInfo("Offre modifiée", "Information");
                 } catch (Exception ex) {
-                    mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la modification", "Information");
-                    ex.printStackTrace();
+                    // On affiche un message si une erreur est intervenue lors de la modification de l'offre
+                    mainJFrame.affichagePopUpInfo(ex.toString(),"Information");
                 }
             }
+            // On vide les TextField du formulaire de l'offre
+            raz();
+            // On rafraichie la liste des offres
+            refreshList();
         } else {
+            // On affiche les erreurs liés à la validation du formulaire
             affichageErreurs(erreurs);
         }
 
     }//GEN-LAST:event_validerOffreButtonActionPerformed
 
+    // Boutton pour effacer le formulaire et clear le focus de la liste d'offres
     private void effacerOffreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_effacerOffreButtonActionPerformed
         // TODO add your handling code here:
         raz();
+        // On eneleve le focus sur la dernière offre selectionnée
         offreList.clearSelection();
     }//GEN-LAST:event_effacerOffreButtonActionPerformed
 
+    // ComboBox de domaines de metiers qui influence la ComboBox de metiers
     private void domaineOffreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_domaineOffreComboBoxActionPerformed
         // TODO add your handling code here:
+        // On recupere le model de la ComboBox des domaines de metiers
         DefaultComboBoxModel model = (DefaultComboBoxModel) domaineOffreComboBox.getModel();
+        // Si un domaine a été choisi
         if ((Domaine) model.getSelectedItem() != null) {
+            // On stocke le domaine choisi
             Domaine d = (Domaine) model.getSelectedItem();
-
+            // Liste des metiers
             ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, d);
+            // On recupere le model de la ComboBox des metiers
             DefaultComboBoxModel modelMetier = (DefaultComboBoxModel) metierOffreComboBox.getModel();
-
             modelMetier.removeAllElements();
-
+            // On parcours la liste des metiers
             for (Metier m : metiers) {
+                // On ajoute le metier au model de la ComboBox des metiers
                 modelMetier.addElement(m);
             }
+            // On ajoute un élément null 
             modelMetier.addElement(null);
             metierOffreComboBox.setModel(modelMetier);
+        // Si le domaine est null
         } else {
+            // Liste des metiers
             ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
+            // On recupere le model de la ComboBox des metiers
             DefaultComboBoxModel modelMetier = (DefaultComboBoxModel) metierOffreComboBox.getModel();
-
             modelMetier.removeAllElements();
-
+            // On parcours la liste de metiers
             for (Metier m : metiers) {
+                // On ajoute le metier au model de la ComboBox des metiers
                 modelMetier.addElement(m);
             }
+            // On ajoute un element null
             modelMetier.addElement(null);
             metierOffreComboBox.setModel(modelMetier);
         }
-
-
-
     }//GEN-LAST:event_domaineOffreComboBoxActionPerformed
 
+    // Evenement lié à la selection d'un annonceur de la liste des annonceurs
     private void selectionAnnonceur(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionAnnonceur
         // TODO add your handling code here:
-
+        // On recupere l'annonceur selectionné
         Annonceur a = (Annonceur) annonceurList.getSelectedValue();
-
+        // On recupere le model de la liste des offres
         DefaultListModel modelOffre = (DefaultListModel) offreList.getModel();
         modelOffre.clear();
+        // Liste des offres en fonction de l'annonceur
         ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, a);
-
+        // On parcours la liste des offres
         for (Offre o : offres) {
+            // On ajoute l'offre au model
             modelOffre.addElement(o);
         }
-
         offreList.setModel(modelOffre);
     }//GEN-LAST:event_selectionAnnonceur
 
+    // Evenement lié à la selection d'un type de contrat de la liste des types de contrats
     private void selectionTypeContrat(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionTypeContrat
         // TODO add your handling code here:
-
+        // On recupere le type de contrat selctionné
         TypeContrat tc = (TypeContrat) typeContratList.getSelectedValue();
-
+        // On recupere le model de la liste des offres
         DefaultListModel modelOffre = (DefaultListModel) offreList.getModel();
         modelOffre.clear();
+        // Liste des offres en fonction du type de contrat
         ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, tc);
-
+        // On parcours la liste des offres
         for (Offre o : offres) {
+            // On ajoute l'offre au model
             modelOffre.addElement(o);
         }
-
         offreList.setModel(modelOffre);
     }//GEN-LAST:event_selectionTypeContrat
 
@@ -795,45 +829,50 @@ public class OffreForm extends javax.swing.JPanel {
 
     }//GEN-LAST:event_reinitialiserButtonActionPerformed
 
+    // Evenement lié à la selection d'un metier de la liste des metiers
     private void selectionMetier(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionMetier
         // TODO add your handling code here:
-
+        // On recupere le metier selectionné
         Metier m = (Metier) metierList.getSelectedValue();
-
+        // On recupere le model de la liste des offres
         DefaultListModel modelOffre = (DefaultListModel) offreList.getModel();
         modelOffre.clear();
+        // Liste des offres en fonction du metier
         ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, m);
-
+        // On parcours la listes des offres
         for (Offre o : offres) {
+            // Ajout de l'offre au model
             modelOffre.addElement(o);
         }
-
         offreList.setModel(modelOffre);
-
     }//GEN-LAST:event_selectionMetier
 
+    // Boutton qui permet la suppresion d'une offre dans la liste des offres
     private void supprimerOffreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerOffreButtonActionPerformed
         // TODO add your handling code here:
+        // On recupere l'offre selectionnée
         Offre o = (Offre) offreList.getSelectedValue();
-
+        // On test si l'offre existe en base de données
         Offre offre = OffreDAO.trouver(mainJFrame.cnx, o.getId());
-
+        // Si elle existe
         if (offre != null) {
-
             try {
+                // On supprime l'offre en base de données
                 OffreDAO.supprimer(mainJFrame.cnx, offre);
-                raz();
+                // On affiche un message confirmant la suppression de l'offre
                 mainJFrame.affichagePopUpInfo("Suppression de l'offre réussie", "Information");
             } catch (Exception e) {
-                mainJFrame.affichagePopUpInfo("Une erreur s'est produite lors de la suppression de l'offre", "Information");
-                e.printStackTrace();
+                // On affiche un message si une erreur s'est produite lors de la suppression de l'offre
+                mainJFrame.affichagePopUpInfo(e.toString(), "Information");
             }
+            raz();
             refreshList();
         }
 
 
     }//GEN-LAST:event_supprimerOffreButtonActionPerformed
 
+    // Vide les TextFiels et les labels d'erreurs du formulaire de l'offre
     private void raz() {
         this.intituleTextField.setText(null);
         this.referenceTextField.setText(null);
@@ -864,6 +903,7 @@ public class OffreForm extends javax.swing.JPanel {
 
     }
 
+    // Permet de rafraichir l'ensemble des List de la page
     private void refreshList() {
         refreshListAnnonceurs();
         refreshListDomaines();
@@ -872,98 +912,133 @@ public class OffreForm extends javax.swing.JPanel {
         refreshListOffres();
     }
 
+    // Liste des offres
     private void refreshListOffres() {
+        
         DefaultListModel model = (DefaultListModel) offreList.getModel();
         model.clear();
+        // Liste de toutes les offres
         ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx);
+        // On parcours la liste d'offres
         for (Offre o : offres) {
+            // On ajoute l'offre au model
             model.addElement(o);
         }
         offreList.setModel(model);
 
     }
 
+    // Liste des annonceurs
     private void refreshListAnnonceurs() {
         DefaultListModel model = (DefaultListModel) annonceurList.getModel();
         model.clear();
+        // Liste des annonceurs
         ArrayList<Annonceur> annonceurs = AnnonceurDAO.lister(mainJFrame.cnx);
+        // On parcours la liste des annonceurs
         for (Annonceur a : annonceurs) {
+            // On ajoute l'annonceur au model
             model.addElement(a);
         }
         annonceurList.setModel(model);
 
     }
 
+    // Liste des domaines de metiers
     private void refreshListDomaines() {
         DefaultListModel model = (DefaultListModel) domaineList.getModel();
         model.clear();
+        // Liste des domaines de metiers
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
-        for (Domaine d : domaines) {
+        // On parcours la liste des domaines
+        for (Domaine d : domaines){
+            // On ajoute le domaine au model
             model.addElement(d);
         }
         domaineList.setModel(model);
 
     }
 
+    // Liste des metiers
     private void refreshListMetiers() {
         DefaultListModel model = (DefaultListModel) metierList.getModel();
         model.clear();
+        // Liste des metiers
         ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
+        // On parcours la liste des metiers
         for (Metier m : metiers) {
+            // On ajoute le metier au model
             model.addElement(m);
         }
         metierList.setModel(model);
 
     }
 
+    // Liste des types de contrats
     private void refreshListTypeContrat() {
         DefaultListModel model = (DefaultListModel) typeContratList.getModel();
         model.clear();
+        // Liste des types de contrats
         ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
+        // On parcours la liste des types de contrats
         for (TypeContrat tc : typeContrats) {
+            // On ajoute le type de contrat au model
             model.addElement(tc);
         }
         typeContratList.setModel(model);
 
     }
 
+    // Permet de rafraichir l'ensemble des ComboBox de la page
     private void refreshComboBox() {
         refreshComboBoxAnnonceurs();
         refreshComboBoxDomaines();
         refreshComboBoxTypeContrats();
     }
 
+    // ComboBox des annonceurs
     private void refreshComboBoxAnnonceurs() {
         DefaultComboBoxModel<Annonceur> model = (DefaultComboBoxModel) annonceurOffreComboBox.getModel();
         model.removeAllElements();
+        // Liste des annonceurs
         ArrayList<Annonceur> annonceurs = AnnonceurDAO.lister(mainJFrame.cnx);
+        // On parcours la liste des annonceurs
         for (Annonceur a : annonceurs) {
+            // On ajoute l'annonceur au model
             model.addElement(a);
         }
         annonceurOffreComboBox.setModel(model);
     }
 
+    // ComboBox des domaines de metiers
     private void refreshComboBoxDomaines() {
         DefaultComboBoxModel<Domaine> model = (DefaultComboBoxModel) domaineOffreComboBox.getModel();
         model.removeAllElements();
+        // Liste des domaines de metiers
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
+        // On parcours la liste des domaines de metiers
         for (Domaine d : domaines) {
+            // On ajoute le domaine au model
             model.addElement(d);
         }
         model.addElement(null);
         domaineOffreComboBox.setModel(model);
     }
 
+    // ComboBox des types de contrats
     private void refreshComboBoxTypeContrats() {
         DefaultComboBoxModel<TypeContrat> model = (DefaultComboBoxModel) typeContratOffreComboBox.getModel();
         model.removeAllElements();
+        // Liste des types de contrats
         ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
+        // On parcours la liste des types de contrats
         for (TypeContrat tc : typeContrats) {
+            // On ajoute le type de contrat au model
             model.addElement(tc);
         }
         typeContratOffreComboBox.setModel(model);
     }
 
+    // Verification du formulaire d'une offre et renvoie un ArrayList null si aucune erreur
     private ArrayList verifFormulaire() {
 
         ArrayList<Erreur> erreurs = new ArrayList();
@@ -1083,6 +1158,7 @@ public class OffreForm extends javax.swing.JPanel {
 
     }
 
+    // Affiche dans les labels d'erreurs les erreurs rencontrés
     private void affichageErreurs(ArrayList<Erreur> erreurs) {
 
         for (Erreur erreur : erreurs) {
