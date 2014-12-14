@@ -107,6 +107,7 @@ public class MainJFrame extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -164,6 +165,7 @@ public class MainJFrame extends javax.swing.JFrame {
                      titre,
                      JOptionPane.INFORMATION_MESSAGE);
     }
+    
     /**
      * @param args the command line arguments
      */
