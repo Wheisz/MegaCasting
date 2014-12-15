@@ -22,10 +22,6 @@ public class SocieteDAO {
     
     public static void creer (Connection cnx, Societe s) throws Exception {
         
-        Societe sTemp = trouver(cnx, s.getRaisonSociale());
-        if (sTemp != null) {
-            throw new Exception("La societe " + s.getRaisonSociale() + " existe déjà !");
-        }
         
         AdresseDAO.creer(cnx, s.getAdresse());
         
@@ -43,7 +39,6 @@ public class SocieteDAO {
             
             if(rs.next()) {
                 s.setId(rs.getLong(1));
-                System.out.println("La société " + s.getRaisonSociale() + "(Id = " + s.getId() + ") a été ajoutée !");
             }    
             
         } catch (SQLException ex) {
@@ -61,10 +56,10 @@ public class SocieteDAO {
     
     public static void modifier (Connection cnx, Societe s) throws Exception {
         
-//        Societe sTemp = trouver(cnx, s.getRaisonSociale());
-//        if (sTemp != null && sTemp.getId() != s.getId()) {
-//            throw new Exception("La societe " + s.getRaisonSociale() + " existe déjà !");
-//        }
+        Societe sTemp = trouver(cnx, s.getRaisonSociale());
+        if (sTemp != null && sTemp.getId() != s.getId()) {
+            throw new Exception("La societe " + s.getRaisonSociale() + " existe déjà !");
+        }
 
         Statement stmt = null;
         try {
@@ -78,8 +73,6 @@ public class SocieteDAO {
                     + "', IdAdresse = " + s.getAdresse().getId()
                     + " WHERE Id = " + s.getId()
             );
-
-            System.out.println("La société " + s.getRaisonSociale() + " a été modifiée !");
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -105,8 +98,7 @@ public class SocieteDAO {
             );
             
             AdresseDAO.supprimer(cnx, s.getAdresse());
-            
-            System.out.println("La societe " + s.getRaisonSociale() + " a été supprimée !");            
+                       
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -215,6 +207,48 @@ public class SocieteDAO {
                 idAdresse = rs.getLong(6);                
                 Adresse a = AdresseDAO.trouver(cnx, idAdresse);
                 s = new Societe(id, numeroSiret, raisonSociale, email, telephone, a);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex){
+                    
+                }
+            }
+        }      
+        return s;
+    }
+    
+    public static Societe trouverByNumSiret (Connection cnx, String numeroSiret) {
+        Societe s = null;
+        
+        Statement stmt = null;
+        long id = 0;
+        long numSiret = 0;
+        String raisonSociale = null;
+        String email = null;
+        String telephone = null;
+        long idAdresse = 0;
+        
+        try {
+            stmt = cnx.createStatement();
+            
+            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, IdAdresse FROM Societe "
+                    + "WHERE NumeroSiret = '" + numeroSiret + "'");
+            
+            if(rs.next()) {
+                id = rs.getLong(1);
+                numSiret = Long.parseLong(numeroSiret);
+                raisonSociale = rs.getString(3);
+                email = rs.getString(4);
+                telephone = rs.getString(5);
+                idAdresse = rs.getLong(6);                
+                Adresse a = AdresseDAO.trouver(cnx, idAdresse);
+                s = new Societe(id, numSiret, raisonSociale, email, telephone, a);
             }
             
         } catch (SQLException ex) {

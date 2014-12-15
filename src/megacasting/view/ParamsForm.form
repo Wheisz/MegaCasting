@@ -6,6 +6,9 @@
       <Color blue="99" green="99" red="99" type="rgb"/>
     </Property>
   </Properties>
+  <Events>
+    <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentShown"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -24,8 +27,8 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="buttonRetour" min="-2" pref="89" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane4" min="-2" pref="546" max="-2" attributes="0"/>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <Component id="jScrollPane4" min="-2" pref="580" max="-2" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -56,202 +59,6 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="jPanel3">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="M&#xe9;tier">
-                    <Property name="tabTitle" type="java.lang.String" value="M&#xe9;tier"/>
-                  </JTabbedPaneConstraints>
-                </Constraint>
-              </Constraints>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jScrollPane3" pref="121" max="32767" attributes="0"/>
-                                          <Component id="comboBoxDomaine" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="checkBoxDomaine" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                                          <Component id="labelErrorValiderMetier" min="-2" pref="165" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="321" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="labelLibelleMetier" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="buttonEffacerMetier" min="-2" pref="105" max="-2" attributes="0"/>
-                                                      <Component id="buttonValiderMetier" min="-2" pref="106" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="textFieldLibelleMetier" min="-2" pref="106" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="labelErrorLibelleMetier" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="labelMetier" alignment="0" pref="121" max="32767" attributes="0"/>
-                                      <Component id="buttonSupprimerMetier" alignment="0" pref="121" max="32767" attributes="0"/>
-                                      <Component id="labelErrorSupprimerMetier" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                  <Component id="labelMetier" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="checkBoxDomaine" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="comboBoxDomaine" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                                  <Component id="labelErrorValiderMetier" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="labelErrorLibelleMetier" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="labelLibelleMetier" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="textFieldLibelleMetier" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="buttonValiderMetier" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="buttonEffacerMetier" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="buttonSupprimerMetier" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="labelErrorSupprimerMetier" min="-2" pref="20" max="-2" attributes="0"/>
-                          <EmptySpace pref="107" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JButton" name="buttonEffacerMetier">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Effacer"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEffacerMetierActionPerformed"/>
-                  </Events>
-                </Component>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane3">
-                  <AuxValues>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                  <SubComponents>
-                    <Component class="javax.swing.JList" name="listMetier">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                          <StringArray count="0"/>
-                        </Property>
-                        <Property name="selectionMode" type="int" value="0"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listMetierValueChanged"/>
-                      </Events>
-                    </Component>
-                  </SubComponents>
-                </Container>
-                <Component class="javax.swing.JLabel" name="labelMetier">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="M&#xe9;tier"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="checkBoxDomaine">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Domaine :"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="checkBoxDomaineStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="buttonSupprimerMetier">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Supprimer"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSupprimerMetierActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="labelLibelleMetier">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Libelle : "/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="textFieldLibelleMetier">
-                </Component>
-                <Component class="javax.swing.JButton" name="buttonValiderMetier">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Valider"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonValiderMetierActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JComboBox" name="comboBoxDomaine">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="0"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboBoxDomaineItemStateChanged"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="labelErrorValiderMetier">
-                  <Properties>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="ff" type="rgb"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="labelErrorLibelleMetier">
-                  <Properties>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="ff" type="rgb"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="labelErrorSupprimerMetier">
-                </Component>
-              </SubComponents>
-            </Container>
             <Container class="javax.swing.JPanel" name="jPanel1">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
@@ -265,28 +72,15 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="378" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="labelErrorValiderTypeContrat" min="-2" pref="205" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="labelErrorLibelleTypeContrat" min="-2" pref="177" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                          <Component id="labelErrorSupprimerTypeContrat" min="-2" pref="120" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace pref="357" max="32767" attributes="0"/>
+                          <Component id="libelleTypeContratErreurLabel" min="-2" pref="182" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="300" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="buttonSupprimerTypeContrat" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
+                                  <Component id="supprimerTypeContratButton" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                                   <Component id="typeContratLabel" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jScrollPane1" min="-2" pref="121" max="-2" attributes="0"/>
@@ -294,15 +88,15 @@
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="buttonValiderTypeContrat" alignment="0" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="labelLibelleTypeContrat" min="-2" max="-2" attributes="0"/>
+                                              <Component id="libelleTypeContratLabel" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="textFieldLibelleTypeContrat" min="-2" pref="110" max="-2" attributes="0"/>
+                                              <Component id="libelleTypeContratTextField" min="-2" pref="110" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="buttonEffacerTypeContrat" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="377" max="32767" attributes="0"/>
+                              <EmptySpace pref="488" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -310,13 +104,9 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                          <Component id="labelErrorValiderTypeContrat" min="-2" pref="18" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="labelErrorLibelleTypeContrat" min="-2" pref="18" max="-2" attributes="0"/>
-                          <EmptySpace pref="178" max="32767" attributes="0"/>
-                          <Component id="labelErrorSupprimerTypeContrat" min="-2" pref="17" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                          <Component id="libelleTypeContratErreurLabel" min="-2" pref="18" max="-2" attributes="0"/>
+                          <EmptySpace pref="282" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -325,8 +115,8 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="labelLibelleTypeContrat" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="textFieldLibelleTypeContrat" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="libelleTypeContratLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="libelleTypeContratTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="buttonValiderTypeContrat" min="-2" max="-2" attributes="0"/>
@@ -340,7 +130,7 @@
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="buttonSupprimerTypeContrat" min="-2" max="-2" attributes="0"/>
+                              <Component id="supprimerTypeContratButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="185" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -360,7 +150,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JList" name="listTypeContrat">
+                    <Component class="javax.swing.JList" name="typeContratList">
                       <Properties>
                         <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                           <StringArray count="0"/>
@@ -368,18 +158,18 @@
                         <Property name="selectionMode" type="int" value="0"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="listTypeContratFocusGained"/>
-                        <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listTypeContratValueChanged"/>
+                        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="typeContratListFocusGained"/>
+                        <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="typeContratListValueChanged"/>
                       </Events>
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="buttonSupprimerTypeContrat">
+                <Component class="javax.swing.JButton" name="supprimerTypeContratButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Supprimer"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSupprimerTypeContratActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="supprimerTypeContratButtonActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="buttonEffacerTypeContrat">
@@ -398,28 +188,19 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonValiderTypeContratActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="labelLibelleTypeContrat">
+                <Component class="javax.swing.JLabel" name="libelleTypeContratLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Libelle :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="textFieldLibelleTypeContrat">
+                <Component class="javax.swing.JTextField" name="libelleTypeContratTextField">
                 </Component>
-                <Component class="javax.swing.JLabel" name="labelErrorLibelleTypeContrat">
+                <Component class="javax.swing.JLabel" name="libelleTypeContratErreurLabel">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="ff" type="rgb"/>
                     </Property>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="labelErrorValiderTypeContrat">
-                  <Properties>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="ff" type="rgb"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="labelErrorSupprimerTypeContrat">
                 </Component>
               </SubComponents>
             </Container>
@@ -435,44 +216,30 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="340" max="-2" attributes="0"/>
-                                  <Component id="labelErrorLibelleDomaine" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
-                                  <Component id="labelErrorValiderDomaine" min="-2" pref="209" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="318" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                          <Component id="labelErrorSupprimerDomaine" min="-2" pref="124" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="345" max="32767" attributes="0"/>
+                          <Component id="libelleDomaineErreurLabel" min="-2" pref="191" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="303" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="buttonSupprimerDomaine" alignment="0" pref="121" max="32767" attributes="0"/>
-                                  <Component id="labelDomaine" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="supprimerDomaineButton" alignment="0" pref="121" max="32767" attributes="0"/>
+                                  <Component id="domaineLabel" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="labelLibelleDomaine" min="-2" max="-2" attributes="0"/>
+                                      <Component id="libelleDomaineLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="textFieldLibelleDomaine" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="libelleDomaineTextField" min="-2" pref="95" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="buttonEffacerDomaine" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="buttonValiderDomaine" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="effacerDomaineButton" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="validerDomaineButton" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="393" max="32767" attributes="0"/>
+                              <EmptySpace pref="504" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -480,35 +247,31 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                          <Component id="labelErrorValiderDomaine" min="-2" pref="21" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="labelErrorLibelleDomaine" min="-2" pref="23" max="-2" attributes="0"/>
-                          <EmptySpace pref="206" max="32767" attributes="0"/>
-                          <Component id="labelErrorSupprimerDomaine" min="-2" pref="17" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                          <Component id="libelleDomaineErreurLabel" min="-2" pref="19" max="-2" attributes="0"/>
+                          <EmptySpace pref="284" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="labelDomaine" min="-2" max="-2" attributes="0"/>
+                              <Component id="domaineLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jScrollPane2" alignment="0" pref="153" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="labelLibelleDomaine" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="textFieldLibelleDomaine" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="libelleDomaineLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="libelleDomaineTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="buttonValiderDomaine" min="-2" max="-2" attributes="0"/>
+                                      <Component id="validerDomaineButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="buttonEffacerDomaine" min="-2" max="-2" attributes="0"/>
+                                      <Component id="effacerDomaineButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="buttonSupprimerDomaine" min="-2" max="-2" attributes="0"/>
+                              <Component id="supprimerDomaineButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="164" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -516,40 +279,40 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="labelLibelleDomaine">
+                <Component class="javax.swing.JLabel" name="libelleDomaineLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Libelle :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="textFieldLibelleDomaine">
+                <Component class="javax.swing.JTextField" name="libelleDomaineTextField">
                 </Component>
-                <Component class="javax.swing.JLabel" name="labelDomaine">
+                <Component class="javax.swing.JLabel" name="domaineLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Domaine"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="buttonValiderDomaine">
+                <Component class="javax.swing.JButton" name="validerDomaineButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Valider"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonValiderDomaineActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="validerDomaineButtonActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="buttonSupprimerDomaine">
+                <Component class="javax.swing.JButton" name="supprimerDomaineButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Supprimer"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSupprimerDomaineActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="supprimerDomaineButtonActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="buttonEffacerDomaine">
+                <Component class="javax.swing.JButton" name="effacerDomaineButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Effacer"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEffacerDomaineActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="effacerDomaineButtonActionPerformed"/>
                   </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -559,7 +322,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JList" name="listDomaine">
+                    <Component class="javax.swing.JList" name="domaineList">
                       <Properties>
                         <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                           <StringArray count="0"/>
@@ -567,26 +330,182 @@
                         <Property name="selectionMode" type="int" value="0"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listDomaineValueChanged"/>
+                        <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="domaineListValueChanged"/>
                       </Events>
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JLabel" name="labelErrorValiderDomaine">
+                <Component class="javax.swing.JLabel" name="libelleDomaineErreurLabel">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="ff" type="rgb"/>
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="labelErrorLibelleDomaine">
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel3">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                  <JTabbedPaneConstraints tabName="M&#xe9;tier">
+                    <Property name="tabTitle" type="java.lang.String" value="M&#xe9;tier"/>
+                  </JTabbedPaneConstraints>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jScrollPane3" pref="121" max="32767" attributes="0"/>
+                                          <Component id="domaineCombobox" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="domaineCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="effacerMetierButton" max="32767" attributes="0"/>
+                                      <Component id="validerMetierButton" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="libelleMetierLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="libelleMetierTextField" min="-2" pref="106" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="libelleMetierErreurLabel" min="-2" pref="166" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="labelMetier" alignment="0" pref="121" max="32767" attributes="0"/>
+                                  <Component id="supprimerMetierButton" alignment="0" pref="121" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="299" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Component id="labelMetier" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="domaineCheckBox" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="domaineCombobox" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="libelleMetierLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="libelleMetierTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="libelleMetierErreurLabel" min="-2" pref="19" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="validerMetierButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="effacerMetierButton" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="supprimerMetierButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="133" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JButton" name="effacerMetierButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Effacer"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="effacerMetierButtonActionPerformed"/>
+                  </Events>
+                </Component>
+                <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JList" name="metierList">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+                          <StringArray count="0"/>
+                        </Property>
+                        <Property name="selectionMode" type="int" value="0"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="metierListValueChanged"/>
+                      </Events>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Component class="javax.swing.JLabel" name="labelMetier">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="M&#xe9;tier"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="domaineCheckBox">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Domaine :"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="domaineCheckBoxStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="supprimerMetierButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Supprimer"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="supprimerMetierButtonActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="libelleMetierLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Libelle : "/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="libelleMetierTextField">
+                </Component>
+                <Component class="javax.swing.JButton" name="validerMetierButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Valider"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="validerMetierButtonActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="domaineCombobox">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="domaineComboboxItemStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="libelleMetierErreurLabel">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="ff" type="rgb"/>
                     </Property>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="labelErrorSupprimerDomaine">
                 </Component>
               </SubComponents>
             </Container>

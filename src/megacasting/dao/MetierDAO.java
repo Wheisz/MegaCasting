@@ -42,7 +42,6 @@ public class MetierDAO {
             
             if(rs.next()) {
                 m.setId(rs.getLong(1));
-                System.out.println("Le métier " + m.getLibelle() + "(Id = " + m.getId() + ") a été ajouté !");
             }    
             
         } catch (SQLException ex) {
@@ -76,8 +75,6 @@ public class MetierDAO {
                     + "', IdDomaine = " + m.getDomaine().getId()
                     + " WHERE Id = " + m.getId()
             );
-
-            System.out.println("La métier " + m.getLibelle()+ " a été modifié !");
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -100,9 +97,7 @@ public class MetierDAO {
             
             stmt.executeUpdate("DELETE FROM Metier "
                     + "WHERE Id = " + m.getId()
-            );
-
-            System.out.println("Le métier " + m.getLibelle()+ " a été supprimé !");            
+            );         
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -147,7 +142,7 @@ public class MetierDAO {
         return metiers;
     }
      
-    public static ArrayList<Metier> lister (Connection cnx, Domaine domaine) {
+     public static ArrayList<Metier> lister (Connection cnx, Domaine domaine) {
         
         ArrayList<Metier> metiers = new ArrayList();
         Statement stmt = null;

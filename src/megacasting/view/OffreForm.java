@@ -34,11 +34,12 @@ public class OffreForm extends javax.swing.JPanel {
     // Creation d'une enumeration d'erreurs
     public enum Erreur {
 
-        ERREUR_INTITULE_VIDE, ERREUR_REFERENCE_VIDE, ERREUR_REFERENCE_INVALIDE, ERREUR_DUREEDIFFUSION_VIDE,
-        ERREUR_DATEDEBUTCONTRAT_VIDE, ERREUR_DATEDEBUTCONTRAT_INVALIDE, ERREUR_NBPOSTE_VIDE, ERREUR_LATTITUDE_VIDE,
-        ERREUR_LATTITUDE_INVALIDE, ERREUR_LONGITUDE_VIDE, ERREUR_LONGITUDE_INVALIDE, ERREUR_DESCRIPTIONPOSTE_VIDE,
-        ERREUR_DESCRIPTIONPROFIL_VIDE, ERREUR_TELEPHONE_VIDE, ERREUR_TELEPHONE_INVALIDE, ERREUR_EMAIL_VIDE,
-        ERREUR_EMAIL_INVALIDE, ERREUR_IDANNONCEUR_VIDE, ERREUR_DOMAINE_METIER_VIDE;
+        ERREUR_INTITULE_VIDE, ERREUR_REFERENCE_VIDE, ERREUR_REFERENCE_INVALIDE, ERREUR_REFERENCE_EXISTANT,
+        ERREUR_DUREEDIFFUSION_VIDE, ERREUR_DATEDEBUTCONTRAT_VIDE, ERREUR_DATEDEBUTCONTRAT_INVALIDE,
+        ERREUR_NBPOSTE_VIDE, ERREUR_LATTITUDE_VIDE, ERREUR_LATTITUDE_INVALIDE, ERREUR_LONGITUDE_VIDE,
+        ERREUR_LONGITUDE_INVALIDE, ERREUR_DESCRIPTIONPOSTE_VIDE, ERREUR_DESCRIPTIONPROFIL_VIDE,
+        ERREUR_TELEPHONE_VIDE, ERREUR_TELEPHONE_INVALIDE, ERREUR_EMAIL_VIDE, ERREUR_EMAIL_INVALIDE,
+        ERREUR_IDANNONCEUR_VIDE, ERREUR_DOMAINE_METIER_VIDE;
     }
 
     public OffreForm(MainJFrame mainJFrame) {
@@ -114,7 +115,7 @@ public class OffreForm extends javax.swing.JPanel {
         dateDebutContratLabel = new javax.swing.JLabel();
         nbPosteLabel = new javax.swing.JLabel();
         nbPosteSpinner = new javax.swing.JSpinner();
-        lattitudeLabel = new javax.swing.JLabel();
+        latitudeLabel = new javax.swing.JLabel();
         lattitudeTextField = new javax.swing.JTextField();
         LongitudeLabel = new javax.swing.JLabel();
         longitudeTextField = new javax.swing.JTextField();
@@ -158,7 +159,13 @@ public class OffreForm extends javax.swing.JPanel {
         datePublicationTextField = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Offre");
 
         accueilButton.setText("Accueil");
@@ -171,6 +178,7 @@ public class OffreForm extends javax.swing.JPanel {
         domaineLabel.setForeground(new java.awt.Color(255, 255, 255));
         domaineLabel.setText("Domaine");
 
+        domaineList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         domaineList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 selectionDomaine(evt);
@@ -181,6 +189,7 @@ public class OffreForm extends javax.swing.JPanel {
         metierLabel.setForeground(new java.awt.Color(255, 255, 255));
         metierLabel.setText("Métier");
 
+        metierList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         metierList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 selectionMetier(evt);
@@ -191,6 +200,7 @@ public class OffreForm extends javax.swing.JPanel {
         annonceurLabel.setForeground(new java.awt.Color(255, 255, 255));
         annonceurLabel.setText("Annonceurs");
 
+        annonceurList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         annonceurList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 selectionAnnonceur(evt);
@@ -201,6 +211,7 @@ public class OffreForm extends javax.swing.JPanel {
         typeContratLabel.setForeground(new java.awt.Color(255, 255, 255));
         typeContratLabel.setText("Type de Contrat");
 
+        typeContratList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         typeContratList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 selectionTypeContrat(evt);
@@ -233,8 +244,8 @@ public class OffreForm extends javax.swing.JPanel {
         nbPosteLabel.setForeground(new java.awt.Color(255, 255, 255));
         nbPosteLabel.setText("Nombre de poste(s)");
 
-        lattitudeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        lattitudeLabel.setText("Lattitude");
+        latitudeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        latitudeLabel.setText("Latitude");
 
         LongitudeLabel.setForeground(new java.awt.Color(255, 255, 255));
         LongitudeLabel.setText("Longitude");
@@ -340,6 +351,9 @@ public class OffreForm extends javax.swing.JPanel {
             }
         });
 
+        domaineMetierErreurLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        domaineMetierErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
         datePublicationTextField.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -353,9 +367,7 @@ public class OffreForm extends javax.swing.JPanel {
                         .addComponent(domaineLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(70, 70, 70)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(accueilButton)
-                        .addGap(430, 430, 430))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -377,7 +389,9 @@ public class OffreForm extends javax.swing.JPanel {
                                 .addComponent(effacerOffreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(validerOffreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(accueilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(42, 42, 42)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -385,7 +399,7 @@ public class OffreForm extends javax.swing.JPanel {
                                     .addComponent(domaineOffreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(nbPosteLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                                     .addComponent(LongitudeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lattitudeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(latitudeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(intituleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(referenceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(datePublicationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -404,26 +418,25 @@ public class OffreForm extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(dateDebutContratErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(domaineMetierErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGap(52, 52, 52))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(domaineOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(dureeDiffusionErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(referenceTextField)
-                                                    .addComponent(intituleTextField)
-                                                    .addComponent(intituleErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(referenceErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(datePublicationTextField)
-                                                    .addComponent(dureeDiffusionSpinner)
-                                                    .addComponent(dateDebutContratDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                                                    .addComponent(lattitudeErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(longitudeTextField))
-                                                .addGap(0, 0, Short.MAX_VALUE))
                                             .addComponent(nbPosteSpinner)
                                             .addComponent(nbPosteErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lattitudeTextField))
+                                            .addComponent(lattitudeTextField)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(domaineOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(dureeDiffusionErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(referenceTextField)
+                                                        .addComponent(intituleTextField)
+                                                        .addComponent(intituleErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(referenceErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(datePublicationTextField)
+                                                        .addComponent(dureeDiffusionSpinner)
+                                                        .addComponent(dateDebutContratDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                                                        .addComponent(lattitudeErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(longitudeTextField))
+                                                    .addComponent(domaineMetierErreurLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(0, 0, Short.MAX_VALUE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,8 +479,7 @@ public class OffreForm extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(domaineLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(accueilButton))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -533,7 +545,7 @@ public class OffreForm extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lattitudeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lattitudeLabel))
+                                .addComponent(latitudeLabel))
                             .addComponent(telephoneErreurLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -571,8 +583,9 @@ public class OffreForm extends javax.swing.JPanel {
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(effacerOffreButton)
-                            .addComponent(validerOffreButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(validerOffreButton)
+                            .addComponent(accueilButton))
+                        .addGap(12, 12, 12)
                         .addComponent(validationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -607,29 +620,49 @@ public class OffreForm extends javax.swing.JPanel {
     // Evenement lié à la selection d'un domaine dans la liste des domaines
     private void selectionDomaine(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionDomaine
         // TODO add your handling code here:
-        
+
+        metierList.clearSelection();
+        typeContratList.clearSelection();
+        annonceurList.clearSelection();
+
         // On recupere le domaine qu'on a selectionné
         Domaine d = (Domaine) domaineList.getSelectedValue();
         // On recupere le model de la liste des metiers
         DefaultListModel model = (DefaultListModel) metierList.getModel();
         model.clear();
-        // Liste des metiers
-        ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, d);
-        // Parcours la liste des metiers
-        for (Metier m : metiers) {
-            // Ajout au model si le metier est different de null
-            if (m != null) {
-                model.addElement(m);
-            }
-        }
-        metierList.setModel(model);
+        // On recupere le model de la liste des offres
+        DefaultListModel modelOffre = (DefaultListModel) offreList.getModel();
+        modelOffre.clear();
 
+        if (d != null) {
+            // Liste des metiers
+            ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, d);
+            // Parcours la liste des metiers
+            for (Metier m : metiers) {
+                // Ajout au model si le metier est different de null
+                if (m != null) {
+                    model.addElement(m);
+                }
+            }
+            metierList.setModel(model);
+
+            // Liste des offres en fonction de l'annonceur
+            ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, d, null);
+            // On parcours la liste des offres
+            for (Offre o : offres) {
+                // On ajoute l'offre au model
+                modelOffre.addElement(o);
+            }
+            offreList.setModel(modelOffre);
+        } else {
+            refreshListMetiers();
+        }
     }//GEN-LAST:event_selectionDomaine
 
     // Evenement lié à la selection d'une offre dans la liste des offres
     private void selectionOffre(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionOffre
         // TODO add your handling code here:
-        
+
         // On recupere l'offre qu'on a selectionné 
         Offre o = (Offre) offreList.getSelectedValue();
         // On rempli le formulaire avec les informations de l'offre selectionné, si elle est different de null
@@ -661,7 +694,7 @@ public class OffreForm extends javax.swing.JPanel {
     // Boutton de validation du formulaire d'une offre
     private void validerOffreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerOffreButtonActionPerformed
         // TODO add your handling code here:
-        
+
         //Creation d'un ArrayList qui va contenir les erreurs potentiels lié au formulaire
         ArrayList<Erreur> erreurs = verifFormulaire();
         // Si aucune erreur est trouvée
@@ -699,7 +732,7 @@ public class OffreForm extends javax.swing.JPanel {
                     // On affiche un message si une erreur est intervenue lors de la creation de l'offre
                     mainJFrame.affichagePopUpInfo(e.toString(), "Erreur");
                 }
-            // Si non    
+                // Si non    
             } else {
                 // On modfie les informations de l'offre
                 o.setIntitule(intitule);
@@ -724,7 +757,7 @@ public class OffreForm extends javax.swing.JPanel {
                     mainJFrame.affichagePopUpInfo("Offre modifiée", "Information");
                 } catch (Exception ex) {
                     // On affiche un message si une erreur est intervenue lors de la modification de l'offre
-                    mainJFrame.affichagePopUpInfo(ex.toString(),"Information");
+                    mainJFrame.affichagePopUpInfo(ex.toString(), "Information");
                 }
             }
             // On vide les TextField du formulaire de l'offre
@@ -768,10 +801,10 @@ public class OffreForm extends javax.swing.JPanel {
             // On ajoute un élément null 
             modelMetier.addElement(null);
             metierOffreComboBox.setModel(modelMetier);
-        // Si le domaine est null
+            // Si le domaine est null
         } else {
             // Liste des metiers
-            ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
+            ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, null);
             // On recupere le model de la ComboBox des metiers
             DefaultComboBoxModel modelMetier = (DefaultComboBoxModel) metierOffreComboBox.getModel();
             modelMetier.removeAllElements();
@@ -789,49 +822,76 @@ public class OffreForm extends javax.swing.JPanel {
     // Evenement lié à la selection d'un annonceur de la liste des annonceurs
     private void selectionAnnonceur(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionAnnonceur
         // TODO add your handling code here:
+
+        metierList.clearSelection();
+        domaineList.clearSelection();
+        typeContratList.clearSelection();
+
         // On recupere l'annonceur selectionné
         Annonceur a = (Annonceur) annonceurList.getSelectedValue();
         // On recupere le model de la liste des offres
         DefaultListModel modelOffre = (DefaultListModel) offreList.getModel();
         modelOffre.clear();
-        // Liste des offres en fonction de l'annonceur
-        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, a);
-        // On parcours la liste des offres
-        for (Offre o : offres) {
-            // On ajoute l'offre au model
-            modelOffre.addElement(o);
+
+        if (a != null) {
+            // Liste des offres en fonction de l'annonceur
+            ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, a);
+            // On parcours la liste des offres
+            for (Offre o : offres) {
+                // On ajoute l'offre au model
+                modelOffre.addElement(o);
+            }
+            offreList.setModel(modelOffre);
         }
-        offreList.setModel(modelOffre);
     }//GEN-LAST:event_selectionAnnonceur
 
     // Evenement lié à la selection d'un type de contrat de la liste des types de contrats
     private void selectionTypeContrat(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionTypeContrat
         // TODO add your handling code here:
+
+        // On déselectionne les autres list
+        metierList.clearSelection();
+        domaineList.clearSelection();
+        annonceurList.clearSelection();
+
         // On recupere le type de contrat selctionné
         TypeContrat tc = (TypeContrat) typeContratList.getSelectedValue();
         // On recupere le model de la liste des offres
         DefaultListModel modelOffre = (DefaultListModel) offreList.getModel();
         modelOffre.clear();
-        // Liste des offres en fonction du type de contrat
-        ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, tc);
-        // On parcours la liste des offres
-        for (Offre o : offres) {
-            // On ajoute l'offre au model
-            modelOffre.addElement(o);
+
+        if (tc != null) {
+            // Liste des offres en fonction du type de contrat
+            ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, tc);
+            // On parcours la liste des offres
+            for (Offre o : offres) {
+                // On ajoute l'offre au model
+                modelOffre.addElement(o);
+            }
+            offreList.setModel(modelOffre);
         }
-        offreList.setModel(modelOffre);
     }//GEN-LAST:event_selectionTypeContrat
 
+    // Boutton qui enleve le focus des List de la fonction recherhce
     private void reinitialiserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reinitialiserButtonActionPerformed
         // TODO add your handling code here: 
 
-        refreshListOffres();
+        metierList.clearSelection();
+        domaineList.clearSelection();
+        typeContratList.clearSelection();
+        annonceurList.clearSelection();
+        offreList.clearSelection();
+        raz();
 
     }//GEN-LAST:event_reinitialiserButtonActionPerformed
 
     // Evenement lié à la selection d'un metier de la liste des metiers
     private void selectionMetier(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionMetier
         // TODO add your handling code here:
+
+        typeContratList.clearSelection();
+        annonceurList.clearSelection();
+
         // On recupere le metier selectionné
         Metier m = (Metier) metierList.getSelectedValue();
         // On recupere le model de la liste des offres
@@ -850,27 +910,39 @@ public class OffreForm extends javax.swing.JPanel {
     // Boutton qui permet la suppresion d'une offre dans la liste des offres
     private void supprimerOffreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerOffreButtonActionPerformed
         // TODO add your handling code here:
-        // On recupere l'offre selectionnée
-        Offre o = (Offre) offreList.getSelectedValue();
-        // On test si l'offre existe en base de données
-        Offre offre = OffreDAO.trouver(mainJFrame.cnx, o.getId());
-        // Si elle existe
-        if (offre != null) {
-            try {
-                // On supprime l'offre en base de données
-                OffreDAO.supprimer(mainJFrame.cnx, offre);
-                // On affiche un message confirmant la suppression de l'offre
-                mainJFrame.affichagePopUpInfo("Suppression de l'offre réussie", "Information");
-            } catch (Exception e) {
-                // On affiche un message si une erreur s'est produite lors de la suppression de l'offre
-                mainJFrame.affichagePopUpInfo(e.toString(), "Information");
+        // Demande de confirmation de la suppression de l'offre
+        int retour = mainJFrame.affichagePopUpValidation("Etes-vous sûr de vouloir supprimer l'offre ?", "Information");
+
+        //Si oui 
+        if (retour == 0) {
+            // On recupere l'offre selectionnée
+            Offre o = (Offre) offreList.getSelectedValue();
+            // On test si l'offre existe en base de données
+            Offre offre = OffreDAO.trouver(mainJFrame.cnx, o.getId());
+            // Si elle existe
+            if (offre != null) {
+                try {
+                    // On supprime l'offre en base de données
+                    OffreDAO.supprimer(mainJFrame.cnx, offre);
+                    // On affiche un message confirmant la suppression de l'offre
+                    mainJFrame.affichagePopUpInfo("Suppression de l'offre réussie", "Information");
+                } catch (Exception e) {
+                    // On affiche un message si une erreur s'est produite lors de la suppression de l'offre
+                    mainJFrame.affichagePopUpInfo(e.toString(), "Information");
+                }
+                raz();
+                refreshList();
             }
-            raz();
-            refreshList();
+
         }
-
-
     }//GEN-LAST:event_supprimerOffreButtonActionPerformed
+
+    // Permet le refresh de l'ensemble des JList et des comboBox de la page
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        refreshList();
+        refreshComboBox();
+    }//GEN-LAST:event_formComponentShown
 
     // Vide les TextFiels et les labels d'erreurs du formulaire de l'offre
     private void raz() {
@@ -900,6 +972,7 @@ public class OffreForm extends javax.swing.JPanel {
         this.telephoneErreurLabel.setText(null);
         this.emailErreurLabel.setText(null);
         this.annonceurErreurLabel.setText(null);
+        this.domaineMetierErreurLabel.setText(null);
 
     }
 
@@ -914,7 +987,7 @@ public class OffreForm extends javax.swing.JPanel {
 
     // Liste des offres
     private void refreshListOffres() {
-        
+
         DefaultListModel model = (DefaultListModel) offreList.getModel();
         model.clear();
         // Liste de toutes les offres
@@ -950,7 +1023,7 @@ public class OffreForm extends javax.swing.JPanel {
         // Liste des domaines de metiers
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
         // On parcours la liste des domaines
-        for (Domaine d : domaines){
+        for (Domaine d : domaines) {
             // On ajoute le domaine au model
             model.addElement(d);
         }
@@ -963,7 +1036,7 @@ public class OffreForm extends javax.swing.JPanel {
         DefaultListModel model = (DefaultListModel) metierList.getModel();
         model.clear();
         // Liste des metiers
-        ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
+        ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, null);
         // On parcours la liste des metiers
         for (Metier m : metiers) {
             // On ajoute le metier au model
@@ -1054,11 +1127,18 @@ public class OffreForm extends javax.swing.JPanel {
             erreurs.add(Erreur.ERREUR_REFERENCE_VIDE);
         } else {
             // Creation d'une erreur si le champ reference a été mal saisi
-            Boolean verifReference = regexReference(this.referenceTextField.getText());
+            Boolean verifReference = mainJFrame.regexReference(this.referenceTextField.getText());
             if (verifReference != true) {
                 erreurs.add(Erreur.ERREUR_REFERENCE_INVALIDE);
             } else {
-                this.referenceErreurLabel.setText(null);
+                String reference = this.referenceTextField.getText();
+                // On test si une offre possède déjà cette reference
+                Offre o = OffreDAO.trouver(mainJFrame.cnx, reference);
+                if (o == null) {
+                    this.referenceErreurLabel.setText(null);
+                } else {
+                    erreurs.add(Erreur.ERREUR_REFERENCE_EXISTANT);
+                }
             }
         }
         // Creation d'une erreur si la durée de diffusion est égale à 0
@@ -1090,7 +1170,7 @@ public class OffreForm extends javax.swing.JPanel {
             erreurs.add(Erreur.ERREUR_LATTITUDE_VIDE);
         } else {
             // Creation d'une erreur si la lattitude saisie est incorrect
-            Boolean verifLattitude = regexCoordonnees(this.lattitudeTextField.getText());
+            Boolean verifLattitude = mainJFrame.regexCoordonnees(this.lattitudeTextField.getText());
             if (verifLattitude != true) {
                 erreurs.add(Erreur.ERREUR_LATTITUDE_INVALIDE);
             } else {
@@ -1102,7 +1182,7 @@ public class OffreForm extends javax.swing.JPanel {
             erreurs.add(Erreur.ERREUR_LONGITUDE_VIDE);
         } else {
             // Creation d'une erreur si la longitude saisie est incorrect
-            Boolean verifLongitude = regexCoordonnees(this.longitudeTextField.getText());
+            Boolean verifLongitude = mainJFrame.regexCoordonnees(this.longitudeTextField.getText());
             if (verifLongitude != true) {
                 erreurs.add(Erreur.ERREUR_LONGITUDE_INVALIDE);
             } else {
@@ -1126,7 +1206,7 @@ public class OffreForm extends javax.swing.JPanel {
             erreurs.add(Erreur.ERREUR_TELEPHONE_VIDE);
         } else {
             // Creation d'une erreur si le numéro de téléphone saisi est incorrect
-            Boolean verifTelephone = regexTelephone(this.telephoneTextField.getText());
+            Boolean verifTelephone = mainJFrame.regexTelephone(this.telephoneTextField.getText());
             if (verifTelephone != true) {
                 erreurs.add(Erreur.ERREUR_TELEPHONE_INVALIDE);
             } else {
@@ -1138,7 +1218,7 @@ public class OffreForm extends javax.swing.JPanel {
             erreurs.add(Erreur.ERREUR_EMAIL_VIDE);
         } else {
             // Creation d'une erreur si l'email saisie est incorrect 
-            Boolean verifEmail = regexEmail(this.emailTextField.getText());
+            Boolean verifEmail = mainJFrame.regexEmail(this.emailTextField.getText());
             if (verifEmail != true) {
                 erreurs.add(Erreur.ERREUR_EMAIL_INVALIDE);
             } else {
@@ -1172,6 +1252,9 @@ public class OffreForm extends javax.swing.JPanel {
                     break;
                 case ERREUR_REFERENCE_INVALIDE:
                     this.referenceErreurLabel.setText("Veuillez saisir une référence correcte !");
+                    break;
+                case ERREUR_REFERENCE_EXISTANT:
+                    this.referenceErreurLabel.setText("Une offre possède déjà cette référence !");
                     break;
                 case ERREUR_DUREEDIFFUSION_VIDE:
                     this.dureeDiffusionErreurLabel.setText("Veuillez saisir une durée de diffusion supérieure à 0 !");
@@ -1219,7 +1302,7 @@ public class OffreForm extends javax.swing.JPanel {
                     this.annonceurErreurLabel.setText("Veuillez choisir un annonceur pour votre offre !");
                     break;
                 case ERREUR_DOMAINE_METIER_VIDE:
-                    this.domaineMetierErreurLabel.setText("Veuillez choisir soit un domaine de métier ou un métier !");
+                    this.domaineMetierErreurLabel.setText("Veuillez choisir soit un domaine ou un métier !");
                     break;
                 default:
                     break;
@@ -1227,38 +1310,6 @@ public class OffreForm extends javax.swing.JPanel {
             }
 
         }
-    }
-
-    private Boolean regexCoordonnees(String coordonnée) {
-        Pattern p = Pattern.compile("^[0-9]{2}° [0-9]{2}' [N-S-E-O]{1}$");
-        Matcher m = p.matcher(coordonnée);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
-    private Boolean regexReference(String reference) {
-        Pattern p = Pattern.compile("^[a-zA-Z0-9_-]+$");
-        Matcher m = p.matcher(reference);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
-    private Boolean regexTelephone(String telephone) {
-        Pattern p = Pattern.compile("^0[1-68]([.-]?[0-9]{2}){4}$");
-        Matcher m = p.matcher(telephone);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
-    private Boolean regexEmail(String email) {
-        Pattern p = Pattern.compile("^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$");
-        Matcher m = p.matcher(email);
-        Boolean b = m.matches();
-
-        return b;
     }
 
 
@@ -1304,8 +1355,8 @@ public class OffreForm extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JLabel latitudeLabel;
     private javax.swing.JLabel lattitudeErreurLabel;
-    private javax.swing.JLabel lattitudeLabel;
     private javax.swing.JTextField lattitudeTextField;
     private javax.swing.JLabel longitudeErreurLabel;
     private javax.swing.JTextField longitudeTextField;

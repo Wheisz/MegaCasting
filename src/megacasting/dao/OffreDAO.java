@@ -16,7 +16,6 @@ import megacasting.entite.Annonceur;
 import megacasting.entite.Domaine;
 import megacasting.entite.Metier;
 import megacasting.entite.Offre;
-import megacasting.entite.Societe;
 import megacasting.entite.TypeContrat;
 
 /**
@@ -27,10 +26,6 @@ public class OffreDAO {
     
     public static void creer (Connection cnx, Offre o) throws Exception {
         
-        Offre oTemp = trouver(cnx, o.getReference());
-        if (oTemp != null) {
-            throw new Exception("L'offre " + o.getIntitule()+ " existe déjà !");
-        }
 
         long id = 0;
         Statement stmt = null;
@@ -72,7 +67,6 @@ public class OffreDAO {
                 o.setIdMetier(rs.getLong(3));
                 o.setIdTypeContrat(rs.getLong(4));
                 o.setIdAnnonceur(rs.getLong(5));
-                System.out.println("L'offre " + o.getIntitule() + "(Id = " + o.getId() + ") a été ajoutée !");
             }  
             }
             
@@ -99,7 +93,6 @@ public class OffreDAO {
                 o.setIdMetier(rs.getLong(3));
                 o.setIdTypeContrat(rs.getLong(4));
                 o.setIdAnnonceur(rs.getLong(5));
-                System.out.println("L'offre " + o.getIntitule() + "(Id = " + o.getId() + ") a été ajoutée !");
             }  
             }
             
@@ -126,7 +119,6 @@ public class OffreDAO {
                 o.setIdMetier(rs.getLong(3));
                 o.setIdTypeContrat(rs.getLong(4));
                 o.setIdAnnonceur(rs.getLong(5));
-                System.out.println("L'offre " + o.getIntitule() + "(Id = " + o.getId() + ") a été ajoutée !");
             }  
             }
         
@@ -222,8 +214,6 @@ public class OffreDAO {
                     + " WHERE Id = " + o.getId()
             );
             }
-
-            System.out.println("L'offre " + o.getReference() + " a été modifiée !");
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -246,9 +236,7 @@ public class OffreDAO {
             
             stmt.executeUpdate("DELETE FROM Offre "
                     + "WHERE Id = " + o.getId()
-            );
-
-            System.out.println("L'offre " + o.getReference()+ " a été supprimée !");            
+            );     
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -343,17 +331,78 @@ public class OffreDAO {
         ArrayList<Offre> offres = new ArrayList();
         Statement stmt = null;
         try {
+            
+            if (m != null) {
+                stmt = cnx.createStatement();
+            
+                ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
+                        + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
+                        + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
+                        + "                              , IdAnnonceur "   
+                        + "FROM Offre o "
+                        + "WHERE o.IdMetier = " + m.getId());
+
+                while(rs.next()) {
+                    Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
+                    TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(16));
+                    Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(17));
+                    Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
+                    rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),
+                    rs.getString(12), rs.getString(13),d,m,tc,a);
+                    offres.add(o);
+                }
+            }  
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex){
+                    
+                }
+            }
+        }         
+        return offres;
+    }
+    
+    public static ArrayList<Offre> lister (Connection cnx, Domaine d, Metier m) {
+        
+        ArrayList<Offre> offres = new ArrayList();
+        Statement stmt = null;
+        try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
-                    + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                    + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
-                    + "                              , IdAnnonceur "   
-                    + "FROM Offre o "
-                    + "WHERE o.IdMetier = " + m.getId());
+            ResultSet rs = null;
+            if (m != null && d != null) {                
             
+                rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
+                        + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
+                        + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
+                        + "                              , IdAnnonceur "   
+                        + "FROM Offre o "
+                        + "WHERE o.IdMetier = " + m.getId()
+                        + " AND o.IdDomaine = " + d.getId());                
+            } 
+            else if (m == null && d != null) {
+                rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
+                        + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
+                        + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
+                        + "                              , IdAnnonceur "   
+                        + "FROM Offre o "
+                        + "WHERE o.IdMetier IS NULL "
+                        + "AND o.IdDomaine = " + d.getId());
+            }
+            else if (m != null && d == null) {
+                rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
+                        + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
+                        + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
+                        + "                              , IdAnnonceur "   
+                        + "FROM Offre o "
+                        + "WHERE o.IdMetier = " + m.getId()
+                        + " AND o.IdDomaine IS NULL ");
+            }
             while(rs.next()) {
-                Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
                 TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(16));
                 Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(17));
                 Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
@@ -361,7 +410,6 @@ public class OffreDAO {
                 rs.getString(12), rs.getString(13),d,m,tc,a);
                 offres.add(o);
             }
-            
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {

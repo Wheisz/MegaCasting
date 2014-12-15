@@ -40,7 +40,6 @@ public class AnnonceurDAO {
                     + "VALUES (" + annonceur.getId()
                     + ")");
 
-            System.out.println("La société " + annonceur.getRaisonSociale() + "(Id = " + annonceur.getId() + ") a été ajoutée !");   
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -64,7 +63,6 @@ public class AnnonceurDAO {
 
         SocieteDAO.modifier(cnx, annonceur);
         
-        System.out.println("L'annonceur " + annonceur.getRaisonSociale() + " a été modifié !");
     }
     
     public static void supprimer (Connection cnx, Annonceur annonceur) {
@@ -83,8 +81,7 @@ public class AnnonceurDAO {
             );
 
             SocieteDAO.supprimer(cnx, annonceur);
-            
-            System.out.println("L'annonceur " + annonceur.getRaisonSociale() + " a été supprimé !");            
+                       
             
         } catch (SQLException ex) {
             ex.printStackTrace();

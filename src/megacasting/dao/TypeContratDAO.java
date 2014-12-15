@@ -32,7 +32,6 @@ public class TypeContratDAO {
             
             if(rs.next()) {
                 tc.setId(rs.getLong(1));
-                System.out.println("TypeContrat ajouté ! (Id = " + tc.getId() + ")");
             }
             
             
@@ -68,7 +67,6 @@ public class TypeContratDAO {
                     + "WHERE Id ="+tc.getId()
             );
 
-            System.out.println("TypeContrat modifié !");
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -92,8 +90,7 @@ public class TypeContratDAO {
             stmt.executeUpdate("DELETE FROM TypeContrat "
                     + "WHERE Id = " + tc.getId()
             );
-
-            System.out.println("Type de contrat supprimé !");            
+          
             
         } catch (SQLException ex) {
             ex.printStackTrace();

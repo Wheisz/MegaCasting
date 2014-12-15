@@ -6,20 +6,10 @@
 package megacasting.view;
 
 import java.awt.CardLayout;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import megacasting.MegaCasting;
 import megacasting.dao.AnnonceurDAO;
 import megacasting.dao.DiffuseurDAO;
 import megacasting.dao.SocieteDAO;
@@ -39,10 +29,10 @@ public class SocieteForm extends javax.swing.JPanel {
     // Creation d'une enumeration d'erreurs
     public enum Erreur {
 
-        ERREUR_NUMEROSIRET_VIDE, ERREUR_NUMEROSIRET_INVALIDE, ERREUR_RAISONSOCIALE_VIDE,
-        ERREUR_EMAIL_VIDE, ERREUR_EMAIL_INVALIDE,ERREUR_TELEPHONE_VIDE, ERREUR_TELEPHONE_INVALIDE, 
-        ERREUR_NUMERO_VIDE, ERREUR_NUMERO_INVALIDE,ERREUR_RUE_VIDE, ERREUR_RUE_INVALIDE,
-        ERREUR_CODEPOSTAL_VIDE, ERREUR_CODEPOSTAL_INVALIDE,ERREUR_VILLE_VIDE, ERREUR_VILLE_INVALIDE,
+        ERREUR_NUMEROSIRET_VIDE, ERREUR_NUMEROSIRET_INVALIDE, ERREUR_NUMEROSIRET_EXISTANT, ERREUR_RAISONSOCIALE_VIDE,
+        ERREUR_RAISONSOCIALE_EXISTANT,ERREUR_EMAIL_VIDE, ERREUR_EMAIL_INVALIDE, ERREUR_TELEPHONE_VIDE,
+        ERREUR_TELEPHONE_INVALIDE,ERREUR_NUMERO_VIDE, ERREUR_NUMERO_INVALIDE, ERREUR_RUE_VIDE, ERREUR_RUE_INVALIDE,
+        ERREUR_CODEPOSTAL_VIDE, ERREUR_CODEPOSTAL_INVALIDE, ERREUR_VILLE_VIDE, ERREUR_VILLE_INVALIDE,
         ERREUR_ANNONCEURDIFFUSEUR_VIDE;
     }
 
@@ -458,7 +448,7 @@ public class SocieteForm extends javax.swing.JPanel {
                         mainJFrame.affichagePopUpInfo(e.toString(), "Information");
                     }
                 }
-            // Si non alors c'est un diffuseur
+                // Si non alors c'est un diffuseur
             } else {
                 // On recupere le diffuseur
                 Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, societe.getId());
@@ -469,7 +459,7 @@ public class SocieteForm extends javax.swing.JPanel {
                     mainJFrame.affichagePopUpInfo("Suppression du diffuseur réussie", "Information");
                 } catch (Exception e) {
                     // On affiche un message si une erreur s'est produite lors de la suppression du diffuseur
-                    mainJFrame.affichagePopUpInfo(e.toString(),"Information");
+                    mainJFrame.affichagePopUpInfo(e.toString(), "Information");
                 }
             }
         }
@@ -519,7 +509,7 @@ public class SocieteForm extends javax.swing.JPanel {
                     // On instancie une nouvelle adresse avec les informations du formulaire
                     Adresse adresse = new Adresse(numero, rue, codePostal, ville);
                     // On instancie un annonceur avec les informations du formaulaire et l'adresse 
-                    a = new Annonceur(numeroSiret,raisonSociale, email, telephone, adresse);
+                    a = new Annonceur(numeroSiret, raisonSociale, email, telephone, adresse);
 
                     try {
                         // On crée l'annonceur en base de données
@@ -555,52 +545,55 @@ public class SocieteForm extends javax.swing.JPanel {
             } else {
                 // Si on définit la société comme un diffuseur
                 if (this.diffuseurValiderRadioButton.isSelected()) {
-                    // On verifie si un annonceur existe avec la raison sociale choisie
-                    Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, raisonSociale);
-                    // Si l'annonceur existe alors on le supprime
-                    if (a != null) {
-                        AnnonceurDAO.supprimer(mainJFrame.cnx, a);
-                    }
-                    // On verifie si la société est déjà identifié comme un diffuseur
-                    Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, raisonSociale);
-
-                    // Si le diffuseur n'existe pas
-                    if (d == null) {
-                        // On instancie une nouvelle adresse avec les informations du formulaire
-                        Adresse adresse = new Adresse(numero, rue, codePostal, ville);
-                        // On instancie un nouveau diffuseur avec les informations du formulaire et l'adresse 
-                        d = new Diffuseur(numeroSiret, raisonSociale, email, telephone, adresse);
-
-                        try {
-                            // On crée le diffuseur en base de données
-                            DiffuseurDAO.creer(mainJFrame.cnx, d);
-                            // On affiche si la création s'est bien réalisé
-                            mainJFrame.affichagePopUpInfo("Le diffuseur a été crée", "Information");
-                        } catch (Exception e) {
-                            // On affiche si une erreur s'est produite lors de la création du diffuseur
-                            mainJFrame.affichagePopUpInfo(e.toString(), "Information");
+                    int retour = mainJFrame.affichagePopUpValidation("La société perdra toutes ses offres", "Attention");
+                    if (retour == 0) {
+                        // On verifie si un annonceur existe avec la raison sociale choisie
+                        Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, raisonSociale);
+                        // Si l'annonceur existe alors on le supprime
+                        if (a != null) {
+                            AnnonceurDAO.supprimer(mainJFrame.cnx, a);
                         }
-                    } else {
-                        // Si le diffuseur existe , alors on va le modifier
-                        // On modifie les informations sur le diffuseur
-                        d.setNumeroSiret(numeroSiret);
-                        d.setRaisonSociale(raisonSociale);
-                        d.setEmail(email);
-                        d.setTelephone(telephone);
+                        // On verifie si la société est déjà identifié comme un diffuseur
+                        Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, raisonSociale);
 
-                        Adresse adresse = d.getAdresse();
-                        adresse.setNumero(numero);
-                        adresse.setRue(rue);
-                        adresse.setCodePostal(codePostal);
-                        adresse.setVille(ville);
-                        try {
-                            // On enregistre les modifications du diffuseur en base de données
-                            DiffuseurDAO.modifier(mainJFrame.cnx, d);
-                            // On affiche la confirmation de la modification du diffuseur
-                            mainJFrame.affichagePopUpInfo("Le diffuseur a été modifié", "Information");
-                        } catch (Exception ex) {
-                            // On affiche un message si une erreur s'est produite lors de la modification du diffuseur
-                            mainJFrame.affichagePopUpInfo(ex.toString(), "Information");
+                        // Si le diffuseur n'existe pas
+                        if (d == null) {
+                            // On instancie une nouvelle adresse avec les informations du formulaire
+                            Adresse adresse = new Adresse(numero, rue, codePostal, ville);
+                            // On instancie un nouveau diffuseur avec les informations du formulaire et l'adresse 
+                            d = new Diffuseur(numeroSiret, raisonSociale, email, telephone, adresse);
+
+                            try {
+                                // On crée le diffuseur en base de données
+                                DiffuseurDAO.creer(mainJFrame.cnx, d);
+                                // On affiche si la création s'est bien réalisé
+                                mainJFrame.affichagePopUpInfo("Le diffuseur a été crée", "Information");
+                            } catch (Exception e) {
+                                // On affiche si une erreur s'est produite lors de la création du diffuseur
+                                mainJFrame.affichagePopUpInfo(e.toString(), "Information");
+                            }
+                        } else {
+                        // Si le diffuseur existe , alors on va le modifier
+                            // On modifie les informations sur le diffuseur
+                            d.setNumeroSiret(numeroSiret);
+                            d.setRaisonSociale(raisonSociale);
+                            d.setEmail(email);
+                            d.setTelephone(telephone);
+
+                            Adresse adresse = d.getAdresse();
+                            adresse.setNumero(numero);
+                            adresse.setRue(rue);
+                            adresse.setCodePostal(codePostal);
+                            adresse.setVille(ville);
+                            try {
+                                // On enregistre les modifications du diffuseur en base de données
+                                DiffuseurDAO.modifier(mainJFrame.cnx, d);
+                                // On affiche la confirmation de la modification du diffuseur
+                                mainJFrame.affichagePopUpInfo("Le diffuseur a été modifié", "Information");
+                            } catch (Exception ex) {
+                                // On affiche un message si une erreur s'est produite lors de la modification du diffuseur
+                                mainJFrame.affichagePopUpInfo(ex.toString(), "Information");
+                            }
                         }
                     }
                 }
@@ -662,7 +655,7 @@ public class SocieteForm extends javax.swing.JPanel {
         CardLayout cl = (CardLayout) mainJFrame.mainPanel.getLayout();
         cl.show(mainJFrame.mainPanel, "accueilCard");
     }//GEN-LAST:event_buttonAccueilActionPerformed
-    
+
     // Permet de rafraichir la List de la page
     private void refreshList() {
         DefaultListModel<Societe> model = (DefaultListModel<Societe>) societeList.getModel();
@@ -709,14 +702,20 @@ public class SocieteForm extends javax.swing.JPanel {
         ArrayList<Erreur> erreurs = new ArrayList();
 
         // Creation d'une erreur si le numero de siret est vide
-        if (this.numeroSiretTextField.getText().equals("")){
+        if (this.numeroSiretTextField.getText().equals("")) {
             erreurs.add(Erreur.ERREUR_NUMEROSIRET_VIDE);
         } else {
             // Creation d'une erreur si le numero de siret saisi est incorrect
             String numeroSiret = this.numeroSiretTextField.getText();
-            Boolean verifNumeroSiret = regexNumeroSiret(numeroSiret);
-            if(verifNumeroSiret){
-                this.numeroSiretErreurLabel.setText(null);
+            Boolean verifNumeroSiret = mainJFrame.regexNumeroSiret(numeroSiret);
+            if (verifNumeroSiret) {
+                // On test si une societe possede deja ce numero de siret
+                Societe s = SocieteDAO.trouverByNumSiret(mainJFrame.cnx, numeroSiret);
+                if(s == null){
+                    this.numeroSiretErreurLabel.setText(null);
+                }else {
+                    erreurs.add(Erreur.ERREUR_NUMEROSIRET_EXISTANT);
+                }
             } else {
                 erreurs.add(Erreur.ERREUR_NUMEROSIRET_INVALIDE);
             }
@@ -725,7 +724,15 @@ public class SocieteForm extends javax.swing.JPanel {
         if (this.raisonSocialeTextField.getText().equals("")) {
             erreurs.add(Erreur.ERREUR_RAISONSOCIALE_VIDE);
         } else {
-            this.raisonSocialeErreurLabel.setText(null);
+            String raisonSociale = this.raisonSocialeTextField.getText();
+            // On test si une societe possède déjà cette raison sociale
+            Societe s = SocieteDAO.trouver(mainJFrame.cnx, raisonSociale);
+            if(s == null){
+                this.raisonSocialeErreurLabel.setText(null);
+            }else{
+                erreurs.add(Erreur.ERREUR_RAISONSOCIALE_EXISTANT);
+            }
+            
         }
         // Creation d'une erreur si l'email est vide
         if (this.emailTextField.getText().equals("")) {
@@ -733,7 +740,7 @@ public class SocieteForm extends javax.swing.JPanel {
         } else {
             // Creation d'une erreur si l'email saisi est incorrect
             String email = this.emailTextField.getText();
-            Boolean verifEmail = regexEmail(email);
+            Boolean verifEmail = mainJFrame.regexEmail(email);
             if (verifEmail) {
                 this.emailErreurLabel.setText(null);
             } else {
@@ -746,7 +753,7 @@ public class SocieteForm extends javax.swing.JPanel {
         } else {
             // Creation d'une erreur si le numero de téléphone saisi est incorrect
             String telephone = this.telephoneTextField.getText();
-            Boolean verifTelephone = regexTelephone(telephone);
+            Boolean verifTelephone = mainJFrame.regexTelephone(telephone);
             if (verifTelephone) {
                 this.telephoneErreurLabel.setText(null);
             } else {
@@ -765,7 +772,7 @@ public class SocieteForm extends javax.swing.JPanel {
         } else {
             // Creation d'une erreur si le nom de rue est incorrect
             String rue = this.rueTextField.getText();
-            Boolean verifRue = regexRue(rue);
+            Boolean verifRue = mainJFrame.regexRue(rue);
             if (verifRue) {
                 this.rueErreurLabel.setText(null);
             } else {
@@ -779,7 +786,7 @@ public class SocieteForm extends javax.swing.JPanel {
             // Creation d'une erreur si le code postal saisi est incorrect
             int codePostalTemp = (int) this.codePostalSpinner.getValue();
             String codePostal = Integer.toString(codePostalTemp);
-            Boolean verifCodePostal = regexCodePostal(codePostal);
+            Boolean verifCodePostal = mainJFrame.regexCodePostal(codePostal);
             if (verifCodePostal) {
                 this.codePostalErreur.setText(null);
             } else {
@@ -792,7 +799,7 @@ public class SocieteForm extends javax.swing.JPanel {
         } else {
             // Creation d'une erreur si le nom de la ville est incorrect
             String ville = this.villeTextField.getText();
-            Boolean verifVille = regexVille(ville);
+            Boolean verifVille = mainJFrame.regexVille(ville);
             if (verifVille) {
                 this.villeErreurLabel.setText(null);
             } else {
@@ -821,8 +828,14 @@ public class SocieteForm extends javax.swing.JPanel {
                 case ERREUR_NUMEROSIRET_INVALIDE:
                     this.numeroSiretErreurLabel.setText("Veuillez saisir un numéro de Siret de 14 chiffres !");
                     break;
+                case ERREUR_NUMEROSIRET_EXISTANT:
+                    this.numeroSiretErreurLabel.setText("Ce numero de Siret existe déjà !");
+                    break;
                 case ERREUR_RAISONSOCIALE_VIDE:
                     this.raisonSocialeErreurLabel.setText("Veuillez saisir une raison sociale !");
+                    break;
+                case ERREUR_RAISONSOCIALE_EXISTANT:
+                    this.raisonSocialeErreurLabel.setText("Une société possède déjà cette raison sociale !");
                     break;
                 case ERREUR_EMAIL_VIDE:
                     this.emailErreurLabel.setText("Veuillez saisir un email !");
@@ -863,57 +876,6 @@ public class SocieteForm extends javax.swing.JPanel {
         }
 
     }
-    
-    private Boolean regexNumeroSiret(String numeroSiret){
-        Pattern p = Pattern.compile("^[0-9]{14}$");
-        Matcher m = p.matcher(numeroSiret);
-        Boolean b = m.matches();
-
-        return b;  
-    }
-
-    private Boolean regexTelephone(String telephone) {
-        Pattern p = Pattern.compile("^0[1-68]([.-]?[0-9]{2}){4}$");
-        Matcher m = p.matcher(telephone);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
-    private Boolean regexEmail(String email) {
-        Pattern p = Pattern.compile("^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$");
-        Matcher m = p.matcher(email);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
-    private Boolean regexRue(String rue) {
-        Pattern p = Pattern.compile("^[a-zA-Z ]+$");
-        Matcher m = p.matcher(rue);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
-    private Boolean regexCodePostal(String codePostal) {
-        Pattern p = Pattern.compile("^[0-9]{5}$");
-        Matcher m = p.matcher(codePostal);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
-    private Boolean regexVille(String ville) {
-        Pattern p = Pattern.compile("^[a-zA-Z- ]+$");
-        Matcher m = p.matcher(ville);
-        Boolean b = m.matches();
-
-        return b;
-    }
-
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel annonceurDiffuseurErreurLabel;

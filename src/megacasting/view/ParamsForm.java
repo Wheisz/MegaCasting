@@ -6,12 +6,7 @@
 package megacasting.view;
 
 import java.awt.CardLayout;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import megacasting.dao.DomaineDAO;
@@ -35,14 +30,29 @@ public class ParamsForm extends javax.swing.JPanel {
         this.mainJFrame = mainJFrame;
         initComponents();        
         
+        DefaultListModel<TypeContrat> modelListTypeContrat = new DefaultListModel<>();
+        typeContratList.setModel(modelListTypeContrat);
+        DefaultListModel<Domaine> modelListDomaine = new DefaultListModel<>();
+        domaineList.setModel(modelListDomaine);
+        DefaultListModel<Metier> modelListMetier = new DefaultListModel<>();
+        metierList.setModel(modelListMetier);
+        
+        DefaultComboBoxModel<Domaine> modelComboBoxDomaine = new DefaultComboBoxModel<>();
+        domaineCombobox.setModel(modelComboBoxDomaine);
+        
+        
+        
         refreshListDomaine();
         refreshComboBoxDomaine();
         refreshListMetier();
         refreshListTypeContrat();
     }
     
+    // List des types de contrats
     private void refreshListTypeContrat() {
-        DefaultListModel<TypeContrat> modelListTypeContrat = new DefaultListModel<>();
+        DefaultListModel model = (DefaultListModel)typeContratList.getModel();
+        
+        model.clear();
         
         // Liste de tous les types de contrat
         ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
@@ -50,14 +60,16 @@ public class ParamsForm extends javax.swing.JPanel {
         // Pour chaque type de contrat
         for (TypeContrat tc : typeContrats) {
             // On l'ajoute à la liste
-            modelListTypeContrat.addElement(tc);
+            model.addElement(tc);
         }
-        listTypeContrat.setModel(modelListTypeContrat);
+        typeContratList.setModel(model);
     }
     
     // Liste des métiers d'un domaine d
     private void refreshListMetier(Domaine d) {
-        DefaultListModel<Metier> modelListMetier = new DefaultListModel<>();
+        DefaultListModel model = (DefaultListModel)metierList.getModel();
+        
+        model.clear();
         
         // Liste des métiers du domaine d
         ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, d);
@@ -65,18 +77,18 @@ public class ParamsForm extends javax.swing.JPanel {
         // Pour chaque métier du domaine d
         for (Metier m : metiers) {
             // On l'ajoute à la liste
-            modelListMetier.addElement(m);
+            model.addElement(m);
         }
-        listMetier.setModel(modelListMetier);
+        metierList.setModel(model);
     }
     
     // Liste de tous les métiers
     private void refreshListMetier(){
         
         // Si la checkbox domaine est cochée
-        if (checkBoxDomaine.isSelected()) {
+        if (domaineCheckBox.isSelected()) {
             // On récupère le domaine sélectionné
-            Domaine d = (Domaine) comboBoxDomaine.getSelectedItem();
+            Domaine d = (Domaine) domaineCombobox.getSelectedItem();
             
             // On refresh la liste des métiers du domaine sélectionné
             refreshListMetier(d);
@@ -89,7 +101,9 @@ public class ParamsForm extends javax.swing.JPanel {
     
     // Liste de tous les domaines
     private void refreshListDomaine() {
-        DefaultListModel<Domaine> modelListDomaine = new DefaultListModel<>();
+        DefaultListModel model = (DefaultListModel)domaineList.getModel();
+        
+        model.clear();
         
         // Liste de tous les domaines
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
@@ -97,13 +111,16 @@ public class ParamsForm extends javax.swing.JPanel {
         // Pour chaque domaine
         for (Domaine d : domaines) {
             // On m'ajoute à la liste
-            modelListDomaine.addElement(d);
+            model.addElement(d);
         }
-        listDomaine.setModel(modelListDomaine);
+        domaineList.setModel(model);
     }
     
+    // ComboBox de tous les domaines
     private void refreshComboBoxDomaine() {
-        DefaultComboBoxModel<Domaine> modelComboBoxDomaine = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel model = (DefaultComboBoxModel)domaineCombobox.getModel();
+        
+        model.removeAllElements();
         
         // Liste de tous les domaines
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
@@ -111,40 +128,36 @@ public class ParamsForm extends javax.swing.JPanel {
         // Pour chaque domaine
         for (Domaine d : domaines) {
             // On l'ajoute à la comboBox
-            modelComboBoxDomaine.addElement(d);
+            model.addElement(d);
         }
-        comboBoxDomaine.setModel(modelComboBoxDomaine);
+        domaineCombobox.setModel(model);
         
         // Selectionne vide
-        comboBoxDomaine.setSelectedIndex(-1);
+        domaineCombobox.setSelectedIndex(-1);
     }
     
     /**
      * Vide les labels et textField du panneau type de contrat
      */
     private void resetTypeContrat() {
-        textFieldLibelleTypeContrat.setText("");
-        labelErrorLibelleTypeContrat.setText("");
-        labelErrorValiderTypeContrat.setText("");
-        labelErrorSupprimerTypeContrat.setText("");
+        libelleTypeContratTextField.setText("");
+        libelleTypeContratErreurLabel.setText("");
     }
     
     /**
      * Vide les labels et textField du panneau domaine
      */
     private void resetDomaine() {
-        textFieldLibelleDomaine.setText("");
-        labelErrorLibelleDomaine.setText("");
-        labelErrorValiderDomaine.setText("");
+        libelleDomaineTextField.setText("");
+        libelleDomaineErreurLabel.setText("");
     }
     
     /**
      * Vide les labels et textField du panneau métier
      */
     private void resetMetier() {
-        textFieldLibelleMetier.setText("");
-        labelErrorLibelleMetier.setText("");
-        labelErrorValiderMetier.setText("");
+        libelleMetierTextField.setText("");
+        libelleMetierErreurLabel.setText("");
     }
     
     /**
@@ -166,46 +179,45 @@ public class ParamsForm extends javax.swing.JPanel {
         buttonRetour = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabbedPanel = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        buttonEffacerMetier = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        listMetier = new javax.swing.JList();
-        labelMetier = new javax.swing.JLabel();
-        checkBoxDomaine = new javax.swing.JCheckBox();
-        buttonSupprimerMetier = new javax.swing.JButton();
-        labelLibelleMetier = new javax.swing.JLabel();
-        textFieldLibelleMetier = new javax.swing.JTextField();
-        buttonValiderMetier = new javax.swing.JButton();
-        comboBoxDomaine = new javax.swing.JComboBox();
-        labelErrorValiderMetier = new javax.swing.JLabel();
-        labelErrorLibelleMetier = new javax.swing.JLabel();
-        labelErrorSupprimerMetier = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         typeContratLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listTypeContrat = new javax.swing.JList();
-        buttonSupprimerTypeContrat = new javax.swing.JButton();
+        typeContratList = new javax.swing.JList();
+        supprimerTypeContratButton = new javax.swing.JButton();
         buttonEffacerTypeContrat = new javax.swing.JButton();
         buttonValiderTypeContrat = new javax.swing.JButton();
-        labelLibelleTypeContrat = new javax.swing.JLabel();
-        textFieldLibelleTypeContrat = new javax.swing.JTextField();
-        labelErrorLibelleTypeContrat = new javax.swing.JLabel();
-        labelErrorValiderTypeContrat = new javax.swing.JLabel();
-        labelErrorSupprimerTypeContrat = new javax.swing.JLabel();
+        libelleTypeContratLabel = new javax.swing.JLabel();
+        libelleTypeContratTextField = new javax.swing.JTextField();
+        libelleTypeContratErreurLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        labelLibelleDomaine = new javax.swing.JLabel();
-        textFieldLibelleDomaine = new javax.swing.JTextField();
-        labelDomaine = new javax.swing.JLabel();
-        buttonValiderDomaine = new javax.swing.JButton();
-        buttonSupprimerDomaine = new javax.swing.JButton();
-        buttonEffacerDomaine = new javax.swing.JButton();
+        libelleDomaineLabel = new javax.swing.JLabel();
+        libelleDomaineTextField = new javax.swing.JTextField();
+        domaineLabel = new javax.swing.JLabel();
+        validerDomaineButton = new javax.swing.JButton();
+        supprimerDomaineButton = new javax.swing.JButton();
+        effacerDomaineButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listDomaine = new javax.swing.JList();
-        labelErrorValiderDomaine = new javax.swing.JLabel();
-        labelErrorLibelleDomaine = new javax.swing.JLabel();
-        labelErrorSupprimerDomaine = new javax.swing.JLabel();
+        domaineList = new javax.swing.JList();
+        libelleDomaineErreurLabel = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        effacerMetierButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        metierList = new javax.swing.JList();
+        labelMetier = new javax.swing.JLabel();
+        domaineCheckBox = new javax.swing.JCheckBox();
+        supprimerMetierButton = new javax.swing.JButton();
+        libelleMetierLabel = new javax.swing.JLabel();
+        libelleMetierTextField = new javax.swing.JTextField();
+        validerMetierButton = new javax.swing.JButton();
+        domaineCombobox = new javax.swing.JComboBox();
+        libelleMetierErreurLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         buttonRetour.setText("Accueil");
         buttonRetour.addActionListener(new java.awt.event.ActionListener() {
@@ -214,150 +226,25 @@ public class ParamsForm extends javax.swing.JPanel {
             }
         });
 
-        buttonEffacerMetier.setText("Effacer");
-        buttonEffacerMetier.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEffacerMetierActionPerformed(evt);
-            }
-        });
-
-        listMetier.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listMetier.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listMetierValueChanged(evt);
-            }
-        });
-        jScrollPane3.setViewportView(listMetier);
-
-        labelMetier.setText("Métier");
-
-        checkBoxDomaine.setText("Domaine :");
-        checkBoxDomaine.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                checkBoxDomaineStateChanged(evt);
-            }
-        });
-
-        buttonSupprimerMetier.setText("Supprimer");
-        buttonSupprimerMetier.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSupprimerMetierActionPerformed(evt);
-            }
-        });
-
-        labelLibelleMetier.setText("Libelle : ");
-
-        buttonValiderMetier.setText("Valider");
-        buttonValiderMetier.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonValiderMetierActionPerformed(evt);
-            }
-        });
-
-        comboBoxDomaine.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboBoxDomaineItemStateChanged(evt);
-            }
-        });
-
-        labelErrorValiderMetier.setForeground(new java.awt.Color(255, 0, 0));
-
-        labelErrorLibelleMetier.setForeground(new java.awt.Color(255, 0, 0));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                                .addComponent(comboBoxDomaine, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(checkBoxDomaine))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addComponent(labelErrorValiderMetier, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 321, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(labelLibelleMetier)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(buttonEffacerMetier, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(buttonValiderMetier, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(textFieldLibelleMetier, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(labelErrorLibelleMetier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelMetier, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(buttonSupprimerMetier, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(labelErrorSupprimerMetier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(labelMetier)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(checkBoxDomaine)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(comboBoxDomaine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(labelErrorValiderMetier, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelErrorLibelleMetier, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(labelLibelleMetier)
-                                .addComponent(textFieldLibelleMetier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonValiderMetier)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buttonEffacerMetier)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonSupprimerMetier)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelErrorSupprimerMetier, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
-        );
-
-        tabbedPanel.addTab("Métier", jPanel3);
-
         typeContratLabel.setText("Type de contrat");
 
-        listTypeContrat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listTypeContrat.addFocusListener(new java.awt.event.FocusAdapter() {
+        typeContratList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        typeContratList.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                listTypeContratFocusGained(evt);
+                typeContratListFocusGained(evt);
             }
         });
-        listTypeContrat.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        typeContratList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listTypeContratValueChanged(evt);
+                typeContratListValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(listTypeContrat);
+        jScrollPane1.setViewportView(typeContratList);
 
-        buttonSupprimerTypeContrat.setText("Supprimer");
-        buttonSupprimerTypeContrat.addActionListener(new java.awt.event.ActionListener() {
+        supprimerTypeContratButton.setText("Supprimer");
+        supprimerTypeContratButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSupprimerTypeContratActionPerformed(evt);
+                supprimerTypeContratButtonActionPerformed(evt);
             }
         });
 
@@ -375,34 +262,23 @@ public class ParamsForm extends javax.swing.JPanel {
             }
         });
 
-        labelLibelleTypeContrat.setText("Libelle :");
+        libelleTypeContratLabel.setText("Libelle :");
 
-        labelErrorLibelleTypeContrat.setForeground(new java.awt.Color(255, 0, 0));
-
-        labelErrorValiderTypeContrat.setForeground(new java.awt.Color(255, 0, 0));
+        libelleTypeContratErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(378, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(labelErrorValiderTypeContrat, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(145, 145, 145))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(labelErrorLibelleTypeContrat, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(labelErrorSupprimerTypeContrat, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(357, Short.MAX_VALUE)
+                .addComponent(libelleTypeContratErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(300, 300, 300))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(60, 60, 60)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(buttonSupprimerTypeContrat, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(supprimerTypeContratButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(typeContratLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -410,22 +286,18 @@ public class ParamsForm extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(buttonValiderTypeContrat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(labelLibelleTypeContrat)
+                                    .addComponent(libelleTypeContratLabel)
                                     .addGap(18, 18, 18)
-                                    .addComponent(textFieldLibelleTypeContrat, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(libelleTypeContratTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(buttonEffacerTypeContrat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addContainerGap(377, Short.MAX_VALUE)))
+                    .addContainerGap(488, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(labelErrorValiderTypeContrat, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(labelErrorLibelleTypeContrat, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
-                .addComponent(labelErrorSupprimerTypeContrat, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                .addGap(101, 101, 101)
+                .addComponent(libelleTypeContratErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(282, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(32, 32, 32)
@@ -433,8 +305,8 @@ public class ParamsForm extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(70, 70, 70)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(labelLibelleTypeContrat)
-                                .addComponent(textFieldLibelleTypeContrat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(libelleTypeContratLabel)
+                                .addComponent(libelleTypeContratTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(buttonValiderTypeContrat)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -444,116 +316,207 @@ public class ParamsForm extends javax.swing.JPanel {
                             .addGap(11, 11, 11)
                             .addComponent(jScrollPane1)))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonSupprimerTypeContrat)
+                    .addComponent(supprimerTypeContratButton)
                     .addContainerGap(185, Short.MAX_VALUE)))
         );
 
         tabbedPanel.addTab("Type de contrat", jPanel1);
 
-        labelLibelleDomaine.setText("Libelle :");
+        libelleDomaineLabel.setText("Libelle :");
 
-        labelDomaine.setText("Domaine");
+        domaineLabel.setText("Domaine");
 
-        buttonValiderDomaine.setText("Valider");
-        buttonValiderDomaine.addActionListener(new java.awt.event.ActionListener() {
+        validerDomaineButton.setText("Valider");
+        validerDomaineButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonValiderDomaineActionPerformed(evt);
+                validerDomaineButtonActionPerformed(evt);
             }
         });
 
-        buttonSupprimerDomaine.setText("Supprimer");
-        buttonSupprimerDomaine.addActionListener(new java.awt.event.ActionListener() {
+        supprimerDomaineButton.setText("Supprimer");
+        supprimerDomaineButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSupprimerDomaineActionPerformed(evt);
+                supprimerDomaineButtonActionPerformed(evt);
             }
         });
 
-        buttonEffacerDomaine.setText("Effacer");
-        buttonEffacerDomaine.addActionListener(new java.awt.event.ActionListener() {
+        effacerDomaineButton.setText("Effacer");
+        effacerDomaineButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEffacerDomaineActionPerformed(evt);
+                effacerDomaineButtonActionPerformed(evt);
             }
         });
 
-        listDomaine.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listDomaine.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        domaineList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        domaineList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listDomaineValueChanged(evt);
+                domaineListValueChanged(evt);
             }
         });
-        jScrollPane2.setViewportView(listDomaine);
+        jScrollPane2.setViewportView(domaineList);
 
-        labelErrorValiderDomaine.setForeground(new java.awt.Color(255, 0, 0));
-
-        labelErrorLibelleDomaine.setForeground(new java.awt.Color(255, 0, 0));
+        libelleDomaineErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(340, 340, 340)
-                        .addComponent(labelErrorLibelleDomaine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(labelErrorValiderDomaine, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 318, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(labelErrorSupprimerDomaine, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 345, Short.MAX_VALUE)
+                .addComponent(libelleDomaineErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(303, 303, 303))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(59, 59, 59)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(buttonSupprimerDomaine, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                        .addComponent(labelDomaine, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(supprimerDomaineButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                        .addComponent(domaineLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(labelLibelleDomaine)
+                            .addComponent(libelleDomaineLabel)
                             .addGap(18, 18, 18)
-                            .addComponent(textFieldLibelleDomaine, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(buttonEffacerDomaine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonValiderDomaine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addContainerGap(393, Short.MAX_VALUE)))
+                            .addComponent(libelleDomaineTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(effacerDomaineButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(validerDomaineButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap(504, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(labelErrorValiderDomaine, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labelErrorLibelleDomaine, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
-                .addComponent(labelErrorSupprimerDomaine, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addGap(98, 98, 98)
+                .addComponent(libelleDomaineErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(284, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(35, 35, 35)
-                    .addComponent(labelDomaine)
+                    .addComponent(domaineLabel)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGap(43, 43, 43)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(labelLibelleDomaine)
-                                .addComponent(textFieldLibelleDomaine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(libelleDomaineLabel)
+                                .addComponent(libelleDomaineTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonValiderDomaine)
+                            .addComponent(validerDomaineButton)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonEffacerDomaine)))
+                            .addComponent(effacerDomaineButton)))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonSupprimerDomaine)
+                    .addComponent(supprimerDomaineButton)
                     .addContainerGap(164, Short.MAX_VALUE)))
         );
 
         tabbedPanel.addTab("Domaine", jPanel2);
+
+        effacerMetierButton.setText("Effacer");
+        effacerMetierButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                effacerMetierButtonActionPerformed(evt);
+            }
+        });
+
+        metierList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        metierList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                metierListValueChanged(evt);
+            }
+        });
+        jScrollPane3.setViewportView(metierList);
+
+        labelMetier.setText("Métier");
+
+        domaineCheckBox.setText("Domaine :");
+        domaineCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                domaineCheckBoxStateChanged(evt);
+            }
+        });
+
+        supprimerMetierButton.setText("Supprimer");
+        supprimerMetierButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supprimerMetierButtonActionPerformed(evt);
+            }
+        });
+
+        libelleMetierLabel.setText("Libelle : ");
+
+        validerMetierButton.setText("Valider");
+        validerMetierButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validerMetierButtonActionPerformed(evt);
+            }
+        });
+
+        domaineCombobox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                domaineComboboxItemStateChanged(evt);
+            }
+        });
+
+        libelleMetierErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                                .addComponent(domaineCombobox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(domaineCheckBox))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(effacerMetierButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(validerMetierButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(libelleMetierLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(libelleMetierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(libelleMetierErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(labelMetier, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                        .addComponent(supprimerMetierButton, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
+                .addContainerGap(299, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(labelMetier)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(domaineCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(domaineCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(libelleMetierLabel)
+                                .addComponent(libelleMetierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(libelleMetierErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(validerMetierButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(effacerMetierButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(supprimerMetierButton)
+                .addContainerGap(133, Short.MAX_VALUE))
+        );
+
+        tabbedPanel.addTab("Métier", jPanel3);
 
         jScrollPane4.setViewportView(tabbedPanel);
 
@@ -564,8 +527,8 @@ public class ParamsForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(buttonRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -584,39 +547,39 @@ public class ParamsForm extends javax.swing.JPanel {
         cl.show(mainJFrame.mainPanel, "accueilCard");
     }//GEN-LAST:event_buttonRetourActionPerformed
 
-    private void listTypeContratFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_listTypeContratFocusGained
+    private void typeContratListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_typeContratListFocusGained
         // TODO add your handling code here:
         // On récupère le type de contrat sélectionné
-        TypeContrat tc = (TypeContrat) listTypeContrat.getSelectedValue();
+        TypeContrat tc = (TypeContrat) typeContratList.getSelectedValue();
         
         // Si la sélection n'est pas nulle
         if (tc != null) {
             // On rempli le textField libelle
-            textFieldLibelleTypeContrat.setText(tc.getLibelle());
+            libelleTypeContratTextField.setText(tc.getLibelle());
         }
-    }//GEN-LAST:event_listTypeContratFocusGained
+    }//GEN-LAST:event_typeContratListFocusGained
 
     /**
      * Changement de valeur dans la liste type de contrat
      * @param evt 
      */
-    private void listTypeContratValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listTypeContratValueChanged
+    private void typeContratListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_typeContratListValueChanged
         // TODO add your handling code here:
         // On récupère le type de contrat sélectionné
-        TypeContrat tc = (TypeContrat) listTypeContrat.getSelectedValue();
+        TypeContrat tc = (TypeContrat) typeContratList.getSelectedValue();
         
         // Si la sélection n'est pas nulle
         if (tc != null) {
             // On rempli le textField type contrat
-            textFieldLibelleTypeContrat.setText(tc.getLibelle());
+            libelleTypeContratTextField.setText(tc.getLibelle());
         }  
-    }//GEN-LAST:event_listTypeContratValueChanged
+    }//GEN-LAST:event_typeContratListValueChanged
 
     // Click boutton Supprimer de type contrat
-    private void buttonSupprimerTypeContratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupprimerTypeContratActionPerformed
+    private void supprimerTypeContratButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerTypeContratButtonActionPerformed
         // TODO add your handling code here:
         // On récupère le type de contrat sélectionné
-        TypeContrat tc = (TypeContrat) listTypeContrat.getSelectedValue();
+        TypeContrat tc = (TypeContrat) typeContratList.getSelectedValue();
         
         // Liste des offres ayant ce type de contrat
         ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, tc);
@@ -632,9 +595,9 @@ public class ParamsForm extends javax.swing.JPanel {
         // Si liste pas vide = reste des offres pour ce type de contrats
         else {
             // Affiche l'erreur
-            mainJFrame.affichagePopUpInfo("Suppression impossible, des offres correspondent au type de contrat","Information");
+            mainJFrame.affichagePopUpInfo("Suppression impossible, des offres correspondent au type de contrat","Erreur");
         } 
-    }//GEN-LAST:event_buttonSupprimerTypeContratActionPerformed
+    }//GEN-LAST:event_supprimerTypeContratButtonActionPerformed
 
     // Click boutton effacer panneau type de contrat
     private void buttonEffacerTypeContratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEffacerTypeContratActionPerformed
@@ -650,16 +613,15 @@ public class ParamsForm extends javax.swing.JPanel {
         ArrayList<TypeContrat> typeContrats = TypeContratDAO.lister(mainJFrame.cnx);
         
         // On récupère le libelle du type de contrat
-        String libelle = textFieldLibelleTypeContrat.getText();
+        String libelle = libelleTypeContratTextField.getText();
         
         // Si le libelle est vide
         if (libelle.equals("")) {
             // Affiche l'erreur
-            labelErrorLibelleTypeContrat.setText("Veuillez saisir un libelle !");
-            labelErrorValiderTypeContrat.setText("");
+            libelleTypeContratErreurLabel.setText("Veuillez saisir un libelle !");
         }
         else {
-            labelErrorLibelleTypeContrat.setText("");
+            libelleTypeContratErreurLabel.setText("");
             boolean exist = false;
 
             // Pour chaque type de contrat
@@ -692,22 +654,21 @@ public class ParamsForm extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonValiderTypeContratActionPerformed
 
     // Click boutton valider du panneau domaine
-    private void buttonValiderDomaineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonValiderDomaineActionPerformed
+    private void validerDomaineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerDomaineButtonActionPerformed
         // TODO add your handling code here:
         // Lisye de tous les domaines
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
         
         // On récupère le libelle du domaine
-        String libelle = textFieldLibelleDomaine.getText();
+        String libelle = libelleDomaineTextField.getText();
         
         // Si le libelle est vide -> on affiche l'erreur
         if (libelle.equals("")) {
-            labelErrorLibelleDomaine.setText("Veuillez saisir un libelle !");
-            labelErrorValiderDomaine.setText("");
+            libelleDomaineErreurLabel.setText("Veuillez saisir un libelle !");
         }
         // Si pas vide
         else {
-            labelErrorLibelleDomaine.setText("");
+            libelleDomaineErreurLabel.setText("");
             boolean exist = false;
 
             // pour chaque domaine on regarde si il existe déjà
@@ -740,13 +701,13 @@ public class ParamsForm extends javax.swing.JPanel {
             }
         }
         
-    }//GEN-LAST:event_buttonValiderDomaineActionPerformed
+    }//GEN-LAST:event_validerDomaineButtonActionPerformed
 
     // Click boutton supprimer du panneau domaine
-    private void buttonSupprimerDomaineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupprimerDomaineActionPerformed
+    private void supprimerDomaineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerDomaineButtonActionPerformed
         // TODO add your handling code here:
         // On récupère le domaine sélectionné
-        Domaine d = (Domaine) listDomaine.getSelectedValue();
+        Domaine d = (Domaine) domaineList.getSelectedValue();
         
         // Liste des offres du domaine
         ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, d);
@@ -764,84 +725,84 @@ public class ParamsForm extends javax.swing.JPanel {
         }
         // Pas d'offres mais des métiers pour ce domaine
         if (offres.isEmpty() && !metiers.isEmpty()) {
-            labelErrorSupprimerDomaine.setText("Suppression impossible, des métiers correspondent au domaine");
+            mainJFrame.affichagePopUpInfo("Suppression impossible, des métiers correspondent au domaine","Erreur");
         }
         // Des offres mais pas de métiers pour ce domaine
         if (!offres.isEmpty() && metiers.isEmpty()) {
-            labelErrorSupprimerDomaine.setText("Suppression impossible, des offres correspondent au domaine");
+            mainJFrame.affichagePopUpInfo("Suppression impossible, des offres correspondent au domaine","Erreur");
         }
         // Des offres et des métiers pour ce domaine
         if (!offres.isEmpty() && !metiers.isEmpty()) {
-            labelErrorSupprimerDomaine.setText("Suppression impossible,  des offres et des métiers correspondent au domaine");
+            mainJFrame.affichagePopUpInfo("Suppression impossible,  des offres et des métiers correspondent au domaine","Erreur");
         }
-    }//GEN-LAST:event_buttonSupprimerDomaineActionPerformed
+    }//GEN-LAST:event_supprimerDomaineButtonActionPerformed
 
     // Click boutton effacer du panneua domaine
-    private void buttonEffacerDomaineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEffacerDomaineActionPerformed
+    private void effacerDomaineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_effacerDomaineButtonActionPerformed
         // TODO add your handling code here:
         // Vide les champs
         resetDomaine();
-    }//GEN-LAST:event_buttonEffacerDomaineActionPerformed
+    }//GEN-LAST:event_effacerDomaineButtonActionPerformed
 
-    // Changement de valeure liste domaine
-    private void listDomaineValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listDomaineValueChanged
+    // Changement de valeur liste domaine
+    private void domaineListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_domaineListValueChanged
         // TODO add your handling code here:
         // Actualise la liste métier
         refreshListMetier();
         
         // Domaine sélectionné
-        Domaine d = (Domaine) listDomaine.getSelectedValue();
+        Domaine d = (Domaine) domaineList.getSelectedValue();
         if (d != null) {
             // On rempli le textField libelle du domaine
-            textFieldLibelleDomaine.setText(d.getLibelle());
+            libelleDomaineTextField.setText(d.getLibelle());
         }
         
-    }//GEN-LAST:event_listDomaineValueChanged
+    }//GEN-LAST:event_domaineListValueChanged
 
     // Click boutton effacer du panneau métier
-    private void buttonEffacerMetierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEffacerMetierActionPerformed
+    private void effacerMetierButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_effacerMetierButtonActionPerformed
         // TODO add your handling code here:
         // Actualise la liste
         resetMetier();
         
         // Sélectionne rien
-        comboBoxDomaine.setSelectedIndex(-1);
-    }//GEN-LAST:event_buttonEffacerMetierActionPerformed
+        domaineCombobox.setSelectedIndex(-1);
+    }//GEN-LAST:event_effacerMetierButtonActionPerformed
 
     // Changement de valeure de la liste métier
-    private void listMetierValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listMetierValueChanged
+    private void metierListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_metierListValueChanged
         // TODO add your handling code here:
         // Métier selectionné
-        Metier m = (Metier) listMetier.getSelectedValue();
+        Metier m = (Metier) metierList.getSelectedValue();
         
         // Si selection non nulle
         if (m != null) {
             // Rempli le textField libelle du métier
-            textFieldLibelleMetier.setText(m.getLibelle());
+            libelleMetierTextField.setText(m.getLibelle());
         } 
-    }//GEN-LAST:event_listMetierValueChanged
+    }//GEN-LAST:event_metierListValueChanged
 
     // Check box domaine changement d'état
-    private void checkBoxDomaineStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkBoxDomaineStateChanged
+    private void domaineCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_domaineCheckBoxStateChanged
         // TODO add your handling code here:
         // Si checkbox selectionné
-        if (checkBoxDomaine.isSelected()) {
+        if (domaineCheckBox.isSelected()) {
             // on affiche la comboBox
-            comboBoxDomaine.setVisible(true);
+            domaineCombobox.setVisible(true);
         }
         // Pas selectionné
         else {
             // On cache la comboBox
-            comboBoxDomaine.setVisible(false);
+            domaineCombobox.setVisible(false);
         }
         refreshListMetier();
-    }//GEN-LAST:event_checkBoxDomaineStateChanged
+    }//GEN-LAST:event_domaineCheckBoxStateChanged
 
-    // CLick boutton supprimer du panneua métier
-    private void buttonSupprimerMetierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupprimerMetierActionPerformed
+    // CLick boutton supprimer du panneau métier
+    private void supprimerMetierButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerMetierButtonActionPerformed
         // TODO add your handling code here:
         // Métier selectionné
-        Metier m = (Metier) listMetier.getSelectedValue();
+        Metier m = (Metier) metierList.getSelectedValue();
         
         // Liste des offres du métier selctionné
         ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, m);
@@ -856,29 +817,28 @@ public class ParamsForm extends javax.swing.JPanel {
         }
         // Offres associées au métier -> Erreur
         else {
-            mainJFrame.affichagePopUpInfo("Suppression impossible, des offres correspondent au métier","Information");
+            mainJFrame.affichagePopUpInfo("Suppression impossible, des offres correspondent au métier","Erreur");
         }  
-    }//GEN-LAST:event_buttonSupprimerMetierActionPerformed
+    }//GEN-LAST:event_supprimerMetierButtonActionPerformed
 
     // CLick bouton valider du panneau métier
-    private void buttonValiderMetierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonValiderMetierActionPerformed
+    private void validerMetierButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerMetierButtonActionPerformed
         // TODO add your handling code here:
         // Liste de tous les métiers
         ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx);
         
         // On récupère le libelle du métier
-        String libelle = textFieldLibelleMetier.getText();
+        String libelle = libelleMetierTextField.getText();
         Domaine d = null;
         boolean exist = false;
 
         // Si libelle vide -> erreur
         if (libelle.equals("")) {
-            labelErrorLibelleMetier.setText("Veuillez saisir un libelle !");
-            labelErrorValiderMetier.setText("");
+            libelleMetierErreurLabel.setText("Veuillez saisir un libelle !");
         }
         // Non vide
         else {
-            labelErrorLibelleMetier.setText("");
+            libelleMetierErreurLabel.setText("");
             
             // On regarde si le métier existe déjà
             for (Metier m : metiers) {
@@ -888,9 +848,9 @@ public class ParamsForm extends javax.swing.JPanel {
             }
             
             // Si checkBox domaine sélectionné
-            if (checkBoxDomaine.isSelected()) {
+            if (domaineCheckBox.isSelected()) {
                 // On récupère le domaine sélectionné dans la comboBox
-                d = (Domaine) comboBoxDomaine.getSelectedItem();
+                d = (Domaine) domaineCombobox.getSelectedItem();
             }
 
             // Métier existe déjà
@@ -908,27 +868,34 @@ public class ParamsForm extends javax.swing.JPanel {
                 resetMetier();
             } 
         }
-    }//GEN-LAST:event_buttonValiderMetierActionPerformed
+    }//GEN-LAST:event_validerMetierButtonActionPerformed
 
-    private void comboBoxDomaineItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxDomaineItemStateChanged
+    // Permet le refresh de la List de metiers
+    private void domaineComboboxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_domaineComboboxItemStateChanged
         // TODO add your handling code here:
         refreshListMetier();
-    }//GEN-LAST:event_comboBoxDomaineItemStateChanged
+    }//GEN-LAST:event_domaineComboboxItemStateChanged
+
+    // Refresh des List et de la ComboBox de la page
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        refreshListDomaine();
+        refreshComboBoxDomaine();
+        refreshListMetier();
+        refreshListTypeContrat();
+    }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonEffacerDomaine;
-    private javax.swing.JButton buttonEffacerMetier;
     private javax.swing.JButton buttonEffacerTypeContrat;
     private javax.swing.JButton buttonRetour;
-    private javax.swing.JButton buttonSupprimerDomaine;
-    private javax.swing.JButton buttonSupprimerMetier;
-    private javax.swing.JButton buttonSupprimerTypeContrat;
-    private javax.swing.JButton buttonValiderDomaine;
-    private javax.swing.JButton buttonValiderMetier;
     private javax.swing.JButton buttonValiderTypeContrat;
-    private javax.swing.JCheckBox checkBoxDomaine;
-    private javax.swing.JComboBox comboBoxDomaine;
+    private javax.swing.JCheckBox domaineCheckBox;
+    private javax.swing.JComboBox domaineCombobox;
+    private javax.swing.JLabel domaineLabel;
+    private javax.swing.JList domaineList;
+    private javax.swing.JButton effacerDomaineButton;
+    private javax.swing.JButton effacerMetierButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -936,27 +903,24 @@ public class ParamsForm extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JLabel labelDomaine;
-    private javax.swing.JLabel labelErrorLibelleDomaine;
-    private javax.swing.JLabel labelErrorLibelleMetier;
-    private javax.swing.JLabel labelErrorLibelleTypeContrat;
-    private javax.swing.JLabel labelErrorSupprimerDomaine;
-    private javax.swing.JLabel labelErrorSupprimerMetier;
-    private javax.swing.JLabel labelErrorSupprimerTypeContrat;
-    private javax.swing.JLabel labelErrorValiderDomaine;
-    private javax.swing.JLabel labelErrorValiderMetier;
-    private javax.swing.JLabel labelErrorValiderTypeContrat;
-    private javax.swing.JLabel labelLibelleDomaine;
-    private javax.swing.JLabel labelLibelleMetier;
-    private javax.swing.JLabel labelLibelleTypeContrat;
     private javax.swing.JLabel labelMetier;
-    private javax.swing.JList listDomaine;
-    private javax.swing.JList listMetier;
-    private javax.swing.JList listTypeContrat;
+    private javax.swing.JLabel libelleDomaineErreurLabel;
+    private javax.swing.JLabel libelleDomaineLabel;
+    private javax.swing.JTextField libelleDomaineTextField;
+    private javax.swing.JLabel libelleMetierErreurLabel;
+    private javax.swing.JLabel libelleMetierLabel;
+    private javax.swing.JTextField libelleMetierTextField;
+    private javax.swing.JLabel libelleTypeContratErreurLabel;
+    private javax.swing.JLabel libelleTypeContratLabel;
+    private javax.swing.JTextField libelleTypeContratTextField;
+    private javax.swing.JList metierList;
+    private javax.swing.JButton supprimerDomaineButton;
+    private javax.swing.JButton supprimerMetierButton;
+    private javax.swing.JButton supprimerTypeContratButton;
     private javax.swing.JTabbedPane tabbedPanel;
-    private javax.swing.JTextField textFieldLibelleDomaine;
-    private javax.swing.JTextField textFieldLibelleMetier;
-    private javax.swing.JTextField textFieldLibelleTypeContrat;
     private javax.swing.JLabel typeContratLabel;
+    private javax.swing.JList typeContratList;
+    private javax.swing.JButton validerDomaineButton;
+    private javax.swing.JButton validerMetierButton;
     // End of variables declaration//GEN-END:variables
 }

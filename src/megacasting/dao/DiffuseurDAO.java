@@ -37,8 +37,6 @@ public class DiffuseurDAO {
                     + "(Id) "
                     + "VALUES (" + diffuseur.getId() 
                     + ")");
-
-            System.out.println("La société " + diffuseur.getRaisonSociale() + "(Id = " + diffuseur.getId() + ") a été ajoutée !");   
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -62,7 +60,6 @@ public class DiffuseurDAO {
         
         SocieteDAO.modifier(cnx, diffuseur);
         
-        System.out.println("Le diffuseur " + diffuseur.getRaisonSociale() + " a été modifié !");
     }
     
     public static void supprimer (Connection cnx, Diffuseur diffuseur) {
@@ -76,8 +73,7 @@ public class DiffuseurDAO {
             );
             
             SocieteDAO.supprimer(cnx, diffuseur);
-
-            System.out.println("Le diffuseur " + diffuseur.getRaisonSociale() + " a été supprimé !");            
+       
             
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -40,7 +40,6 @@ public class AdresseDAO {
             
             if(rs.next()) {
                 a.setId(rs.getLong(1));
-                System.out.println("Adresse ajoutée ! (Id = " + a.getId() + ")");
             }
             
             
@@ -76,7 +75,6 @@ public class AdresseDAO {
                     + "' WHERE Id = " + a.getId()
             );
 
-            System.out.println("Adresse modifiée !");
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -100,8 +98,7 @@ public class AdresseDAO {
             stmt.executeUpdate("DELETE FROM Adresse "
                     + "WHERE Id = " + a.getId()
             );
-
-            System.out.println("Adresse supprimée !");            
+         
             
         } catch (SQLException ex) {
             ex.printStackTrace();

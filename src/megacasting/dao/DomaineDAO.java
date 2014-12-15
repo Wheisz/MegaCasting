@@ -37,7 +37,6 @@ public class DomaineDAO {
             
             if(rs.next()) {
                 d.setId(rs.getLong(1));
-                System.out.println("Domaine ajouté ! (Id = " + d.getId() + ")");
             }
             
             
@@ -70,8 +69,6 @@ public class DomaineDAO {
                     +" WHERE Id="+d.getId()
             );
 
-            System.out.println("Domaine modifié !");
-            
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
@@ -93,9 +90,7 @@ public class DomaineDAO {
             
             stmt.executeUpdate("DELETE FROM Domaine "
                     + "WHERE Id = " + d.getId()
-            );
-
-            System.out.println("Domaine supprimé !");            
+            );         
             
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -6,9 +6,7 @@
 package megacasting.view;
 
 import java.awt.CardLayout;
-import static java.time.Instant.now;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import megacasting.dao.AnnonceurDAO;
 import megacasting.dao.DomaineDAO;
@@ -51,7 +49,7 @@ public class StatistiqueForm extends javax.swing.JPanel {
             metiers = MetierDAO.lister(mainJFrame.cnx, d);
             
             // Liste des offres du domaine (celles qui n'ont pas de métier)
-            ArrayList<Offre> offresFinal = OffreDAO.lister(mainJFrame.cnx, d);
+            ArrayList<Offre> offresFinal = OffreDAO.lister(mainJFrame.cnx, d , null);
             
             // On initialise le nb de postes à 0
             int nbPostes = 0;
@@ -60,13 +58,13 @@ public class StatistiqueForm extends javax.swing.JPanel {
             for (Metier m : metiers) {
                 // Liste des offres du métier (et donc du domaine)
                 ArrayList<Offre> offresTemp = OffreDAO.lister(mainJFrame.cnx, m);
-                
                 // Pour chaque offre du métier
                 for (Offre o : offresTemp) {
                     // On l'ajoute à la liste des offres du domaine
                     offresFinal.add(o);
                 }
             }
+            
             // Pour chaque offre du domaine
             for (Offre of : offresFinal) {
                 // On compte le nombre de postes

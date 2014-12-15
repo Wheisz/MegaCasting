@@ -9,23 +9,10 @@ import java.awt.CardLayout;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import megacasting.MegaCasting;
-import megacasting.dao.AdresseDAO;
-import megacasting.dao.AnnonceurDAO;
-import megacasting.dao.DomaineDAO;
-import megacasting.dao.MetierDAO;
-import megacasting.dao.OffreDAO;
-import megacasting.dao.TypeContratDAO;
-import megacasting.entite.Adresse;
-import megacasting.entite.Annonceur;
-import megacasting.entite.Domaine;
-import megacasting.entite.Metier;
-import megacasting.entite.Offre;
-import megacasting.entite.TypeContrat;
+
 
 /**
  *
@@ -34,9 +21,6 @@ import megacasting.entite.TypeContrat;
 public class MainJFrame extends javax.swing.JFrame {
 
     private AccueilForm accueilForm;
-    private AdresseForm adresseForm;
-    private AnnonceurForm annonceurForm;
-    private DiffuseurForm diffuseurForm;
     private OffreForm offreForm;
     private SocieteForm societeForm;
     private ParamsForm paramsForm;
@@ -48,8 +32,8 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     public MainJFrame() {
-            initComponents();      
-        MegaCasting.loadDriver();
+        initComponents();      
+        loadDriver();
         String url = "jdbc:jtds:sqlserver://localhost:1433/MegaCastingCL";
         
         try {
@@ -68,20 +52,20 @@ public class MainJFrame extends javax.swing.JFrame {
         } 
     }
 
+    private void loadDriver() {
+        try {
+             //Chargement du driver MSSQL Server
+             Class.forName("net.sourceforge.jtds.jdbc.Driver");
+        } catch (ClassNotFoundException ex) { 
+             ex.printStackTrace();
+            } 
+        }
+    
     private void loadCardLayout()
     {
         // Accueil
         accueilForm = new AccueilForm(this);
         mainPanel.add(accueilForm, "accueilCard");
-        // Adresse
-        adresseForm = new AdresseForm(this);
-        mainPanel.add(adresseForm, "adresseCard");
-        // Annonceur
-        annonceurForm = new AnnonceurForm(this);
-        mainPanel.add(annonceurForm, "annonceurCard");
-        // Diffuseur
-        diffuseurForm = new DiffuseurForm(this);
-        mainPanel.add(diffuseurForm, "diffuseurCard");
         // Offre
         offreForm = new OffreForm(this);
         mainPanel.add(offreForm, "offreCard");
@@ -164,6 +148,70 @@ public class MainJFrame extends javax.swing.JFrame {
                      contenu,
                      titre,
                      JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    protected Boolean regexCoordonnees(String coordonnée) {
+        Pattern p = Pattern.compile("^[0-9]{2}° [0-9]{2}' [N-S-E-O]{1}$");
+        Matcher m = p.matcher(coordonnée);
+        Boolean b = m.matches();
+
+        return b;
+    }
+
+    protected Boolean regexReference(String reference) {
+        Pattern p = Pattern.compile("^[a-zA-Z0-9_-]+$");
+        Matcher m = p.matcher(reference);
+        Boolean b = m.matches();
+
+        return b;
+    }
+
+    protected Boolean regexTelephone(String telephone) {
+        Pattern p = Pattern.compile("^0[1-68]([.-]?[0-9]{2}){4}$");
+        Matcher m = p.matcher(telephone);
+        Boolean b = m.matches();
+
+        return b;
+    }
+
+    protected Boolean regexEmail(String email) {
+        Pattern p = Pattern.compile("^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$");
+        Matcher m = p.matcher(email);
+        Boolean b = m.matches();
+
+        return b;
+    }
+    
+    protected Boolean regexNumeroSiret(String numeroSiret) {
+        Pattern p = Pattern.compile("^[0-9]{14}$");
+        Matcher m = p.matcher(numeroSiret);
+        Boolean b = m.matches();
+
+        return b;
+    }
+
+    protected Boolean regexRue(String rue) {
+        Pattern p = Pattern.compile("^\\p{L}*$");
+        Matcher m = p.matcher(rue);
+        Boolean b = m.matches();
+
+        return b;
+    }
+
+    protected Boolean regexCodePostal(String codePostal) {
+        Pattern p = Pattern.compile("^[0-9]{5}$");
+        Matcher m = p.matcher(codePostal);
+        Boolean b = m.matches();
+
+        return b;
+    }
+
+    protected Boolean regexVille(String ville) {
+        Pattern p = Pattern.compile("^[a-zA-Z-éèêëàâîïôöûü]$");
+        Matcher m = p.matcher(ville);
+        Boolean b = m.matches();
+
+        return b;
     }
     
     /**
