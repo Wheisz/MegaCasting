@@ -12,10 +12,12 @@ import java.util.regex.Pattern;
 import javax.swing.DefaultListModel;
 import megacasting.dao.AnnonceurDAO;
 import megacasting.dao.DiffuseurDAO;
+import megacasting.dao.OffreDAO;
 import megacasting.dao.SocieteDAO;
 import megacasting.entite.Adresse;
 import megacasting.entite.Annonceur;
 import megacasting.entite.Diffuseur;
+import megacasting.entite.Offre;
 import megacasting.entite.Societe;
 
 /**
@@ -434,21 +436,44 @@ public class SocieteForm extends javax.swing.JPanel {
             Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, societe.getId());
             // Si oui
             if (a != null) {
-                // Demande de validation de suppression
-                int retour = mainJFrame.affichagePopUpValidation("La suppresion de la société entraîne la suppresion des offres rattachées", "Attention");
+                // On test si la société a des offres
+                ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, a);
+                
                 // Si oui
-                if (retour == 0) {
-                    try {
-                        // Suppression de l'annonceur en base de données
-                        AnnonceurDAO.supprimer(mainJFrame.cnx, a);
-                        // On affiche un message confirmant la suppression de l'annonceur
-                        mainJFrame.affichagePopUpInfo("Suppression de l'annonceur réussie", "Information");
-                    } catch (Exception e) {
-                        // On affiche un message si une erreur s'est produite lors de la suppression de l'annonceur
-                        mainJFrame.affichagePopUpInfo(e.toString(), "Information");
+                if (!offres.isEmpty()) {
+                    // Demande de validation de suppression
+                    int retour = mainJFrame.affichagePopUpValidation("Supprimer l'annonceur ?", "Confirmation");
+                    // Si oui
+                    if (retour == 0) {
+                        try {
+                            // Suppression de l'annonceur en base de données
+                            AnnonceurDAO.supprimer(mainJFrame.cnx, a);
+                            // On affiche un message confirmant la suppression de l'annonceur
+                            mainJFrame.affichagePopUpInfo("Suppression de l'annonceur réussie", "Information");
+                        } catch (Exception e) {
+                            // On affiche un message si une erreur s'est produite lors de la suppression de l'annonceur
+                            mainJFrame.affichagePopUpInfo(e.toString(), "Information");
+                        }
                     }
                 }
-                // Si non alors c'est un diffuseur
+                // Si non
+                else {
+                    // Demande de validation de suppression
+                    int retour = mainJFrame.affichagePopUpValidation("La suppresion de la société entraîne la suppresion des offres rattachées", "Attention");
+                    // Si oui
+                    if (retour == 0) {
+                        try {
+                            // Suppression de l'annonceur en base de données
+                            AnnonceurDAO.supprimer(mainJFrame.cnx, a);
+                            // On affiche un message confirmant la suppression de l'annonceur
+                            mainJFrame.affichagePopUpInfo("Suppression de l'annonceur réussie", "Information");
+                        } catch (Exception e) {
+                            // On affiche un message si une erreur s'est produite lors de la suppression de l'annonceur
+                            mainJFrame.affichagePopUpInfo(e.toString(), "Information");
+                        }
+                    }
+                }
+            // Si non alors c'est un diffuseur
             } else {
                 // On recupere le diffuseur
                 Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, societe.getId());
