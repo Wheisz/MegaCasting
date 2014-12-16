@@ -191,7 +191,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     protected Boolean regexRue(String rue) {
-        Pattern p = Pattern.compile("^\\p{L}*$");
+        Pattern p = Pattern.compile("^[a-zA-Z-éèëäâàüûïîöô ]*$");
         Matcher m = p.matcher(rue);
         Boolean b = m.matches();
 
@@ -207,7 +207,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     protected Boolean regexVille(String ville) {
-        Pattern p = Pattern.compile("^[a-zA-Z-éèêëàâîïôöûü]$");
+        Pattern p = Pattern.compile("^[a-zA-Z-éèëäâàüûïîöô ]*$");
         Matcher m = p.matcher(ville);
         Boolean b = m.matches();
 

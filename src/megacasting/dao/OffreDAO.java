@@ -62,11 +62,12 @@ public class OffreDAO {
                     + "                              MAX(IdAnnonceur) as Annonceur FROM Offre");
             
             if(rs.next()) {
+
                 o.setId(rs.getLong(1));
-                o.setIdDomaine(rs.getLong(2));
-                o.setIdMetier(rs.getLong(3));
-                o.setIdTypeContrat(rs.getLong(4));
-                o.setIdAnnonceur(rs.getLong(5));
+                o.getDomaine().setId(rs.getLong(2));
+                o.getMetier().setId(rs.getLong(3));
+                o.getTypeContrat().setId(rs.getLong(4));
+                o.getAnnonceur().setId(rs.getLong(4));
             }  
             }
             
@@ -89,10 +90,10 @@ public class OffreDAO {
             
             if(rs.next()) {
                 o.setId(rs.getLong(1));
-                o.setIdDomaine(rs.getLong(2));
-                o.setIdMetier(rs.getLong(3));
-                o.setIdTypeContrat(rs.getLong(4));
-                o.setIdAnnonceur(rs.getLong(5));
+                o.getDomaine().setId(rs.getLong(2));
+                o.getMetier().setId(rs.getLong(3));
+                o.getTypeContrat().setId(rs.getLong(4));
+                o.getAnnonceur().setId(rs.getLong(4));
             }  
             }
             
@@ -115,10 +116,10 @@ public class OffreDAO {
             
             if(rs.next()) {
                 o.setId(rs.getLong(1));
-                o.setIdDomaine(rs.getLong(2));
-                o.setIdMetier(rs.getLong(3));
-                o.setIdTypeContrat(rs.getLong(4));
-                o.setIdAnnonceur(rs.getLong(5));
+                o.getDomaine().setId(rs.getLong(2));
+                o.getMetier().setId(rs.getLong(3));
+                o.getTypeContrat().setId(rs.getLong(4));
+                o.getAnnonceur().setId(rs.getLong(4));
             }  
             }
         

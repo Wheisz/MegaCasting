@@ -39,10 +39,6 @@ public class Offre {
     private Metier metier;
     private TypeContrat typeContrat;
     private Annonceur annonceur;
-    private long idDomaine;
-    private long idMetier;
-    private long idTypeContrat;
-    private long idAnnonceur;
 
     public long getId() {
         return id;
@@ -176,38 +172,6 @@ public class Offre {
         this.annonceur = annonceur;
     }
 
-    public long getIdDomaine() {
-        return idDomaine;
-    }
-
-    public void setIdDomaine(long idDomaine) {
-        this.idDomaine = idDomaine;
-    }
-
-    public long getIdMetier() {
-        return idMetier;
-    }
-
-    public void setIdMetier(long idMetier) {
-        this.idMetier = idMetier;
-    }
-
-    public long getIdTypeContrat() {
-        return idTypeContrat;
-    }
-
-    public void setIdTypeContrat(long idTypeContrat) {
-        this.idTypeContrat = idTypeContrat;
-    }
-
-    public long getIdAnnonceur() {
-        return idAnnonceur;
-    }
-
-    public void setIdAnnonceur(long idAnnonceur) {
-        this.idAnnonceur = idAnnonceur;
-    }
-
     @Override
     public String toString() {
         return intitule;
@@ -277,18 +241,6 @@ public class Offre {
             return false;
         }
         if (!Objects.equals(this.annonceur, other.annonceur)) {
-            return false;
-        }
-        if (this.idDomaine != other.idDomaine) {
-            return false;
-        }
-        if (this.idMetier != other.idMetier) {
-            return false;
-        }
-        if (this.idTypeContrat != other.idTypeContrat) {
-            return false;
-        }
-        if (this.idAnnonceur != other.idAnnonceur) {
             return false;
         }
         return true;
@@ -376,77 +328,4 @@ public class Offre {
         this.annonceur = annonceur;
     }
     
-    public Offre(long id, String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, TypeContrat typeContrat, Annonceur annonceur) {
-        this.id = id;
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication =  new Date();
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = dateDebutContrat;
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.domaine = domaine;
-        this.typeContrat = typeContrat;
-        this.annonceur = annonceur;
-    }
-    
-    public Offre(String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, TypeContrat typeContrat, Annonceur annonceur) {
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication =  new Date();
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = dateDebutContrat;
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.domaine = domaine;
-        this.typeContrat = typeContrat;
-        this.annonceur = annonceur;
-    }
-    
-    public Offre(long id, String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
-        this.id = id;
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication =  new Date();
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = dateDebutContrat;
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.metier = metier;
-        this.typeContrat = typeContrat;
-        this.annonceur = annonceur;
-    }
-    
-    public Offre(String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication =  new Date();
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = dateDebutContrat;
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.metier = metier;
-        this.typeContrat = typeContrat;
-        this.annonceur = annonceur;
-    }
 }

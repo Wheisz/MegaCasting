@@ -28,12 +28,12 @@ import megacasting.entite.TypeContrat;
  * @author theodore
  */
 public class OffreForm extends javax.swing.JPanel {
-
+    
     private MainJFrame mainJFrame;
 
     // Creation d'une enumeration d'erreurs
     public enum Erreur {
-
+        
         ERREUR_INTITULE_VIDE, ERREUR_REFERENCE_VIDE, ERREUR_REFERENCE_INVALIDE, ERREUR_REFERENCE_EXISTANT,
         ERREUR_DUREEDIFFUSION_VIDE, ERREUR_DATEDEBUTCONTRAT_VIDE, ERREUR_DATEDEBUTCONTRAT_INVALIDE,
         ERREUR_NBPOSTE_VIDE, ERREUR_LATTITUDE_VIDE, ERREUR_LATTITUDE_INVALIDE, ERREUR_LONGITUDE_VIDE,
@@ -41,7 +41,7 @@ public class OffreForm extends javax.swing.JPanel {
         ERREUR_TELEPHONE_VIDE, ERREUR_TELEPHONE_INVALIDE, ERREUR_EMAIL_VIDE, ERREUR_EMAIL_INVALIDE,
         ERREUR_IDANNONCEUR_VIDE, ERREUR_DOMAINE_METIER_VIDE;
     }
-
+    
     public OffreForm(MainJFrame mainJFrame) {
         this.mainJFrame = mainJFrame;
         initComponents();
@@ -55,7 +55,7 @@ public class OffreForm extends javax.swing.JPanel {
         typeContratList.setModel(typeContratListModel);
         DefaultListModel<Offre> offreListModel = new DefaultListModel<>();
         offreList.setModel(offreListModel);
-
+        
         DefaultComboBoxModel<Annonceur> annonceurComboBoxModel = new DefaultComboBoxModel<>();
         annonceurOffreComboBox.setModel(annonceurComboBoxModel);
         DefaultComboBoxModel<Domaine> domaineComboBoxModel = new DefaultComboBoxModel<>();
@@ -64,13 +64,13 @@ public class OffreForm extends javax.swing.JPanel {
         metierOffreComboBox.setModel(metierComboBoxModel);
         DefaultComboBoxModel<TypeContrat> typeContratComboBoxModel = new DefaultComboBoxModel<>();
         typeContratOffreComboBox.setModel(typeContratComboBoxModel);
-
+        
         this.datePublicationLabel.setVisible(false);
         this.datePublicationTextField.setVisible(false);
-
+        
         refreshList();
         refreshComboBox();
-
+        
     }
 
     /**
@@ -389,7 +389,7 @@ public class OffreForm extends javax.swing.JPanel {
                                 .addComponent(effacerOffreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(validerOffreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                                 .addComponent(accueilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
@@ -633,7 +633,7 @@ public class OffreForm extends javax.swing.JPanel {
         // On recupere le model de la liste des offres
         DefaultListModel modelOffre = (DefaultListModel) offreList.getModel();
         modelOffre.clear();
-
+        
         if (d != null) {
             // Liste des metiers
             ArrayList<Metier> metiers = MetierDAO.lister(mainJFrame.cnx, d);
@@ -662,7 +662,7 @@ public class OffreForm extends javax.swing.JPanel {
     // Evenement lié à la selection d'une offre dans la liste des offres
     private void selectionOffre(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selectionOffre
         // TODO add your handling code here:
-
+        razErreurs();
         // On recupere l'offre qu'on a selectionné 
         Offre o = (Offre) offreList.getSelectedValue();
         // On rempli le formulaire avec les informations de l'offre selectionné, si elle est different de null
@@ -681,12 +681,12 @@ public class OffreForm extends javax.swing.JPanel {
             this.descriptionProfilTextArea.setText(o.getDescriptionProfil());
             this.telephoneTextField.setText(o.getTelephone());
             this.emailTextField.setText(o.getEmail());
-
+            
             this.typeContratOffreComboBox.setSelectedItem(o.getTypeContrat());
             this.domaineOffreComboBox.setSelectedItem(o.getDomaine());
             this.annonceurOffreComboBox.setSelectedItem(o.getAnnonceur());
             this.metierOffreComboBox.setSelectedItem(o.getMetier());
-
+            
         }
 
     }//GEN-LAST:event_selectionOffre
@@ -694,6 +694,14 @@ public class OffreForm extends javax.swing.JPanel {
     // Boutton de validation du formulaire d'une offre
     private void validerOffreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerOffreButtonActionPerformed
         // TODO add your handling code here:
+
+        long id = 0;
+        // On recupere l'offre si on la selectionne dans la liste
+        Offre oTemp = (Offre) offreList.getSelectedValue();
+        if (oTemp != null) {
+            // On stocke l'id de l'offre
+            id = oTemp.getId();
+        }
 
         //Creation d'un ArrayList qui va contenir les erreurs potentiels lié au formulaire
         ArrayList<Erreur> erreurs = verifFormulaire();
@@ -716,54 +724,76 @@ public class OffreForm extends javax.swing.JPanel {
             TypeContrat typeContrat = (TypeContrat) this.typeContratOffreComboBox.getSelectedItem();
             Annonceur annonceur = (Annonceur) this.annonceurOffreComboBox.getSelectedItem();
             // On teste si l'offre est deja en base de données
-            Offre o = OffreDAO.trouver(mainJFrame.cnx, reference);
+            Offre o = OffreDAO.trouver(mainJFrame.cnx, id);
             // Si oui 
             if (o == null) {
-                try {
-                    // On instancie une nouvelle offre
-                    o = new Offre(intitule, reference, dureeDiffusion,
-                            dateDebutContrat, nbPoste, lattitude, longitude, descriptionPoste, descriptionProfil,
-                            telephone, email, domaine, metier, typeContrat, annonceur);
-                    // On crée l'offre en base de données
-                    OffreDAO.creer(mainJFrame.cnx, o);
-                    // On affiche un message confirmant la création de l'offre
-                    mainJFrame.affichagePopUpInfo("Offre crée", "Information");
-                } catch (Exception e) {
-                    // On affiche un message si une erreur est intervenue lors de la creation de l'offre
-                    mainJFrame.affichagePopUpInfo(e.toString(), "Erreur");
+                // On effectue une deuxieme verfication du formulaire plus poussée
+                erreurs = verifFormulaireCreation();
+                // Si aucune erreur
+                if (erreurs.isEmpty()) {
+                    try {
+                        // On instancie une nouvelle offre
+                        o = new Offre(intitule, reference, dureeDiffusion,
+                                dateDebutContrat, nbPoste, lattitude, longitude, descriptionPoste, descriptionProfil,
+                                telephone, email, domaine, metier, typeContrat, annonceur);
+                        // On crée l'offre en base de données
+                        OffreDAO.creer(mainJFrame.cnx, o);
+                        // On affiche un message confirmant la création de l'offre
+                        mainJFrame.affichagePopUpInfo("Offre crée", "Information");
+                    } catch (Exception e) {
+                        // On affiche un message si une erreur est intervenue lors de la creation de l'offre
+                        mainJFrame.affichagePopUpInfo(e.toString(), "Erreur");
+                    }
+                    // On vide les TextField du formulaire de l'offre
+                    raz();
+                    // On rafraichie la liste des offres
+                    refreshList();
+                // Sinon on affiche les erreurs
+                } else {
+                    affichageErreurs(erreurs);
                 }
                 // Si non    
             } else {
-                // On modfie les informations de l'offre
-                o.setIntitule(intitule);
-                o.setReference(reference);
-                o.setDureeDiffusion(dureeDiffusion);
-                o.setDateDebutContrat(dateDebutContrat);
-                o.setNbPoste(nbPoste);
-                o.setLocalisationLattitude(lattitude);
-                o.setLocalisationLongitude(longitude);
-                o.setDescriptionPoste(descriptionPoste);
-                o.setDescriptionProfil(descriptionProfil);
-                o.setTelephone(telephone);
-                o.setEmail(email);
-                o.setDomaine(domaine);
-                o.setMetier(metier);
-                o.setTypeContrat(typeContrat);
-                o.setAnnonceur(annonceur);
-                try {
-                    // On enregistre les modifications de l'offre en base de données
-                    OffreDAO.modifier(mainJFrame.cnx, o);
-                    // On affiche un message confirmant la modification de l'offre
-                    mainJFrame.affichagePopUpInfo("Offre modifiée", "Information");
-                } catch (Exception ex) {
-                    // On affiche un message si une erreur est intervenue lors de la modification de l'offre
-                    mainJFrame.affichagePopUpInfo(ex.toString(), "Information");
+                // On recupere l'offre tel qu'elle etait avant la modification
+                Offre offreOld = OffreDAO.trouver(mainJFrame.cnx, id);
+                // On effectue une deuxieme verification du formaulaire plus poussée
+                erreurs = verifFormulaireModification(offreOld);
+                // Si aucune erreur
+                if (erreurs.isEmpty()) {
+                    // On modfie les informations de l'offre
+                    o.setIntitule(intitule);
+                    o.setReference(reference);
+                    o.setDureeDiffusion(dureeDiffusion);
+                    o.setDateDebutContrat(dateDebutContrat);
+                    o.setNbPoste(nbPoste);
+                    o.setLocalisationLattitude(lattitude);
+                    o.setLocalisationLongitude(longitude);
+                    o.setDescriptionPoste(descriptionPoste);
+                    o.setDescriptionProfil(descriptionProfil);
+                    o.setTelephone(telephone);
+                    o.setEmail(email);
+                    o.setDomaine(domaine);
+                    o.setMetier(metier);
+                    o.setTypeContrat(typeContrat);
+                    o.setAnnonceur(annonceur);
+                    try {
+                        // On enregistre les modifications de l'offre en base de données
+                        OffreDAO.modifier(mainJFrame.cnx, o);
+                        // On affiche un message confirmant la modification de l'offre
+                        mainJFrame.affichagePopUpInfo("Offre modifiée", "Information");
+                    } catch (Exception ex) {
+                        // On affiche un message si une erreur est intervenue lors de la modification de l'offre
+                        mainJFrame.affichagePopUpInfo(ex.toString(), "Information");
+                    }
+                    // On vide les TextField du formulaire de l'offre
+                    raz();
+                    // On rafraichie la liste des offres
+                    refreshList();
+                // Sinon on affiche les erreurs
+                } else {
+                    affichageErreurs(erreurs);
                 }
             }
-            // On vide les TextField du formulaire de l'offre
-            raz();
-            // On rafraichie la liste des offres
-            refreshList();
         } else {
             // On affiche les erreurs liés à la validation du formulaire
             affichageErreurs(erreurs);
@@ -832,7 +862,7 @@ public class OffreForm extends javax.swing.JPanel {
         // On recupere le model de la liste des offres
         DefaultListModel modelOffre = (DefaultListModel) offreList.getModel();
         modelOffre.clear();
-
+        
         if (a != null) {
             // Liste des offres en fonction de l'annonceur
             ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, a);
@@ -859,7 +889,7 @@ public class OffreForm extends javax.swing.JPanel {
         // On recupere le model de la liste des offres
         DefaultListModel modelOffre = (DefaultListModel) offreList.getModel();
         modelOffre.clear();
-
+        
         if (tc != null) {
             // Liste des offres en fonction du type de contrat
             ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, tc);
@@ -881,7 +911,11 @@ public class OffreForm extends javax.swing.JPanel {
         typeContratList.clearSelection();
         annonceurList.clearSelection();
         offreList.clearSelection();
+        // On refresh la list des offres
+        refreshListOffres();
+        // On clear le formulaire
         raz();
+
 
     }//GEN-LAST:event_reinitialiserButtonActionPerformed
 
@@ -933,7 +967,7 @@ public class OffreForm extends javax.swing.JPanel {
                 raz();
                 refreshList();
             }
-
+            
         }
     }//GEN-LAST:event_supprimerOffreButtonActionPerformed
 
@@ -944,7 +978,7 @@ public class OffreForm extends javax.swing.JPanel {
         refreshComboBox();
     }//GEN-LAST:event_formComponentShown
 
-    // Vide les TextFiels et les labels d'erreurs du formulaire de l'offre
+    // Vide les TextFiels du formulaire de l'offre
     private void raz() {
         this.intituleTextField.setText(null);
         this.referenceTextField.setText(null);
@@ -960,6 +994,11 @@ public class OffreForm extends javax.swing.JPanel {
         this.telephoneTextField.setText(null);
         this.emailTextField.setText(null);
 
+    }
+    
+    // Vide les labels d'erreurs du formulaire de l'offre
+    private void razErreurs(){
+        
         this.intituleErreurLabel.setText(null);
         this.referenceErreurLabel.setText(null);
         this.dureeDiffusionErreurLabel.setText(null);
@@ -973,7 +1012,6 @@ public class OffreForm extends javax.swing.JPanel {
         this.emailErreurLabel.setText(null);
         this.annonceurErreurLabel.setText(null);
         this.domaineMetierErreurLabel.setText(null);
-
     }
 
     // Permet de rafraichir l'ensemble des List de la page
@@ -987,7 +1025,7 @@ public class OffreForm extends javax.swing.JPanel {
 
     // Liste des offres
     private void refreshListOffres() {
-
+        
         DefaultListModel model = (DefaultListModel) offreList.getModel();
         model.clear();
         // Liste de toutes les offres
@@ -998,7 +1036,7 @@ public class OffreForm extends javax.swing.JPanel {
             model.addElement(o);
         }
         offreList.setModel(model);
-
+        
     }
 
     // Liste des annonceurs
@@ -1013,7 +1051,7 @@ public class OffreForm extends javax.swing.JPanel {
             model.addElement(a);
         }
         annonceurList.setModel(model);
-
+        
     }
 
     // Liste des domaines de metiers
@@ -1028,7 +1066,7 @@ public class OffreForm extends javax.swing.JPanel {
             model.addElement(d);
         }
         domaineList.setModel(model);
-
+        
     }
 
     // Liste des metiers
@@ -1043,7 +1081,7 @@ public class OffreForm extends javax.swing.JPanel {
             model.addElement(m);
         }
         metierList.setModel(model);
-
+        
     }
 
     // Liste des types de contrats
@@ -1058,7 +1096,7 @@ public class OffreForm extends javax.swing.JPanel {
             model.addElement(tc);
         }
         typeContratList.setModel(model);
-
+        
     }
 
     // Permet de rafraichir l'ensemble des ComboBox de la page
@@ -1113,7 +1151,7 @@ public class OffreForm extends javax.swing.JPanel {
 
     // Verification du formulaire d'une offre et renvoie un ArrayList null si aucune erreur
     private ArrayList verifFormulaire() {
-
+        
         ArrayList<Erreur> erreurs = new ArrayList();
 
         // Creation d'une erreur si le champ intitule est vide
@@ -1131,18 +1169,11 @@ public class OffreForm extends javax.swing.JPanel {
             if (verifReference != true) {
                 erreurs.add(Erreur.ERREUR_REFERENCE_INVALIDE);
             } else {
-                String reference = this.referenceTextField.getText();
-                // On test si une offre possède déjà cette reference
-                Offre o = OffreDAO.trouver(mainJFrame.cnx, reference);
-                if (o == null) {
-                    this.referenceErreurLabel.setText(null);
-                } else {
-                    erreurs.add(Erreur.ERREUR_REFERENCE_EXISTANT);
-                }
+                this.referenceErreurLabel.setText(null);
             }
         }
         // Creation d'une erreur si la durée de diffusion est égale à 0
-        if ((int) this.dureeDiffusionSpinner.getValue() == 0) {
+        if ((int) this.dureeDiffusionSpinner.getValue() <= 0) {
             erreurs.add(Erreur.ERREUR_DUREEDIFFUSION_VIDE);
         } else {
             this.dureeDiffusionErreurLabel.setText(null);
@@ -1160,7 +1191,7 @@ public class OffreForm extends javax.swing.JPanel {
             }
         }
         // Creation d'une erreur si le nombre de postes est égale à 0
-        if ((int) this.nbPosteSpinner.getValue() == 0) {
+        if ((int) this.nbPosteSpinner.getValue() <= 0) {
             erreurs.add(Erreur.ERREUR_NBPOSTE_VIDE);
         } else {
             this.nbPosteErreurLabel.setText(null);
@@ -1235,15 +1266,62 @@ public class OffreForm extends javax.swing.JPanel {
             erreurs.add(Erreur.ERREUR_DOMAINE_METIER_VIDE);
         }
         return erreurs;
+        
+    }
 
+    // Verification plus pousée du formulaire d'une offre lors de la création
+    // et renvoie un ArrayList null si aucune erreur
+    private ArrayList verifFormulaireCreation() {
+        // Creation d'un tableau d'erreurs
+        ArrayList<Erreur> erreurs = new ArrayList();
+
+        // On stocke la reference de l'offre qu'on souhaite crée
+        String reference = this.referenceTextField.getText();
+        // On verifie si elle n'existe pas déjà
+        Offre o = OffreDAO.trouver(mainJFrame.cnx, reference);
+        //Si oui
+        if (o == null) {
+            // On affiche rien
+            this.referenceErreurLabel.setText(null);
+        } else {
+            // On stocke l'erreur correspondante
+            erreurs.add(Erreur.ERREUR_REFERENCE_EXISTANT);
+        }        
+        return erreurs;
+    }
+
+    // Verification plus pousée du formulaire d'une offre lors de la modification
+    // et renvoie un ArrayList null si aucune erreur
+    private ArrayList verifFormulaireModification(Offre offre) {
+        // Creation  d'un tableau d'erreur
+        ArrayList<Erreur> erreurs = new ArrayList();
+
+        // On stocke l'ancienne reference et lea nouvelle de l'offre
+        String referenceOld = String.valueOf(offre.getReference());
+        String referenceNew = this.referenceTextField.getText();
+
+        // On teste si ils sont differents
+        if (!referenceNew.equals(referenceOld)) {
+            // Si oui, on test si une offre ne possede pas déjà cette reference
+            Offre o = OffreDAO.trouver(mainJFrame.cnx, referenceNew);
+            // Si non
+            if (o == null) {
+                // On affiche rien
+                this.referenceErreurLabel.setText(null);
+            } else {
+                // Sinon, on stocke l'erreur correspondante
+                erreurs.add(Erreur.ERREUR_REFERENCE_EXISTANT);
+            }
+        }
+        return erreurs;
     }
 
     // Affiche dans les labels d'erreurs les erreurs rencontrés
     private void affichageErreurs(ArrayList<Erreur> erreurs) {
-
+        
         for (Erreur erreur : erreurs) {
             switch (erreur) {
-
+                
                 case ERREUR_INTITULE_VIDE:
                     this.intituleErreurLabel.setText("Veuillez saisir un intitulé !");
                     break;
@@ -1306,9 +1384,9 @@ public class OffreForm extends javax.swing.JPanel {
                     break;
                 default:
                     break;
-
+                
             }
-
+            
         }
     }
 

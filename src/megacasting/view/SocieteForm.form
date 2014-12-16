@@ -105,7 +105,7 @@
                                   <Component id="villeErreurLabel" alignment="0" max="32767" attributes="0"/>
                                   <Component id="annonceurDiffuseurErreurLabel" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
                           </Group>
                           <Component id="numeroSiretErreurLabel" max="32767" attributes="0"/>
                       </Group>

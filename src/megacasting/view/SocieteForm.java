@@ -32,8 +32,8 @@ public class SocieteForm extends javax.swing.JPanel {
     public enum Erreur {
 
         ERREUR_NUMEROSIRET_VIDE, ERREUR_NUMEROSIRET_INVALIDE, ERREUR_NUMEROSIRET_EXISTANT, ERREUR_RAISONSOCIALE_VIDE,
-        ERREUR_RAISONSOCIALE_EXISTANT,ERREUR_EMAIL_VIDE, ERREUR_EMAIL_INVALIDE, ERREUR_TELEPHONE_VIDE,
-        ERREUR_TELEPHONE_INVALIDE,ERREUR_NUMERO_VIDE, ERREUR_NUMERO_INVALIDE, ERREUR_RUE_VIDE, ERREUR_RUE_INVALIDE,
+        ERREUR_RAISONSOCIALE_EXISTANT, ERREUR_EMAIL_VIDE, ERREUR_EMAIL_INVALIDE, ERREUR_TELEPHONE_VIDE,
+        ERREUR_TELEPHONE_INVALIDE, ERREUR_NUMERO_VIDE, ERREUR_NUMERO_INVALIDE, ERREUR_RUE_VIDE, ERREUR_RUE_INVALIDE,
         ERREUR_CODEPOSTAL_VIDE, ERREUR_CODEPOSTAL_INVALIDE, ERREUR_VILLE_VIDE, ERREUR_VILLE_INVALIDE,
         ERREUR_ANNONCEURDIFFUSEUR_VIDE;
     }
@@ -293,7 +293,7 @@ public class SocieteForm extends javax.swing.JPanel {
                                     .addComponent(telephoneErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(villeErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(annonceurDiffuseurErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 35, Short.MAX_VALUE))
                             .addComponent(numeroSiretErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(buttonAccueil)
@@ -436,13 +436,12 @@ public class SocieteForm extends javax.swing.JPanel {
             Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, societe.getId());
             // Si oui
             if (a != null) {
-                // On test si la société a des offres
+                // On verifie si l'annonceur possede des offres
                 ArrayList<Offre> offres = OffreDAO.lister(mainJFrame.cnx, a);
-                
-                // Si oui
-                if (!offres.isEmpty()) {
+                // Si aucune offres trouvées
+                if (offres.isEmpty()) {
                     // Demande de validation de suppression
-                    int retour = mainJFrame.affichagePopUpValidation("Supprimer l'annonceur ?", "Confirmation");
+                    int retour = mainJFrame.affichagePopUpValidation("Etes-vous sûr de supprimer l'annonceur ?", "Attention");
                     // Si oui
                     if (retour == 0) {
                         try {
@@ -455,9 +454,7 @@ public class SocieteForm extends javax.swing.JPanel {
                             mainJFrame.affichagePopUpInfo(e.toString(), "Information");
                         }
                     }
-                }
-                // Si non
-                else {
+                } else {
                     // Demande de validation de suppression
                     int retour = mainJFrame.affichagePopUpValidation("La suppresion de la société entraîne la suppresion des offres rattachées", "Attention");
                     // Si oui
@@ -473,18 +470,22 @@ public class SocieteForm extends javax.swing.JPanel {
                         }
                     }
                 }
-            // Si non alors c'est un diffuseur
+                // Si non alors c'est un diffuseur
             } else {
+                // Demande de validation de suppression
+                int retour = mainJFrame.affichagePopUpValidation("Etes-vous sûr de supprimer le diffuseur ?", "Attention");
                 // On recupere le diffuseur
-                Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, societe.getId());
-                try {
-                    // On supprime le diffuseur en base de données
-                    DiffuseurDAO.supprimer(mainJFrame.cnx, d);
-                    // On affiche un message confirmant la suppression du diffuseur
-                    mainJFrame.affichagePopUpInfo("Suppression du diffuseur réussie", "Information");
-                } catch (Exception e) {
-                    // On affiche un message si une erreur s'est produite lors de la suppression du diffuseur
-                    mainJFrame.affichagePopUpInfo(e.toString(), "Information");
+                if (retour == 0) {
+                    Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, societe.getId());
+                    try {
+                        // On supprime le diffuseur en base de données
+                        DiffuseurDAO.supprimer(mainJFrame.cnx, d);
+                        // On affiche un message confirmant la suppression du diffuseur
+                        mainJFrame.affichagePopUpInfo("Suppression du diffuseur réussie", "Information");
+                    } catch (Exception e) {
+                        // On affiche un message si une erreur s'est produite lors de la suppression du diffuseur
+                        mainJFrame.affichagePopUpInfo(e.toString(), "Information");
+                    }
                 }
             }
         }
@@ -505,6 +506,15 @@ public class SocieteForm extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Creation d'un ArrayList qui va contenir les erreurs potentiels lors de la validation du formulaire
         ArrayList<Erreur> erreurs = verifFormulaire();
+
+        long id = 0;
+        // On recupere la societe si on la selectionne dans la liste
+        Societe sTemp = (Societe) societeList.getSelectedValue();
+        if (sTemp != null) {
+            // On stocke l'id de la societe
+            id = sTemp.getId();
+        }
+
         if (erreurs.isEmpty()) {
             // Recuperation des données de la société
             long numeroSiret = Long.parseLong(numeroSiretTextField.getText());
@@ -520,69 +530,100 @@ public class SocieteForm extends javax.swing.JPanel {
 
             // Création d'un annonceur 
             if (this.annonceurValiderRadioButton.isSelected()) {
+
                 // On verifie si un diffuseur existe avec la raison sociale choisie
                 Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, raisonSociale);
+
                 // Si oui alors on le supprime
                 if (d != null) {
                     DiffuseurDAO.supprimer(mainJFrame.cnx, d);
                 }
-                // On verifie si un annonceur existe avec la raison sociale choisie
-                Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, raisonSociale);
+                // On verifie si un annonceur existe avec l'id
+                Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, id);
 
                 // Si l'annonceur n'existe pas
                 if (a == null) {
-                    // On instancie une nouvelle adresse avec les informations du formulaire
-                    Adresse adresse = new Adresse(numero, rue, codePostal, ville);
-                    // On instancie un annonceur avec les informations du formaulaire et l'adresse 
-                    a = new Annonceur(numeroSiret, raisonSociale, email, telephone, adresse);
+                    // On effectue une deuxieme verification du formaulaire plus poussée
+                    erreurs = verifFormulaireCreation();
+                    // S'il est vide
+                    if (erreurs.isEmpty()) {
+                        // On instancie une nouvelle adresse avec les informations du formulaire
+                        Adresse adresse = new Adresse(numero, rue, codePostal, ville);
+                        // On instancie un annonceur avec les informations du formaulaire et l'adresse 
+                        a = new Annonceur(numeroSiret, raisonSociale, email, telephone, adresse);
 
-                    try {
-                        // On crée l'annonceur en base de données
-                        AnnonceurDAO.creer(mainJFrame.cnx, a);
-                        // On affiche un message confirmant la création de l'annonceur
-                        mainJFrame.affichagePopUpInfo("L'annonceur a été crée", "Information");
-                    } catch (Exception e) {
-                        // On affiche l'erreur si la création a échoué
-                        mainJFrame.affichagePopUpInfo(e.toString(), "Erreur");
+                        try {
+                            // On crée l'annonceur en base de données
+                            AnnonceurDAO.creer(mainJFrame.cnx, a);
+                            // On affiche un message confirmant la création de l'annonceur
+                            mainJFrame.affichagePopUpInfo("L'annonceur a été crée", "Information");
+                        } catch (Exception e) {
+                            // On affiche l'erreur si la création a échoué
+                            mainJFrame.affichagePopUpInfo(e.toString(), "Erreur");
+                        }
+                        raz();
+                        refreshList();
+                        // Sinon on affiche les erreurs
+                    } else {
+                        affichageErreurs(erreurs);
                     }
                 } else {
-                    // Si l'annonceur existe , alors on va le modifier
-                    // On modifie les informations sur l'annonceur
-                    a.setNumeroSiret(numeroSiret);
-                    a.setRaisonSociale(raisonSociale);
-                    a.setEmail(email);
-                    a.setTelephone(telephone);
+                    // On recupere la societe tel qu'elle est avant la modification
+                    Societe societeOld = SocieteDAO.trouver(mainJFrame.cnx, id);
+                    // On effectue une deuxieme verification du formaulaire plus poussée
+                    erreurs = verifFormulaireModification(societeOld);
+                    // Si aucune erreur
+                    if (erreurs.isEmpty()) {
+                        // Si l'annonceur existe , alors on va le modifier
+                        // On modifie les informations sur l'annonceur
+                        a.setNumeroSiret(numeroSiret);
+                        a.setRaisonSociale(raisonSociale);
+                        a.setEmail(email);
+                        a.setTelephone(telephone);
 
-                    Adresse adresse = a.getAdresse();
-                    adresse.setNumero(numero);
-                    adresse.setRue(rue);
-                    adresse.setCodePostal(codePostal);
-                    adresse.setVille(ville);
-                    try {
-                        // On modifie l'annonceur en base de données
-                        AnnonceurDAO.modifier(mainJFrame.cnx, a);
-                        // On affiche un message confirmant la modification de l'annonceur
-                        mainJFrame.affichagePopUpInfo("L'annonceur a été modifié", "Information");
-                    } catch (Exception ex) {
-                        mainJFrame.affichagePopUpInfo(ex.toString(), "Information");
+                        Adresse adresse = a.getAdresse();
+                        adresse.setNumero(numero);
+                        adresse.setRue(rue);
+                        adresse.setCodePostal(codePostal);
+                        adresse.setVille(ville);
+
+                        try {
+                            // On modifie l'annonceur en base de données
+                            AnnonceurDAO.modifier(mainJFrame.cnx, a);
+                            // On affiche un message confirmant la modification de l'annonceur
+                            mainJFrame.affichagePopUpInfo("L'annonceur a été modifié", "Information");
+                        } catch (Exception ex) {
+                            mainJFrame.affichagePopUpInfo(ex.toString(), "Information");
+                        }
+                        raz();
+                        refreshList();
+                        // Sinon on affiche les erreurs
+                    } else {
+                        affichageErreurs(erreurs);
                     }
                 }
             } else {
                 // Si on définit la société comme un diffuseur
                 if (this.diffuseurValiderRadioButton.isSelected()) {
-                    int retour = mainJFrame.affichagePopUpValidation("La société perdra toutes ses offres", "Attention");
-                    if (retour == 0) {
-                        // On verifie si un annonceur existe avec la raison sociale choisie
-                        Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, raisonSociale);
-                        // Si l'annonceur existe alors on le supprime
-                        if (a != null) {
+
+                    // On verifie si un annonceur existe avec la raison sociale choisie
+                    Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, raisonSociale);
+                    // Si l'annonceur existe alors on le supprime
+                    if (a != null) {
+                        int retour = mainJFrame.affichagePopUpValidation("La société perdra toutes ses offres", "Attention");
+                        if (retour == 0) {
                             AnnonceurDAO.supprimer(mainJFrame.cnx, a);
                         }
-                        // On verifie si la société est déjà identifié comme un diffuseur
-                        Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, raisonSociale);
+                    }
+                    // On verifie si la société est déjà identifié comme un diffuseur
+                    Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, id);
 
-                        // Si le diffuseur n'existe pas
-                        if (d == null) {
+                    // Si le diffuseur n'existe pas
+                    if (d == null) {
+                        // On effectue une deuxieme verification du formaulaire plus poussée
+                        erreurs = verifFormulaireCreation();
+                        // Si aucune erreur
+                        if (erreurs.isEmpty()) {
                             // On instancie une nouvelle adresse avec les informations du formulaire
                             Adresse adresse = new Adresse(numero, rue, codePostal, ville);
                             // On instancie un nouveau diffuseur avec les informations du formulaire et l'adresse 
@@ -597,8 +638,20 @@ public class SocieteForm extends javax.swing.JPanel {
                                 // On affiche si une erreur s'est produite lors de la création du diffuseur
                                 mainJFrame.affichagePopUpInfo(e.toString(), "Information");
                             }
+                            raz();
+                            refreshList();
+                            // Sinon on affiche les erreurs
                         } else {
-                        // Si le diffuseur existe , alors on va le modifier
+                            affichageErreurs(erreurs);
+                        }
+                    } else {
+                        // On recupere la societe tel qu'elle est avant la modification
+                        Societe societeOld = SocieteDAO.trouver(mainJFrame.cnx, id);
+                        // On effectue une deuxieme verification du formaulaire plus pousée
+                        erreurs = verifFormulaireModification(societeOld);
+                        // Si aucune erreur
+                        if (erreurs.isEmpty()) {
+                                // Si le diffuseur existe , alors on va le modifier
                             // On modifie les informations sur le diffuseur
                             d.setNumeroSiret(numeroSiret);
                             d.setRaisonSociale(raisonSociale);
@@ -610,6 +663,7 @@ public class SocieteForm extends javax.swing.JPanel {
                             adresse.setRue(rue);
                             adresse.setCodePostal(codePostal);
                             adresse.setVille(ville);
+
                             try {
                                 // On enregistre les modifications du diffuseur en base de données
                                 DiffuseurDAO.modifier(mainJFrame.cnx, d);
@@ -619,22 +673,29 @@ public class SocieteForm extends javax.swing.JPanel {
                                 // On affiche un message si une erreur s'est produite lors de la modification du diffuseur
                                 mainJFrame.affichagePopUpInfo(ex.toString(), "Information");
                             }
+                            raz();
+                            refreshList();
+                            // Sinon on affiche les erreurs
+                        } else {
+                            affichageErreurs(erreurs);
                         }
+
                     }
                 }
             }
-            raz();
-            refreshList();
+            // On affiche les erreurs du formulaire
         } else {
             affichageErreurs(erreurs);
         }
-
+        // On clear la selection de la recherche de société
+        this.buttonGroup2.clearSelection();
 
     }//GEN-LAST:event_validerSocieteButtonActionPerformed
 
     // Evenement lors de la selection d'une societe
     private void selection(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_selection
         // TODO add your handling code here:
+        razErreurs();
         Societe s = (Societe) societeList.getSelectedValue();
         if (s != null) {
             this.numeroSiretTextField.setText(String.valueOf(s.getNumeroSiret()));
@@ -696,7 +757,7 @@ public class SocieteForm extends javax.swing.JPanel {
 
     }
 
-    // Vide les TextFiels et les labels d'erreurs du formulaire d'une societe
+    // Vide les TextFiels du formulaire d'une societe
     private void raz() {
         this.numeroSiretTextField.setText(null);
         this.raisonSocialeTextField.setText(null);
@@ -708,6 +769,12 @@ public class SocieteForm extends javax.swing.JPanel {
         this.villeTextField.setText(null);
         this.validationLabel.setText(null);
 
+        this.buttonGroup1.clearSelection();
+    }
+
+    // Vide les labels d'erreurs du formulaire d'une societe
+    private void razErreurs() {
+
         this.numeroSiretErreurLabel.setText(null);
         this.raisonSocialeErreurLabel.setText(null);
         this.emailErreurLabel.setText(null);
@@ -717,8 +784,6 @@ public class SocieteForm extends javax.swing.JPanel {
         this.codePostalErreur.setText(null);
         this.villeErreurLabel.setText(null);
         this.annonceurDiffuseurErreurLabel.setText(null);
-
-        this.buttonGroup1.clearSelection();
     }
 
     // Verification du formulaire d'une societe et renvoie un ArrayList null si aucune erreur
@@ -734,13 +799,7 @@ public class SocieteForm extends javax.swing.JPanel {
             String numeroSiret = this.numeroSiretTextField.getText();
             Boolean verifNumeroSiret = mainJFrame.regexNumeroSiret(numeroSiret);
             if (verifNumeroSiret) {
-                // On test si une societe possede deja ce numero de siret
-                Societe s = SocieteDAO.trouverByNumSiret(mainJFrame.cnx, numeroSiret);
-                if(s == null){
-                    this.numeroSiretErreurLabel.setText(null);
-                }else {
-                    erreurs.add(Erreur.ERREUR_NUMEROSIRET_EXISTANT);
-                }
+                this.numeroSiretErreurLabel.setText(null);
             } else {
                 erreurs.add(Erreur.ERREUR_NUMEROSIRET_INVALIDE);
             }
@@ -749,15 +808,7 @@ public class SocieteForm extends javax.swing.JPanel {
         if (this.raisonSocialeTextField.getText().equals("")) {
             erreurs.add(Erreur.ERREUR_RAISONSOCIALE_VIDE);
         } else {
-            String raisonSociale = this.raisonSocialeTextField.getText();
-            // On test si une societe possède déjà cette raison sociale
-            Societe s = SocieteDAO.trouver(mainJFrame.cnx, raisonSociale);
-            if(s == null){
-                this.raisonSocialeErreurLabel.setText(null);
-            }else{
-                erreurs.add(Erreur.ERREUR_RAISONSOCIALE_EXISTANT);
-            }
-            
+            this.raisonSocialeErreurLabel.setText(null);
         }
         // Creation d'une erreur si l'email est vide
         if (this.emailTextField.getText().equals("")) {
@@ -842,6 +893,86 @@ public class SocieteForm extends javax.swing.JPanel {
 
     }
 
+    // Verification plus pousée du formulaire d'une societe lors de la création
+    // et renvoie un ArrayList null si aucune erreur
+    private ArrayList verifFormulaireCreation() {
+        // Creation d'un tableau d'erreurs
+        ArrayList<Erreur> erreurs = new ArrayList();
+
+        // On stocke le numero de siret de la societe qu'on souhaite crée
+        String numeroSiret = this.numeroSiretTextField.getText();
+        // On verifie si elle n'existe pas déjà
+        Societe s = SocieteDAO.trouverByNumSiret(mainJFrame.cnx, numeroSiret);
+        //Si oui
+        if (s == null) {
+            // On affiche rien
+            this.numeroSiretErreurLabel.setText(null);
+        } else {
+            // On stocke l'erreur correspondante
+            erreurs.add(Erreur.ERREUR_NUMEROSIRET_EXISTANT);
+        }
+
+        // On stocke la raison sociale de la societe qu'on souhaite crée
+        String raisonSociale = this.raisonSocialeTextField.getText();
+        // On test si une societe possède déjà cette raison sociale
+        s = SocieteDAO.trouver(mainJFrame.cnx, raisonSociale);
+        // Si oui
+        if (s == null) {
+            // On affiche rien
+            this.raisonSocialeErreurLabel.setText(null);
+        } else {
+            // On stocke l'erreur correspondante
+            erreurs.add(Erreur.ERREUR_RAISONSOCIALE_EXISTANT);
+        }
+
+        return erreurs;
+    }
+
+    // Verification plus pousée du formulaire d'une societe lors de la modification
+    // et renvoie un ArrayList null si aucune erreur
+    private ArrayList verifFormulaireModification(Societe societe) {
+        // Creation  d'un tableau d'erreur
+        ArrayList<Erreur> erreurs = new ArrayList();
+
+        // On stocke l'ancien numero et le nouveau numero de siret de la societe
+        String numeroSiretOld = String.valueOf(societe.getNumeroSiret());
+        String numeroSiretNew = this.numeroSiretTextField.getText();
+
+        // On teste si ils sont differents
+        if (!numeroSiretNew.equals(numeroSiretOld)) {
+            // Si oui, on test si une societe ne possede pas déjà ce numéro de siret
+            Societe s = SocieteDAO.trouverByNumSiret(mainJFrame.cnx, numeroSiretNew);
+            // Si non
+            if (s == null) {
+                // On affiche rien
+                this.numeroSiretErreurLabel.setText(null);
+            } else {
+                // Sinon, on stocke l'erreur correspondante
+                erreurs.add(Erreur.ERREUR_NUMEROSIRET_EXISTANT);
+            }
+        }
+
+        // On stocke l'ancienne raison sociale et la nouvelle  de la societe
+        String raisonSocialeOld = societe.getRaisonSociale();
+        String raisonSocialeNew = this.raisonSocialeTextField.getText();
+
+        // On teste si elles sont differents
+        if (!raisonSocialeNew.equals(raisonSocialeOld)) {
+            // Si oui, on test si une societe ne possède pas déjà cette raison sociale
+            Societe s = SocieteDAO.trouver(mainJFrame.cnx, raisonSocialeNew);
+            // Si non 
+            if (s == null) {
+                // On affiche rien
+                this.raisonSocialeErreurLabel.setText(null);
+            } else {
+                //Sinon, on stocke l'erreur correspondante
+                erreurs.add(Erreur.ERREUR_RAISONSOCIALE_EXISTANT);
+            }
+        }
+
+        return erreurs;
+    }
+
     // Affiche dans les labels d'erreurs les erreurs rencontrés
     private void affichageErreurs(ArrayList<Erreur> erreurs) {
 
@@ -891,6 +1022,9 @@ public class SocieteForm extends javax.swing.JPanel {
                     break;
                 case ERREUR_VILLE_VIDE:
                     this.villeErreurLabel.setText("Veuillez saisir un nom de ville !");
+                    break;
+                case ERREUR_VILLE_INVALIDE:
+                    this.villeErreurLabel.setText("Veuillez saisir un nom de ville valide !");
                     break;
                 case ERREUR_ANNONCEURDIFFUSEUR_VIDE:
                     this.annonceurDiffuseurErreurLabel.setText("Veuillez choisir soit un annonceur ou un diffuseur !");

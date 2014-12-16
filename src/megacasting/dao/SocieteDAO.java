@@ -61,6 +61,8 @@ public class SocieteDAO {
             throw new Exception("La societe " + s.getRaisonSociale() + " existe déjà !");
         }
 
+        AdresseDAO.modifier(cnx, s.getAdresse());
+        
         Statement stmt = null;
         try {
             stmt = cnx.createStatement();
