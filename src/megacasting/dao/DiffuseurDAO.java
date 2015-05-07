@@ -95,7 +95,7 @@ public class DiffuseurDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT d.Id, NumeroSiret, RaisonSociale, Email, Telephone, IdAdresse "
+            ResultSet rs = stmt.executeQuery("SELECT d.Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id "
                     + "FROM Diffuseur d "
                     + "INNER JOIN Societe s ON d.Id = s.Id ");
             
@@ -132,7 +132,7 @@ public class DiffuseurDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT d.Id, NumeroSiret, RaisonSociale, Email, Telephone, IdAdresse "
+            ResultSet rs = stmt.executeQuery("SELECT d.Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id "
                     + "FROM Diffuseur d "
                     + "INNER JOIN Societe s ON d.Id = s.Id "
                     + "WHERE d.Id = " + id);       
@@ -174,7 +174,7 @@ public class DiffuseurDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT d.Id, NumeroSiret, RaisonSociale, Email, Telephone, IdAdresse "
+            ResultSet rs = stmt.executeQuery("SELECT d.Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id "
                     + "FROM Diffuseur d "
                     + "INNER JOIN Societe s ON d.Id = s.Id "
                     + "WHERE RaisonSociale = '" + raisonSociale + "'");

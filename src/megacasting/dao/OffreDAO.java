@@ -67,7 +67,7 @@ public class OffreDAO {
                 o.getDomaine().setId(rs.getLong(2));
                 o.getMetier().setId(rs.getLong(3));
                 o.getTypeContrat().setId(rs.getLong(4));
-                o.getAnnonceur().setId(rs.getLong(4));
+                o.getAnnonceur().setId(rs.getLong(5));
             }  
             }
             
@@ -93,7 +93,7 @@ public class OffreDAO {
                 o.getDomaine().setId(rs.getLong(2));
                 o.getMetier().setId(rs.getLong(3));
                 o.getTypeContrat().setId(rs.getLong(4));
-                o.getAnnonceur().setId(rs.getLong(4));
+                o.getAnnonceur().setId(rs.getLong(5));
             }  
             }
             
@@ -119,7 +119,7 @@ public class OffreDAO {
                 o.getDomaine().setId(rs.getLong(2));
                 o.getMetier().setId(rs.getLong(3));
                 o.getTypeContrat().setId(rs.getLong(4));
-                o.getAnnonceur().setId(rs.getLong(4));
+                o.getAnnonceur().setId(rs.getLong(5));
             }  
             }
         
