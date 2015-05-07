@@ -103,7 +103,7 @@ public class AnnonceurDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT a.Id, NumeroSiret, RaisonSociale, Email, Telephone, IdAdresse "
+            ResultSet rs = stmt.executeQuery("SELECT a.Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id "
                     + "FROM Annonceur a "
                     + "INNER JOIN Societe s ON a.Id = s.Id ");
             
@@ -140,7 +140,7 @@ public class AnnonceurDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT a.Id, NumeroSiret, RaisonSociale, Email, Telephone, IdAdresse "
+            ResultSet rs = stmt.executeQuery("SELECT a.Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id "
                     + "FROM Annonceur a "
                     + "INNER JOIN Societe s ON a.Id = s.Id "
                     + "WHERE a.Id = " + id);       
@@ -182,7 +182,7 @@ public class AnnonceurDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT a.Id, NumeroSiret, RaisonSociale, Email, Telephone, IdAdresse "
+            ResultSet rs = stmt.executeQuery("SELECT a.Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id "
                     + "FROM Annonceur a "
                     + "INNER JOIN Societe s ON a.Id = s.Id "
                     + "WHERE RaisonSociale = '" + raisonSociale + "'");

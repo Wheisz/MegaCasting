@@ -48,8 +48,8 @@ public class OffreDAO {
 
             stmt.executeUpdate("INSERT INTO Offre "
                     + "(Intitule, Reference, DatePublication, DureeDiffusion, DateDebutContrat, NbPoste, LocalisationLattitude"
-                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, IdDomaine, IdMetier"
-                    + ", IdTypeContrat, IdAnnonceur ) "
+                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, Domaine_id, Metier_id"
+                    + ", TypeContrat_id, Annonceur_id ) "
                     + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', convert(datetime,'"
                     + datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
                     + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
@@ -57,9 +57,9 @@ public class OffreDAO {
                     + o.getEmail()+"', "+ o.getDomaine().getId() +", "+ null +", "+ o.getTypeContrat().getId() +", "
                     + o.getAnnonceur().getId() +")");
 
-            ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(IdDomaine) as IdDomaine,"
-                    + "                              MAX(IdMetier) as IdMetier, MAX(IdTypeContrat) as IdTypeContrat,"
-                    + "                              MAX(IdAnnonceur) as Annonceur FROM Offre");
+            ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(Domaine_id) as Domaine_id,"
+                    + "                              MAX(Metier_id) as Metier_id, MAX(TypeContrat_id) as TypeContrat_id,"
+                    + "                              MAX(Annonceur_id) as Annonceur_id FROM Offre");
             
             if(rs.next()) {
 
@@ -75,8 +75,8 @@ public class OffreDAO {
 
             stmt.executeUpdate("INSERT INTO Offre "
                     + "(Intitule, Reference, DatePublication, DureeDiffusion, DateDebutContrat, NbPoste, LocalisationLattitude"
-                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, IdDomaine, IdMetier"
-                    + ", IdTypeContrat, IdAnnonceur ) "
+                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, Domaine_id, Metier_id"
+                    + ", TypeContrat_id, Annonceur_id ) "
                     + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', convert(datetime,'"
                     + datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
                     + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
@@ -84,9 +84,9 @@ public class OffreDAO {
                     + o.getEmail()+"', "+ null +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
                     + o.getAnnonceur().getId() +")");
 
-            ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(IdDomaine) as IdDomaine,"
-                    + "                              MAX(IdMetier) as IdMetier, MAX(IdTypeContrat) as IdTypeContrat,"
-                    + "                              MAX(IdAnnonceur) as Annonceur FROM Offre");
+            ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(Domaine_id) as Domaine_id,"
+                    + "                              MAX(Metier_id) as Metier_id, MAX(TypeContrat_id) as TypeContrat_id,"
+                    + "                              MAX(Annonceur_id) as Annonceur_id FROM Offre");
             
             if(rs.next()) {
                 o.setId(rs.getLong(1));
@@ -101,8 +101,8 @@ public class OffreDAO {
 
             stmt.executeUpdate("INSERT INTO Offre "
                     + "(Intitule, Reference, DatePublication, DureeDiffusion, DateDebutContrat, NbPoste, LocalisationLattitude"
-                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, IdDomaine, IdMetier"
-                    + ", IdTypeContrat, IdAnnonceur ) "
+                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, Domaine_id, Metier_id"
+                    + ", TypeContrat_id, Annonceur_id ) "
                     + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', convert(datetime,'"
                     + datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
                     + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
@@ -110,9 +110,9 @@ public class OffreDAO {
                     + o.getEmail()+"', "+ o.getDomaine().getId() +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
                     + o.getAnnonceur().getId() +")");
 
-            ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(IdDomaine) as IdDomaine,"
-                    + "                              MAX(IdMetier) as IdMetier, MAX(IdTypeContrat) as IdTypeContrat,"
-                    + "                              MAX(IdAnnonceur) as Annonceur FROM Offre");
+            ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(Domaine_id) as Domaine_id,"
+                    + "                              MAX(Metier_id) as Metier_id, MAX(TypeContrat_id) as TypeContrat_id,"
+                    + "                              MAX(Annonceur_id) as Annonceur_id FROM Offre");
             
             if(rs.next()) {
                 o.setId(rs.getLong(1));
@@ -168,10 +168,10 @@ public class OffreDAO {
                     + "', DescriptionProfil = '" + o.getDescriptionProfil()
                     + "', Telephone = '" + o.getTelephone()
                     + "', Email = '" + o.getEmail()
-                    + "', IdDomaine = " + null
-                    + ", IdMetier = " + o.getMetier().getId()
-                    + ", IdTypeContrat = " + o.getTypeContrat().getId()
-                    + ", IdAnnonceur = " + o.getAnnonceur().getId()
+                    + "', Domaine_id = " + null
+                    + ", Metier_id = " + o.getMetier().getId()
+                    + ", TypeContrat_id = " + o.getTypeContrat().getId()
+                    + ", Annonceur_id = " + o.getAnnonceur().getId()
                     + " WHERE Id = " + o.getId()
             );
             }
@@ -188,10 +188,10 @@ public class OffreDAO {
                     + "', DescriptionProfil = '" + o.getDescriptionProfil()
                     + "', Telephone = '" + o.getTelephone()
                     + "', Email = '" + o.getEmail()
-                    + "', IdDomaine = " + o.getDomaine().getId()
-                    + ", IdMetier = " + null
-                    + ", IdTypeContrat = " + o.getTypeContrat().getId()
-                    + ", IdAnnonceur = " + o.getAnnonceur().getId()
+                    + "', Domaine_id = " + o.getDomaine().getId()
+                    + ", Metier_id = " + null
+                    + ", TypeContrat_id = " + o.getTypeContrat().getId()
+                    + ", Annonceur_id = " + o.getAnnonceur().getId()
                     + " WHERE Id = " + o.getId()
             );
             }
@@ -208,10 +208,10 @@ public class OffreDAO {
                     + "', DescriptionProfil = '" + o.getDescriptionProfil()
                     + "', Telephone = '" + o.getTelephone()
                     + "', Email = '" + o.getEmail()
-                    + "', IdDomaine = " + o.getDomaine().getId()
-                    + ", IdMetier = " + o.getMetier().getId()
-                    + ", IdTypeContrat = " + o.getTypeContrat().getId()
-                    + ", IdAnnonceur = " + o.getAnnonceur().getId()
+                    + "', Domaine_id = " + o.getDomaine().getId()
+                    + ", Metier_id = " + o.getMetier().getId()
+                    + ", TypeContrat_id = " + o.getTypeContrat().getId()
+                    + ", Annonceur_id = " + o.getAnnonceur().getId()
                     + " WHERE Id = " + o.getId()
             );
             }
@@ -261,8 +261,8 @@ public class OffreDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                     + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                    + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
-                    + "                              , IdAnnonceur   FROM Offre ");
+                    + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                    + "                              , Annonceur_id   FROM Offre ");
             
             while(rs.next()) {
                 Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
@@ -298,10 +298,10 @@ public class OffreDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT o.Id, o.Intitule, o.Reference, o.DatePublication, DureeDiffusion,DateDebutContrat"
                     + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                    + "                              , DescriptionProfil, Telephone, Email, o.IdDomaine, o.IdMetier, o.IdTypeContrat"
-                    + "                              , o.IdAnnonceur "
+                    + "                              , DescriptionProfil, Telephone, Email, o.Domaine_id, o.Metier_id, o.TypeContrat_id"
+                    + "                              , o.Annonceur_id "
                     + "FROM Offre o "
-                    + "WHERE o.IdDomaine = " + d.getId());
+                    + "WHERE o.Domaine_id = " + d.getId());
             
             while(rs.next()) {
                 Metier m = MetierDAO.trouver(cnx, rs.getLong(15));
@@ -338,10 +338,10 @@ public class OffreDAO {
             
                 ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                         + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                        + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
-                        + "                              , IdAnnonceur "   
+                        + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                        + "                              , Annonceur_id "   
                         + "FROM Offre o "
-                        + "WHERE o.IdMetier = " + m.getId());
+                        + "WHERE o.Metier_id = " + m.getId());
 
                 while(rs.next()) {
                     Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
@@ -379,29 +379,29 @@ public class OffreDAO {
             
                 rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                         + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                        + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
-                        + "                              , IdAnnonceur "   
+                        + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                        + "                              , Annonceur_id "   
                         + "FROM Offre o "
-                        + "WHERE o.IdMetier = " + m.getId()
-                        + " AND o.IdDomaine = " + d.getId());                
+                        + "WHERE o.Metier_id = " + m.getId()
+                        + " AND o.Domaine_id = " + d.getId());                
             } 
             else if (m == null && d != null) {
                 rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                         + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                        + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
-                        + "                              , IdAnnonceur "   
+                        + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                        + "                              , Annonceur_id "   
                         + "FROM Offre o "
-                        + "WHERE o.IdMetier IS NULL "
-                        + "AND o.IdDomaine = " + d.getId());
+                        + "WHERE o.Metier_id IS NULL "
+                        + "AND o.Domaine_id = " + d.getId());
             }
             else if (m != null && d == null) {
                 rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                         + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                        + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
-                        + "                              , IdAnnonceur "   
+                        + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                        + "                              , Annonceur_id "   
                         + "FROM Offre o "
-                        + "WHERE o.IdMetier = " + m.getId()
-                        + " AND o.IdDomaine IS NULL ");
+                        + "WHERE o.Metier_id = " + m.getId()
+                        + " AND o.Domaine_id IS NULL ");
             }
             while(rs.next()) {
                 TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(16));
@@ -434,10 +434,10 @@ public class OffreDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                     + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                    + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
-                    + "                              , IdAnnonceur "   
+                    + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                    + "                              , Annonceur_id "   
                     + "FROM Offre o "
-                    + "WHERE o.IdAnnonceur = " + a.getId());
+                    + "WHERE o.Annonceur_id = " + a.getId());
             
             while(rs.next()) {
                 Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
@@ -472,10 +472,10 @@ public class OffreDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                     + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                    + "                              , DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
-                    + "                              , IdAnnonceur "
+                    + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                    + "                              , Annonceur_id "
                     + "FROM Offre o "
-                    + "WHERE o.IdTypeContrat = " + tc.getId());
+                    + "WHERE o.TypeContrat_id = " + tc.getId());
             
             while(rs.next()) {
                 Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
@@ -533,8 +533,8 @@ public class OffreDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                                                 + ", NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                                                + ", DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
-                                                + ", IdAnnonceur"
+                                                + ", DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                                                + ", Annonceur_id"
                                                 + " FROM Offre"
                                                 + " WHERE Id = " + id);
             
@@ -609,8 +609,8 @@ public class OffreDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                                                 + ", NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                                                + ", DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
-                                                + ", IdAnnonceur"
+                                                + ", DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                                                + ", Annonceur_id"
                                                 + " FROM Offre"
                                                 + " WHERE Reference = '" + reference+"'");
             
@@ -688,8 +688,8 @@ public class OffreDAO {
             ResultSet rs = stmt.executeQuery("SELECT TOP 1 "
                     + "Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                                                 + ", NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                                                + ", DescriptionProfil, Telephone, Email, IdDomaine, IdMetier, IdTypeContrat"
-                                                + ", IdAnnonceur"
+                                                + ", DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                                                + ", Annonceur_id"
                                                 + " FROM Offre"
                                                 + " ORDER BY DatePublication ASC");
             

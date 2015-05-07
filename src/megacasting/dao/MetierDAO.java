@@ -29,12 +29,12 @@ public class MetierDAO {
             
             if (m.getDomaine() != null) {
                 stmt.executeUpdate("INSERT INTO Metier "
-                    + "(Libelle,IdDomaine) "
+                    + "(Libelle,Domaine_id) "
                     + "VALUES ('" + m.getLibelle()+ "', " + m.getDomaine().getId()+ ")");
             }
             else {
                 stmt.executeUpdate("INSERT INTO Metier "
-                    + "(Libelle,IdDomaine) "
+                    + "(Libelle,Domaine_id) "
                     + "VALUES ('" + m.getLibelle()+ "', " + null + ")");
             }
 
@@ -72,7 +72,7 @@ public class MetierDAO {
             
             stmt.executeUpdate("UPDATE Metier "
                     + "SET Libelle = '" + m.getLibelle()
-                    + "', IdDomaine = " + m.getDomaine().getId()
+                    + "', Domaine_id = " + m.getDomaine().getId()
                     + " WHERE Id = " + m.getId()
             );
             
@@ -119,7 +119,7 @@ public class MetierDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, Libelle, IdDomaine "
+            ResultSet rs = stmt.executeQuery("SELECT Id, Libelle, Domaine_id "
                     + "FROM Metier");
             
             while(rs.next()) {
@@ -151,14 +151,14 @@ public class MetierDAO {
             
             ResultSet rs = null;
             if (domaine != null) {
-                rs = stmt.executeQuery("SELECT Id, Libelle, IdDomaine "
+                rs = stmt.executeQuery("SELECT Id, Libelle, Domaine_id "
                     + "FROM Metier "
-                    + "WHERE IdDomaine = " + domaine.getId());
+                    + "WHERE Domaine_id = " + domaine.getId());
             }
             else {
-                rs = stmt.executeQuery("SELECT Id, Libelle, IdDomaine "
+                rs = stmt.executeQuery("SELECT Id, Libelle, Domaine_id "
                     + "FROM Metier "
-                    + "WHERE IdDomaine IS NULL");
+                    + "WHERE Domaine_id IS NULL");
             }
             
             
@@ -192,7 +192,7 @@ public class MetierDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, Libelle, IdDomaine FROM Metier "
+            ResultSet rs = stmt.executeQuery("SELECT Id, Libelle, Domaine_id FROM Metier "
                     + "WHERE Id = '" + id + "'");
             
             if(rs.next()) {
@@ -226,7 +226,7 @@ public class MetierDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, Libelle, IdDomaine FROM Metier "
+            ResultSet rs = stmt.executeQuery("SELECT Id, Libelle, Domaine_id FROM Metier "
                     + "WHERE Libelle = '" + libelle + "'");
             
             if(rs.next()) {

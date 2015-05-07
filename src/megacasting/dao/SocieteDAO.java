@@ -31,7 +31,7 @@ public class SocieteDAO {
             stmt = cnx.createStatement();
             
             stmt.executeUpdate("INSERT INTO Societe "
-                    + "(NumeroSiret, RaisonSociale, Email, Telephone, IdAdresse) "
+                    + "(NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id) "
                     + "VALUES ("+ s.getNumeroSiret() +", '" + s.getRaisonSociale() + "', '" + s.getEmail() + "', '"
                     + s.getTelephone() + "', '" + s.getAdresse().getId() + "')");
 
@@ -72,7 +72,7 @@ public class SocieteDAO {
                     + ", RaisonSociale = '" + s.getRaisonSociale()
                     + "', Email = '" + s.getEmail()
                     + "', Telephone = '" + s.getTelephone()
-                    + "', IdAdresse = " + s.getAdresse().getId()
+                    + "', Adresse_id = " + s.getAdresse().getId()
                     + " WHERE Id = " + s.getId()
             );
             
@@ -122,7 +122,7 @@ public class SocieteDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, IdAdresse "
+            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id "
                     + "FROM Societe");
             
             while(rs.next()) {
@@ -158,7 +158,7 @@ public class SocieteDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, IdAdresse FROM Societe "
+            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id FROM Societe "
                     + "WHERE Id = " + id);
             
             if(rs.next()) {
@@ -198,7 +198,7 @@ public class SocieteDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, IdAdresse FROM Societe "
+            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id FROM Societe "
                     + "WHERE RaisonSociale = '" + raisonSociale + "'");
             
             if(rs.next()) {
@@ -239,7 +239,7 @@ public class SocieteDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, IdAdresse FROM Societe "
+            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id FROM Societe "
                     + "WHERE NumeroSiret = '" + numeroSiret + "'");
             
             if(rs.next()) {
