@@ -16,7 +16,6 @@ public class Metier {
     private long id;
     private String libelle;
     private Domaine domaine;
-    private long idDomaine;
 
     public long getId() {
         return id;
@@ -42,14 +41,6 @@ public class Metier {
         this.domaine = domaine;
     }
 
-    public long getIdDomaine() {
-        return idDomaine;
-    }
-
-    public void setIdDomaine(long idDomaine) {
-        this.idDomaine = idDomaine;
-    }
-
     @Override
     public String toString() {
         return libelle;
@@ -69,9 +60,6 @@ public class Metier {
             return false;
         }
         if (!Objects.equals(this.domaine, other.domaine)) {
-            return false;
-        }
-        if (this.idDomaine != other.idDomaine) {
             return false;
         }
         return true;

@@ -53,15 +53,6 @@
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                              <Component id="effacerOffreButton" min="-2" pref="291" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="validerOffreButton" min="-2" pref="323" max="-2" attributes="0"/>
-                              <EmptySpace pref="77" max="32767" attributes="0"/>
-                              <Component id="accueilButton" min="-2" pref="111" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="metierOffreLabel" max="32767" attributes="0"/>
@@ -74,8 +65,9 @@
                                   <Component id="datePublicationLabel" alignment="0" max="32767" attributes="0"/>
                                   <Component id="dureeDiffusionLabel" alignment="0" max="32767" attributes="0"/>
                                   <Component id="dateDebutContratLabel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel2" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -89,82 +81,91 @@
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="dateDebutContratErreurLabel" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="nbPosteSpinner" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="nbPosteErreurLabel" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="lattitudeTextField" alignment="1" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="domaineOffreComboBox" min="-2" pref="166" max="-2" attributes="0"/>
-                                                      <Component id="dureeDiffusionErreurLabel" max="32767" attributes="0"/>
-                                                      <Component id="referenceTextField" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="intituleTextField" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="intituleErreurLabel" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="referenceErreurLabel" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="datePublicationTextField" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="dureeDiffusionSpinner" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="dateDebutContratDateChooser" alignment="0" pref="277" max="32767" attributes="0"/>
-                                                      <Component id="lattitudeErreurLabel" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="longitudeTextField" alignment="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="domaineMetierErreurLabel" alignment="0" min="-2" pref="223" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                                  <Component id="typeContratOffreComboBox" alignment="1" min="-2" pref="166" max="-2" attributes="0"/>
-                                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="annonceurOffreLabel" min="-2" pref="122" max="-2" attributes="0"/>
-                                                          <EmptySpace max="32767" attributes="0"/>
-                                                          <Component id="annonceurOffreComboBox" min="-2" pref="166" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="annonceurErreurLabel" alignment="1" max="32767" attributes="0"/>
-                                                  </Group>
+                                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="domaineOffreComboBox" min="-2" pref="166" max="-2" attributes="0"/>
+                                              <Component id="dureeDiffusionErreurLabel" max="32767" attributes="0"/>
+                                              <Component id="referenceTextField" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="intituleTextField" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="intituleErreurLabel" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="referenceErreurLabel" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="datePublicationTextField" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="dureeDiffusionSpinner" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="dateDebutContratDateChooser" alignment="0" pref="277" max="32767" attributes="0"/>
+                                              <Component id="lattitudeErreurLabel" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="longitudeTextField" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="domaineMetierErreurLabel" alignment="0" min="-2" pref="223" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="estValideRadioButton" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="estValideErreurLabel" min="-2" pref="250" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="nbPosteSpinner" alignment="0" min="-2" pref="279" max="-2" attributes="0"/>
+                                          <Component id="lattitudeTextField" alignment="0" min="-2" pref="277" max="-2" attributes="0"/>
+                                          <Component id="dateDebutContratErreurLabel" alignment="0" min="-2" pref="277" max="-2" attributes="0"/>
+                                          <Component id="nbPosteErreurLabel" min="-2" pref="277" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="6" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="descriptionPosteLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jScrollPane6" min="-2" pref="237" max="-2" attributes="0"/>
+                                                  <Component id="descriptionPosteErreurLabel" min="-2" pref="237" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="typeContratOffreLabel" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="telephoneLabel" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
-                                                      <Component id="emailLabel" alignment="0" min="-2" pref="91" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                              <Component id="annonceurOffreLabel" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
+                                              <Component id="annonceurErreurLabel" alignment="1" min="-2" pref="418" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                              <Component id="annonceurOffreComboBox" min="-2" pref="166" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="typeContratOffreLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="typeContratOffreComboBox" min="-2" pref="166" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="telephoneErreurLabel" min="-2" pref="243" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                          <Component id="emailTextField" pref="243" max="32767" attributes="0"/>
-                                                          <Component id="telephoneTextField" max="32767" attributes="0"/>
-                                                          <Component id="emailErreurLabel" alignment="0" max="32767" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="telephoneLabel" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                                                          <Component id="emailLabel" alignment="0" min="-2" pref="91" max="-2" attributes="0"/>
                                                       </Group>
-                                                  </Group>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="descriptionPosteLabel" min="-2" pref="122" max="-2" attributes="0"/>
-                                                  <EmptySpace max="32767" attributes="0"/>
-                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                      <Component id="descriptionPosteErreurLabel" max="32767" attributes="0"/>
-                                                      <Component id="jScrollPane6" pref="237" max="32767" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="telephoneErreurLabel" min="-2" pref="243" max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                              <Component id="emailTextField" pref="243" max="32767" attributes="0"/>
+                                                              <Component id="telephoneTextField" max="32767" attributes="0"/>
+                                                              <Component id="emailErreurLabel" alignment="0" max="32767" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
                                                   </Group>
                                               </Group>
                                           </Group>
-                                          <Group type="102" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
                                               <Component id="descriptionProfilLabel" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Component id="descriptionProfilErreurLabel" max="32767" attributes="0"/>
                                                   <Component id="jScrollPane7" pref="237" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                              <Component id="effacerOffreButton" min="-2" pref="291" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="validerOffreButton" min="-2" pref="323" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="accueilButton" min="-2" pref="111" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -182,8 +183,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="intituleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="intituleTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -210,14 +211,15 @@
                                   <Component id="datePublicationTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="datePublicationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="descriptionPosteErreurLabel" min="-2" pref="17" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -309,11 +311,21 @@
                           <Component id="annonceurErreurLabel" min="-2" pref="17" max="-2" attributes="0"/>
                           <Component id="domaineMetierErreurLabel" min="-2" pref="17" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="effacerOffreButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="validerOffreButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="accueilButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="estValideRadioButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="estValideErreurLabel" min="-2" pref="16" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="effacerOffreButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="validerOffreButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="accueilButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="validationLabel" min="-2" pref="0" max="-2" attributes="0"/>
@@ -340,7 +352,7 @@
                   </Group>
                   <Component id="jScrollPane5" alignment="0" min="-2" pref="497" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -864,6 +876,23 @@
     <Component class="javax.swing.JTextField" name="datePublicationTextField">
       <Properties>
         <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="estValideRadioButton">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Est Valide "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="estValideErreurLabel">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

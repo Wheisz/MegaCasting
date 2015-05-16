@@ -35,6 +35,7 @@ public class Offre {
     private String descriptionProfil;
     private String telephone;
     private String email;
+    private boolean estValide;
     private Domaine domaine;
     private Metier metier;
     private TypeContrat typeContrat;
@@ -140,6 +141,14 @@ public class Offre {
         this.email = email;
     }
 
+    public boolean isEstValide() {
+        return estValide;
+    }
+
+    public void setEstValide(boolean estValide) {
+        this.estValide = estValide;
+    }
+
     public Domaine getDomaine() {
         return domaine;
     }
@@ -231,6 +240,9 @@ public class Offre {
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
+        if (this.estValide != other.estValide) {
+            return false;
+        }
         if (!Objects.equals(this.domaine, other.domaine)) {
             return false;
         }
@@ -268,12 +280,11 @@ public class Offre {
         return coordonnee;
     }
 
-
-    public Offre(long id, String intitule, String reference,Date datePublication, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
+    public Offre(long id, String intitule, String reference, Date datePublication, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, boolean estValide, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
         this.id = id;
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication =  datePublication;
+        this.datePublication = datePublication;
         this.dureeDiffusion = dureeDiffusion;
         this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
@@ -283,13 +294,14 @@ public class Offre {
         this.descriptionProfil = descriptionProfil;
         this.telephone = telephone;
         this.email = email;
+        this.estValide = estValide;
         this.domaine = domaine;
         this.metier = metier;
         this.typeContrat = typeContrat;
         this.annonceur = annonceur;
     }
      
-    public Offre(long id, String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
+    public Offre(long id, String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, boolean estValide,Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
         this.id = id;
         this.intitule = intitule;
         this.reference = reference;
@@ -303,13 +315,14 @@ public class Offre {
         this.descriptionProfil = descriptionProfil;
         this.telephone = telephone;
         this.email = email;
+        this.estValide = estValide;
         this.domaine = domaine;
         this.metier = metier;
         this.typeContrat = typeContrat;
         this.annonceur = annonceur;
     }
 
-    public Offre(String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
+    public Offre(String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, boolean estValide, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
         this.intitule = intitule;
         this.reference = reference;
         this.datePublication =  new Date();
@@ -322,6 +335,7 @@ public class Offre {
         this.descriptionProfil = descriptionProfil;
         this.telephone = telephone;
         this.email = email;
+        this.estValide = estValide;
         this.domaine = domaine;
         this.metier = metier;
         this.typeContrat = typeContrat;

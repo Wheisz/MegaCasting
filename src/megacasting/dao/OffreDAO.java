@@ -48,13 +48,13 @@ public class OffreDAO {
 
             stmt.executeUpdate("INSERT INTO Offre "
                     + "(Intitule, Reference, DatePublication, DureeDiffusion, DateDebutContrat, NbPoste, LocalisationLattitude"
-                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, Domaine_id, Metier_id"
+                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id"
                     + ", TypeContrat_id, Annonceur_id ) "
                     + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', convert(datetime,'"
                     + datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
                     + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
                     + o.getDescriptionPoste()+"', '"+o.getDescriptionProfil()+"', '"+o.getTelephone()+"', '"
-                    + o.getEmail()+"', "+ o.getDomaine().getId() +", "+ null +", "+ o.getTypeContrat().getId() +", "
+                    + o.getEmail()+"', '"+ o.isEstValide() +"', "+ o.getDomaine().getId() +", "+ null +", "+ o.getTypeContrat().getId() +", "
                     + o.getAnnonceur().getId() +")");
 
             ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(Domaine_id) as Domaine_id,"
@@ -75,13 +75,13 @@ public class OffreDAO {
 
             stmt.executeUpdate("INSERT INTO Offre "
                     + "(Intitule, Reference, DatePublication, DureeDiffusion, DateDebutContrat, NbPoste, LocalisationLattitude"
-                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, Domaine_id, Metier_id"
+                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id"
                     + ", TypeContrat_id, Annonceur_id ) "
                     + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', convert(datetime,'"
                     + datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
                     + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
                     + o.getDescriptionPoste()+"', '"+o.getDescriptionProfil()+"', '"+o.getTelephone()+"', '"
-                    + o.getEmail()+"', "+ null +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
+                    + o.getEmail()+"','"+ o.isEstValide() +"', "+ null +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
                     + o.getAnnonceur().getId() +")");
 
             ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(Domaine_id) as Domaine_id,"
@@ -101,13 +101,13 @@ public class OffreDAO {
 
             stmt.executeUpdate("INSERT INTO Offre "
                     + "(Intitule, Reference, DatePublication, DureeDiffusion, DateDebutContrat, NbPoste, LocalisationLattitude"
-                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, Domaine_id, Metier_id"
+                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id"
                     + ", TypeContrat_id, Annonceur_id ) "
                     + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', convert(datetime,'"
                     + datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
                     + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
                     + o.getDescriptionPoste()+"', '"+o.getDescriptionProfil()+"', '"+o.getTelephone()+"', '"
-                    + o.getEmail()+"', "+ o.getDomaine().getId() +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
+                    + o.getEmail()+"', '"+ o.isEstValide()+"',"+ o.getDomaine().getId() +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
                     + o.getAnnonceur().getId() +")");
 
             ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(Domaine_id) as Domaine_id,"
@@ -168,6 +168,7 @@ public class OffreDAO {
                     + "', DescriptionProfil = '" + o.getDescriptionProfil()
                     + "', Telephone = '" + o.getTelephone()
                     + "', Email = '" + o.getEmail()
+                    + "', EstValide = '" + o.isEstValide()
                     + "', Domaine_id = " + null
                     + ", Metier_id = " + o.getMetier().getId()
                     + ", TypeContrat_id = " + o.getTypeContrat().getId()
@@ -188,6 +189,7 @@ public class OffreDAO {
                     + "', DescriptionProfil = '" + o.getDescriptionProfil()
                     + "', Telephone = '" + o.getTelephone()
                     + "', Email = '" + o.getEmail()
+                    + "', EstValide = '" + o.isEstValide()
                     + "', Domaine_id = " + o.getDomaine().getId()
                     + ", Metier_id = " + null
                     + ", TypeContrat_id = " + o.getTypeContrat().getId()
@@ -208,6 +210,7 @@ public class OffreDAO {
                     + "', DescriptionProfil = '" + o.getDescriptionProfil()
                     + "', Telephone = '" + o.getTelephone()
                     + "', Email = '" + o.getEmail()
+                    + "', EstValide = '" + o.isEstValide()
                     + "', Domaine_id = " + o.getDomaine().getId()
                     + ", Metier_id = " + o.getMetier().getId()
                     + ", TypeContrat_id = " + o.getTypeContrat().getId()
@@ -261,17 +264,17 @@ public class OffreDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                     + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                    + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                    + "                              , DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
                     + "                              , Annonceur_id   FROM Offre ");
             
             while(rs.next()) {
-                Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
-                Metier m = MetierDAO.trouver(cnx, rs.getLong(15));
-                TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(16));
-                Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(17));
+                Domaine d = DomaineDAO.trouver(cnx, rs.getLong(15));
+                Metier m = MetierDAO.trouver(cnx, rs.getLong(16));
+                TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(17));
+                Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(18));
                 Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
                 rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),
-                rs.getString(12), rs.getString(13),d,m,tc,a);
+                rs.getString(12), rs.getString(13), rs.getBoolean(14),d,m,tc,a);
                 offres.add(o);
             }
             
@@ -298,18 +301,18 @@ public class OffreDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT o.Id, o.Intitule, o.Reference, o.DatePublication, DureeDiffusion,DateDebutContrat"
                     + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                    + "                              , DescriptionProfil, Telephone, Email, o.Domaine_id, o.Metier_id, o.TypeContrat_id"
+                    + "                              , DescriptionProfil, Telephone, Email, EstValide, o.Domaine_id, o.Metier_id, o.TypeContrat_id"
                     + "                              , o.Annonceur_id "
                     + "FROM Offre o "
                     + "WHERE o.Domaine_id = " + d.getId());
             
             while(rs.next()) {
-                Metier m = MetierDAO.trouver(cnx, rs.getLong(15));
-                TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(16));
-                Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(17));
+                Metier m = MetierDAO.trouver(cnx, rs.getLong(16));
+                TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(17));
+                Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(18));
                 Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
                 rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),
-                rs.getString(12), rs.getString(13),d,m,tc,a);
+                rs.getString(12), rs.getString(13), rs.getBoolean(14),d,m,tc,a);
                 offres.add(o);
             }
             
@@ -338,18 +341,18 @@ public class OffreDAO {
             
                 ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                         + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                        + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                        + "                              , DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
                         + "                              , Annonceur_id "   
                         + "FROM Offre o "
                         + "WHERE o.Metier_id = " + m.getId());
 
                 while(rs.next()) {
-                    Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
-                    TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(16));
-                    Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(17));
+                    Domaine d = DomaineDAO.trouver(cnx, rs.getLong(15));
+                    TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(17));
+                    Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(18));
                     Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
                     rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),
-                    rs.getString(12), rs.getString(13),d,m,tc,a);
+                    rs.getString(12), rs.getString(13),rs.getBoolean(14),d,m,tc,a);
                     offres.add(o);
                 }
             }  
@@ -379,7 +382,7 @@ public class OffreDAO {
             
                 rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                         + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                        + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                        + "                              , DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
                         + "                              , Annonceur_id "   
                         + "FROM Offre o "
                         + "WHERE o.Metier_id = " + m.getId()
@@ -388,7 +391,7 @@ public class OffreDAO {
             else if (m == null && d != null) {
                 rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                         + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                        + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                        + "                              , DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
                         + "                              , Annonceur_id "   
                         + "FROM Offre o "
                         + "WHERE o.Metier_id IS NULL "
@@ -397,7 +400,7 @@ public class OffreDAO {
             else if (m != null && d == null) {
                 rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                         + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                        + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                        + "                              , DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
                         + "                              , Annonceur_id "   
                         + "FROM Offre o "
                         + "WHERE o.Metier_id = " + m.getId()
@@ -408,7 +411,7 @@ public class OffreDAO {
                 Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(17));
                 Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
                 rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),
-                rs.getString(12), rs.getString(13),d,m,tc,a);
+                rs.getString(12), rs.getString(13),rs.getBoolean(14),d,m,tc,a);
                 offres.add(o);
             }
         } catch (SQLException ex) {
@@ -434,18 +437,18 @@ public class OffreDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                     + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                    + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                    + "                              , DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
                     + "                              , Annonceur_id "   
                     + "FROM Offre o "
                     + "WHERE o.Annonceur_id = " + a.getId());
             
             while(rs.next()) {
-                Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
-                Metier m = MetierDAO.trouver(cnx, rs.getLong(15));
-                TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(16));
+                Domaine d = DomaineDAO.trouver(cnx, rs.getLong(15));
+                Metier m = MetierDAO.trouver(cnx, rs.getLong(16));
+                TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(17));
                 Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
                 rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),
-                rs.getString(12), rs.getString(13),d,m,tc,a);
+                rs.getString(12), rs.getString(13),rs.getBoolean(14),d,m,tc,a);
                 offres.add(o);
             }
             
@@ -472,18 +475,18 @@ public class OffreDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                     + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                    + "                              , DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                    + "                              , DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
                     + "                              , Annonceur_id "
                     + "FROM Offre o "
                     + "WHERE o.TypeContrat_id = " + tc.getId());
             
             while(rs.next()) {
-                Domaine d = DomaineDAO.trouver(cnx, rs.getLong(14));
-                Metier m = MetierDAO.trouver(cnx, rs.getLong(15));
-                Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(17));
+                Domaine d = DomaineDAO.trouver(cnx, rs.getLong(15));
+                Metier m = MetierDAO.trouver(cnx, rs.getLong(16));
+                Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(18));
                 Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
                 rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),
-                rs.getString(12), rs.getString(13),d,m,tc,a);
+                rs.getString(12), rs.getString(13),rs.getBoolean(14),d,m,tc,a);
                 offres.add(o);
             }
             
@@ -519,6 +522,7 @@ public class OffreDAO {
         String descriptionProfil = null;
         String telephone = null;
         String email = null;
+        boolean estValide = false;
         long idDomaine = 0;
         long idMetier = 0;
         long idTypeContrat = 0;
@@ -533,7 +537,7 @@ public class OffreDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                                                 + ", NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                                                + ", DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                                                + ", DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
                                                 + ", Annonceur_id"
                                                 + " FROM Offre"
                                                 + " WHERE Id = " + id);
@@ -551,17 +555,18 @@ public class OffreDAO {
                 descriptionProfil = rs.getString(11);
                 telephone = rs.getString(12);
                 email = rs.getString(13);
-                idDomaine = rs.getLong(14);
-                idMetier = rs.getLong(15);
-                idTypeContrat = rs.getLong(16);
-                idAnnonceur = rs.getLong(17);
+                estValide = rs.getBoolean(14);
+                idDomaine = rs.getLong(15);
+                idMetier = rs.getLong(16);
+                idTypeContrat = rs.getLong(17);
+                idAnnonceur = rs.getLong(18);
                 
                 d = DomaineDAO.trouver(cnx, idDomaine);
                 m = MetierDAO.trouver(cnx, idMetier);
                 TypeContrat tc = TypeContratDAO.trouver(cnx, idTypeContrat);
                 Annonceur a = AnnonceurDAO.trouver(cnx, idAnnonceur);
 
-                o = new Offre(id,intitule,reference,datePublication,dureeDiffusion,dateDebutContrat,nbPoste,localisationLattitude,localisationLongitude,descriptionPoste,descriptionProfil,telephone,email,d,m,tc,a);
+                o = new Offre(id,intitule,reference,datePublication,dureeDiffusion,dateDebutContrat,nbPoste,localisationLattitude,localisationLongitude,descriptionPoste,descriptionProfil,telephone,email,estValide,d,m,tc,a);
             }
             
         } catch (SQLException ex) {
@@ -595,6 +600,7 @@ public class OffreDAO {
         String descriptionProfil = null;
         String telephone = null;
         String email = null;
+        boolean estValide = false;
         long idDomaine = 0;
         long idMetier = 0;
         long idTypeContrat = 0;
@@ -609,7 +615,7 @@ public class OffreDAO {
             
             ResultSet rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                                                 + ", NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                                                + ", DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                                                + ", DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
                                                 + ", Annonceur_id"
                                                 + " FROM Offre"
                                                 + " WHERE Reference = '" + reference+"'");
@@ -627,17 +633,18 @@ public class OffreDAO {
                 descriptionProfil = rs.getString(11);
                 telephone = rs.getString(12);
                 email = rs.getString(13);
-                idDomaine = rs.getLong(14);
-                idMetier = rs.getLong(15);
-                idTypeContrat = rs.getLong(16);
-                idAnnonceur = rs.getLong(17);
+                estValide = rs.getBoolean(14);
+                idDomaine = rs.getLong(15);
+                idMetier = rs.getLong(16);
+                idTypeContrat = rs.getLong(17);
+                idAnnonceur = rs.getLong(18);
                 
                 d = DomaineDAO.trouver(cnx, idDomaine);
                 m = MetierDAO.trouver(cnx, idMetier);
                 TypeContrat tc = TypeContratDAO.trouver(cnx, idTypeContrat);
                 Annonceur a = AnnonceurDAO.trouver(cnx, idAnnonceur);
 
-                o = new Offre(id,intitule,reference,datePublication,dureeDiffusion,dateDebutContrat,nbPoste,localisationLattitude,localisationLongitude,descriptionPoste,descriptionProfil,telephone,email,d,m,tc,a);
+                o = new Offre(id,intitule,reference,datePublication,dureeDiffusion,dateDebutContrat,nbPoste,localisationLattitude,localisationLongitude,descriptionPoste,descriptionProfil,telephone,email,estValide,d,m,tc,a);
             }
             
         } catch (SQLException ex) {
@@ -673,6 +680,7 @@ public class OffreDAO {
         String descriptionProfil = null;
         String telephone = null;
         String email = null;
+        boolean estValide = false;
         long idDomaine = 0;
         long idMetier = 0;
         long idTypeContrat = 0;
@@ -688,7 +696,7 @@ public class OffreDAO {
             ResultSet rs = stmt.executeQuery("SELECT TOP 1 "
                     + "Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
                                                 + ", NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                                                + ", DescriptionProfil, Telephone, Email, Domaine_id, Metier_id, TypeContrat_id"
+                                                + ", DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
                                                 + ", Annonceur_id"
                                                 + " FROM Offre"
                                                 + " ORDER BY DatePublication ASC");
@@ -707,17 +715,18 @@ public class OffreDAO {
                 descriptionProfil = rs.getString(11);
                 telephone = rs.getString(12);
                 email = rs.getString(13);
-                idDomaine = rs.getLong(14);
-                idMetier = rs.getLong(15);
-                idTypeContrat = rs.getLong(16);
-                idAnnonceur = rs.getLong(17);
+                estValide = rs.getBoolean(14);
+                idDomaine = rs.getLong(15);
+                idMetier = rs.getLong(16);
+                idTypeContrat = rs.getLong(17);
+                idAnnonceur = rs.getLong(18);
                 
                 d = DomaineDAO.trouver(cnx, idDomaine);
                 m = MetierDAO.trouver(cnx, idMetier);
                 TypeContrat tc = TypeContratDAO.trouver(cnx, idTypeContrat);
                 Annonceur a = AnnonceurDAO.trouver(cnx, idAnnonceur);
 
-                o = new Offre(id,intitule,reference,datePublication,dureeDiffusion,dateDebutContrat,nbPoste,localisationLattitude,localisationLongitude,descriptionPoste,descriptionProfil,telephone,email,d,m,tc,a);
+                o = new Offre(id,intitule,reference,datePublication,dureeDiffusion,dateDebutContrat,nbPoste,localisationLattitude,localisationLongitude,descriptionPoste,descriptionProfil,telephone,email,estValide,d,m,tc,a);
             }
             
         } catch (SQLException ex) {
