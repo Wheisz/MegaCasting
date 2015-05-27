@@ -19,6 +19,7 @@ public class Societe {
     protected String email;
     protected String telephone;
     protected Adresse adresse;
+    protected String discr;
 
     public long getId() {
         return id;
@@ -68,11 +69,22 @@ public class Societe {
         this.adresse = adresse;
     }
 
+    public String getDiscr() {
+        return discr;
+    }
+
+    public void setDiscr(String discr) {
+        this.discr = discr;
+    }
+    
+
     @Override
     public String toString() {
         return raisonSociale;
     }
 
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -106,24 +118,29 @@ public class Societe {
         if (!Objects.equals(this.adresse, other.adresse)) {
             return false;
         }
+        if (!Objects.equals(this.discr, other.discr)) {
+            return false;
+        }
         return true;
     }
 
-    public Societe(long id, long numeroSiret, String raisonSociale, String email, String telephone, Adresse adresse) {
+    public Societe(long id, long numeroSiret, String raisonSociale, String email, String telephone, Adresse adresse, String discr) {
         this.id = id;
         this.numeroSiret = numeroSiret;
         this.raisonSociale = raisonSociale;
         this.email = email;
         this.telephone = telephone;
         this.adresse = adresse;
+        this.discr   = discr;
     }
 
-    public Societe(long numeroSiret, String raisonSociale, String email, String telephone, Adresse adresse) {
+    public Societe(long numeroSiret, String raisonSociale, String email, String telephone, Adresse adresse , String discr) {
         this.numeroSiret = numeroSiret;
         this.raisonSociale = raisonSociale;
         this.email = email;
         this.telephone = telephone;
         this.adresse = adresse;
+        this.discr   = discr;
     }
 
 }

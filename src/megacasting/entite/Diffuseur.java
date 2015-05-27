@@ -11,12 +11,12 @@ package megacasting.entite;
  */
 public class Diffuseur extends Societe{
 
-    public Diffuseur(long id, long numeroSiret, String raisonSociale, String email, String telephone, Adresse adresse) {
-        super(id, numeroSiret, raisonSociale, email, telephone, adresse);
+    public Diffuseur(long id, long numeroSiret, String raisonSociale, String email, String telephone, Adresse adresse, String discr) {
+        super(id, numeroSiret, raisonSociale, email, telephone, adresse, discr);
     }
 
-    public Diffuseur(long numeroSiret, String raisonSociale, String email, String telephone, Adresse adresse) {
-        super(numeroSiret, raisonSociale, email, telephone, adresse);
+    public Diffuseur(long numeroSiret, String raisonSociale, String email, String telephone, Adresse adresse, String discr) {
+        super(numeroSiret, raisonSociale, email, telephone, adresse, discr);
     }
 
 

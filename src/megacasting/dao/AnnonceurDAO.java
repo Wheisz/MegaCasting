@@ -103,13 +103,13 @@ public class AnnonceurDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT a.Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id "
+            ResultSet rs = stmt.executeQuery("SELECT a.Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id, Discr "
                     + "FROM Annonceur a "
                     + "INNER JOIN Societe s ON a.Id = s.Id ");
             
             while(rs.next()) {
                 Adresse a = AdresseDAO.trouver(cnx, rs.getLong(6));
-                Annonceur annonceur = new Annonceur(rs.getLong(1), rs.getLong(2), rs.getString(3), rs.getString(4), rs.getString(5), a);
+                Annonceur annonceur = new Annonceur(rs.getLong(1), rs.getLong(2), rs.getString(3), rs.getString(4), rs.getString(5), a, rs.getString(7));
                 annonceurs.add(annonceur);
             }
             
@@ -136,11 +136,12 @@ public class AnnonceurDAO {
         String email = null;
         String telephone = null;
         long idAdresse = 0;
+        String discr = null;
         
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT a.Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id "
+            ResultSet rs = stmt.executeQuery("SELECT a.Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id, Discr "
                     + "FROM Annonceur a "
                     + "INNER JOIN Societe s ON a.Id = s.Id "
                     + "WHERE a.Id = " + id);       
@@ -152,7 +153,8 @@ public class AnnonceurDAO {
                 telephone = rs.getString(5);
                 idAdresse = rs.getLong(6);                
                 Adresse adr = AdresseDAO.trouver(cnx, idAdresse);
-                annonceur = new Annonceur(id, numeroSiret, raisonSociale, email, telephone, adr);
+                discr = rs.getString(7);
+                annonceur = new Annonceur(id, numeroSiret, raisonSociale, email, telephone, adr, discr);
             }
             
         } catch (SQLException ex) {
@@ -178,11 +180,12 @@ public class AnnonceurDAO {
         String email = null;
         String telephone = null;
         long idAdresse = 0;
+        String discr = null;
         
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT a.Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id "
+            ResultSet rs = stmt.executeQuery("SELECT a.Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id, Discr "
                     + "FROM Annonceur a "
                     + "INNER JOIN Societe s ON a.Id = s.Id "
                     + "WHERE RaisonSociale = '" + raisonSociale + "'");
@@ -194,7 +197,8 @@ public class AnnonceurDAO {
                 telephone = rs.getString(5);
                 idAdresse = rs.getLong(6);                
                 Adresse a = AdresseDAO.trouver(cnx, idAdresse);
-                annonceur = new Annonceur(id, numeroSiret, raisonSociale, email, telephone, a);
+                discr = rs.getString(7);
+                annonceur = new Annonceur(id, numeroSiret, raisonSociale, email, telephone, a, discr);
             }
             
         } catch (SQLException ex) {

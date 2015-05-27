@@ -534,6 +534,7 @@ public class SocieteForm extends javax.swing.JPanel {
                 // On verifie si un diffuseur existe avec la raison sociale choisie
                 Diffuseur d = DiffuseurDAO.trouver(mainJFrame.cnx, raisonSociale);
 
+                
                 // Si oui alors on le supprime
                 if (d != null) {
                     DiffuseurDAO.supprimer(mainJFrame.cnx, d);
@@ -549,8 +550,10 @@ public class SocieteForm extends javax.swing.JPanel {
                     if (erreurs.isEmpty()) {
                         // On instancie une nouvelle adresse avec les informations du formulaire
                         Adresse adresse = new Adresse(numero, rue, codePostal, ville);
+                        // On initialise la valeur de discr à annonceur
+                        String discr = "annonceur";
                         // On instancie un annonceur avec les informations du formaulaire et l'adresse 
-                        a = new Annonceur(numeroSiret, raisonSociale, email, telephone, adresse);
+                        a = new Annonceur(numeroSiret, raisonSociale, email, telephone, adresse, discr);
 
                         try {
                             // On crée l'annonceur en base de données
@@ -626,8 +629,10 @@ public class SocieteForm extends javax.swing.JPanel {
                         if (erreurs.isEmpty()) {
                             // On instancie une nouvelle adresse avec les informations du formulaire
                             Adresse adresse = new Adresse(numero, rue, codePostal, ville);
+                            // On initialise la valeur de discr à diffuseur
+                            String discr = "diffuseur";
                             // On instancie un nouveau diffuseur avec les informations du formulaire et l'adresse 
-                            d = new Diffuseur(numeroSiret, raisonSociale, email, telephone, adresse);
+                            d = new Diffuseur(numeroSiret, raisonSociale, email, telephone, adresse, discr);
 
                             try {
                                 // On crée le diffuseur en base de données

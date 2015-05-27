@@ -39,7 +39,7 @@ public class OffreForm extends javax.swing.JPanel {
         ERREUR_NBPOSTE_VIDE, ERREUR_LATTITUDE_VIDE, ERREUR_LATTITUDE_INVALIDE, ERREUR_LONGITUDE_VIDE,
         ERREUR_LONGITUDE_INVALIDE, ERREUR_DESCRIPTIONPOSTE_VIDE, ERREUR_DESCRIPTIONPROFIL_VIDE,
         ERREUR_TELEPHONE_VIDE, ERREUR_TELEPHONE_INVALIDE, ERREUR_EMAIL_VIDE, ERREUR_EMAIL_INVALIDE,
-        ERREUR_VALIDE_VIDE, ERREUR_IDANNONCEUR_VIDE, ERREUR_DOMAINE_METIER_VIDE;
+         ERREUR_IDANNONCEUR_VIDE, ERREUR_DOMAINE_METIER_VIDE;
     }
     
     public OffreForm(MainJFrame mainJFrame) {
@@ -742,7 +742,12 @@ public class OffreForm extends javax.swing.JPanel {
             String descriptionProfil = this.descriptionProfilTextArea.getText();
             String telephone = this.telephoneTextField.getText();
             String email = this.emailTextField.getText();
-            boolean estValide = true;
+            boolean estValide = false;
+            if( this.estValideRadioButton.isSelected() ){
+                estValide = true;
+            }else{
+                estValide = false;
+            }
             Domaine domaine = (Domaine) this.domaineOffreComboBox.getSelectedItem();
             Metier metier = (Metier) this.metierOffreComboBox.getSelectedItem();
             TypeContrat typeContrat = (TypeContrat) this.typeContratOffreComboBox.getSelectedItem();
@@ -1038,7 +1043,6 @@ public class OffreForm extends javax.swing.JPanel {
         this.emailErreurLabel.setText(null);
         this.estValideErreurLabel.setText(null);
         this.annonceurErreurLabel.setText(null);
-        this.domaineMetierErreurLabel.setText(null);
     }
 
     // Permet de rafraichir l'ensemble des List de la page
@@ -1283,12 +1287,6 @@ public class OffreForm extends javax.swing.JPanel {
                 this.emailErreurLabel.setText(null);
             }
         }
-        // Creation d'une erreur si la radioBox de EstValide n'est pas selectionné
-        if (this.estValideRadioButton.isSelected() == false){
-            erreurs.add(Erreur.ERREUR_VALIDE_VIDE);
-        }else {
-            this.estValideErreurLabel.setText(null);
-        }
         // Creation d'une erreur si aucun annonceur à été choisi
         if (this.annonceurOffreComboBox.getSelectedItem() == null) {
             erreurs.add(Erreur.ERREUR_IDANNONCEUR_VIDE);
@@ -1408,9 +1406,6 @@ public class OffreForm extends javax.swing.JPanel {
                     break;
                 case ERREUR_EMAIL_INVALIDE:
                     this.emailErreurLabel.setText("Veuillez saisir un email correct !");
-                    break;
-                case ERREUR_VALIDE_VIDE:
-                    this.estValideErreurLabel.setText("Veuillez valider l'offre !");
                     break;
                 case ERREUR_IDANNONCEUR_VIDE:
                     this.annonceurErreurLabel.setText("Veuillez choisir un annonceur pour votre offre !");

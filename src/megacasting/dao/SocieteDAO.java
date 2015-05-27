@@ -31,9 +31,9 @@ public class SocieteDAO {
             stmt = cnx.createStatement();
             
             stmt.executeUpdate("INSERT INTO Societe "
-                    + "(NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id) "
+                    + "(NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id, Discr) "
                     + "VALUES ("+ s.getNumeroSiret() +", '" + s.getRaisonSociale() + "', '" + s.getEmail() + "', '"
-                    + s.getTelephone() + "', '" + s.getAdresse().getId() + "')");
+                    + s.getTelephone() + "', '" + s.getAdresse().getId() + "','" + s.getDiscr() +"')");
 
             ResultSet rs = stmt.executeQuery("SELECT MAX(Id) FROM Societe");
             
@@ -73,7 +73,8 @@ public class SocieteDAO {
                     + "', Email = '" + s.getEmail()
                     + "', Telephone = '" + s.getTelephone()
                     + "', Adresse_id = " + s.getAdresse().getId()
-                    + " WHERE Id = " + s.getId()
+                    + ", Discr = '" + s.getDiscr()
+                    + "' WHERE Id = " + s.getId()
             );
             
         } catch (SQLException ex) {
@@ -122,12 +123,12 @@ public class SocieteDAO {
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id "
+            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id, Discr "
                     + "FROM Societe");
             
             while(rs.next()) {
                 Adresse a = AdresseDAO.trouver(cnx, rs.getLong(6));
-                Societe s = new Societe(rs.getLong(1),rs.getLong(2), rs.getString(3), rs.getString(4), rs.getString(5), a);
+                Societe s = new Societe(rs.getLong(1),rs.getLong(2), rs.getString(3), rs.getString(4), rs.getString(5), a, rs.getString(7));
                 societes.add(s);
             }
             
@@ -154,11 +155,12 @@ public class SocieteDAO {
         String email = null;
         String telephone = null;
         long idAdresse = 0;
+        String discr = null;
         
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id FROM Societe "
+            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id, Discr FROM Societe "
                     + "WHERE Id = " + id);
             
             if(rs.next()) {
@@ -168,7 +170,8 @@ public class SocieteDAO {
                 telephone = rs.getString(5);
                 idAdresse = rs.getLong(6);                
                 Adresse a = AdresseDAO.trouver(cnx, idAdresse);
-                s = new Societe(id, numeroSiret, raisonSociale, email, telephone, a);
+                discr = rs.getString(7);
+                s = new Societe(id, numeroSiret, raisonSociale, email, telephone, a , discr);
             }
             
         } catch (SQLException ex) {
@@ -194,11 +197,12 @@ public class SocieteDAO {
         String email = null;
         String telephone = null;
         long idAdresse = 0;
+        String discr = null;
         
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id FROM Societe "
+            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id, Discr FROM Societe "
                     + "WHERE RaisonSociale = '" + raisonSociale + "'");
             
             if(rs.next()) {
@@ -208,7 +212,8 @@ public class SocieteDAO {
                 telephone = rs.getString(5);
                 idAdresse = rs.getLong(6);                
                 Adresse a = AdresseDAO.trouver(cnx, idAdresse);
-                s = new Societe(id, numeroSiret, raisonSociale, email, telephone, a);
+                discr = rs.getString(7);
+                s = new Societe(id, numeroSiret, raisonSociale, email, telephone, a, discr);
             }
             
         } catch (SQLException ex) {
@@ -235,11 +240,12 @@ public class SocieteDAO {
         String email = null;
         String telephone = null;
         long idAdresse = 0;
+        String discr = null;
         
         try {
             stmt = cnx.createStatement();
             
-            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id FROM Societe "
+            ResultSet rs = stmt.executeQuery("SELECT Id, NumeroSiret, RaisonSociale, Email, Telephone, Adresse_id, Discr FROM Societe "
                     + "WHERE NumeroSiret = '" + numeroSiret + "'");
             
             if(rs.next()) {
@@ -250,7 +256,8 @@ public class SocieteDAO {
                 telephone = rs.getString(5);
                 idAdresse = rs.getLong(6);                
                 Adresse a = AdresseDAO.trouver(cnx, idAdresse);
-                s = new Societe(id, numSiret, raisonSociale, email, telephone, a);
+                discr = rs.getString(7);
+                s = new Societe(id, numSiret, raisonSociale, email, telephone, a, discr );
             }
             
         } catch (SQLException ex) {
