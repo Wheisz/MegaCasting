@@ -625,13 +625,11 @@ public class OffreForm extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(typeContratOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, 0)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(domaineOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(domaineOffreLabel))
-                                    .addComponent(typeContratOffreLabel, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(domaineOffreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(domaineOffreLabel))
+                                .addComponent(typeContratOffreLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
                         .addGap(0, 0, 0)
                         .addComponent(domaineMetierErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -775,8 +773,10 @@ public class OffreForm extends javax.swing.JPanel {
             String telephone = this.telephoneTextField.getText();
             String email = this.emailTextField.getText();
             boolean estValide = false;
+            Date datePublication = null;
             if( this.estValideRadioButton.isSelected() ){
                 estValide = true;
+                datePublication = new Date(System.currentTimeMillis());; 
             }else{
                 estValide = false;
             }
@@ -794,7 +794,7 @@ public class OffreForm extends javax.swing.JPanel {
                 if (erreurs.isEmpty()) {
                     try {
                         // On instancie une nouvelle offre
-                        o = new Offre(intitule, reference, dureeDiffusion,
+                        o = new Offre(intitule, reference, datePublication, dureeDiffusion,
                                 dateDebutContrat, nbPoste, lattitude, longitude, descriptionPoste, descriptionProfil,
                                 telephone, email,estValide, domaine, metier, typeContrat, annonceur);
                         // On crée l'offre en base de données
@@ -824,6 +824,7 @@ public class OffreForm extends javax.swing.JPanel {
                     // On modfie les informations de l'offre
                     o.setIntitule(intitule);
                     o.setReference(reference);
+                    o.setDatePublication(datePublication);
                     o.setDureeDiffusion(dureeDiffusion);
                     o.setDateDebutContrat(dateDebutContrat);
                     o.setNbPoste(nbPoste);
@@ -890,8 +891,6 @@ public class OffreForm extends javax.swing.JPanel {
                 // On ajoute le metier au model de la ComboBox des metiers
                 modelMetier.addElement(m);
             }
-            // On ajoute un élément null 
-            modelMetier.addElement(null);
             metierOffreComboBox.setModel(modelMetier);
             // Si le domaine est null
         } else {
@@ -905,8 +904,6 @@ public class OffreForm extends javax.swing.JPanel {
                 // On ajoute le metier au model de la ComboBox des metiers
                 modelMetier.addElement(m);
             }
-            // On ajoute un element null
-            modelMetier.addElement(null);
             metierOffreComboBox.setModel(modelMetier);
         }
     }//GEN-LAST:event_domaineOffreComboBoxActionPerformed
@@ -1386,64 +1383,64 @@ public class OffreForm extends javax.swing.JPanel {
             switch (erreur) {
                 
                 case ERREUR_INTITULE_VIDE:
-                    this.intituleErreurLabel.setText("Veuillez saisir un intitulé !");
+                    this.intituleErreurLabel.setText("Veuillez saisir un intitulé");
                     break;
                 case ERREUR_REFERENCE_VIDE:
-                    this.referenceErreurLabel.setText("Veuillez saisir une référence !");
+                    this.referenceErreurLabel.setText("Veuillez saisir une référence");
                     break;
                 case ERREUR_REFERENCE_INVALIDE:
-                    this.referenceErreurLabel.setText("Veuillez saisir une référence correcte !");
+                    this.referenceErreurLabel.setText("Veuillez saisir une référence correcte");
                     break;
                 case ERREUR_REFERENCE_EXISTANT:
-                    this.referenceErreurLabel.setText("Une offre possède déjà cette référence !");
+                    this.referenceErreurLabel.setText("Une offre possède déjà cette référence");
                     break;
                 case ERREUR_DUREEDIFFUSION_VIDE:
-                    this.dureeDiffusionErreurLabel.setText("Veuillez saisir une durée de diffusion supérieure à 0 !");
+                    this.dureeDiffusionErreurLabel.setText("Veuillez saisir une durée de diffusion supérieure à 0");
                     break;
                 case ERREUR_DATEDEBUTCONTRAT_VIDE:
-                    this.dateDebutContratErreurLabel.setText("Veuillez saisir une date de début de contrat !");
+                    this.dateDebutContratErreurLabel.setText("Veuillez saisir une date de début de contrat");
                     break;
                 case ERREUR_DATEDEBUTCONTRAT_INVALIDE:
-                    this.dateDebutContratErreurLabel.setText("La date saisie est inférieure à celle d\'aujourdh'hui !");
+                    this.dateDebutContratErreurLabel.setText("La date saisie est inférieure à celle d\'aujourdh'hui");
                     break;
                 case ERREUR_NBPOSTE_VIDE:
-                    this.nbPosteErreurLabel.setText("Veuillez saisir le nombre de postes pour l'offre !");
+                    this.nbPosteErreurLabel.setText("Veuillez saisir le nombre de postes pour l'offre");
                     break;
                 case ERREUR_LATTITUDE_VIDE:
-                    this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude !");
+                    this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude");
                     break;
                 case ERREUR_LATTITUDE_INVALIDE:
-                    this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude correcte : 00° 00' N !");
+                    this.lattitudeErreurLabel.setText("Veuillez saisir une lattitude correcte : 00° 00' N");
                     break;
                 case ERREUR_LONGITUDE_VIDE:
-                    this.longitudeErreurLabel.setText("Veuillez saisir une longitude !");
+                    this.longitudeErreurLabel.setText("Veuillez saisir une longitude");
                     break;
                 case ERREUR_LONGITUDE_INVALIDE:
-                    this.longitudeErreurLabel.setText("Veuillez saisir une longitude correcte : 00° 00' N !");
+                    this.longitudeErreurLabel.setText("Veuillez saisir une longitude correcte : 00° 00' N");
                     break;
                 case ERREUR_DESCRIPTIONPOSTE_VIDE:
-                    this.descriptionPosteErreurLabel.setText("Veuillez saisir une description de poste !");
+                    this.descriptionPosteErreurLabel.setText("Veuillez saisir une description de poste");
                     break;
                 case ERREUR_DESCRIPTIONPROFIL_VIDE:
-                    this.descriptionProfilErreurLabel.setText("Veuillez saisir une description de profil !");
+                    this.descriptionProfilErreurLabel.setText("Veuillez saisir une description de profil");
                     break;
                 case ERREUR_TELEPHONE_VIDE:
-                    this.telephoneErreurLabel.setText("Veuillez saisir un numéro de téléphone !");
+                    this.telephoneErreurLabel.setText("Veuillez saisir un numéro de téléphone");
                     break;
                 case ERREUR_TELEPHONE_INVALIDE:
-                    this.telephoneErreurLabel.setText("Veuillez saisir une numéro de téléphone de 10 chiffres !");
+                    this.telephoneErreurLabel.setText("Veuillez saisir une numéro de téléphone de 10 chiffres");
                     break;
                 case ERREUR_EMAIL_VIDE:
-                    this.emailErreurLabel.setText("Veuillez saisir un email !");
+                    this.emailErreurLabel.setText("Veuillez saisir un email");
                     break;
                 case ERREUR_EMAIL_INVALIDE:
-                    this.emailErreurLabel.setText("Veuillez saisir un email correct !");
+                    this.emailErreurLabel.setText("Veuillez saisir un email correct");
                     break;
                 case ERREUR_IDANNONCEUR_VIDE:
-                    this.annonceurErreurLabel.setText("Veuillez choisir un annonceur pour votre offre !");
+                    this.annonceurErreurLabel.setText("Veuillez choisir un annonceur pour votre offre");
                     break;
                 case ERREUR_DOMAINE_METIER_VIDE:
-                    this.domaineMetierErreurLabel.setText("Veuillez choisir soit un domaine ou un métier !");
+                    this.domaineMetierErreurLabel.setText("Veuillez selectionner un domaine et un métier");
                     break;
                 default:
                     break;

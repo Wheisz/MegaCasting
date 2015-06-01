@@ -32,9 +32,11 @@ public class OffreDAO {
         try {
             stmt = cnx.createStatement();
             
-            Date datePublication =  new Date(System.currentTimeMillis());
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String datePublicationStr = sdf.format(datePublication);
+            String datePublicationStr = null;
+            
+            if(o.getDatePublication() != null){
+                datePublicationStr = Offre.changeDateInString(o.getDatePublication());
+            }
             
             
             Date dateDebutContrat = o.getDateDebutContrat();
@@ -43,72 +45,32 @@ public class OffreDAO {
               
             String lattitude = Offre.modifCoordonnee(o.getLocalisationLattitude());
             String longitude = Offre.modifCoordonnee(o.getLocalisationLongitude());
-            
-            if((o.getDomaine() != null) && (o.getMetier() == null)){
-
-            stmt.executeUpdate("INSERT INTO Offre "
-                    + "(Intitule, Reference, DatePublication, DureeDiffusion, DateDebutContrat, NbPoste, LocalisationLattitude"
-                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id"
-                    + ", TypeContrat_id, Annonceur_id ) "
-                    + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', convert(datetime,'"
-                    + datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
-                    + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
-                    + o.getDescriptionPoste()+"', '"+o.getDescriptionProfil()+"', '"+o.getTelephone()+"', '"
-                    + o.getEmail()+"', '"+ o.isEstValide() +"', "+ o.getDomaine().getId() +", "+ null +", "+ o.getTypeContrat().getId() +", "
-                    + o.getAnnonceur().getId() +")");
-
-            ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(Domaine_id) as Domaine_id,"
-                    + "                              MAX(Metier_id) as Metier_id, MAX(TypeContrat_id) as TypeContrat_id,"
-                    + "                              MAX(Annonceur_id) as Annonceur_id FROM Offre");
-            
-            if(rs.next()) {
-
-                o.setId(rs.getLong(1));
-                o.getDomaine().setId(rs.getLong(2));
-                o.getMetier().setId(rs.getLong(3));
-                o.getTypeContrat().setId(rs.getLong(4));
-                o.getAnnonceur().setId(rs.getLong(5));
-            }  
-            }
-            
-            if((o.getDomaine() == null) && (o.getMetier() != null)){
-
-            stmt.executeUpdate("INSERT INTO Offre "
-                    + "(Intitule, Reference, DatePublication, DureeDiffusion, DateDebutContrat, NbPoste, LocalisationLattitude"
-                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id"
-                    + ", TypeContrat_id, Annonceur_id ) "
-                    + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', convert(datetime,'"
-                    + datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
-                    + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
-                    + o.getDescriptionPoste()+"', '"+o.getDescriptionProfil()+"', '"+o.getTelephone()+"', '"
-                    + o.getEmail()+"','"+ o.isEstValide() +"', "+ null +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
-                    + o.getAnnonceur().getId() +")");
-
-            ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(Domaine_id) as Domaine_id,"
-                    + "                              MAX(Metier_id) as Metier_id, MAX(TypeContrat_id) as TypeContrat_id,"
-                    + "                              MAX(Annonceur_id) as Annonceur_id FROM Offre");
-            
-            if(rs.next()) {
-                o.setId(rs.getLong(1));
-                o.getDomaine().setId(rs.getLong(2));
-                o.getMetier().setId(rs.getLong(3));
-                o.getTypeContrat().setId(rs.getLong(4));
-                o.getAnnonceur().setId(rs.getLong(5));
-            }  
-            }
+           
             
             if((o.getDomaine() != null) && (o.getMetier() != null)){
 
-            stmt.executeUpdate("INSERT INTO Offre "
-                    + "(Intitule, Reference, DatePublication, DureeDiffusion, DateDebutContrat, NbPoste, LocalisationLattitude"
-                    + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id"
-                    + ", TypeContrat_id, Annonceur_id ) "
-                    + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', convert(datetime,'"
-                    + datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
-                    + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
-                    + o.getDescriptionPoste()+"', '"+o.getDescriptionProfil()+"', '"+o.getTelephone()+"', '"
-                    + o.getEmail()+"', '"+ o.isEstValide()+"',"+ o.getDomaine().getId() +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
-                    + o.getAnnonceur().getId() +")");
+            if(o.getDatePublication() != null){    
+                stmt.executeUpdate("INSERT INTO Offre "
+                        + "(Intitule, Reference, DatePublication, DureeDiffusion, DateDebutContrat, NbPoste, LocalisationLattitude"
+                        + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id"
+                        + ", TypeContrat_id, Annonceur_id ) "
+                        + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', convert(datetime,'"
+                        + datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
+                        + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
+                        + o.getDescriptionPoste()+"', '"+o.getDescriptionProfil()+"', '"+o.getTelephone()+"', '"
+                        + o.getEmail()+"', '"+ o.isEstValide()+"',"+ o.getDomaine().getId() +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
+                        + o.getAnnonceur().getId() +")");
+            }else{
+                stmt.executeUpdate("INSERT INTO Offre "
+                        + "(Intitule, Reference, DatePublication, DureeDiffusion, DateDebutContrat, NbPoste, LocalisationLattitude"
+                        + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id"
+                        + ", TypeContrat_id, Annonceur_id ) "
+                        + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', null ," + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
+                        + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
+                        + o.getDescriptionPoste()+"', '"+o.getDescriptionProfil()+"', '"+o.getTelephone()+"', '"
+                        + o.getEmail()+"', '"+ o.isEstValide()+"',"+ o.getDomaine().getId() +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
+                        + o.getAnnonceur().getId() +")");
+            }
 
             ResultSet rs = stmt.executeQuery("SELECT MAX(Id)as Id, MAX(Domaine_id) as Domaine_id,"
                     + "                              MAX(Metier_id) as Metier_id, MAX(TypeContrat_id) as TypeContrat_id,"
@@ -155,68 +117,53 @@ public class OffreDAO {
         try {
             stmt = cnx.createStatement();
             
-            if((o.getDomaine() == null) && (o.getMetier() != null)){
-            stmt.executeUpdate("UPDATE Offre "
-                    + "SET Intitule = '" + o.getIntitule()
-                    + "', Reference = '" + o.getReference()
-                    + "', DureeDiffusion = " + o.getDureeDiffusion()
-                    + ", DateDebutContrat = '" + dateDebutContratStr
-                    + "', NbPoste = " + o.getNbPoste()
-                    + ", LocalisationLattitude = '" + lattitude
-                    + "', LocalisationLongitude = '" + longitude
-                    + "', DescriptionPoste = '" + o.getDescriptionPoste()
-                    + "', DescriptionProfil = '" + o.getDescriptionProfil()
-                    + "', Telephone = '" + o.getTelephone()
-                    + "', Email = '" + o.getEmail()
-                    + "', EstValide = '" + o.isEstValide()
-                    + "', Domaine_id = " + null
-                    + ", Metier_id = " + o.getMetier().getId()
-                    + ", TypeContrat_id = " + o.getTypeContrat().getId()
-                    + ", Annonceur_id = " + o.getAnnonceur().getId()
-                    + " WHERE Id = " + o.getId()
-            );
-            }
-            if(o.getDomaine() != null & o.getMetier() == null){
-            stmt.executeUpdate("UPDATE Offre "
-                    + "SET Intitule = '" + o.getIntitule()
-                    + "', Reference = '" + o.getReference()
-                    + "', DureeDiffusion = " + o.getDureeDiffusion()
-                    + ", DateDebutContrat = '" + dateDebutContratStr
-                    + "', NbPoste = " + o.getNbPoste()
-                    + ", LocalisationLattitude = '" + lattitude
-                    + "', LocalisationLongitude = '" + longitude
-                    + "', DescriptionPoste = '" + o.getDescriptionPoste()
-                    + "', DescriptionProfil = '" + o.getDescriptionProfil()
-                    + "', Telephone = '" + o.getTelephone()
-                    + "', Email = '" + o.getEmail()
-                    + "', EstValide = '" + o.isEstValide()
-                    + "', Domaine_id = " + o.getDomaine().getId()
-                    + ", Metier_id = " + null
-                    + ", TypeContrat_id = " + o.getTypeContrat().getId()
-                    + ", Annonceur_id = " + o.getAnnonceur().getId()
-                    + " WHERE Id = " + o.getId()
-            );
-            }
             if(o.getDomaine() != null & o.getMetier() != null){
-            stmt.executeUpdate("UPDATE Offre "
-                    + "SET Intitule = '" + o.getIntitule()
-                    + "', Reference = '" + o.getReference()
-                    + "', DureeDiffusion = " + o.getDureeDiffusion()
-                    + ", DateDebutContrat = '" + dateDebutContratStr
-                    + "', NbPoste = " + o.getNbPoste()
-                    + ", LocalisationLattitude = '" + lattitude
-                    + "', LocalisationLongitude = '" + longitude
-                    + "', DescriptionPoste = '" + o.getDescriptionPoste()
-                    + "', DescriptionProfil = '" + o.getDescriptionProfil()
-                    + "', Telephone = '" + o.getTelephone()
-                    + "', Email = '" + o.getEmail()
-                    + "', EstValide = '" + o.isEstValide()
-                    + "', Domaine_id = " + o.getDomaine().getId()
-                    + ", Metier_id = " + o.getMetier().getId()
-                    + ", TypeContrat_id = " + o.getTypeContrat().getId()
-                    + ", Annonceur_id = " + o.getAnnonceur().getId()
-                    + " WHERE Id = " + o.getId()
-            );
+                if(o.getDatePublication() != null){
+                    
+                    String datePublicationStr = Offre.changeDateInString(o.getDatePublication());
+                    
+                    stmt.executeUpdate("UPDATE Offre "
+                            + "SET Intitule = '" + o.getIntitule()
+                            + "', Reference = '" + o.getReference()
+                            + "' , DatePublication =  convert(datetime,'"+datePublicationStr+"',120)"
+                            + " , DureeDiffusion = " + o.getDureeDiffusion()
+                            + ", DateDebutContrat = '" + dateDebutContratStr
+                            + "', NbPoste = " + o.getNbPoste()
+                            + ", LocalisationLattitude = '" + lattitude
+                            + "', LocalisationLongitude = '" + longitude
+                            + "', DescriptionPoste = '" + o.getDescriptionPoste()
+                            + "', DescriptionProfil = '" + o.getDescriptionProfil()
+                            + "', Telephone = '" + o.getTelephone()
+                            + "', Email = '" + o.getEmail()
+                            + "', EstValide = '" + o.isEstValide()
+                            + "', Domaine_id = " + o.getDomaine().getId()
+                            + ", Metier_id = " + o.getMetier().getId()
+                            + ", TypeContrat_id = " + o.getTypeContrat().getId()
+                            + ", Annonceur_id = " + o.getAnnonceur().getId()
+                            + " WHERE Id = " + o.getId()
+                    );
+                }else{
+                    stmt.executeUpdate("UPDATE Offre "
+                            + "SET Intitule = '" + o.getIntitule()
+                            + "', Reference = '" + o.getReference()
+                            + "' , DatePublication =  " + null 
+                            + " , DureeDiffusion = " + o.getDureeDiffusion()
+                            + ", DateDebutContrat = '" + dateDebutContratStr
+                            + "', NbPoste = " + o.getNbPoste()
+                            + ", LocalisationLattitude = '" + lattitude
+                            + "', LocalisationLongitude = '" + longitude
+                            + "', DescriptionPoste = '" + o.getDescriptionPoste()
+                            + "', DescriptionProfil = '" + o.getDescriptionProfil()
+                            + "', Telephone = '" + o.getTelephone()
+                            + "', Email = '" + o.getEmail()
+                            + "', EstValide = '" + o.isEstValide()
+                            + "', Domaine_id = " + o.getDomaine().getId()
+                            + ", Metier_id = " + o.getMetier().getId()
+                            + ", TypeContrat_id = " + o.getTypeContrat().getId()
+                            + ", Annonceur_id = " + o.getAnnonceur().getId()
+                            + " WHERE Id = " + o.getId()
+                    );
+                }
             }
             
         } catch (SQLException ex) {
@@ -388,24 +335,7 @@ public class OffreDAO {
                         + "WHERE o.Metier_id = " + m.getId()
                         + " AND o.Domaine_id = " + d.getId());                
             } 
-            else if (m == null && d != null) {
-                rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
-                        + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                        + "                              , DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
-                        + "                              , Annonceur_id "   
-                        + "FROM Offre o "
-                        + "WHERE o.Metier_id IS NULL "
-                        + "AND o.Domaine_id = " + d.getId());
-            }
-            else if (m != null && d == null) {
-                rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
-                        + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
-                        + "                              , DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
-                        + "                              , Annonceur_id "   
-                        + "FROM Offre o "
-                        + "WHERE o.Metier_id = " + m.getId()
-                        + " AND o.Domaine_id IS NULL ");
-            }
+
             while(rs.next()) {
                 TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(16));
                 Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(17));

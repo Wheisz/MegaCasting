@@ -68,6 +68,10 @@ public class Offre {
     public Date getDatePublication() {
         return datePublication;
     }
+
+    public void setDatePublication(Date datePublication) {
+        this.datePublication = datePublication;
+    }
     
     public int getDureeDiffusion() {
         return dureeDiffusion;
@@ -274,6 +278,16 @@ public class Offre {
         return date;
     }
     
+    public static String changeDateInString(Date datePublication)
+    {
+        datePublication = new Date(System.currentTimeMillis());
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String datePublicationStr = sdf.format(datePublication);
+        
+        return datePublicationStr;
+    }
+    
     public static String modifCoordonnee(String coordonnee) 
     {
         coordonnee = coordonnee.replace("'", "''");
@@ -301,31 +315,31 @@ public class Offre {
         this.annonceur = annonceur;
     }
      
-    public Offre(long id, String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, boolean estValide,Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
-        this.id = id;
-        this.intitule = intitule;
-        this.reference = reference;
-        this.datePublication = new Date();
-        this.dureeDiffusion = dureeDiffusion;
-        this.dateDebutContrat = dateDebutContrat;
-        this.nbPoste = nbPoste;
-        this.localisationLattitude = localisationLattitude;
-        this.localisationLongitude = localisationLongitude;
-        this.descriptionPoste = descriptionPoste;
-        this.descriptionProfil = descriptionProfil;
-        this.telephone = telephone;
-        this.email = email;
-        this.estValide = estValide;
-        this.domaine = domaine;
-        this.metier = metier;
-        this.typeContrat = typeContrat;
-        this.annonceur = annonceur;
-    }
+//    public Offre(long id, String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, boolean estValide,Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
+//        this.id = id;
+//        this.intitule = intitule;
+//        this.reference = reference;
+//        this.datePublication = new Date();
+//        this.dureeDiffusion = dureeDiffusion;
+//        this.dateDebutContrat = dateDebutContrat;
+//        this.nbPoste = nbPoste;
+//        this.localisationLattitude = localisationLattitude;
+//        this.localisationLongitude = localisationLongitude;
+//        this.descriptionPoste = descriptionPoste;
+//        this.descriptionProfil = descriptionProfil;
+//        this.telephone = telephone;
+//        this.email = email;
+//        this.estValide = estValide;
+//        this.domaine = domaine;
+//        this.metier = metier;
+//        this.typeContrat = typeContrat;
+//        this.annonceur = annonceur;
+//    }
 
-    public Offre(String intitule, String reference, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, boolean estValide, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
+    public Offre(String intitule, String reference, Date datePublication, int dureeDiffusion, Date dateDebutContrat, int nbPoste, String localisationLattitude, String localisationLongitude, String descriptionPoste, String descriptionProfil, String telephone, String email, boolean estValide, Domaine domaine, Metier metier, TypeContrat typeContrat, Annonceur annonceur) {
         this.intitule = intitule;
         this.reference = reference;
-        this.datePublication =  new Date();
+        this.datePublication =  datePublication;
         this.dureeDiffusion = dureeDiffusion;
         this.dateDebutContrat = dateDebutContrat;
         this.nbPoste = nbPoste;
