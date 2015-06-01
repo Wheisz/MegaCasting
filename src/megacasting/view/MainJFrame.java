@@ -34,11 +34,11 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();      
         loadDriver();
-        String url = "jdbc:jtds:sqlserver://localhost:1433/MegaCastingCL";
+        String url = "jdbc:jtds:sqlserver://172.16.2.66:1433/MegaCasting;integratedSecurity=true;";
         
         try {
             
-            cnx = DriverManager.getConnection(url, "sa", "not24get");
+            cnx = DriverManager.getConnection(url, "sa", "Rr7u82vT");
            
             loadCardLayout();
         
