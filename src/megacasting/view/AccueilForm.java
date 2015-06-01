@@ -6,6 +6,7 @@
 package megacasting.view;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 
 /**
  *
@@ -17,7 +18,7 @@ public class AccueilForm extends javax.swing.JPanel {
 
     public AccueilForm(MainJFrame mainJFrame) {
         this.mainJFrame = mainJFrame;
-        this.mainJFrame.setExtendedState(this.mainJFrame.MAXIMIZED_BOTH);
+//        this.mainJFrame.setExtendedState(this.mainJFrame.MAXIMIZED_BOTH);
         initComponents();
         
         
@@ -28,6 +29,8 @@ public class AccueilForm extends javax.swing.JPanel {
      */
     public AccueilForm() {
         initComponents();
+        
+        
     }
 
     /**
@@ -46,8 +49,13 @@ public class AccueilForm extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 102, 102));
+        setAlignmentX(0.0F);
+        setAlignmentY(0.0F);
+        setAutoscrolls(true);
+        setPreferredSize(new java.awt.Dimension(1020, 750));
 
         buttonParams.setText("Paramètres");
+        buttonParams.setPreferredSize(new java.awt.Dimension(1020, 50));
         buttonParams.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonParamsActionPerformed(evt);
@@ -55,6 +63,7 @@ public class AccueilForm extends javax.swing.JPanel {
         });
 
         buttonSociete.setText("Société");
+        buttonSociete.setPreferredSize(new java.awt.Dimension(1020, 50));
         buttonSociete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSocieteActionPerformed(evt);
@@ -62,6 +71,7 @@ public class AccueilForm extends javax.swing.JPanel {
         });
 
         buttonOffre.setText("Offre");
+        buttonOffre.setPreferredSize(new java.awt.Dimension(1020, 50));
         buttonOffre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOffreActionPerformed(evt);
@@ -69,6 +79,7 @@ public class AccueilForm extends javax.swing.JPanel {
         });
 
         buttonStatistique.setText("Statistique");
+        buttonStatistique.setPreferredSize(new java.awt.Dimension(1020, 50));
         buttonStatistique.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonStatistiqueActionPerformed(evt);
@@ -77,32 +88,35 @@ public class AccueilForm extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(102, 102, 102));
         jLabel1.setFont(new java.awt.Font("Rod", 0, 48)); // NOI18N
-        jLabel1.setText("MegaCasting");
+        jLabel1.setText("            MegaCasting");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(buttonOffre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(buttonStatistique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(buttonParams, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(buttonSociete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1001, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(buttonSociete, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
+                        .addComponent(buttonOffre, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(buttonStatistique, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(buttonParams, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonSociete, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonOffre, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonStatistique, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonParams, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(buttonParams, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -6,6 +6,7 @@
 package megacasting.view;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -41,7 +42,6 @@ public class MainJFrame extends javax.swing.JFrame {
             cnx = DriverManager.getConnection(url, "sa", "Rr7u82vT");
            
             loadCardLayout();
-        
             CardLayout cl = (CardLayout) mainPanel.getLayout();
             cl.show(mainPanel, "accueilCard");      
             
@@ -91,30 +91,29 @@ public class MainJFrame extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAutoRequestFocus(false);
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1020, 720));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
+        mainPanel.setAlignmentX(0.0F);
+        mainPanel.setAlignmentY(0.0F);
+        mainPanel.setAutoscrolls(true);
         mainPanel.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(589, Short.MAX_VALUE))
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
         );
 
         mainPanel.getAccessibleContext().setAccessibleDescription("");
