@@ -35,11 +35,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();      
         loadDriver();
-<<<<<<< HEAD
-        String url = "jdbc:jtds:sqlserver://172.16.2.66:1433/MegaCasting";
-=======
         String url = "jdbc:jtds:sqlserver://172.16.2.66:1433/MegaCasting;integratedSecurity=true;";
->>>>>>> e05e6fc49ccc4f08a5a5842fc71a5b4c187e1344
         
         try {
             

@@ -428,6 +428,7 @@ public class ParamsForm extends javax.swing.JPanel {
 
         labelMetier.setText("Métier");
 
+        domaineCheckBox.setSelected(true);
         domaineCheckBox.setText("Domaine :");
         domaineCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
