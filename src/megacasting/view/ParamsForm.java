@@ -430,6 +430,8 @@ public class ParamsForm extends javax.swing.JPanel {
 
         domaineCheckBox.setSelected(true);
         domaineCheckBox.setText("Domaine :");
+        domaineCheckBox.setEnabled(false);
+        domaineCheckBox.setFocusable(false);
         domaineCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 domaineCheckBoxStateChanged(evt);
@@ -860,13 +862,17 @@ public class ParamsForm extends javax.swing.JPanel {
             }
             // Existe pas -> on l'ajoute à la bdd
             else {
-                Metier metier = new Metier(libelle, d);
-                MetierDAO.creer(mainJFrame.cnx, metier);
-                
-                // Actualise la liste
-                refreshListMetier();
-                // Vide les champs
-                resetMetier();
+                if(d!= null)
+                {
+                    Metier metier = new Metier(libelle, d);
+                    MetierDAO.creer(mainJFrame.cnx, metier);
+
+                    // Actualise la liste
+                    refreshListMetier();
+                    // Vide les champs
+                    resetMetier(); 
+                }
+
             } 
         }
     }//GEN-LAST:event_validerMetierButtonActionPerformed
