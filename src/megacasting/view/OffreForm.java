@@ -1322,8 +1322,10 @@ public class OffreForm extends javax.swing.JPanel {
         } else {
             this.annonceurErreurLabel.setText(null);
         }
-        if ((this.domaineOffreComboBox.getSelectedItem() == null) & (this.metierOffreComboBox.getSelectedItem() == null)) {
+        if ((this.domaineOffreComboBox.getSelectedItem() == null) || (this.metierOffreComboBox.getSelectedItem() == null)) {
             erreurs.add(Erreur.ERREUR_DOMAINE_METIER_VIDE);
+        }else{
+            this.domaineMetierErreurLabel.setText(null);
         }
         return erreurs;
         
