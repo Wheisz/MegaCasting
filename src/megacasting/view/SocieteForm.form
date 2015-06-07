@@ -28,11 +28,11 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="271" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                       <Component id="societeSupprimerButton" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" alignment="0" pref="299" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" min="-2" pref="299" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="annonceurRadioButton" min="-2" pref="89" max="-2" attributes="0"/>
@@ -44,73 +44,68 @@
               </Group>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="validationLabel" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="validerSocieteButton" max="32767" attributes="0"/>
+                      <Component id="effacerSocieteButton" min="-2" pref="305" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="validerSocieteButton" max="32767" attributes="0"/>
-                              <Component id="effacerSocieteButton" min="-2" pref="305" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="annonceurValiderRadioButton" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                  <Component id="annonceurValiderRadioButton" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="raisonSocialLabel" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
-                                          <Component id="numeroSiretLabel" min="-2" pref="85" max="-2" attributes="0"/>
-                                          <Component id="emailLabel" alignment="1" min="-2" pref="41" max="-2" attributes="0"/>
-                                          <Component id="telephoneLabel" alignment="1" min="-2" pref="67" max="-2" attributes="0"/>
-                                          <Component id="numeroLabel" alignment="1" min="-2" pref="54" max="-2" attributes="0"/>
-                                          <Component id="rueLabel" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="raisonSocialLabel" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="numeroSiretLabel" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="emailLabel" alignment="1" min="-2" pref="41" max="-2" attributes="0"/>
+                                  <Component id="telephoneLabel" alignment="1" min="-2" pref="67" max="-2" attributes="0"/>
+                                  <Component id="numeroLabel" alignment="1" min="-2" pref="54" max="-2" attributes="0"/>
+                                  <Component id="rueLabel" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="villeLabel" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="villeLabel" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                              <Component id="codePostalLabel" min="-2" pref="74" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                      <Component id="codePostalLabel" min="-2" pref="74" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="raisonSocialeTextField" pref="150" max="32767" attributes="0"/>
-                                  <Component id="diffuseurValiderRadioButton" max="32767" attributes="0"/>
-                                  <Component id="emailTextField" max="32767" attributes="0"/>
-                                  <Component id="telephoneTextField" max="32767" attributes="0"/>
-                                  <Component id="rueTextField" max="32767" attributes="0"/>
-                                  <Component id="villeTextField" pref="150" max="32767" attributes="0"/>
-                                  <Component id="numeroSpinner" max="32767" attributes="0"/>
-                                  <Component id="codePostalSpinner" max="32767" attributes="0"/>
-                                  <Component id="numeroSiretTextField" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="numeroErreurLabel" alignment="0" pref="223" max="32767" attributes="0"/>
-                                  <Component id="rueErreurLabel" alignment="0" pref="223" max="32767" attributes="0"/>
-                                  <Component id="codePostalErreur" alignment="0" pref="223" max="32767" attributes="0"/>
-                                  <Component id="raisonSocialeErreurLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="emailErreurLabel" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="telephoneErreurLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="villeErreurLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="annonceurDiffuseurErreurLabel" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="numeroSiretErreurLabel" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="raisonSocialeTextField" max="32767" attributes="0"/>
+                          <Component id="diffuseurValiderRadioButton" max="32767" attributes="0"/>
+                          <Component id="emailTextField" max="32767" attributes="0"/>
+                          <Component id="telephoneTextField" max="32767" attributes="0"/>
+                          <Component id="rueTextField" max="32767" attributes="0"/>
+                          <Component id="villeTextField" max="32767" attributes="0"/>
+                          <Component id="numeroSpinner" max="32767" attributes="0"/>
+                          <Component id="codePostalSpinner" max="32767" attributes="0"/>
+                          <Component id="numeroSiretTextField" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="numeroErreurLabel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="rueErreurLabel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="codePostalErreur" alignment="0" max="32767" attributes="0"/>
+                          <Component id="raisonSocialeErreurLabel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="emailErreurLabel" alignment="1" max="32767" attributes="0"/>
+                          <Component id="telephoneErreurLabel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="villeErreurLabel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="annonceurDiffuseurErreurLabel" alignment="0" min="-2" pref="223" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="numeroSiretErreurLabel" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="validationLabel" pref="9" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Component id="buttonAccueil" min="-2" max="-2" attributes="0"/>
@@ -120,101 +115,107 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="buttonAccueil" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="validationLabel" min="-2" pref="22" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="numeroSiretLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="numeroSiretTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="raisonSocialeErreurLabel" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="raisonSocialeTextField" alignment="3" max="32767" attributes="0"/>
-                                      <Component id="raisonSocialLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="numeroSiretLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="numeroSiretTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="raisonSocialeErreurLabel" min="-2" pref="20" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                              <Component id="raisonSocialeTextField" alignment="3" max="32767" attributes="0"/>
+                                              <Component id="raisonSocialLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="emailLabel" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                              <Component id="emailTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="emailErreurLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="telephoneLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="telephoneTextField" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="telephoneErreurLabel" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="numeroLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="numeroSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="numeroErreurLabel" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="rueLabel" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                              <Component id="rueTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rueErreurLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="codePostalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="codePostalSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="codePostalErreur" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="villeLabel" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                              <Component id="villeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="villeErreurLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="annonceurValiderRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="diffuseurValiderRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="annonceurDiffuseurErreurLabel" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                      <Component id="validerSocieteButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="effacerSocieteButton" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="numeroSiretErreurLabel" min="-2" pref="20" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="emailLabel" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="emailTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="emailErreurLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="telephoneLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="telephoneTextField" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="telephoneErreurLabel" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="numeroLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="numeroSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="numeroErreurLabel" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="rueLabel" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="rueTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rueErreurLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="codePostalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="codePostalSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="codePostalErreur" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="villeLabel" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="villeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="villeErreurLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="annonceurValiderRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="diffuseurValiderRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="annonceurDiffuseurErreurLabel" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="validerSocieteButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="effacerSocieteButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="numeroSiretErreurLabel" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="annonceurRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="diffuseurRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="societeRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="255" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="societeSupprimerButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="buttonAccueil" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="annonceurRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="diffuseurRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="societeRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="255" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="societeSupprimerButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="validationLabel" min="-2" pref="22" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
