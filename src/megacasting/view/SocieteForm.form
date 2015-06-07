@@ -81,13 +81,19 @@
                           <Component id="rueTextField" max="32767" attributes="0"/>
                           <Component id="villeTextField" max="32767" attributes="0"/>
                           <Component id="numeroSpinner" max="32767" attributes="0"/>
-                          <Component id="codePostalSpinner" max="32767" attributes="0"/>
-                          <Component id="numeroSiretTextField" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="numeroSiretTextField" alignment="0" pref="150" max="32767" attributes="0"/>
+                          <Component id="codePostalTextBox" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="numeroSiretErreurLabel" pref="112" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="validationLabel" pref="120" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="numeroErreurLabel" alignment="0" max="32767" attributes="0"/>
@@ -101,11 +107,7 @@
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="numeroSiretErreurLabel" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="validationLabel" pref="9" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Component id="buttonAccueil" min="-2" max="-2" attributes="0"/>
@@ -165,13 +167,15 @@
                                               <Component id="rueErreurLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="codePostalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="codePostalSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="codePostalErreur" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="codePostalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="codePostalErreur" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="codePostalTextBox" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="villeLabel" min="-2" max="-2" attributes="0"/>
                                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
@@ -282,7 +286,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="codePostalSpinner"/>
+          <ComponentRef name="default"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Code Postal"/>
       </Properties>
@@ -337,8 +341,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JSpinner" name="numeroSpinner">
-    </Component>
-    <Component class="javax.swing.JSpinner" name="codePostalSpinner">
     </Component>
     <Component class="javax.swing.JButton" name="societeSupprimerButton">
       <Properties>
@@ -505,6 +507,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="numeroSiretTextField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="codePostalTextBox">
     </Component>
   </SubComponents>
 </Form>

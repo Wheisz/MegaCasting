@@ -33,8 +33,8 @@ public class AdresseDAO {
             
             stmt.executeUpdate("INSERT INTO Adresse "
                     + "(Numero, Rue, CodePostal, Ville) "
-                    + "VALUES (" + a.getNumero() + ", '" + a.getRue() + "', "
-                    + a.getCodePostal() + ", '" + a.getVille() + "')");
+                    + "VALUES (" + a.getNumero() + ", '" + a.getRue() + "', '"
+                    + a.getCodePostal() + "', '" + a.getVille() + "')");
 
             ResultSet rs = stmt.executeQuery("SELECT MAX(Id) FROM Adresse");
             
@@ -70,8 +70,8 @@ public class AdresseDAO {
             stmt.executeUpdate("UPDATE Adresse "
                     + "SET Numero = " + a.getNumero()
                     + ", Rue = '" + a.getRue()
-                    + "', CodePostal = " + a.getCodePostal()
-                    + ", Ville = '" + a.getVille()
+                    + "', CodePostal = '" + a.getCodePostal()
+                    + "', Ville = '" + a.getVille()
                     + "' WHERE Id = " + a.getId()
             );
 
@@ -123,7 +123,7 @@ public class AdresseDAO {
             ResultSet rs = stmt.executeQuery("SELECT Id, Numero, Rue, CodePostal, Ville FROM Adresse");
             
             while(rs.next()) {
-                Adresse a = new Adresse(rs.getLong(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5));
+                Adresse a = new Adresse(rs.getLong(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5));
                 adresses.add(a);
             }
             
@@ -148,7 +148,7 @@ public class AdresseDAO {
         long id = 0;
         int numero = 0;
         String rue = null;
-        int cp = 0;
+        String cp = null;
         String ville = null;
         
         try {
@@ -161,7 +161,7 @@ public class AdresseDAO {
                 id = rs.getLong(1);
                 numero = rs.getInt(2);
                 rue = rs.getString(3);
-                cp = rs.getInt(4);
+                cp = rs.getString(4);
                 ville = rs.getString(5);                
                 
                 a = new Adresse(id, numero, rue, cp, ville);
@@ -182,7 +182,7 @@ public class AdresseDAO {
         return a;
     }
     
-    public static Adresse trouver (Connection cnx, int numero, String rue, int cp, String ville) {
+    public static Adresse trouver (Connection cnx, int numero, String rue, String cp, String ville) {
         Adresse a = null;
         
         Statement stmt = null;
@@ -194,8 +194,8 @@ public class AdresseDAO {
             ResultSet rs = stmt.executeQuery("SELECT Id, Numero, Rue, CodePostal, Ville "
                     + "FROM Adresse "
                     + "WHERE Numero = " + numero + " AND Rue = '" + rue 
-                    + "' AND CodePostal = "  + cp 
-                    + " AND Ville = '" + ville + "'");
+                    + "' AND CodePostal = '"  + cp 
+                    + "' AND Ville = '" + ville + "'");
             
             if(rs.next()) {
                 id = rs.getLong(1);                

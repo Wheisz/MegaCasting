@@ -80,7 +80,6 @@ public class SocieteForm extends javax.swing.JPanel {
         annonceurRadioButton = new javax.swing.JRadioButton();
         diffuseurRadioButton = new javax.swing.JRadioButton();
         numeroSpinner = new javax.swing.JSpinner();
-        codePostalSpinner = new javax.swing.JSpinner();
         societeSupprimerButton = new javax.swing.JButton();
         validerSocieteButton = new javax.swing.JButton();
         effacerSocieteButton = new javax.swing.JButton();
@@ -102,6 +101,7 @@ public class SocieteForm extends javax.swing.JPanel {
         numeroSiretLabel = new javax.swing.JLabel();
         numeroSiretErreurLabel = new javax.swing.JLabel();
         numeroSiretTextField = new javax.swing.JTextField();
+        codePostalTextBox = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(153, 153, 153));
 
@@ -126,7 +126,6 @@ public class SocieteForm extends javax.swing.JPanel {
         rueLabel.setText("Rue");
 
         codePostalLabel.setForeground(new java.awt.Color(255, 255, 255));
-        codePostalLabel.setLabelFor(codePostalSpinner);
         codePostalLabel.setText("Code Postal");
 
         villeLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -274,10 +273,15 @@ public class SocieteForm extends javax.swing.JPanel {
                             .addComponent(rueTextField)
                             .addComponent(villeTextField)
                             .addComponent(numeroSpinner)
-                            .addComponent(codePostalSpinner)
-                            .addComponent(numeroSiretTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(numeroSiretTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(codePostalTextBox))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(numeroSiretErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(validationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                        .addGap(281, 281, 281))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(numeroErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -288,11 +292,7 @@ public class SocieteForm extends javax.swing.JPanel {
                             .addComponent(telephoneErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(villeErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(annonceurDiffuseurErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(numeroSiretErreurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(validationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 9, Short.MAX_VALUE)
-                .addGap(281, 281, 281))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(buttonAccueil)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -341,10 +341,11 @@ public class SocieteForm extends javax.swing.JPanel {
                                                 .addComponent(rueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(rueErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(codePostalLabel)
-                                            .addComponent(codePostalSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(codePostalErreur, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(codePostalLabel)
+                                                .addComponent(codePostalErreur, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(codePostalTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(villeLabel)
@@ -526,7 +527,7 @@ public class SocieteForm extends javax.swing.JPanel {
             // Recuperation des données de l'adresse de la société
             int numero = (int) this.numeroSpinner.getValue();
             String rue = MainJFrame.remplacementCaractere(this.rueTextField.getText());
-            int codePostal = (int) this.codePostalSpinner.getValue();
+            String codePostal = this.codePostalTextBox.getText();
             String ville = MainJFrame.remplacementCaractere(this.villeTextField.getText());
 
             // Création d'un annonceur 
@@ -710,7 +711,7 @@ public class SocieteForm extends javax.swing.JPanel {
             this.telephoneTextField.setText(s.getTelephone());
             this.numeroSpinner.setValue(s.getAdresse().getNumero());
             this.rueTextField.setText(s.getAdresse().getRue());
-            this.codePostalSpinner.setValue(s.getAdresse().getCodePostal());
+            this.codePostalTextBox.setText(String.valueOf(s.getAdresse().getCodePostal()));
             this.villeTextField.setText(s.getAdresse().getVille());
 
             Annonceur a = AnnonceurDAO.trouver(mainJFrame.cnx, s.getId());
@@ -771,7 +772,7 @@ public class SocieteForm extends javax.swing.JPanel {
         this.telephoneTextField.setText(null);
         this.numeroSpinner.setValue(0);
         this.rueTextField.setText(null);
-        this.codePostalSpinner.setValue(0);
+        this.codePostalTextBox.setText(null);
         this.villeTextField.setText(null);
         this.validationLabel.setText(null);
 
@@ -862,12 +863,11 @@ public class SocieteForm extends javax.swing.JPanel {
             }
         }
         // Creation d'une erreur si le code postal est égale à 0
-        if ((int) this.codePostalSpinner.getValue() == 0) {
+        if (this.codePostalTextBox.equals("")) {
             erreurs.add(Erreur.ERREUR_CODEPOSTAL_VIDE);
         } else {
             // Creation d'une erreur si le code postal saisi est incorrect
-            int codePostalTemp = (int) this.codePostalSpinner.getValue();
-            String codePostal = Integer.toString(codePostalTemp);
+            String codePostal = this.codePostalTextBox.getText();
             Boolean verifCodePostal = mainJFrame.regexCodePostal(codePostal);
             if (verifCodePostal) {
                 this.codePostalErreur.setText(null);
@@ -1051,7 +1051,7 @@ public class SocieteForm extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel codePostalErreur;
     private javax.swing.JLabel codePostalLabel;
-    private javax.swing.JSpinner codePostalSpinner;
+    private javax.swing.JTextField codePostalTextBox;
     private javax.swing.JRadioButton diffuseurRadioButton;
     private javax.swing.JRadioButton diffuseurValiderRadioButton;
     private javax.swing.JButton effacerSocieteButton;

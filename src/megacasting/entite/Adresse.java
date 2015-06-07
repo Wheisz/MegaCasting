@@ -16,7 +16,7 @@ public class Adresse {
     private long id;
     private int numero;
     private String rue;
-    private int codePostal;
+    private String codePostal;
     private String ville;
 
     public long getId() {
@@ -43,13 +43,14 @@ public class Adresse {
         this.rue = rue;
     }
 
-    public int getCodePostal() {
+    public String getCodePostal() {
         return codePostal;
     }
 
-    public void setCodePostal(int codePostal) {
+    public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
+
 
     public String getVille() {
         return ville;
@@ -57,6 +58,12 @@ public class Adresse {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
     }
 
     @Override
@@ -77,7 +84,7 @@ public class Adresse {
         if (!Objects.equals(this.rue, other.rue)) {
             return false;
         }
-        if (this.codePostal != other.codePostal) {
+        if (!Objects.equals(this.codePostal, other.codePostal)) {
             return false;
         }
         if (!Objects.equals(this.ville, other.ville)) {
@@ -86,7 +93,9 @@ public class Adresse {
         return true;
     }
 
-    public Adresse(long id, int numero, String rue, int codePostal, String ville) {
+
+
+    public Adresse(long id, int numero, String rue, String codePostal, String ville) {
         this.id = id;
         this.numero = numero;
         this.rue = rue;
@@ -94,7 +103,7 @@ public class Adresse {
         this.ville = ville;
     }
 
-    public Adresse(int numero, String rue, int codePostal, String ville) {
+    public Adresse(int numero, String rue, String codePostal, String ville) {
         this.numero = numero;
         this.rue = rue;
         this.codePostal = codePostal;
