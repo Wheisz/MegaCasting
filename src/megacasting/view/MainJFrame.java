@@ -7,6 +7,7 @@ package megacasting.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.io.Console;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -35,11 +36,11 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();      
         loadDriver();
-        String url = "jdbc:jtds:sqlserver://172.16.2.66:1433/MegaCasting;integratedSecurity=true;";
+        String url = "jdbc:jtds:sqlserver://172.16.1.162:1433/MegaCasting;integratedSecurity=true;";
         
         try {
             
-            cnx = DriverManager.getConnection(url, "sa", "Rr7u82vT");
+            cnx = DriverManager.getConnection(url, "sa", "P@ssword");
            
             loadCardLayout();
             CardLayout cl = (CardLayout) mainPanel.getLayout();
@@ -211,6 +212,12 @@ public class MainJFrame extends javax.swing.JFrame {
         Boolean b = m.matches();
 
         return b;
+    }
+    
+    public static String remplacementCaractere (String chaine){
+        String newChaine = chaine.replaceAll("'", "''");
+ 
+        return newChaine;
     }
     
     /**

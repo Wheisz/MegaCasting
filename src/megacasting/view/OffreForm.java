@@ -761,15 +761,15 @@ public class OffreForm extends javax.swing.JPanel {
         // Si aucune erreur est trouvée
         if (erreurs.isEmpty()) {
             // On stocke les differentes informations de l'offre
-            String intitule = this.intituleTextField.getText();
+            String intitule = MainJFrame.remplacementCaractere(this.intituleTextField.getText());
             String reference = this.referenceTextField.getText();
             int dureeDiffusion = (int) this.dureeDiffusionSpinner.getValue();
             Date dateDebutContrat = this.dateDebutContratDateChooser.getDate();
             int nbPoste = (int) this.nbPosteSpinner.getValue();
-            String lattitude = this.lattitudeTextField.getText();
-            String longitude = this.longitudeTextField.getText();
-            String descriptionPoste = this.descriptionPosteTextArea.getText();
-            String descriptionProfil = this.descriptionProfilTextArea.getText();
+            String lattitude = MainJFrame.remplacementCaractere(this.lattitudeTextField.getText());
+            String longitude = MainJFrame.remplacementCaractere(this.longitudeTextField.getText());
+            String descriptionPoste = MainJFrame.remplacementCaractere(this.descriptionPosteTextArea.getText());
+            String descriptionProfil = MainJFrame.remplacementCaractere(this.descriptionProfilTextArea.getText());
             String telephone = this.telephoneTextField.getText();
             String email = this.emailTextField.getText();
             boolean estValide = false;

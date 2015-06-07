@@ -17,6 +17,7 @@ import megacasting.entite.Domaine;
 import megacasting.entite.Metier;
 import megacasting.entite.Offre;
 import megacasting.entite.TypeContrat;
+import megacasting.view.MainJFrame;
 
 /**
  *
@@ -41,10 +42,7 @@ public class OffreDAO {
             
             Date dateDebutContrat = o.getDateDebutContrat();
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-            String dateDebutContratStr = sdf1.format(dateDebutContrat);
-              
-            String lattitude = Offre.modifCoordonnee(o.getLocalisationLattitude());
-            String longitude = Offre.modifCoordonnee(o.getLocalisationLongitude());
+            String dateDebutContratStr = sdf1.format(dateDebutContrat);            
            
             
             if((o.getDomaine() != null) && (o.getMetier() != null)){
@@ -56,7 +54,7 @@ public class OffreDAO {
                         + ", TypeContrat_id, Annonceur_id ) "
                         + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', convert(datetime,'"
                         + datePublicationStr+"',120), " + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
-                        + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
+                        + o.getNbPoste()+", '"+ o.getLocalisationLattitude() +"', '"+ o.getLocalisationLongitude() +"', '"
                         + o.getDescriptionPoste()+"', '"+o.getDescriptionProfil()+"', '"+o.getTelephone()+"', '"
                         + o.getEmail()+"', '"+ o.isEstValide()+"',"+ o.getDomaine().getId() +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
                         + o.getAnnonceur().getId() +")");
@@ -66,7 +64,7 @@ public class OffreDAO {
                         + ", LocalisationLongitude, DescriptionPoste, DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id"
                         + ", TypeContrat_id, Annonceur_id ) "
                         + "VALUES ('" + o.getIntitule()+ "', '" + o.getReference()+"', null ," + o.getDureeDiffusion() + ", convert(datetime,'"+dateDebutContratStr+"',103), "
-                        + o.getNbPoste()+", '"+ lattitude +"', '"+ longitude +"', '"
+                        + o.getNbPoste()+", '"+ o.getLocalisationLattitude() +"', '"+ o.getLocalisationLongitude() +"', '"
                         + o.getDescriptionPoste()+"', '"+o.getDescriptionProfil()+"', '"+o.getTelephone()+"', '"
                         + o.getEmail()+"', '"+ o.isEstValide()+"',"+ o.getDomaine().getId() +", "+ o.getMetier().getId() +", "+ o.getTypeContrat().getId() +", "
                         + o.getAnnonceur().getId() +")");
@@ -110,8 +108,6 @@ public class OffreDAO {
         SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
         String dateDebutContratStr = sdf1.format(dateDebutContrat);
         
-        String lattitude = Offre.modifCoordonnee(o.getLocalisationLattitude());
-        String longitude = Offre.modifCoordonnee(o.getLocalisationLongitude());
         
         Statement stmt = null;
         try {
@@ -129,8 +125,8 @@ public class OffreDAO {
                             + " , DureeDiffusion = " + o.getDureeDiffusion()
                             + ", DateDebutContrat = '" + dateDebutContratStr
                             + "', NbPoste = " + o.getNbPoste()
-                            + ", LocalisationLattitude = '" + lattitude
-                            + "', LocalisationLongitude = '" + longitude
+                            + ", LocalisationLattitude = '" + o.getLocalisationLattitude()
+                            + "', LocalisationLongitude = '" + o.getLocalisationLongitude()
                             + "', DescriptionPoste = '" + o.getDescriptionPoste()
                             + "', DescriptionProfil = '" + o.getDescriptionProfil()
                             + "', Telephone = '" + o.getTelephone()
@@ -150,8 +146,8 @@ public class OffreDAO {
                             + " , DureeDiffusion = " + o.getDureeDiffusion()
                             + ", DateDebutContrat = '" + dateDebutContratStr
                             + "', NbPoste = " + o.getNbPoste()
-                            + ", LocalisationLattitude = '" + lattitude
-                            + "', LocalisationLongitude = '" + longitude
+                            + ", LocalisationLattitude = '" + o.getLocalisationLattitude()
+                            + "', LocalisationLongitude = '" + o.getLocalisationLongitude()
                             + "', DescriptionPoste = '" + o.getDescriptionPoste()
                             + "', DescriptionProfil = '" + o.getDescriptionProfil()
                             + "', Telephone = '" + o.getTelephone()

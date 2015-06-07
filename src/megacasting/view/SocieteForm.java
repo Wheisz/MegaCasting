@@ -519,15 +519,15 @@ public class SocieteForm extends javax.swing.JPanel {
         if (erreurs.isEmpty()) {
             // Recuperation des données de la société
             long numeroSiret = Long.parseLong(numeroSiretTextField.getText());
-            String raisonSociale = this.raisonSocialeTextField.getText();
+            String raisonSociale = MainJFrame.remplacementCaractere(this.raisonSocialeTextField.getText());
             String email = this.emailTextField.getText();
             String telephone = this.telephoneTextField.getText();
 
             // Recuperation des données de l'adresse de la société
             int numero = (int) this.numeroSpinner.getValue();
-            String rue = this.rueTextField.getText();
+            String rue = MainJFrame.remplacementCaractere(this.rueTextField.getText());
             int codePostal = (int) this.codePostalSpinner.getValue();
-            String ville = this.villeTextField.getText();
+            String ville = MainJFrame.remplacementCaractere(this.villeTextField.getText());
 
             // Création d'un annonceur 
             if (this.annonceurValiderRadioButton.isSelected()) {
