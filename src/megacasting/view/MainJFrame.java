@@ -36,11 +36,11 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();      
         loadDriver();
-        String url = "jdbc:jtds:sqlserver://172.16.1.162:1433/MegaCasting;integratedSecurity=true;";
+        String url = "jdbc:jtds:sqlserver://172.16.2.66:1433/MegaCasting;integratedSecurity=true;";
         
         try {
             
-            cnx = DriverManager.getConnection(url, "sa", "P@ssword");
+            cnx = DriverManager.getConnection(url, "sa", "Rr7u82vT");
            
             loadCardLayout();
             CardLayout cl = (CardLayout) mainPanel.getLayout();

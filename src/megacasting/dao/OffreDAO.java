@@ -333,8 +333,8 @@ public class OffreDAO {
             } 
 
             while(rs.next()) {
-                TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(16));
-                Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(17));
+                TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(17));
+                Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(18));
                 Offre o = new Offre(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getInt(5),
                 rs.getDate(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),
                 rs.getString(12), rs.getString(13),rs.getBoolean(14),d,m,tc,a);

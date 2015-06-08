@@ -199,6 +199,7 @@ public class ParamsForm extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         domaineList = new javax.swing.JList();
         libelleDomaineErreurLabel = new javax.swing.JLabel();
+        ajouterDomaineButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         effacerMetierButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -326,7 +327,7 @@ public class ParamsForm extends javax.swing.JPanel {
 
         domaineLabel.setText("Domaine");
 
-        validerDomaineButton.setText("Valider");
+        validerDomaineButton.setText("Modifier");
         validerDomaineButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 validerDomaineButtonActionPerformed(evt);
@@ -357,12 +358,31 @@ public class ParamsForm extends javax.swing.JPanel {
 
         libelleDomaineErreurLabel.setForeground(new java.awt.Color(255, 0, 0));
 
+        ajouterDomaineButton.setText("Ajouter");
+        ajouterDomaineButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ajouterDomaineButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(186, 186, 186)
+                .addComponent(libelleDomaineLabel)
+                .addGap(18, 18, 18)
+                .addComponent(libelleDomaineTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 345, Short.MAX_VALUE)
+                .addGap(0, 186, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(effacerDomaineButton, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(validerDomaineButton, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                        .addComponent(ajouterDomaineButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(libelleDomaineErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(303, 303, 303))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,38 +392,33 @@ public class ParamsForm extends javax.swing.JPanel {
                         .addComponent(supprimerDomaineButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                         .addComponent(domaineLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(libelleDomaineLabel)
-                            .addGap(18, 18, 18)
-                            .addComponent(libelleDomaineTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(effacerDomaineButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(validerDomaineButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addContainerGap(504, Short.MAX_VALUE)))
+                    .addContainerGap(659, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(libelleDomaineErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addGap(72, 72, 72)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(libelleDomaineTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(libelleDomaineLabel))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(libelleDomaineErreurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(ajouterDomaineButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(validerDomaineButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(effacerDomaineButton)
+                .addContainerGap(204, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(35, 35, 35)
                     .addComponent(domaineLabel)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(43, 43, 43)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(libelleDomaineLabel)
-                                .addComponent(libelleDomaineTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(validerDomaineButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(effacerDomaineButton)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(supprimerDomaineButton)
                     .addContainerGap(164, Short.MAX_VALUE)))
@@ -659,7 +674,7 @@ public class ParamsForm extends javax.swing.JPanel {
     // Click boutton valider du panneau domaine
     private void validerDomaineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerDomaineButtonActionPerformed
         // TODO add your handling code here:
-        // Lisye de tous les domaines
+        // Liste de tous les domaines
         ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
         
         // On récupère le libelle du domaine
@@ -673,25 +688,36 @@ public class ParamsForm extends javax.swing.JPanel {
         else {
             libelleDomaineErreurLabel.setText("");
             boolean exist = false;
+            
+            // On récupère le domaine
+            Domaine modifiedDomaine = (Domaine)domaineList.getSelectedValue();
 
-            // pour chaque domaine on regarde si il existe déjà
+            // On vérifie que ce libelle n'est pas déjà utilisé
             for (Domaine d : domaines) {
                 if (d.getLibelle().equalsIgnoreCase(libelle)) {
                     // Domaine existant
                     exist = true;
                 }
             }
-
-            Domaine domaine = null;
             
-            // Si il existe pas -> on le crée
+            // Si pas déjà utilisé
             if (!exist) {
-                domaine = new Domaine(libelle);
-                try {
-                    DomaineDAO.creer(mainJFrame.cnx, domaine);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                
+                // On vérifie que le domaine a bien été sélectionné
+                if (modifiedDomaine != null) {
+                    try {
+                        // On change le libelle
+                        modifiedDomaine.setLibelle(libelle);
+                        // On modifie en bdd
+                        DomaineDAO.modifier(mainJFrame.cnx, modifiedDomaine);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
+                else {
+                    mainJFrame.affichagePopUpInfo("Veuillez sélectionner un domaine à modifier !", "information");
+                }
+                
                 // Actualise la liste et la comboBox
                 refreshListDomaine();
                 refreshComboBoxDomaine();
@@ -892,8 +918,57 @@ public class ParamsForm extends javax.swing.JPanel {
         refreshListTypeContrat();
     }//GEN-LAST:event_formComponentShown
 
+    private void ajouterDomaineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterDomaineButtonActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Domaine> domaines = DomaineDAO.lister(mainJFrame.cnx);
+        
+        // On récupère le libelle du domaine
+        String libelle = libelleDomaineTextField.getText();
+        
+        // Si le libelle est vide -> on affiche l'erreur
+        if (libelle.equals("")) {
+            libelleDomaineErreurLabel.setText("Veuillez saisir un libelle !");
+        }
+        // Si pas vide
+        else {
+            libelleDomaineErreurLabel.setText("");
+            boolean exist = false;
+
+            // On vérifie que ce libelle n'est pas déjà utilisé
+            for (Domaine d : domaines) {
+                if (d.getLibelle().equalsIgnoreCase(libelle)) {
+                    // Domaine existant
+                    exist = true;
+                }
+            }
+            
+            // Si pas déjà utilisé
+            if (!exist) {
+                
+                // On crée un nouveau domaine et on l'ajoute à la bdd
+                Domaine dom = new Domaine (libelle);
+                try {
+                    DomaineDAO.creer(mainJFrame.cnx, dom);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                
+                // Actualise la liste et la comboBox
+                refreshListDomaine();
+                refreshComboBoxDomaine();
+                // Vide les champs
+                resetDomaine();
+            }
+            // Si il existe on affiche l'erreur
+            else {
+                mainJFrame.affichagePopUpInfo("Ce domaine existe déjà !", "information");
+            }
+        }
+    }//GEN-LAST:event_ajouterDomaineButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ajouterDomaineButton;
     private javax.swing.JButton buttonEffacerTypeContrat;
     private javax.swing.JButton buttonRetour;
     private javax.swing.JButton buttonValiderTypeContrat;
