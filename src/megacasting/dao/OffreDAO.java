@@ -330,8 +330,25 @@ public class OffreDAO {
                         + "FROM Offre o "
                         + "WHERE o.Metier_id = " + m.getId()
                         + " AND o.Domaine_id = " + d.getId());                
-            } 
-
+            }
+            if (m == null && d != null) {                
+            
+                rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
+                        + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
+                        + "                              , DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
+                        + "                              , Annonceur_id "   
+                        + "FROM Offre o "
+                        + "WHERE o.Domaine_id = " + d.getId());                
+            }
+            if (m != null && d == null) {                
+            
+                rs = stmt.executeQuery("SELECT Id, Intitule, Reference, DatePublication, DureeDiffusion,DateDebutContrat"
+                        + "                              , NbPoste, LocalisationLattitude, LocalisationLongitude, DescriptionPoste"
+                        + "                              , DescriptionProfil, Telephone, Email, EstValide, Domaine_id, Metier_id, TypeContrat_id"
+                        + "                              , Annonceur_id "   
+                        + "FROM Offre o "
+                        + "WHERE o.Metier_id = " + m.getId());                
+            }
             while(rs.next()) {
                 TypeContrat tc = TypeContratDAO.trouver(cnx, rs.getLong(17));
                 Annonceur a = AnnonceurDAO.trouver(cnx, rs.getLong(18));
