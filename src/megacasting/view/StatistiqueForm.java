@@ -55,8 +55,8 @@ public class StatistiqueForm extends javax.swing.JPanel {
             // Liste des métiers du domaine
             metiers = MetierDAO.lister(mainJFrame.cnx, d);
             
-            // Liste des offres du domaine (celles qui n'ont pas de métier)
-            ArrayList<Offre> offresFinal = OffreDAO.lister(mainJFrame.cnx, d , null);
+            // Creation tableau d'offres
+            ArrayList<Offre> offresFinal = new ArrayList<>();
             
             // On initialise le nb de postes à 0
             int nbPostes = 0;
