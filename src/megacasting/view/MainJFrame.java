@@ -175,7 +175,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     protected Boolean regexEmail(String email) {
-        Pattern p = Pattern.compile("^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$");
+        Pattern p = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\\.[a-z]{2,4}$");
         Matcher m = p.matcher(email);
         Boolean b = m.matches();
 
